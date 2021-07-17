@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+    
+    
+    <title>Joining Dataframes</title>
+
+        <script src="joining-dataframes_files/header-attrs-2.9/header-attrs.js"></script>
+        <script src="joining-dataframes_files/jquery-1.11.3/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="joining-dataframes_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="joining-dataframes_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+        <script src="joining-dataframes_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+        <script src="joining-dataframes_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+        <style>h1 {font-size: 34px;}
+               h1.title {font-size: 38px;}
+               h2 {font-size: 30px;}
+               h3 {font-size: 24px;}
+               h4 {font-size: 18px;}
+               h5 {font-size: 16px;}
+               h6 {font-size: 12px;}
+               code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+               pre:not([class]) { background-color: white }</style>
+        <script src="joining-dataframes_files/navigation-1.1/tabsets.js"></script>
+        
+          <meta property="og:title" content="Joining Dataframes" />
+          <meta property="og:type" content="article">
+          <meta property="og:description" content="How to combining multiple dataframes and make the most out of them
+        " />
+          <meta property="og:url" content="https://datamotto.com/posts/dotto/D009-2021-07-15-joining-dataframes/" />
+          <meta property="og:locale" content="en_US">
+          <meta property="og:site_name" content="Data Motto">
+          <meta property="og:image" content="https://datamotto.com/assets/img/logo.svg" />
+          
+        
+          <meta property="twitter:card" content="summary_large_image">
+          <meta property="twitter:title" content="Joining Dataframes">
+          <meta property="twitter:description" content="How to combining multiple dataframes and make the most out of them
+        ">
+          <meta property="twitter:url" content="https://datamotto.com/posts/dotto/D009-2021-07-15-joining-dataframes/">
+          <meta property="twitter:image" content="https://datamotto.com/assets/img/logo.svg">
+          
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WZMEMQM0Y2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WZMEMQM0Y2');
+</script>
+<link rel="shortcut icon" href="../../../assets/img/favicon/favicon-32x32.png" />
+<link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../../../assets/css/Font-Awesome-5-Brands.css" />
+<link rel="stylesheet" href="../../../assets/css/Font-Awesome-5-Free.css" />
+<link rel="stylesheet" href="../../../assets/css/icomoon.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata" />
+<link rel="stylesheet" href="../../../assets/fonts/fontawesome-all.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/font-awesome.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/ionicons.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/fontawesome5-overrides.min.css" />
+<link rel="stylesheet" href="../../../assets/css/Footer-Basic.css" />
+<link rel="stylesheet" href="../../../assets/css/home-cards.css" />
+<link rel="stylesheet" href="../../../assets/css/site.css" />
+<link rel="stylesheet" href="../../../assets/css/style.css" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" />
+<link rel="stylesheet" href="../../../assets/css/Team-Boxed.css" />
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="../../../assets/js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="../../../assets/highlight/styles/dracula.css" />
+<script src="../../../assets/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+<script src="../../../assets/js/vue.js"></script>
+
+</head>
+
+<body style="height: 100vh;">
+<div class="d-flex flex-column" id="all_page">
+
+<!-- Body Header ------------------------------>
+
+<section id="dotto-row-header">
+<div class="row dotto-header">
+
+<div class="col-1 d-flex justify-content-start align-items-center header-logo">
+<a href="/" class="text-muted"><img id="logo" src="../../../assets/img/logo.svg" /></a>
+</div>
+
+
+<div class="col-6 col-sm-7">
+<div class="header-title">
+<h6 class="dotto-header-maintitle">
+Joining Dataframes
+</h6>
+<p class="dotto-header-description">
+How to combining multiple dataframes and make the most out of them
+
+</p>
+<p class="dotto-header-tags">
+<i class="fas fa-tags"></i>&nbsp; Wrangling
+</p>
+</div>
+</div>
+
+
+<div class="col-1 d-flex justify-content-center align-items-center">
+<button class="btn btn-outline-light btn-block header-like-btn" style="background-color:white" type="button">
+<!-- LikeBtn.com BEGIN -->
+<span class="likebtn-wrapper" data-theme="custom" data-btn_size="30" data-f_size="18" data-icon_size="30" data-icon_l="hrt13" data-icon_l_c="rgba(255,121,198,0.68)" data-icon_l_c_v="#ff79c6" data-icon_d_c_v="green" data-label_c="red" data-label_c_v="yellow" data-bg_c="#ffffff" data-bg_c_v="#ffffff" data-brdr_c="#ffffff" data-label_fs="r" data-i18n_like="  " data-identifier="3d305e34-e54b-11eb-8693-34e6adc52272" data-dislike_enabled="false" data-site_id="604e13966fd08bbf03672c5b" data-counter_clickable="true" data-popup_disabled="true" data-share_enabled="false" data-tooltip_enabled="false"></span>
+<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+<!-- LikeBtn.com END -->
+</button>
+</div>
+
+
+<div class="col-3 d-flex justify-content-end dotto-header-user">
+
+<div class="d-flex flex-column mx-3">
+<div class="row">
+<div @click="authorOneModal = true" type="button"
+class="col d-flex d-md-flex flex-row flex-shrink-1 justify-content-sm-end align-items-sm-center justify-content-md-end align-items-md-center dotto-header-user-icon">
+<img class="img-fluid user-image lang-color-r mx-auto" src="joining-dataframes_files/figure-html/Mohsen-Jalali.jpeg" />
+</div>
+</div>
+<h6 class="d-flex justify-content-end dotto-header-user-name mx-auto">
+Mohsen Jalali
+</h6>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<div v-if="authorOneModal" class="modal">
+<!-- Modal content -->
+<div class="modal-content">
+<span @click="authorOneModal = false" class="close">&times;</span>
+<div class="card" style="max-width: 540px">
+<div class="row g-0">
+<div class="col-md-4">
+<img src="joining-dataframes_files/figure-html/Mohsen-Jalali.jpeg" class="img-fluid" />
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<ins><a href="https://mohsenjalali.ir" class="text-dark" target="_blank"><h3 class="card-title mb-0">Mohsen Jalali</h3></a></ins>
+<div class="card-text fs-4 my-2">Data Scientist, DataMotto</div>
+<small class="card-text text-muted my-2 fs-4">Language: Python</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div v-show="commentOpen" class="modal overflow-auto">
+<div class="modal-comment overflow-auto">
+<span @click="commentOpen = false" class="close">&times;</span>
+<div id="disqus_thread"></div>
+</div>
+</div>
+
+
+<section>
+<div id="dotto-row-info" class="d-flex">
+
+<div class="col-4 d-flex flex-grow-0 justify-content-start align-items-center align-items-xl-center">
+<div class="d-flex mx-4 justify-content-around align-items-center bg-social-icons">
+
+<div>
+<i type="button" @click="activeLang = 'r'"
+class="fab fa-r-project mx-2"
+:class="{'lang-color-r': activeLang === 'r'}" >
+  </i>
+</div>
+
+
+<div>
+<i type="button" @click="activeLang = 'python'"
+class="fab fa-python mx-2"
+:class="{'lang-color-python': activeLang === 'python'}" >
+  </i>
+</div>
+
+</div>
+</div>
+
+
+<div
+class="col-8 d-flex justify-content-end align-items-center" style="padding-right: 15px">
+<!--
+<div class="d-flex justify-content-center align-items-center align-content-center bg-social-icons"
+style="margin-right: 7px; width: 146.3px">
+<span class="d-flex justify-content-lg-center align-items-lg-center" style="width: 133.7px">
+<i class="fas fa-music" style="padding-right: 12px"> </i>
+</span>
+</div>
+---->
+<div class="d-flex justify-content-around align-items-center bg-social-icons">
+<a href="https://twitter.com/share?text=Joining Dataframes&amp;url=https://datamotto.com/posts/Dotto/D009-2021-07-15-joining-dataframes/index.html&amp;hashtags=rstats,Python" target="_blank" class="text-reset">
+<i class="fab fa-twitter"></i></a>
+<a href="https://www.linkedin.com/sharing/share-offsite/?url=https://datamotto.com/posts/Dotto/D009-2021-07-15-joining-dataframes/index.html" target="_blank" class="text-reset">
+<i class="fa fa-linkedin-square"></i></a>
+</div>
+<div class="text-nowrap d-flex justify-content-around align-items-center bg-social-icons bg-bugs-icons">
+<a href="https://github.com/DataMotto/DataMotto/blob/master/posts/Dotto/D009-2021-07-15-joining-dataframes/joining-dataframes.Rmd" target="_blank" class="text-reset">
+<i class="fab fa-github header-social-icon"></i></a>
+<a href="https://github.com/DataMotto/DataMotto/issues/new?assignees=&labels=bug&template=bug_report.md&title=" target="_blank" class="text-reset">
+<i class="fas fa-bug header-social-icon"></i></a>
+</div>
+</div>
+
+</div>
+</section>
+
+
+
+
+<section v-if="activeDotto === '1'"
+class="text-left d-flex flex-row flex-grow-1 flex-wrap" id="dotto-row-main">
+<div class="col-12 col-lg-1" id="dotto-main-dots">
+
+<button type="button" @click="activeMotto = '1'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '1', 'btn-outline-light': activeMotto !== '1'}">1</button>
+
+
+<button type="button" @click="activeMotto = '2'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '2', 'btn-outline-light': activeMotto !== '2'}">2</button>
+
+
+<button type="button" @click="activeMotto = '3'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '3', 'btn-outline-light': activeMotto !== '3'}">3</button>
+
+
+<button type="button" @click="activeMotto = '4'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '4', 'btn-outline-light': activeMotto !== '4'}">4</button>
+
+
+<button type="button" @click="activeMotto = '5'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '5', 'btn-outline-light': activeMotto !== '5'}">5</button>
+
+
+<button type="button" @click="activeMotto = '6'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '6', 'btn-outline-light': activeMotto !== '6'}">6</button>
+
+
+<button type="button" @click="activeMotto = '7'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '7', 'btn-outline-light': activeMotto !== '7'}">7</button>
+
+
+<button type="button" @click="activeMotto = '8'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '8', 'btn-outline-light': activeMotto !== '8'}">8</button>
+
+</div>
+
+<!-- Dot 1------------------------------------------------>
+
+<div v-if="activeMotto === '1'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><strong>Description About Package</strong>
+<ul>
+<li><a href="https://pandas.pydata.org/">pandas</a> is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.</li>
+</ul></li>
+<li><strong>Description About Dataset</strong> If we want to start an online shop on Instagram and sell coffee, who are our customers? In this Dotto we use <a href="https://www.kaggle.com/mohsenjalali/instagram-coffee-page-in-us">Instagram coffee page in US</a>.</li>
+<li><strong>Prepare Environment</strong> Install packages with below commands: <code>pip install pandas</code></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><strong>Description About Package</strong>
+<ul>
+<li><a href="https://dplyr.tidyverse.org/">dplyr</a> is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges</li>
+</ul></li>
+<li><strong>Description About Dataset</strong> If we want to start an online shop on Instagram and sell coffee, who are our customers? In this Dotto we use <a href="https://www.kaggle.com/mohsenjalali/instagram-coffee-page-in-us">Instagram coffee page in US</a>.</li>
+<li><strong>Prepare Environment</strong> Install packages with below commands: <code>install.packages("dplyr")</code></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now check that libraries loaded or not</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( <span class="st">&#39;dplyr&#39;</span> <span class="sc">%in%</span> (<span class="fu">.packages</span>()))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;all library have been loaded&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># import data sets</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>novocoffee_followers <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&#39;./novocoffee_followers.csv&#39;</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>heartroasters_followers <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&#39;./heartroasters_followers.csv&#39;</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of novocoffee dataset</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(novocoffee_followers))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">ncol</span>(novocoffee_followers))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of row: %d&#39;</span>,<span class="fu">nrow</span>(novocoffee_followers))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#print property of heartroasters dataset</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(heartroasters_followers))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">ncol</span>(heartroasters_followers))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of row: %d&#39;</span>,<span class="fu">nrow</span>(heartroasters_followers))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb2"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Now check that libraries loaded or not</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">&quot;pandas&quot;</span> <span class="kw">in</span> sys.modules):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&quot;all modules have been loaded&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># import data sets  </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>novocoffee_followers <span class="op">=</span> pd.read_csv(<span class="st">&#39;./novocoffee_followers.csv&#39;</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>heartroasters_followers <span class="op">=</span> pd.read_csv(<span class="st">&#39;./heartroasters_followers.csv&#39;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#print property of novocoffee dataset</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(novocoffee_followers.columns)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(novocoffee_followers.shape)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#print property of heartroasters dataset</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(heartroasters_followers.columns)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(heartroasters_followers.shape)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;all library have been loaded&quot;</code></pre>
+<pre><code>## [1] &quot;username&quot;            &quot;is_verified&quot;         &quot;is_private&quot;          &quot;is_business_account&quot;</code></pre>
+<pre><code>## [1] &quot;number of column: 4&quot;</code></pre>
+<pre><code>## [1] &quot;number of row: 522&quot;</code></pre>
+<pre><code>## [1] &quot;username&quot;            &quot;is_verified&quot;         &quot;is_private&quot;          &quot;is_business_account&quot;</code></pre>
+<pre><code>## [1] &quot;number of column: 4&quot;</code></pre>
+<pre><code>## [1] &quot;number of row: 1439&quot;</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## all modules have been loaded</code></pre>
+<pre><code>## Index([&#39;username&#39;, &#39;is_verified&#39;, &#39;is_private&#39;, &#39;is_business_account&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## (522, 4)</code></pre>
+<pre><code>## Index([&#39;username&#39;, &#39;is_verified&#39;, &#39;is_private&#39;, &#39;is_business_account&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## (1439, 4)</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 2------------------------------------------------>
+
+<div v-if="activeMotto === '2'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>who are followers of both of these pages?</strong> we want to answer to this question for find intersection of novocoffee followers and heartroasters followers.</p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For this purpose, we use inner join between two tables. when combining tables, there are two terminologies you should be familiar with: The name of the table you use first is called the left table while the other is called the right table.</p></li>
+<li><p>For joining tables we use the <code>inner_join()</code> function with three parameters <code>novocoffee_followers, heartroasters_followers, by='username'</code>. First two parameters are name of tables and the <code>by</code> parameter represents the column that we want to join tables on that (if in our tables the column names are different we can use <code>by=c('left_column_name'='right_column_name')</code>).</p></li>
+<li><p>Because our data set that have the names of the same columns we can add a suffix to the names of columns with this parameter <code>suffix</code>.</p></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>who are followers of both of these pages?</strong> we want to answer to this question for find intersection of novocoffee followers and heartroasters followers.</p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For this purpose, we use inner join between two tables. when combining tables, there are two terminologies you should be familiar with: The name of the table you use first is called the left table while the other is called the right table.</p></li>
+<li><p>For joining tables we use the <code>merge()</code> function with two parameters <code>on='username', how = 'inner'</code>. <code>how</code> parameter represents the type of join we use, and the <code>on</code> parameter represents the column that we want to join tables on that (if in our tables the column names are different we can use <code>right_on</code> and <code>left_on</code> parameters).</p></li>
+<li><p>Because our data set that have the names of the same columns we can add a suffix to the names of columns with this parameter <code>suffixes</code>.</p></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb15"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>inner_joined <span class="ot">=</span> <span class="fu">inner_join</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  novocoffee_followers,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by=</span><span class="st">&#39;username&#39;</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">suffix=</span><span class="fu">c</span>(<span class="st">&#39;_novocoffee&#39;</span>, <span class="st">&#39;_heartroasters&#39;</span>))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(inner_joined)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">ncol</span>(inner_joined))</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">nrow</span>(inner_joined))</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#who follow both of these pages?</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(inner_joined[<span class="st">&quot;username&quot;</span>])</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb16"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>inner_joined <span class="op">=</span> novocoffee_followers.merge(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  on<span class="op">=</span><span class="st">&#39;username&#39;</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  how<span class="op">=</span><span class="st">&#39;inner&#39;</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  suffixes<span class="op">=</span>(<span class="st">&#39;_novocoffee&#39;</span>, <span class="st">&#39;_heartroasters&#39;</span>))</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inner_joined.columns)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inner_joined.shape)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#who follow both of these pages?</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inner_joined[<span class="st">&#39;username&#39;</span>])</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;username&quot;                          &quot;is_verified_novocoffee&quot;           
+## [3] &quot;is_private_novocoffee&quot;             &quot;is_business_account_novocoffee&quot;   
+## [5] &quot;is_verified_heartroasters&quot;         &quot;is_private_heartroasters&quot;         
+## [7] &quot;is_business_account_heartroasters&quot;</code></pre>
+<pre><code>## [1] &quot;number of column: 7&quot;</code></pre>
+<pre><code>## [1] &quot;number of column: 11&quot;</code></pre>
+<pre><code>##              username
+## 1        camelkordish
+## 2  packagingbest_lucy
+## 3             joecvlt
+## 4            ejf31590
+## 5            tibi1203
+## 6          coffeenola
+## 7         fauxinsiles
+## 8          alex.mi200
+## 9         umukocoffee
+## 10        robwheelman
+## 11        florforlife</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## Index([&#39;username&#39;, &#39;is_verified_novocoffee&#39;, &#39;is_private_novocoffee&#39;,
+##        &#39;is_business_account_novocoffee&#39;, &#39;is_verified_heartroasters&#39;,
+##        &#39;is_private_heartroasters&#39;, &#39;is_business_account_heartroasters&#39;],
+##       dtype=&#39;object&#39;)</code></pre>
+<pre><code>## (11, 7)</code></pre>
+<pre><code>## 0           camelkordish
+## 1     packagingbest_lucy
+## 2                joecvlt
+## 3               ejf31590
+## 4               tibi1203
+## 5             coffeenola
+## 6            fauxinsiles
+## 7             alex.mi200
+## 8            umukocoffee
+## 9            robwheelman
+## 10           florforlife
+## Name: username, dtype: object</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 3------------------------------------------------>
+
+<div v-if="activeMotto === '3'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Which followers of the Novocoffee page are the same as the Heartroasters page and which followers are not the same?</strong></p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For answer this question we can use left join between two tables.</p></li>
+<li><p><strong>A left join will return all of the rows of the left table including matching rows from the right table.</strong> <code>dplyr</code> will put a <code>NA</code> value to the cells with no match.(As you can see in the result <code>amycharlenem</code> followed Novocoffee but <code>amycharlenem</code> didn’t follow Heartroasters and the value of the columns of Heartroasters are <code>NA</code>)</p></li>
+<li><p>For left join, we use the <code>left_join()</code> function.</p></li>
+</ul>
+<p><strong>Note: In our example Novocoffee is left table and Heartroasters is right table</strong></p>
+
+</p>
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Which followers of the Novocoffee page are the same as the Heartroasters page and which followers are not the same?</strong></p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For answer this question we can use left join between two tables.</p></li>
+<li><p><strong>A left join will return all of the rows of the left table including matching rows from the right table.</strong> <code>pandas</code> will put a <code>NaN</code> value to the cells with no match.(As you can see in the result <code>amycharlenem</code> followed Novocoffee but <code>amycharlenem</code> didn’t follow Heartroasters and the value of the columns of Heartroasters are <code>NaN</code>)</p></li>
+<li><p>For left join, we should set the <code>how</code> parameter equal to <code>left</code>.</p></li>
+</ul>
+<p><strong>Note: In our example Novocoffee is left table and Heartroasters is right table</strong></p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb24"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>left_joined <span class="ot">=</span> <span class="fu">left_join</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  novocoffee_followers,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by=</span><span class="st">&quot;username&quot;</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">suffix=</span><span class="fu">c</span>(<span class="st">&#39;_novocoffee&#39;</span>, <span class="st">&#39;_heartroasters&#39;</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(left_joined)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">ncol</span>(left_joined))</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">nrow</span>(left_joined))</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(left_joined,<span class="dv">1</span>))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb25"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>left_joined <span class="op">=</span> novocoffee_followers.merge(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  on<span class="op">=</span><span class="st">&#39;username&#39;</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  how<span class="op">=</span><span class="st">&#39;left&#39;</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  suffixes<span class="op">=</span>(<span class="st">&#39;_novocoffee&#39;</span>, <span class="st">&#39;_heartroasters&#39;</span>))</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(left_joined.columns)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(left_joined.shape)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(left_joined.head(<span class="dv">1</span>).transpose())</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;username&quot;                          &quot;is_verified_novocoffee&quot;           
+## [3] &quot;is_private_novocoffee&quot;             &quot;is_business_account_novocoffee&quot;   
+## [5] &quot;is_verified_heartroasters&quot;         &quot;is_private_heartroasters&quot;         
+## [7] &quot;is_business_account_heartroasters&quot;</code></pre>
+<pre><code>## [1] &quot;number of column: 7&quot;</code></pre>
+<pre><code>## [1] &quot;number of column: 522&quot;</code></pre>
+<pre><code>## Rows: 1
+## Columns: 7
+## $ username                          &lt;fct&gt; amycharlenem
+## $ is_verified_novocoffee            &lt;fct&gt; False
+## $ is_private_novocoffee             &lt;fct&gt; True
+## $ is_business_account_novocoffee    &lt;fct&gt; False
+## $ is_verified_heartroasters         &lt;fct&gt; NA
+## $ is_private_heartroasters          &lt;fct&gt; NA
+## $ is_business_account_heartroasters &lt;fct&gt; NA</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## Index([&#39;username&#39;, &#39;is_verified_novocoffee&#39;, &#39;is_private_novocoffee&#39;,
+##        &#39;is_business_account_novocoffee&#39;, &#39;is_verified_heartroasters&#39;,
+##        &#39;is_private_heartroasters&#39;, &#39;is_business_account_heartroasters&#39;],
+##       dtype=&#39;object&#39;)</code></pre>
+<pre><code>## (522, 7)</code></pre>
+<pre><code>##                                               0
+## username                           amycharlenem
+## is_verified_novocoffee                    False
+## is_private_novocoffee                      True
+## is_business_account_novocoffee            False
+## is_verified_heartroasters                   NaN
+## is_private_heartroasters                    NaN
+## is_business_account_heartroasters           NaN</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 4------------------------------------------------>
+
+<div v-if="activeMotto === '4'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Which followers of the Heartroasters page are the same as the Novocoffee page and which followers are not the same?</strong></p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For answer this question we can use right join between two tables.</p></li>
+<li><p><strong>A right join will return all of the rows of the right table including matching rows from the left table.</strong> <code>dplyr</code> will put a <code>NA</code> value to the cells with no match.(As you can see in the result <code>aylinlongoria28</code> followed Heartroasters but <code>aylinlongoria28</code> didn’t follow Novocoffee and the value of the columns of Novocoffee are <code>NA</code>)</p></li>
+<li><p>For left join, we use the <code>right_join()</code> function.</p></li>
+</ul>
+<p><strong>Note: In our example Novocoffee is left table and Heartroasters is right table</strong></p>
+
+</p>
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Which followers of the Heartroasters page are the same as the Novocoffee page and which followers are not the same?</strong></p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For answer this question we can use right join between two tables.</p></li>
+<li><p><strong>A right join will return all of the rows of the right table including matching rows from the left table.</strong> <code>pandas</code> will put a <code>NaN</code> value to the cells with no match.(As you can see in the result <code>aylinlongoria28</code> followed Heartroasters but <code>aylinlongoria28</code> didn’t follow Novocoffee and the value of the columns of Novocoffee are <code>NaN</code>)</p></li>
+<li><p>For right join, we should set the <code>how</code> parameter equal to <code>right</code>.</p></li>
+</ul>
+<p><strong>Note: In our example Novocoffee is left table and Heartroasters is right table</strong></p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb33"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>right_joined <span class="ot">=</span> <span class="fu">right_join</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  novocoffee_followers,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by=</span><span class="st">&quot;username&quot;</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">suffix=</span><span class="fu">c</span>(<span class="st">&#39;_novocoffee&#39;</span>, <span class="st">&#39;_heartroasters&#39;</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(right_joined)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">ncol</span>(right_joined))</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">nrow</span>(right_joined))</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(right_joined,<span class="dv">1</span>))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb34"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>right_joined <span class="op">=</span> novocoffee_followers.merge(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  on<span class="op">=</span><span class="st">&#39;username&#39;</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  how<span class="op">=</span><span class="st">&#39;right&#39;</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  suffixes<span class="op">=</span>(<span class="st">&#39;_novocoffee&#39;</span>, <span class="st">&#39;_heartroasters&#39;</span>))</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(right_joined.columns)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(right_joined.shape)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(right_joined.head(<span class="dv">1</span>).transpose())</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;username&quot;                          &quot;is_verified_novocoffee&quot;           
+## [3] &quot;is_private_novocoffee&quot;             &quot;is_business_account_novocoffee&quot;   
+## [5] &quot;is_verified_heartroasters&quot;         &quot;is_private_heartroasters&quot;         
+## [7] &quot;is_business_account_heartroasters&quot;</code></pre>
+<pre><code>## [1] &quot;number of column: 7&quot;</code></pre>
+<pre><code>## [1] &quot;number of column: 1439&quot;</code></pre>
+<pre><code>## Rows: 1
+## Columns: 7
+## $ username                          &lt;fct&gt; aylinlongoria28
+## $ is_verified_novocoffee            &lt;fct&gt; NA
+## $ is_private_novocoffee             &lt;fct&gt; NA
+## $ is_business_account_novocoffee    &lt;fct&gt; NA
+## $ is_verified_heartroasters         &lt;fct&gt; False
+## $ is_private_heartroasters          &lt;fct&gt; True
+## $ is_business_account_heartroasters &lt;fct&gt; False</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## Index([&#39;username&#39;, &#39;is_verified_novocoffee&#39;, &#39;is_private_novocoffee&#39;,
+##        &#39;is_business_account_novocoffee&#39;, &#39;is_verified_heartroasters&#39;,
+##        &#39;is_private_heartroasters&#39;, &#39;is_business_account_heartroasters&#39;],
+##       dtype=&#39;object&#39;)</code></pre>
+<pre><code>## (1439, 7)</code></pre>
+<pre><code>##                                                  0
+## username                           aylinlongoria28
+## is_verified_novocoffee                         NaN
+## is_private_novocoffee                          NaN
+## is_business_account_novocoffee                 NaN
+## is_verified_heartroasters                    False
+## is_private_heartroasters                      True
+## is_business_account_heartroasters            False</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 5------------------------------------------------>
+
+<div v-if="activeMotto === '5'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Who follows the Novocoffee page or Who follows the Heartroasters page?</strong> In here we want to know all accounts that follow each of the Novocoffee page or the Heartroasters page(it’s like consensus of two followers list).</p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For answer this question we can use full outer join between two tables.</p></li>
+<li><p><strong>A full outer join will combine the results of both the left and the right joins.</strong> <code>dplyr</code> will put a <code>NA</code> value to the cells with no match.</p></li>
+<li><p>For full outer join, we use <code>full_join()</code> function.</p></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Who follows the Novocoffee page or Who follows the Heartroasters page?</strong> In here we want to know all accounts that follow each of the Novocoffee page or the Heartroasters page(it’s like consensus of two followers list).</p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For answer this question we can use outer join between two tables.</p></li>
+<li><p><strong>A outer join will combine the results of both the left and the right joins.</strong> <code>pandas</code> will put a <code>NaN</code> value to the cells with no match.</p></li>
+<li><p>For outer join, we should set the <code>how</code> parameter equal to <code>outer</code>.</p></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb42"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>outer_joined <span class="ot">=</span> <span class="fu">full_join</span>(</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  novocoffee_followers,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by=</span><span class="st">&quot;username&quot;</span>,</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">suffix=</span><span class="fu">c</span>(<span class="st">&#39;_novocoffee&#39;</span>, <span class="st">&#39;_heartroasters&#39;</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(outer_joined)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">ncol</span>(outer_joined))</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">nrow</span>(outer_joined))</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="co"># this show you that outer join combine right join and left join but we should subtract intersection of right join and left join</span></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">nrow</span>(right_joined) <span class="sc">+</span> <span class="fu">nrow</span>(left_joined) <span class="sc">-</span> <span class="fu">nrow</span>(inner_joined <span class="sc">==</span> <span class="fu">nrow</span>(outer_joined)))</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(outer_joined,<span class="dv">1</span>))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb43"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>outer_joined <span class="op">=</span> novocoffee_followers.merge(</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  on<span class="op">=</span><span class="st">&#39;username&#39;</span>,</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  how<span class="op">=</span><span class="st">&#39;outer&#39;</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  suffixes<span class="op">=</span>(<span class="st">&#39;_novocoffee&#39;</span>, <span class="st">&#39;_heartroasters&#39;</span>))</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(outer_joined.columns)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(outer_joined.shape)</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co"># this show you that outer join combine right join and left join but we should subtract intersection of right join and left join</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((right_joined.shape[<span class="dv">0</span>] <span class="op">+</span> left_joined.shape[<span class="dv">0</span>] <span class="op">-</span> inner_joined.shape[<span class="dv">0</span>]) <span class="op">==</span> outer_joined.shape[<span class="dv">0</span>])</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(outer_joined.head(<span class="dv">1</span>).transpose())</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;username&quot;                          &quot;is_verified_novocoffee&quot;           
+## [3] &quot;is_private_novocoffee&quot;             &quot;is_business_account_novocoffee&quot;   
+## [5] &quot;is_verified_heartroasters&quot;         &quot;is_private_heartroasters&quot;         
+## [7] &quot;is_business_account_heartroasters&quot;</code></pre>
+<pre><code>## [1] &quot;number of column: 7&quot;</code></pre>
+<pre><code>## [1] &quot;number of column: 1950&quot;</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre><code>## Rows: 1
+## Columns: 7
+## $ username                          &lt;fct&gt; amycharlenem
+## $ is_verified_novocoffee            &lt;fct&gt; False
+## $ is_private_novocoffee             &lt;fct&gt; True
+## $ is_business_account_novocoffee    &lt;fct&gt; False
+## $ is_verified_heartroasters         &lt;fct&gt; NA
+## $ is_private_heartroasters          &lt;fct&gt; NA
+## $ is_business_account_heartroasters &lt;fct&gt; NA</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## Index([&#39;username&#39;, &#39;is_verified_novocoffee&#39;, &#39;is_private_novocoffee&#39;,
+##        &#39;is_business_account_novocoffee&#39;, &#39;is_verified_heartroasters&#39;,
+##        &#39;is_private_heartroasters&#39;, &#39;is_business_account_heartroasters&#39;],
+##       dtype=&#39;object&#39;)</code></pre>
+<pre><code>## (1950, 7)</code></pre>
+<pre><code>## True</code></pre>
+<pre><code>##                                               0
+## username                           amycharlenem
+## is_verified_novocoffee                    False
+## is_private_novocoffee                      True
+## is_business_account_novocoffee            False
+## is_verified_heartroasters                   NaN
+## is_private_heartroasters                    NaN
+## is_business_account_heartroasters           NaN</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 6------------------------------------------------>
+
+<div v-if="activeMotto === '6'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Who follows the Novocoffee page and is on Heartroasters’s follower list?</strong> This question is so like our first question <strong>who are followers of both of these pages?</strong>, but in here we want to know about Novocoffee followers.</p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For answer this question we can use semi-join between two tables.</p></li>
+<li><p><strong>Semi-joins are useful when you want to subset your data based on observations in other tables. Semi-join is exactly like an inner join but it only includes the results from the left table.</strong></p></li>
+<li><p>For semi-join, we use <code>semi_join()</code> function.</p></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Who follows the Novocoffee page and is on Heartroasters’s follower list?</strong> This question is so like our first question <strong>who are followers of both of these pages?</strong>, but in here we want to know about Novocoffee followers.</p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For answer this question we can use semi-join between two tables.</p></li>
+<li><p><strong>Semi-joins are useful when you want to subset your data based on observations in other tables. Semi-join is exactly like an inner join but it only includes the results from the left table.</strong></p></li>
+<li><p>Implement semi-join is different. In the first step, we do an inner join between two tables, and after that, in the second step we check which username of the left table is in the table achieved from the first step, in the third step, we return a subset of the left table that is shared with the right table.</p></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb53"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>semi_joined <span class="ot">=</span> <span class="fu">semi_join</span>(</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  novocoffee_followers,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by=</span><span class="st">&quot;username&quot;</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co"># compare different between semi-join and inner join</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(semi_joined)</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(inner_joined)</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column semi_join: %d&#39;</span>,<span class="fu">ncol</span>(semi_joined))</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of row semi_join: %d&#39;</span>,<span class="fu">nrow</span>(semi_joined))</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column inner_join: %d&#39;</span>,<span class="fu">ncol</span>(inner_joined))</span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of row inner_join: %d&#39;</span>,<span class="fu">nrow</span>(inner_joined))</span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(semi_joined,<span class="dv">1</span>))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb54"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>semi_table <span class="op">=</span> novocoffee_followers.merge(</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  on<span class="op">=</span><span class="st">&#39;username&#39;</span>,</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  how<span class="op">=</span><span class="st">&#39;inner&#39;</span>)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>in_both <span class="op">=</span> novocoffee_followers[<span class="st">&#39;username&#39;</span>].isin(semi_table[<span class="st">&#39;username&#39;</span>])</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>semi_joined <span class="op">=</span> novocoffee_followers[in_both]</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a><span class="co"># compare different between semi-join and inner join</span></span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;semi-join columns : &quot;</span> <span class="op">+</span> <span class="bu">str</span>(semi_joined.columns))</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;inner join columns : &quot;</span> <span class="op">+</span> <span class="bu">str</span>(inner_joined.columns))</span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;inner join table shape : &quot;</span> <span class="op">+</span> <span class="bu">str</span>(inner_joined.shape))</span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;semi join table shape : &quot;</span> <span class="op">+</span> <span class="bu">str</span>(semi_joined.shape))</span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(semi_joined.head(<span class="dv">1</span>).transpose())</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;username&quot;            &quot;is_verified&quot;         &quot;is_private&quot;          &quot;is_business_account&quot;</code></pre>
+<pre><code>## [1] &quot;username&quot;                          &quot;is_verified_novocoffee&quot;           
+## [3] &quot;is_private_novocoffee&quot;             &quot;is_business_account_novocoffee&quot;   
+## [5] &quot;is_verified_heartroasters&quot;         &quot;is_private_heartroasters&quot;         
+## [7] &quot;is_business_account_heartroasters&quot;</code></pre>
+<pre><code>## [1] &quot;number of column semi_join: 4&quot;</code></pre>
+<pre><code>## [1] &quot;number of row semi_join: 11&quot;</code></pre>
+<pre><code>## [1] &quot;number of column inner_join: 7&quot;</code></pre>
+<pre><code>## [1] &quot;number of row inner_join: 11&quot;</code></pre>
+<pre><code>## Rows: 1
+## Columns: 4
+## $ username            &lt;fct&gt; camelkordish
+## $ is_verified         &lt;fct&gt; False
+## $ is_private          &lt;fct&gt; False
+## $ is_business_account &lt;fct&gt; False</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## semi-join columns : Index([&#39;username&#39;, &#39;is_verified&#39;, &#39;is_private&#39;, &#39;is_business_account&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## inner join columns : Index([&#39;username&#39;, &#39;is_verified_novocoffee&#39;, &#39;is_private_novocoffee&#39;,
+##        &#39;is_business_account_novocoffee&#39;, &#39;is_verified_heartroasters&#39;,
+##        &#39;is_private_heartroasters&#39;, &#39;is_business_account_heartroasters&#39;],
+##       dtype=&#39;object&#39;)</code></pre>
+<pre><code>## inner join table shape : (11, 7)</code></pre>
+<pre><code>## semi join table shape : (11, 4)</code></pre>
+<pre><code>##                                 2
+## username             camelkordish
+## is_verified                 False
+## is_private                  False
+## is_business_account         False</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 7------------------------------------------------>
+
+<div v-if="activeMotto === '7'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Who follows the Novocoffee page and is not on Heartroasters’s follower list?</strong> We want to know which followers of the Novocoffee page don’t follow the Heartroasters page.</p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For answer this question we can use anti-join between two tables.</p></li>
+<li><p><strong>Anti-join is the complete opposite of a semi-join and returns the left table, excluding the intersection</strong></p></li>
+<li><p>For Anti-join, we use <code>anti_join()</code> function.</p></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Who follows the Novocoffee page and is not on Heartroasters’s follower list?</strong> We want to know which followers of the Novocoffee page don’t follow the Heartroasters page.</p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>For answer this question we can use anti-join between two tables.</p></li>
+<li><p><strong>Anti-join is the complete opposite of a semi-join and returns the left table, excluding the intersection</strong></p></li>
+<li><p>For implement anti-join In the first step, we do an left join between two tables but we add <code>indicator=True</code> parameter to the <code>merge()</code> function (this parameter add <code>_merge</code> column to the table that show us which data is in both table with <code>both</code> value and which data is only in the left table with <code>left_only</code>), and after that, in the second step we get rows of the table achieved from the first step that have <code>left_only</code> value in <code>_merge</code> column, in the third step, we return a subset of the left table that is not shared with the right table.</p></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb67"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>anti_joined <span class="ot">=</span> <span class="fu">anti_join</span>(</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  novocoffee_followers,</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by=</span><span class="st">&quot;username&quot;</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(anti_joined)</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a><span class="co"># relation between anti join and semi join</span></span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column anti_join: %d&#39;</span>,<span class="fu">ncol</span>(anti_joined))</span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of row anti_join: %d&#39;</span>,<span class="fu">nrow</span>(anti_joined))</span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column semi_join: %d&#39;</span>,<span class="fu">ncol</span>(semi_joined))</span>
+<span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of row semi_join: %d&#39;</span>,<span class="fu">nrow</span>(semi_joined))</span>
+<span id="cb67-15"><a href="#cb67-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-16"><a href="#cb67-16" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column Novocoffee: %d&#39;</span>,<span class="fu">ncol</span>(novocoffee_followers))</span>
+<span id="cb67-17"><a href="#cb67-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of row Novocoffee: %d&#39;</span>,<span class="fu">nrow</span>(novocoffee_followers))</span>
+<span id="cb67-18"><a href="#cb67-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-19"><a href="#cb67-19" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(anti_joined,<span class="dv">1</span>))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb68"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>left_joined <span class="op">=</span> novocoffee_followers.merge(</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers,</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  on<span class="op">=</span><span class="st">&#39;username&#39;</span>,</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  how<span class="op">=</span><span class="st">&#39;left&#39;</span>,</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  indicator<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>left_only <span class="op">=</span> left_joined.loc[left_joined[<span class="st">&#39;_merge&#39;</span>] <span class="op">==</span> <span class="st">&#39;left_only&#39;</span>, <span class="st">&#39;username&#39;</span>]</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>anti_joined <span class="op">=</span> novocoffee_followers[novocoffee_followers[<span class="st">&#39;username&#39;</span>].isin(left_only)]</span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;anti-join columns : &quot;</span> <span class="op">+</span> <span class="bu">str</span>(anti_joined.columns))</span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a><span class="co"># relation between anti join and semi join</span></span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;anti join table shape : &quot;</span> <span class="op">+</span> <span class="bu">str</span>(anti_joined.shape))</span>
+<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;semi join table shape : &quot;</span> <span class="op">+</span> <span class="bu">str</span>(semi_joined.shape))</span>
+<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Novocoffee followers table shape : &quot;</span> <span class="op">+</span> <span class="bu">str</span>(novocoffee_followers.shape))</span>
+<span id="cb68-17"><a href="#cb68-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-18"><a href="#cb68-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(anti_joined.head(<span class="dv">1</span>).transpose())</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;username&quot;            &quot;is_verified&quot;         &quot;is_private&quot;          &quot;is_business_account&quot;</code></pre>
+<pre><code>## [1] &quot;number of column anti_join: 4&quot;</code></pre>
+<pre><code>## [1] &quot;number of row anti_join: 511&quot;</code></pre>
+<pre><code>## [1] &quot;number of column semi_join: 4&quot;</code></pre>
+<pre><code>## [1] &quot;number of row semi_join: 11&quot;</code></pre>
+<pre><code>## [1] &quot;number of column Novocoffee: 4&quot;</code></pre>
+<pre><code>## [1] &quot;number of row Novocoffee: 522&quot;</code></pre>
+<pre><code>## Rows: 1
+## Columns: 4
+## $ username            &lt;fct&gt; amycharlenem
+## $ is_verified         &lt;fct&gt; False
+## $ is_private          &lt;fct&gt; True
+## $ is_business_account &lt;fct&gt; False</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## anti-join columns : Index([&#39;username&#39;, &#39;is_verified&#39;, &#39;is_private&#39;, &#39;is_business_account&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## anti join table shape : (511, 4)</code></pre>
+<pre><code>## semi join table shape : (11, 4)</code></pre>
+<pre><code>## Novocoffee followers table shape : (522, 4)</code></pre>
+<pre><code>##                                 0
+## username             amycharlenem
+## is_verified                 False
+## is_private                   True
+## is_business_account         False</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 8------------------------------------------------>
+
+<div v-if="activeMotto === '8'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Who are interest about the coffee?</strong> To answer this question we can find the follower of the coffee page (in our data set we have lists of followers of the Novocoffee and the Heartroasters pages). This question is so like the <strong>Who follows the Novocoffee page or Who follows the Heartroasters page?</strong>.</p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>To answer this question we can row bind two tables. This approach is like outer join but in outer join, we don’t have duplicate data but in the row bind, it’s possible to have duplicate data (because it’s possible tables have intersection).</p></li>
+<li><p><strong>Row-bind means add two or more tables vertically</strong></p></li>
+<li><p>For implement row bind we use <code>bind_rows()</code> function.</p></li>
+<li><p>When we bind two tables, <code>dplyr</code> generates a new index for each row automatically.</p></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<ul>
+<li><p><strong>Who are interest about the coffee?</strong> To answer this question we can find the follower of the coffee page (in our data set we have lists of followers of the Novocoffee and the Heartroasters pages). This question is so like the <strong>Who follows the Novocoffee page or Who follows the Heartroasters page?</strong>.</p></li>
+<li><p><strong>Technical Details</strong></p></li>
+<li><p>To answer this question we can row bind two tables. This approach is like outer join but in outer join, we don’t have duplicate data but in the row bind, it’s possible to have duplicate data (because it’s possible tables have intersection).</p></li>
+<li><p><strong>Row-bind means add two or more tables vertically</strong></p></li>
+<li><p>For implement row bind we use <code>concat()</code> method with parameter <code>axis='index'</code>.</p></li>
+<li><p>In row bind, each table has its own index column and when we want to combine these tables we should note that the result table hasn’t duplicate index. To prevent duplicated index we use the <code>verify_integrity=True</code> parameter in <code>concat()</code> function, it raises an error if we have a duplicate index.</p></li>
+<li><p>To solve duplicate index problem we can use the <code>ignore_index=True</code> parameter in <code>concat()</code> function, with this parameter pandas ignore the index value of each row and generate a new index for each row of data.</p></li>
+</ul>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb82"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>row_bind <span class="ot">=</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  novocoffee_followers,</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  heartroasters_followers)</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(row_bind)</span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column row_bind: %d&#39;</span>,<span class="fu">ncol</span>(row_bind))</span>
+<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of row row_bind: %d&#39;</span>,<span class="fu">nrow</span>(row_bind))</span>
+<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-10"><a href="#cb82-10" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(row_bind,<span class="dv">1</span>))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb83"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>row_bind <span class="op">=</span> pd.concat(</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  [novocoffee_followers,heartroasters_followers],</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  axis<span class="op">=</span><span class="st">&#39;index&#39;</span>, </span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  ignore_index<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>  verify_integrity<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;row_bind columns : &quot;</span> <span class="op">+</span> <span class="bu">str</span>(row_bind.columns))</span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;row_bind table shape : &quot;</span> <span class="op">+</span> <span class="bu">str</span>(row_bind.shape))</span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(row_bind.head(<span class="dv">1</span>).transpose())</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;username&quot;            &quot;is_verified&quot;         &quot;is_private&quot;          &quot;is_business_account&quot;</code></pre>
+<pre><code>## [1] &quot;number of column row_bind: 4&quot;</code></pre>
+<pre><code>## [1] &quot;number of row row_bind: 1961&quot;</code></pre>
+<pre><code>## Rows: 1
+## Columns: 4
+## $ username            &lt;fct&gt; amycharlenem
+## $ is_verified         &lt;fct&gt; False
+## $ is_private          &lt;fct&gt; True
+## $ is_business_account &lt;fct&gt; False</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## row_bind columns : Index([&#39;username&#39;, &#39;is_verified&#39;, &#39;is_private&#39;, &#39;is_business_account&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## row_bind table shape : (1961, 4)</code></pre>
+<pre><code>##                                 0
+## username             amycharlenem
+## is_verified                 False
+## is_private                   True
+## is_business_account         False</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+</section>
+<!-- Body Footer ----------------------------------->
+
+<section id="dotto-footer">
+<div class="col-12 col-md-9">
+<div class="d-flex" id="dotto-row-lines">
+<img src="../../../assets/img/Dotto.svg" width="35" height="35" type="button" class=" ml-5 icon d-sm-flex justify-content-sm-center dotto-lines-icons">
+</i>
+</div>
+</div>
+<div class="col-12 col-md-3 pt-2">
+<div class="alert alert-danger dotto-alert-comment text-center" role="alert">
+<span type="button" @click="commentOpen = true" class="footer-disqus-text">
+<strong><i class="fas fa-comments fa-1x" style="font-size: 21px"> </i>
+<span class="disqus-comment-count" data-disqus-url="https://datamotto.com/posts/Dotto/D009-2021-07-15-joining-dataframes/index.html" data-disqus-identifier="3d305e34-e54b-11eb-8693-34e6adc52272"></span>
+</strong>
+<span> for this Dotto.</span>
+<span> Write yours here!</span>
+</span>
+
+<script>
+var disqus_config = function () {
+  this.page.url = "https://datamotto.com/posts/Dotto/D009-2021-07-15-joining-dataframes/index.html";
+  this.page.identifier = "3d305e34-e54b-11eb-8693-34e6adc52272";
+};
+
+(function() {
+var d = document, s = d.createElement("script");
+s.src = "https://datamotto-com.disqus.com/embed.js";
+s.setAttribute("data-timestamp", +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//datamotto-com.disqus.com/count.js" async></script>
+
+</div>
+</div>
+</section>
+
+
+</div>
+<!-- Don't indent these lines or it will mess pre blocks indentation -->
+<script src="../../../assets/js/post.js"></script>
+<script src="../../../assets/js/jquery.min.js"></script>
+<script src="../../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../assets/js/bs-init.js"></script>
+<script src="../../../assets/js/carts.js"></script>
+<script src="../../../assets/js/Index_page.js"></script>
+<script src="../../../assets/js/jquery-3.5.1.min.js"></script>
+</body>
+</html>
