@@ -19,10 +19,10 @@
       "occupation": ["Internship"],
       "affiliation": ["DataMotto"],
       "url": ["https://www.linkedin.com/in/mahyar-sharifi-06126616a"],
-      "img": ["Mahyar.jpg"],
+      "img": ["Mahyar.jpeg"],
       "lang": ["python", "r"],
-      "profile_img_for_Dotto": ["../../../assets/img/dotto.png"],
-      "profile_img": ["./posts/Dotto/D007-2021-07-14-interesting-ways-to-select-dataframe-columns./../../assets/img/dotto.png"]
+      "profile_img_for_Dotto": ["./interesting-ways-to-select-dataframe-columns_files/figure-html/Mahyar.jpeg"],
+      "profile_img": ["./posts/Dotto/D007-2021-07-14-interesting-ways-to-select-dataframe-columns/interesting-ways-to-select-dataframe-columns_files/figure-html/Mahyar.jpeg"]
     }
   ],
   "tech": [

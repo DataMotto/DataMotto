@@ -7,7 +7,7 @@ author:
     occupation: "Internship"
     affiliation: "DataMotto"
     url: "https://www.linkedin.com/in/mahyar-sharifi-06126616a"
-    img: "Mahyar.jpg"
+    img: "Mahyar.jpeg"
     lang: ["python", "r"]
 tech:
   - lang: r
