@@ -1,0 +1,655 @@
+---
+title: "Joining Dataframes"
+description: |
+  How to combining multiple dataframes and make the most out of them
+author:
+  - name: "Mohsen Jalali"
+    occupation: "Data Scientist"
+    affiliation: "DataMotto"
+    url: "mohsenjalali.ir"
+    img: "Mohsen-Jalali.jpeg"
+    lang: "Python"
+tech:
+  - lang: r
+    pkgs: ["dplyr"]
+  - lang: python
+    pkgs: ["pandas"]
+date:
+  created: "2021-07-15"
+  last_updated: "2021-07-15"
+categories: Wrangling
+applications: General
+cover_image: NULL
+slug: "joining-dataframes"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+- **Description About Package**
+  - [pandas](https://pandas.pydata.org/) is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.
+- **Description About Dataset**
+If we want to start an online shop on Instagram and sell coffee, who are our customers? In this Dotto we use [Instagram coffee page in US](https://www.kaggle.com/mohsenjalali/instagram-coffee-page-in-us).
+- **Prepare Environment**
+  Install packages with below commands:
+  `pip install pandas`
+```
+
+
+```{block, Dot = 1, part = "Instruction", lang = "python"}
+- **Description About Package**
+  - [dplyr](https://dplyr.tidyverse.org/) is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges
+- **Description About Dataset**
+If we want to start an online shop on Instagram and sell coffee, who are our customers? In this Dotto we use [Instagram coffee page in US](https://www.kaggle.com/mohsenjalali/instagram-coffee-page-in-us).
+- **Prepare Environment**
+  Install packages with below commands:
+  `install.packages("dplyr")`
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+library(dplyr)
+# Now check that libraries loaded or not
+if( 'dplyr' %in% (.packages()))
+  print("all library have been loaded")
+# import data sets
+novocoffee_followers = read.csv('./novocoffee_followers.csv')
+heartroasters_followers = read.csv('./heartroasters_followers.csv')
+# print property of novocoffee dataset
+print(colnames(novocoffee_followers))
+sprintf('number of column: %d',ncol(novocoffee_followers))
+sprintf('number of row: %d',nrow(novocoffee_followers))
+#print property of heartroasters dataset
+print(colnames(heartroasters_followers))
+sprintf('number of column: %d',ncol(heartroasters_followers))
+sprintf('number of row: %d',nrow(heartroasters_followers))
+```
+
+```{python, Dot = 1, part = "Code", echo = T, eval = F, }
+import pandas as pd
+# Now check that libraries loaded or not
+if ("pandas" in sys.modules):
+  print("all modules have been loaded")
+# import data sets  
+novocoffee_followers = pd.read_csv('./novocoffee_followers.csv')
+heartroasters_followers = pd.read_csv('./heartroasters_followers.csv')
+#print property of novocoffee dataset
+print(novocoffee_followers.columns)
+print(novocoffee_followers.shape)
+#print property of heartroasters dataset
+print(heartroasters_followers.columns)
+print(heartroasters_followers.shape)
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+library(dplyr)
+# Now check that libraries loaded or not
+if( 'dplyr' %in% (.packages()))
+  print("all library have been loaded")
+# import data sets
+novocoffee_followers = read.csv('./novocoffee_followers.csv')
+heartroasters_followers = read.csv('./heartroasters_followers.csv')
+# print property of novocoffee dataset
+print(colnames(novocoffee_followers))
+sprintf('number of column: %d',ncol(novocoffee_followers))
+sprintf('number of row: %d',nrow(novocoffee_followers))
+#print property of heartroasters dataset
+print(colnames(heartroasters_followers))
+sprintf('number of column: %d',ncol(heartroasters_followers))
+sprintf('number of row: %d',nrow(heartroasters_followers))
+```
+
+
+```{python, Dot = 1, part = "Result", echo = F, eval = T}
+import pandas as pd
+# Now check that libraries loaded or not
+if ("pandas" in sys.modules):
+  print("all modules have been loaded")
+  
+novocoffee_followers = pd.read_csv('./novocoffee_followers.csv')
+heartroasters_followers = pd.read_csv('./heartroasters_followers.csv')
+#print property of novocoffee dataset
+print(novocoffee_followers.columns)
+print(novocoffee_followers.shape)
+#print property of heartroasters dataset
+print(heartroasters_followers.columns)
+print(heartroasters_followers.shape)
+```
+
+<!-- Dot 2------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+- **who are followers of both of these pages?**
+we want to answer to this question for find intersection of novocoffee followers and heartroasters followers.
+- **Technical Details** 
+- For this purpose, we use inner join between two tables. when combining tables, there are two terminologies you should be familiar with: The name of the table you use first is called the left table while the other is called the right table. 
+- For joining tables we use the `inner_join()` function with three parameters `novocoffee_followers, heartroasters_followers, by='username'`. First two parameters are name of tables and the `by` parameter represents the column that we want to join tables on that (if in our tables the column names are different we can use `by=c('left_column_name'='right_column_name')`). 
+- Because our data set that have the names of the same columns we can add a suffix to the names of columns with this parameter `suffix`.
+```
+
+```{block, Dot = 2, part = "Instruction", lang = "python"}
+- **who are followers of both of these pages?**
+we want to answer to this question for find intersection of novocoffee followers and heartroasters followers.
+- **Technical Details** 
+- For this purpose, we use inner join between two tables. when combining tables, there are two terminologies you should be familiar with: The name of the table you use first is called the left table while the other is called the right table. 
+- For joining tables we use the `merge()` function with two parameters `on='username', how = 'inner'`. `how` parameter represents the type of join we use, and the `on` parameter represents the column that we want to join tables on that (if in our tables the column names are different we can use `right_on` and `left_on` parameters). 
+- Because our data set that have the names of the same columns we can add a suffix to the names of columns with this parameter `suffixes`.
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+inner_joined = inner_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by='username',
+  suffix=c('_novocoffee', '_heartroasters'))
+# print property of result of joining two tables
+colnames(inner_joined)
+sprintf('number of column: %d',ncol(inner_joined))
+sprintf('number of column: %d',nrow(inner_joined))
+#who follow both of these pages?
+print(inner_joined["username"])
+```
+
+```{python, Dot = 2, part = "Code", echo = T, eval = F, }
+inner_joined = novocoffee_followers.merge(
+  heartroasters_followers,
+  on='username',
+  how='inner',
+  suffixes=('_novocoffee', '_heartroasters'))
+# print property of result of joining two tables
+print(inner_joined.columns)
+print(inner_joined.shape)
+#who follow both of these pages?
+print(inner_joined['username'])
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+inner_joined = inner_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by='username',
+  suffix=c('_novocoffee', '_heartroasters'))
+# print property of result of joining two tables
+colnames(inner_joined)
+sprintf('number of column: %d',ncol(inner_joined))
+sprintf('number of column: %d',nrow(inner_joined))
+#who follow both of these pages?
+print(inner_joined["username"])
+```
+
+
+```{python, Dot = 2, part = "Result", echo = F, eval = T}
+inner_joined = novocoffee_followers.merge(heartroasters_followers,on='username',how='inner', suffixes=('_novocoffee', '_heartroasters'))
+# print property of result of joining two tables
+print(inner_joined.columns)
+print(inner_joined.shape)
+#who follow both of these pages?
+print(inner_joined['username'])
+```
+
+<!-- Dot 3------------------------------------------------>
+
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+- **Which followers of the Novocoffee page are the same as the Heartroasters page and which followers are not the same?**
+- **Technical Details** 
+- For answer this question we can use left join between two tables.
+- **A left join will return all of the rows of the left table including matching rows from the right table.** `dplyr` will put a `NA` value to the cells with no match.(As you can see in the result `amycharlenem` followed Novocoffee but `amycharlenem` didn't follow Heartroasters and the value of  the columns of Heartroasters are `NA`)
+- For left join, we use the `left_join()` function.
+**Note: In our example Novocoffee is left table and Heartroasters is right table**
+```
+
+```{block, Dot = 3, part = "Instruction", lang = "python"}
+- **Which followers of the Novocoffee page are the same as the Heartroasters page and which followers are not the same?**
+- **Technical Details** 
+- For answer this question we can use left join between two tables.
+- **A left join will return all of the rows of the left table including matching rows from the right table.** `pandas` will put a `NaN` value to the cells with no match.(As you can see in the result `amycharlenem` followed Novocoffee but `amycharlenem` didn't follow Heartroasters and the value of  the columns of Heartroasters are `NaN`)
+- For left join, we should set the `how` parameter equal to `left`.
+**Note: In our example Novocoffee is left table and Heartroasters is right table**
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F, }
+left_joined = left_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by="username",
+  suffix=c('_novocoffee', '_heartroasters')
+)
+# print property of result of joining two tables
+colnames(left_joined)
+sprintf('number of column: %d',ncol(left_joined))
+sprintf('number of column: %d',nrow(left_joined))
+glimpse(head(left_joined,1))
+```
+
+```{python, Dot = 3, part = "Code", echo = T, eval = F, }
+left_joined = novocoffee_followers.merge(
+  heartroasters_followers,
+  on='username',
+  how='left',
+  suffixes=('_novocoffee', '_heartroasters'))
+# print property of result of joining two tables
+print(left_joined.columns)
+print(left_joined.shape)
+print(left_joined.head(1).transpose())
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+left_joined = left_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by="username",
+  suffix=c('_novocoffee', '_heartroasters')
+)
+# print property of result of joining two tables
+colnames(left_joined)
+sprintf('number of column: %d',ncol(left_joined))
+sprintf('number of column: %d',nrow(left_joined))
+glimpse(head(left_joined,1))
+```
+
+
+```{python, Dot = 3, part = "Result", echo = F, eval = T}
+left_joined = novocoffee_followers.merge(heartroasters_followers,on='username',how='left',suffixes=('_novocoffee', '_heartroasters'))
+# print property of result of joining two tables
+print(left_joined.columns)
+print(left_joined.shape)
+print(left_joined.head(1).transpose())
+```
+
+<!-- Dot 4------------------------------------------------>
+
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+- **Which followers of the Heartroasters page are the same as the Novocoffee page and which followers are not the same?**
+- **Technical Details** 
+- For answer this question we can use right join between two tables.
+- **A right join will return all of the rows of the right table including matching rows from the left table.** `dplyr` will put a `NA` value to the cells with no match.(As you can see in the result `aylinlongoria28` followed Heartroasters but `aylinlongoria28` didn't follow Novocoffee and the value of  the columns of Novocoffee are `NA`)
+- For left join, we use the `right_join()` function.
+**Note: In our example Novocoffee is left table and Heartroasters is right table**
+```
+
+```{block, Dot = 4, part = "Instruction", lang = "python"}
+- **Which followers of the Heartroasters page are the same as the Novocoffee page and which followers are not the same?**
+- **Technical Details** 
+- For answer this question we can use right join between two tables.
+- **A right join will return all of the rows of the right table including matching rows from the left table.** `pandas` will put a `NaN` value to the cells with no match.(As you can see in the result `aylinlongoria28` followed Heartroasters but `aylinlongoria28` didn't follow Novocoffee and the value of  the columns of Novocoffee are `NaN`)
+- For right join, we should set the `how` parameter equal to `right`.
+**Note: In our example Novocoffee is left table and Heartroasters is right table**
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F, }
+right_joined = right_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by="username",
+  suffix=c('_novocoffee', '_heartroasters')
+)
+# print property of result of joining two tables
+colnames(right_joined)
+sprintf('number of column: %d',ncol(right_joined))
+sprintf('number of column: %d',nrow(right_joined))
+glimpse(head(right_joined,1))
+```
+
+```{python, Dot = 4, part = "Code", echo = T, eval = F, }
+right_joined = novocoffee_followers.merge(
+  heartroasters_followers,
+  on='username',
+  how='right',
+  suffixes=('_novocoffee', '_heartroasters'))
+# print property of result of joining two tables
+print(right_joined.columns)
+print(right_joined.shape)
+print(right_joined.head(1).transpose())
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+right_joined = right_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by="username",
+  suffix=c('_novocoffee', '_heartroasters')
+)
+# print property of result of joining two tables
+colnames(right_joined)
+sprintf('number of column: %d',ncol(right_joined))
+sprintf('number of column: %d',nrow(right_joined))
+glimpse(head(right_joined[right_joined$username=='aylinlongoria28',],1))
+```
+
+
+```{python, Dot = 4, part = "Result", echo = F, eval = T}
+right_joined = novocoffee_followers.merge(
+  heartroasters_followers,
+  on='username',
+  how='right',
+  suffixes=('_novocoffee', '_heartroasters'))
+# print property of result of joining two tables
+print(right_joined.columns)
+print(right_joined.shape)
+#who follow both of these pages?
+print(right_joined.head(1).transpose())
+```
+
+<!-- Dot 5------------------------------------------------>
+
+
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+- **Who follows the Novocoffee page or Who follows the Heartroasters page?**
+In here we want to know all accounts that follow each of the Novocoffee page or the Heartroasters page(it's like consensus of two followers list).
+- **Technical Details** 
+- For answer this question we can use full outer join between two tables.
+- **A full outer join will combine the results of both the left and the right joins.** `dplyr` will put a `NA` value to the cells with no match.
+- For full outer join, we use `full_join()` function.
+```
+
+```{block, Dot = 5, part = "Instruction", lang = "python"}
+- **Who follows the Novocoffee page or Who follows the Heartroasters page?**
+In here we want to know all accounts that follow each of the Novocoffee page or the Heartroasters page(it's like consensus of two followers list).
+- **Technical Details** 
+- For answer this question we can use outer join between two tables.
+- **A outer join will combine the results of both the left and the right joins.** `pandas` will put a `NaN` value to the cells with no match.
+- For outer join, we should set the `how` parameter equal to `outer`.
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F, }
+outer_joined = full_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by="username",
+  suffix=c('_novocoffee', '_heartroasters')
+)
+# print property of result of joining two tables
+colnames(outer_joined)
+sprintf('number of column: %d',ncol(outer_joined))
+sprintf('number of column: %d',nrow(outer_joined))
+# this show you that outer join combine right join and left join but we should subtract intersection of right join and left join
+print(nrow(right_joined) + nrow(left_joined) - nrow(inner_joined == nrow(outer_joined)))
+glimpse(head(outer_joined,1))
+```
+
+```{python, Dot = 5, part = "Code", echo = T, eval = F, }
+outer_joined = novocoffee_followers.merge(
+  heartroasters_followers,
+  on='username',
+  how='outer',
+  suffixes=('_novocoffee', '_heartroasters'))
+# print property of result of joining two tables
+print(outer_joined.columns)
+print(outer_joined.shape)
+# this show you that outer join combine right join and left join but we should subtract intersection of right join and left join
+print((right_joined.shape[0] + left_joined.shape[0] - inner_joined.shape[0]) == outer_joined.shape[0])
+print(outer_joined.head(1).transpose())
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+outer_joined = full_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by="username",
+  suffix=c('_novocoffee', '_heartroasters')
+)
+# print property of result of joining two tables
+colnames(outer_joined)
+sprintf('number of column: %d',ncol(outer_joined))
+sprintf('number of column: %d',nrow(outer_joined))
+# this show you that outer join combine right join and left join but we should subtract intersection of right join and left join
+print(nrow(right_joined) + nrow(left_joined) - nrow(inner_joined) == nrow(outer_joined))
+glimpse(head(outer_joined,1))
+```
+
+
+```{python, Dot = 5, part = "Result", echo = F, eval = T}
+outer_joined = novocoffee_followers.merge(
+  heartroasters_followers,
+  on='username',
+  how='outer',
+  suffixes=('_novocoffee', '_heartroasters'))
+# print property of result of joining two tables
+print(outer_joined.columns)
+print(outer_joined.shape)
+# this show you that outer join combine right join and left join
+print((right_joined.shape[0] + left_joined.shape[0] - inner_joined.shape[0]) == outer_joined.shape[0])
+#who follow both of these pages?
+print(outer_joined.head(1).transpose())
+```
+
+<!-- Dot 6------------------------------------------------>
+
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+- **Who follows the Novocoffee page and is on Heartroasters's follower list?**
+This question is so like our first question **who are followers of both of these pages?**, but in here we want to know about Novocoffee followers.
+- **Technical Details** 
+- For answer this question we can use semi-join between two tables.
+- **Semi-joins are useful when you want to subset your data based on observations in other tables. Semi-join is exactly like an inner join but it only includes the results from the left table.** 
+- For semi-join, we use `semi_join()` function.
+```
+
+```{block, Dot = 6, part = "Instruction", lang = "python"}
+- **Who follows the Novocoffee page and is on Heartroasters's follower list?**
+This question is so like our first question **who are followers of both of these pages?**, but in here we want to know about Novocoffee followers.
+- **Technical Details** 
+- For answer this question we can use semi-join between two tables.
+- **Semi-joins are useful when you want to subset your data based on observations in other tables. Semi-join is exactly like an inner join but it only includes the results from the left table.** 
+- Implement semi-join is different. In the first step, we do an inner join between two tables, and after that, in the second step we check which username of the left table is in the table achieved from the first step, in the third step, we return a subset of the left table that is shared with the right table.
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F, }
+semi_joined = semi_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by="username"
+)
+# compare different between semi-join and inner join
+colnames(semi_joined)
+colnames(inner_joined)
+sprintf('number of column semi_join: %d',ncol(semi_joined))
+sprintf('number of row semi_join: %d',nrow(semi_joined))
+sprintf('number of column inner_join: %d',ncol(inner_joined))
+sprintf('number of row inner_join: %d',nrow(inner_joined))
+glimpse(head(semi_joined,1))
+```
+
+```{python, Dot = 6, part = "Code", echo = T, eval = F, }
+semi_table = novocoffee_followers.merge(
+  heartroasters_followers,
+  on='username',
+  how='inner')
+in_both = novocoffee_followers['username'].isin(semi_table['username'])
+semi_joined = novocoffee_followers[in_both]
+# compare different between semi-join and inner join
+print("semi-join columns : " + str(semi_joined.columns))
+print("inner join columns : " + str(inner_joined.columns))
+print("inner join table shape : " + str(inner_joined.shape))
+print("semi join table shape : " + str(semi_joined.shape))
+print(semi_joined.head(1).transpose())
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+semi_joined = semi_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by="username"
+)
+# compare different between semi-join and inner join
+colnames(semi_joined)
+colnames(inner_joined)
+sprintf('number of column semi_join: %d',ncol(semi_joined))
+sprintf('number of row semi_join: %d',nrow(semi_joined))
+sprintf('number of column inner_join: %d',ncol(inner_joined))
+sprintf('number of row inner_join: %d',nrow(inner_joined))
+glimpse(head(semi_joined,1))
+```
+
+
+```{python, Dot = 6, part = "Result", echo = F, eval = T}
+semi_table = novocoffee_followers.merge(
+  heartroasters_followers,
+  on='username',
+  how='inner')
+in_both = novocoffee_followers['username'].isin(semi_table['username'])
+semi_joined = novocoffee_followers[in_both]
+# compare different between semi-join and inner join
+print("semi-join columns : " + str(semi_joined.columns))
+print("inner join columns : " + str(inner_joined.columns))
+print("inner join table shape : " + str(inner_joined.shape))
+print("semi join table shape : " + str(semi_joined.shape))
+#who follow both of these pages?
+print(semi_joined.head(1).transpose())
+```
+
+<!-- Dot 7------------------------------------------------>
+
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+- **Who follows the Novocoffee page and is not on Heartroasters's follower list?**
+We want to know which followers of the Novocoffee page don't follow the Heartroasters page.
+- **Technical Details** 
+- For answer this question we can use anti-join between two tables.
+- **Anti-join is the complete opposite of a semi-join and returns the left table, excluding the intersection** 
+- For Anti-join, we use `anti_join()` function.
+```
+
+```{block, Dot = 7, part = "Instruction", lang = "python"}
+- **Who follows the Novocoffee page and is not on Heartroasters's follower list?**
+We want to know which followers of the Novocoffee page don't follow the Heartroasters page.
+- **Technical Details** 
+- For answer this question we can use anti-join between two tables.
+- **Anti-join is the complete opposite of a semi-join and returns the left table, excluding the intersection** 
+- For implement anti-join In the first step, we do an left join between two tables but we add `indicator=True` parameter to the `merge()` function (this parameter add `_merge` column to the table that show us which data is in both table with `both` value and which data is only in the left table with `left_only`), and after that, in the second step we get rows of the table achieved from the first step that have `left_only` value in `_merge` column, in the third step, we return a subset of the left table that is not shared with the right table.
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F, }
+anti_joined = anti_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by="username"
+)
+colnames(anti_joined)
+# relation between anti join and semi join
+sprintf('number of column anti_join: %d',ncol(anti_joined))
+sprintf('number of row anti_join: %d',nrow(anti_joined))
+sprintf('number of column semi_join: %d',ncol(semi_joined))
+sprintf('number of row semi_join: %d',nrow(semi_joined))
+sprintf('number of column Novocoffee: %d',ncol(novocoffee_followers))
+sprintf('number of row Novocoffee: %d',nrow(novocoffee_followers))
+glimpse(head(anti_joined,1))
+```
+
+```{python, Dot = 7, part = "Code", echo = T, eval = F, }
+left_joined = novocoffee_followers.merge(
+  heartroasters_followers,
+  on='username',
+  how='left',
+  indicator=True)
+left_only = left_joined.loc[left_joined['_merge'] == 'left_only', 'username']
+anti_joined = novocoffee_followers[novocoffee_followers['username'].isin(left_only)]
+print("anti-join columns : " + str(anti_joined.columns))
+# relation between anti join and semi join
+print("anti join table shape : " + str(anti_joined.shape))
+print("semi join table shape : " + str(semi_joined.shape))
+print("Novocoffee followers table shape : " + str(novocoffee_followers.shape))
+print(anti_joined.head(1).transpose())
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+anti_joined = anti_join(
+  novocoffee_followers,
+  heartroasters_followers,
+  by="username"
+)
+colnames(anti_joined)
+# relation between anti join and semi join
+sprintf('number of column anti_join: %d',ncol(anti_joined))
+sprintf('number of row anti_join: %d',nrow(anti_joined))
+sprintf('number of column semi_join: %d',ncol(semi_joined))
+sprintf('number of row semi_join: %d',nrow(semi_joined))
+sprintf('number of column Novocoffee: %d',ncol(novocoffee_followers))
+sprintf('number of row Novocoffee: %d',nrow(novocoffee_followers))
+glimpse(head(anti_joined,1))
+```
+
+
+```{python, Dot = 7, part = "Result", echo = F, eval = T}
+left_joined = novocoffee_followers.merge(
+  heartroasters_followers,
+  on='username',
+  how='left',
+  indicator=True)
+left_only = left_joined.loc[left_joined['_merge'] == 'left_only', 'username']
+anti_joined = novocoffee_followers[novocoffee_followers['username'].isin(left_only)]
+print("anti-join columns : " + str(anti_joined.columns))
+# relation between anti join and semi join
+print("anti join table shape : " + str(anti_joined.shape))
+print("semi join table shape : " + str(semi_joined.shape))
+print("Novocoffee followers table shape : " + str(novocoffee_followers.shape))
+print(anti_joined.head(1).transpose())
+```
+
+<!-- Dot 8------------------------------------------------>
+
+```{block, Dot = 8, part = "Instruction", lang = "r"}
+- **Who are interest about the coffee?**
+To answer this question we can find the follower of the coffee page (in our data set we have lists of followers of the Novocoffee and the Heartroasters pages). This question is so like the **Who follows the Novocoffee page or Who follows the Heartroasters page?**.
+- **Technical Details** 
+- To answer this question we can row bind two tables. This approach is like outer join but in outer join, we don't have duplicate data but in the row bind, it's possible to have duplicate data (because it's possible tables have intersection).
+- **Row-bind means add two or more tables vertically** 
+- For implement row bind we use `bind_rows()` function.
+- When we bind two tables, `dplyr` generates a new index for each row automatically. 
+```
+
+```{block, Dot = 8, part = "Instruction", lang = "python"}
+- **Who are interest about the coffee?**
+To answer this question we can find the follower of the coffee page (in our data set we have lists of followers of the Novocoffee and the Heartroasters pages). This question is so like the **Who follows the Novocoffee page or Who follows the Heartroasters page?**.
+- **Technical Details** 
+- To answer this question we can row bind two tables. This approach is like outer join but in outer join, we don't have duplicate data but in the row bind, it's possible to have duplicate data (because it's possible tables have intersection).
+- **Row-bind means add two or more tables vertically** 
+- For implement row bind we use `concat()` method with parameter `axis='index'`.
+- In row bind, each table has its own index column and when we want to combine these tables we should note that the result table hasn't duplicate index. To prevent duplicated index we use the `verify_integrity=True` parameter in `concat()` function, it raises an error if we have a duplicate index.
+- To solve duplicate index problem we can use the `ignore_index=True` parameter in `concat()` function, with this parameter pandas ignore the index value of each row and generate a new index for each row of data.
+```
+
+```{r, Dot = 8, part = "Code", echo = T, eval = F, }
+row_bind = bind_rows(
+  novocoffee_followers,
+  heartroasters_followers)
+colnames(row_bind)
+sprintf('number of column row_bind: %d',ncol(row_bind))
+sprintf('number of row row_bind: %d',nrow(row_bind))
+glimpse(head(row_bind,1))
+```
+
+```{python, Dot = 8, part = "Code", echo = T, eval = F, }
+row_bind = pd.concat(
+  [novocoffee_followers,heartroasters_followers],
+  axis='index', 
+  ignore_index=True,
+  verify_integrity=True)
+print("row_bind columns : " + str(row_bind.columns))
+print("row_bind table shape : " + str(row_bind.shape))
+print(row_bind.head(1).transpose())
+```
+
+```{r, Dot = 8, part = "Result", echo = F, eval = T}
+row_bind = bind_rows(
+  novocoffee_followers,
+  heartroasters_followers)
+colnames(row_bind)
+sprintf('number of column row_bind: %d',ncol(row_bind))
+sprintf('number of row row_bind: %d',nrow(row_bind))
+glimpse(head(row_bind,1))
+```
+
+
+```{python, Dot = 8, part = "Result", echo = F, eval = T}
+row_bind = pd.concat(
+  [novocoffee_followers,heartroasters_followers],
+  axis='index', 
+  ignore_index=True,
+  verify_integrity=True)
+print("row_bind columns : " + str(row_bind.columns))
+print("row_bind table shape : " + str(row_bind.shape))
+print(row_bind.head(1).transpose())
+```

@@ -124,7 +124,7 @@ You will learn how to select some specific columns of a tidy dataframe professio
 <div class="row">
 <div @click="authorOneModal = true" type="button"
 class="col d-flex d-md-flex flex-row flex-shrink-1 justify-content-sm-end align-items-sm-center justify-content-md-end align-items-md-center dotto-header-user-icon">
-<img class="img-fluid user-image lang-color-r mx-auto" src="interesting-ways-to-select-dataframe-columns_files/figure-html/Mahyar.jpeg" />
+<img class="img-fluid user-image lang-color-r mx-auto" src="../../../assets/img/dotto.png" />
 </div>
 </div>
 <h6 class="d-flex justify-content-end dotto-header-user-name mx-auto">
@@ -144,7 +144,7 @@ Mahyar Sharifi
 <div class="card" style="max-width: 540px">
 <div class="row g-0">
 <div class="col-md-4">
-<img src="interesting-ways-to-select-dataframe-columns_files/figure-html/Mahyar.jpeg" class="img-fluid" />
+<img src="../../../assets/img/dotto.png" class="img-fluid" />
 </div>
 <div class="col-md-8">
 <div class="card-body">
@@ -254,6 +254,16 @@ class="btn dotto-main-dot-shape"
 class="btn dotto-main-dot-shape"
 :class="{'btn-light': activeMotto === '6', 'btn-outline-light': activeMotto !== '6'}">6</button>
 
+
+<button type="button" @click="activeMotto = '7'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '7', 'btn-outline-light': activeMotto !== '7'}">7</button>
+
+
+<button type="button" @click="activeMotto = '8'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '8', 'btn-outline-light': activeMotto !== '8'}">8</button>
+
 </div>
 
 <!-- Dot 1, lang: r,python ------------------------------------------------>
@@ -268,13 +278,16 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>The Palmer Archipelago penguin dataset has been becoming famous, likes the Iris dataset. This dataset is a great intro dataset for data exploration &amp; visualization. The penguin dataset contains four numerical features, two categorical features, and a binary feature. These features are: <strong>1)bill_length_mm</strong></p>
-<p><strong>2)bill_depth_mm</strong></p>
-<p><strong>3)flipper_length_mm</strong></p>
-<p><strong>4)body_mass_g</strong></p>
-<p><strong>5)species:</strong> (Chinstrap, Adélie, or Gentoo)</p>
-<p><strong>6)island:</strong> (Dream, Torgersen, or Biscoe)</p>
-<p><strong>7)sex</strong> To import this dataset, we use <code>palmerpenguins</code> packages.</p>
+<p><strong>Dataset Description</strong> The Palmer Archipelago penguin dataset has been becoming famous, likes the Iris dataset. This dataset is a great intro dataset for data exploration &amp; visualization. The penguin dataset contains four numerical features, two categorical features, and a binary feature. These features are: 1. <strong>bill_length_mm</strong>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p><strong>bill_depth_mm</strong></p></li>
+<li><p><strong>flipper_length_mm</strong></p></li>
+<li><p><strong>body_mass_g</strong></p></li>
+<li><p><strong>year (Num)</strong></p></li>
+<li><p><strong>species:</strong> (Chinstrap, Adélie, or Gentoo)</p></li>
+<li><p><strong>island:</strong> (Dream, Torgersen, or Biscoe)</p></li>
+<li><p><strong>sex</strong> To import this dataset, we use <code>palmerpenguins</code> packages. After the <strong>penguins</strong> dataset imported, we try some intresting ways to select columns in dplyr library.</p></li>
+</ol>
 
 </p>
 </div>
@@ -285,14 +298,14 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>The Palmer Archipelago penguin dataset has been becoming famous, likes the Iris dataset. This dataset is a great intro dataset for data exploration &amp; visualization. The penguin dataset contains four numerical features, two categorical features, and a binary feature. These features are: 1. <strong>bill_length_mm</strong>.</p>
+<p><strong>Dataset Description</strong> The Palmer Archipelago penguin dataset has been becoming famous, likes the Iris dataset. This dataset is a great intro dataset for data exploration &amp; visualization. The penguin dataset contains four numerical features(Num), two categorical features(Cat), and a binary feature(Bin). These features are: 1. <strong>bill_length_mm (Num)</strong>.</p>
 <ol start="2" style="list-style-type: decimal">
-<li><p><strong>bill_depth_mm</strong></p></li>
-<li><p><strong>flipper_length_mm</strong></p></li>
-<li><p><strong>body_mass_g</strong></p></li>
-<li><p><strong>species:</strong> (Chinstrap, Adélie, or Gentoo)</p></li>
-<li><p><strong>island:</strong> (Dream, Torgersen, or Biscoe)</p></li>
-<li><p><strong>sex</strong> To import this dataset, we use <code>palmerpenguins</code> packages. After the <strong>penguins</strong> dataset imported, we try some intresting ways to select columns in pandas packages.</p></li>
+<li><p><strong>bill_depth_mm (Num)</strong></p></li>
+<li><p><strong>flipper_length_mm (Num)</strong></p></li>
+<li><p><strong>body_mass_g (Num)</strong></p></li>
+<li><p><strong>species (Cat)</strong> (Chinstrap, Adélie, or Gentoo)</p></li>
+<li><p><strong>island (Cat)</strong> (Dream, Torgersen, or Biscoe)</p></li>
+<li><p><strong>sex (Cat)</strong> To import this dataset, we use <code>seaborn</code> packages. After the <strong>penguins</strong> dataset imported, we try some intresting ways to select columns in pandas packages.</p></li>
 </ol>
 
 </p>
@@ -311,9 +324,13 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;palmerpenguins&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>palmerpenguins <span class="sc">::</span> penguins</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">sample_n</span>(penguins, <span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import Packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Load Penguins dataset</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">=</span> palmerpenguins<span class="sc">::</span>penguins</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Show five sample rows</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(penguins,<span class="dv">5</span>)</span></code></pre></div>
 
 </div>
  
@@ -322,9 +339,12 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb2"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">&quot;penguins&quot;</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>penguins.sample(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import package</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Load Penguins dataset</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">&quot;penguins&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Show five sample rows</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>penguins.sample(<span class="dv">5</span>)</span></code></pre></div>
 
 </div>
  
@@ -340,183 +360,15 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
-<pre><code>## # A tibble: 344 x 8
-##    species island bill_length_mm bill_depth_mm flipper_length_…
-##    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;
-##  1 Adelie  Torge…           39.1          18.7              181
-##  2 Adelie  Torge…           39.5          17.4              186
-##  3 Adelie  Torge…           40.3          18                195
-##  4 Adelie  Torge…           NA            NA                 NA
-##  5 Adelie  Torge…           36.7          19.3              193
-##  6 Adelie  Torge…           39.3          20.6              190
-##  7 Adelie  Torge…           38.9          17.8              181
-##  8 Adelie  Torge…           39.2          19.6              195
-##  9 Adelie  Torge…           34.1          18.1              193
-## 10 Adelie  Torge…           42            20.2              190
-## # … with 334 more rows, and 3 more variables:
-## #   body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-species
-</th>
-<th style="text-align:left;">
-island
-</th>
-<th style="text-align:right;">
-bill_length_mm
-</th>
-<th style="text-align:right;">
-bill_depth_mm
-</th>
-<th style="text-align:right;">
-flipper_length_mm
-</th>
-<th style="text-align:right;">
-body_mass_g
-</th>
-<th style="text-align:left;">
-sex
-</th>
-<th style="text-align:right;">
-year
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:left;">
-Dream
-</td>
-<td style="text-align:right;">
-46.4
-</td>
-<td style="text-align:right;">
-18.6
-</td>
-<td style="text-align:right;">
-190
-</td>
-<td style="text-align:right;">
-3450
-</td>
-<td style="text-align:left;">
-female
-</td>
-<td style="text-align:right;">
-2007
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:left;">
-Biscoe
-</td>
-<td style="text-align:right;">
-48.5
-</td>
-<td style="text-align:right;">
-15.0
-</td>
-<td style="text-align:right;">
-219
-</td>
-<td style="text-align:right;">
-4850
-</td>
-<td style="text-align:left;">
-female
-</td>
-<td style="text-align:right;">
-2009
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:left;">
-Dream
-</td>
-<td style="text-align:right;">
-48.1
-</td>
-<td style="text-align:right;">
-16.4
-</td>
-<td style="text-align:right;">
-199
-</td>
-<td style="text-align:right;">
-3325
-</td>
-<td style="text-align:left;">
-female
-</td>
-<td style="text-align:right;">
-2009
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-Torgersen
-</td>
-<td style="text-align:right;">
-36.6
-</td>
-<td style="text-align:right;">
-17.8
-</td>
-<td style="text-align:right;">
-185
-</td>
-<td style="text-align:right;">
-3700
-</td>
-<td style="text-align:left;">
-female
-</td>
-<td style="text-align:right;">
-2007
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:left;">
-Dream
-</td>
-<td style="text-align:right;">
-51.0
-</td>
-<td style="text-align:right;">
-18.8
-</td>
-<td style="text-align:right;">
-203
-</td>
-<td style="text-align:right;">
-4100
-</td>
-<td style="text-align:left;">
-male
-</td>
-<td style="text-align:right;">
-2008
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>## # A tibble: 5 x 8
+##   species island bill_length_mm bill_depth_mm flipper_length_mm
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+## 1 Gentoo  Biscoe           50.4          15.3               224
+## 2 Adelie  Dream            39            18.7               185
+## 3 Adelie  Dream            38.1          17.6               187
+## 4 Adelie  Biscoe           38.8          17.2               180
+## 5 Adelie  Biscoe           35.3          18.9               187
+## # … with 3 more variables: body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 
 </div>
  
@@ -525,12 +377,12 @@ male
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>##        species  ...     sex
-## 302     Gentoo  ...  Female
-## 118     Adelie  ...  Female
-## 211  Chinstrap  ...  Female
-## 164  Chinstrap  ...  Female
-## 254     Gentoo  ...  Female
+<pre><code>##     species     island  bill_length_mm  ...  flipper_length_mm  body_mass_g     sex
+## 68   Adelie  Torgersen            35.9  ...              190.0       3050.0  Female
+## 79   Adelie  Torgersen            42.1  ...              195.0       4000.0    Male
+## 296  Gentoo     Biscoe            47.5  ...              209.0       4600.0  Female
+## 258  Gentoo     Biscoe            44.0  ...              208.0       4350.0  Female
+## 60   Adelie     Biscoe            35.7  ...              185.0       3150.0  Female
 ## 
 ## [5 rows x 7 columns]</code></pre>
 
@@ -552,7 +404,7 @@ male
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>Sometimes we want to select single or multiple columns with the name. In this case, we need to write the column’s name. For example, we need just the gender column or two bill columns.</p>
+<p><strong>Select by a name or list of names</strong> Sometimes we want to select single or multiple columns with the name. In this case, we need to write the column’s name. The names or numbers order is essential for columns order. For example, we need just the gender column or two bill columns.</p>
 
 </p>
 </div>
@@ -563,7 +415,7 @@ male
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>Sometimes we want to select single or multiple columns with the name. In this case, we need to write the column’s name. For example, we need just the gender column or two bill columns.</p>
+<p><strong>Select by a name or list of names</strong> Sometimes we want to select single or multiple columns with the name. In this case, we need to write the column’s names. The names order is essential for columns order. For example, we need just the sex column and two bill columns.</p>
 
 </p>
 </div>
@@ -581,11 +433,11 @@ male
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb5"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select &#39;sex&#39; column</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>penguins[,<span class="st">&#39;sex&#39;</span>]</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select &#39;sex&#39; columns</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">select</span>(penguins, <span class="fu">c</span>(<span class="st">&#39;sex&#39;</span>)))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Select two bill columns</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>penguins[, <span class="fu">c</span>(<span class="st">&#39;bill_length_mm&#39;</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;bill_depth_mm&#39;</span>)]</span></code></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">select</span>(penguins, <span class="fu">c</span>(<span class="st">&#39;bill_length_mm&#39;</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&#39;bill_depth_mm&#39;</span>)))</span></code></pre></div>
 
 </div>
  
@@ -595,10 +447,10 @@ male
 <div v-if="activeLang === 'python'" class="mx-2">
 
 <div class="sourceCode" id="cb6"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select &#39;sex&#39; columns</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>penguins[[<span class="st">&#39;sex&#39;</span>]]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins[[<span class="st">&#39;sex&#39;</span>]].columns)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Select two bill columns</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>penguins[[<span class="st">&#39;bill_length_mm&#39;</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;bill_depth_mm&#39;</span>]]</span></code></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins[[<span class="st">&#39;bill_length_mm&#39;</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;bill_depth_mm&#39;</span>]].columns)</span></code></pre></div>
 
 </div>
  
@@ -614,34 +466,8 @@ male
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
-<pre><code>## # A tibble: 344 x 1
-##    sex   
-##    &lt;fct&gt; 
-##  1 male  
-##  2 female
-##  3 female
-##  4 &lt;NA&gt;  
-##  5 female
-##  6 male  
-##  7 female
-##  8 male  
-##  9 &lt;NA&gt;  
-## 10 &lt;NA&gt;  
-## # … with 334 more rows</code></pre>
-<pre><code>## # A tibble: 344 x 2
-##    bill_length_mm bill_depth_mm
-##             &lt;dbl&gt;         &lt;dbl&gt;
-##  1           39.1          18.7
-##  2           39.5          17.4
-##  3           40.3          18  
-##  4           NA            NA  
-##  5           36.7          19.3
-##  6           39.3          20.6
-##  7           38.9          17.8
-##  8           39.2          19.6
-##  9           34.1          18.1
-## 10           42            20.2
-## # … with 334 more rows</code></pre>
+<pre><code>## [1] &quot;sex&quot;</code></pre>
+<pre><code>## [1] &quot;bill_length_mm&quot; &quot;bill_depth_mm&quot;</code></pre>
 
 </div>
  
@@ -650,34 +476,8 @@ male
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>##         sex
-## 0      Male
-## 1    Female
-## 2    Female
-## 3       NaN
-## 4    Female
-## ..      ...
-## 339     NaN
-## 340  Female
-## 341    Male
-## 342  Female
-## 343    Male
-## 
-## [344 rows x 1 columns]</code></pre>
-<pre><code>##      bill_length_mm  bill_depth_mm
-## 0              39.1           18.7
-## 1              39.5           17.4
-## 2              40.3           18.0
-## 3               NaN            NaN
-## 4              36.7           19.3
-## ..              ...            ...
-## 339             NaN            NaN
-## 340            46.8           14.3
-## 341            50.4           15.7
-## 342            45.2           14.8
-## 343            49.9           16.1
-## 
-## [344 rows x 2 columns]</code></pre>
+<pre><code>## Index([&#39;sex&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## Index([&#39;bill_length_mm&#39;, &#39;bill_depth_mm&#39;], dtype=&#39;object&#39;)</code></pre>
 
 </div>
  
@@ -697,8 +497,7 @@ male
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>Similar to the second Dotto, we have a list of columns name, and we want to select columns in this list or select columns not in this list. In this case, we use two function: <strong>%in%</strong> <strong>! %in%</strong></p>
-<p>For example, we need select a dataset that contains only two bill columns, and select a dataset that contains all columns except two bill columns.</p>
+<p><strong>Check from a list</strong> Similar to the second Dotto, we have a list of columns name, and we want to select columns in this list or select columns are not in this list. In this case, we use two function: - <code>%in%()</code> For example, we need select a dataset that contains only two bill columns, and select a dataset that contains all columns except two bill columns.</p>
 
 </p>
 </div>
@@ -709,8 +508,7 @@ male
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>Similar to the second Dotto, we have a list of columns name, and we want to select columns in this list or select columns not in this list. In this case, we use two function: <strong>isin</strong> <strong>difference</strong> or <strong>~isin</strong></p>
-<p>For example, we need select a dataset that contains only two bill columns, and select a dataset that contains all columns except two bill columns.</p>
+<p><strong>Check from a list</strong> Similar to the second Dotto, we have a list of columns name, and we want to select columns in this list or select columns are not in this list. In this case, we use two function: - <code>isin()</code> - <code>difference()</code> or <code>~ isin()</code> For example, we need select a dataset that contains only two bill columns, and select a dataset that contains all columns except two bill columns.</p>
 
 </p>
 </div>
@@ -728,12 +526,14 @@ male
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb11"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select dataset that contains bill_length_mm &amp; bill_depth_mm</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>penguins[, (<span class="fu">colnames</span>(penguins) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;bill_length_mm&#39;</span>, </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&#39;bill_depth_mm&#39;</span>))]</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select dataset that contains all columns except bill_length_mm &amp; bill_depth_mm</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>penguins[, <span class="sc">!</span> (<span class="fu">colnames</span>(penguins) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;bill_length_mm&#39;</span>, </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&#39;bill_depth_mm&#39;</span>))]</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select dataset that contains bill_length_mm and&#39; bill_depth_mm</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins[, (<span class="fu">colnames</span>(penguins) <span class="sc">%in%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">c</span>(<span class="st">&#39;bill_length_mm&#39;</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&#39;bill_depth_mm&#39;</span>))])</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Select dataset that contains all columns except bill_length_mm &amp; bill_depth_mm</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins[, <span class="sc">!</span>(<span class="fu">colnames</span>(penguins) <span class="sc">%in%</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">c</span>(<span class="st">&#39;bill_length_mm&#39;</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&#39;bill_depth_mm&#39;</span>))])</span></code></pre></div>
 
 </div>
  
@@ -743,18 +543,18 @@ male
 <div v-if="activeLang === 'python'" class="mx-2">
 
 <div class="sourceCode" id="cb12"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select dataset that contains bill_length_mm &amp; bill_depth_mm</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>penguins[penguins.columns[</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins[penguins.columns[</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                  penguins.columns.isin([<span class="st">&#39;bill_length_mm&#39;</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">&#39;bill_depth_mm&#39;</span>])]]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">&#39;bill_depth_mm&#39;</span>])]].columns)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Select dataset that contains all columns except bill_length_mm &amp; bill_depth_mm _First Way</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>penguins[penguins.columns.difference(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins[penguins.columns.difference(</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                            [<span class="st">&#39;bill_length_mm&#39;</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&#39;bill_depth_mm&#39;</span>])]</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&#39;bill_depth_mm&#39;</span>])].columns)</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                                           </span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Select dataset that contains all columns except bill_length_mm &amp; bill_depth_mm _Second Way                                           </span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>penguins[penguins.columns[</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins[penguins.columns[</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                  <span class="op">~</span>penguins.columns.isin([<span class="st">&#39;bill_length_mm&#39;</span>,</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&#39;bill_depth_mm&#39;</span>])]]</span></code></pre></div>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">&#39;bill_depth_mm&#39;</span>])]].columns)</span></code></pre></div>
 
 </div>
  
@@ -770,34 +570,9 @@ male
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
-<pre><code>## # A tibble: 344 x 2
-##    bill_length_mm bill_depth_mm
-##             &lt;dbl&gt;         &lt;dbl&gt;
-##  1           39.1          18.7
-##  2           39.5          17.4
-##  3           40.3          18  
-##  4           NA            NA  
-##  5           36.7          19.3
-##  6           39.3          20.6
-##  7           38.9          17.8
-##  8           39.2          19.6
-##  9           34.1          18.1
-## 10           42            20.2
-## # … with 334 more rows</code></pre>
-<pre><code>## # A tibble: 344 x 6
-##    species island    flipper_length_mm body_mass_g sex     year
-##    &lt;fct&gt;   &lt;fct&gt;                 &lt;int&gt;       &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
-##  1 Adelie  Torgersen               181        3750 male    2007
-##  2 Adelie  Torgersen               186        3800 female  2007
-##  3 Adelie  Torgersen               195        3250 female  2007
-##  4 Adelie  Torgersen                NA          NA &lt;NA&gt;    2007
-##  5 Adelie  Torgersen               193        3450 female  2007
-##  6 Adelie  Torgersen               190        3650 male    2007
-##  7 Adelie  Torgersen               181        3625 female  2007
-##  8 Adelie  Torgersen               195        4675 male    2007
-##  9 Adelie  Torgersen               193        3475 &lt;NA&gt;    2007
-## 10 Adelie  Torgersen               190        4250 &lt;NA&gt;    2007
-## # … with 334 more rows</code></pre>
+<pre><code>## [1] &quot;bill_length_mm&quot; &quot;bill_depth_mm&quot;</code></pre>
+<pre><code>## [1] &quot;species&quot;           &quot;island&quot;            &quot;flipper_length_mm&quot;
+## [4] &quot;body_mass_g&quot;       &quot;sex&quot;               &quot;year&quot;</code></pre>
 
 </div>
  
@@ -806,48 +581,9 @@ male
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>##      bill_length_mm  bill_depth_mm
-## 0              39.1           18.7
-## 1              39.5           17.4
-## 2              40.3           18.0
-## 3               NaN            NaN
-## 4              36.7           19.3
-## ..              ...            ...
-## 339             NaN            NaN
-## 340            46.8           14.3
-## 341            50.4           15.7
-## 342            45.2           14.8
-## 343            49.9           16.1
-## 
-## [344 rows x 2 columns]</code></pre>
-<pre><code>##      body_mass_g  ...  species
-## 0         3750.0  ...   Adelie
-## 1         3800.0  ...   Adelie
-## 2         3250.0  ...   Adelie
-## 3            NaN  ...   Adelie
-## 4         3450.0  ...   Adelie
-## ..           ...  ...      ...
-## 339          NaN  ...   Gentoo
-## 340       4850.0  ...   Gentoo
-## 341       5750.0  ...   Gentoo
-## 342       5200.0  ...   Gentoo
-## 343       5400.0  ...   Gentoo
-## 
-## [344 rows x 5 columns]</code></pre>
-<pre><code>##     species  ...     sex
-## 0    Adelie  ...    Male
-## 1    Adelie  ...  Female
-## 2    Adelie  ...  Female
-## 3    Adelie  ...     NaN
-## 4    Adelie  ...  Female
-## ..      ...  ...     ...
-## 339  Gentoo  ...     NaN
-## 340  Gentoo  ...  Female
-## 341  Gentoo  ...    Male
-## 342  Gentoo  ...  Female
-## 343  Gentoo  ...    Male
-## 
-## [344 rows x 5 columns]</code></pre>
+<pre><code>## Index([&#39;bill_length_mm&#39;, &#39;bill_depth_mm&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## Index([&#39;body_mass_g&#39;, &#39;flipper_length_mm&#39;, &#39;island&#39;, &#39;sex&#39;, &#39;species&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## Index([&#39;species&#39;, &#39;island&#39;, &#39;flipper_length_mm&#39;, &#39;body_mass_g&#39;, &#39;sex&#39;], dtype=&#39;object&#39;)</code></pre>
 
 </div>
  
@@ -867,6 +603,7 @@ male
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
+<p><strong>Select()</strong> Another way to select columns in pandas data-frame is to use <code>select()</code> function from <code>dplyr</code>. The names or numbers order is essential for columns order.</p>
 
 </p>
 </div>
@@ -877,6 +614,11 @@ male
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
+<p><strong>Slicing 1</strong> Another way to select columns in pandas data-frame is to use <code>iloc</code> and <code>loc</code> functions. The names or numbers order is essential for columns order. 1. <code>iloc</code> function selects rows and columns by the row and column numbers. + dataframe.iloc[ rows number, [columns number]]</p>
+<ol start="2" style="list-style-type: decimal">
+<li><code>loc</code> function selects rows and columns by the row and column names. + dataframe.loc[ rows names, [columns name]]</li>
+</ol>
+<p>In these functions, we can filter rows, too. For yhis purpose, we can filter rows by condition.</p>
 
 </p>
 </div>
@@ -894,9 +636,13 @@ male
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb18"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select dataset that contains numeric value</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">select_if</span>(is.numeric)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select &#39;sex&#39; and &#39;island&#39; columns by column&#39;s name</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&#39;sex&#39;</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;island&#39;</span>)))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Select &#39;sex&#39; and &#39;island&#39; columns by column&#39;s number</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>           <span class="fu">select</span>(<span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">2</span>)))</span></code></pre></div>
 
 </div>
  
@@ -905,8 +651,10 @@ male
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb19"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select dataset that contains numeric value</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>penguins.loc[:,(penguins.dtypes<span class="op">==</span><span class="st">&#39;float64&#39;</span>).values]</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select &#39;sex&#39; and &#39;island&#39; columns by column&#39;s name</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.loc[:, [<span class="st">&#39;sex&#39;</span>, <span class="st">&#39;island&#39;</span>]].columns)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Select &#39;sex&#39; and &#39;island&#39; columns by column&#39;s number</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.iloc[:, [<span class="dv">6</span>,<span class="dv">1</span>]].columns)</span></code></pre></div>
 
 </div>
  
@@ -922,6 +670,8 @@ male
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
+<pre><code>## [1] &quot;sex&quot;    &quot;island&quot;</code></pre>
+<pre><code>## [1] &quot;sex&quot;    &quot;island&quot;</code></pre>
 
 </div>
  
@@ -930,20 +680,8 @@ male
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>##      bill_length_mm  ...  body_mass_g
-## 0              39.1  ...       3750.0
-## 1              39.5  ...       3800.0
-## 2              40.3  ...       3250.0
-## 3               NaN  ...          NaN
-## 4              36.7  ...       3450.0
-## ..              ...  ...          ...
-## 339             NaN  ...          NaN
-## 340            46.8  ...       4850.0
-## 341            50.4  ...       5750.0
-## 342            45.2  ...       5200.0
-## 343            49.9  ...       5400.0
-## 
-## [344 rows x 4 columns]</code></pre>
+<pre><code>## Index([&#39;sex&#39;, &#39;island&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## Index([&#39;sex&#39;, &#39;island&#39;], dtype=&#39;object&#39;)</code></pre>
 
 </div>
  
@@ -963,6 +701,7 @@ male
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
+<p><strong>Filter() and Select()</strong> Sometimes we want to select columns and filter rows simultaneously. In this case we can use <code>%&gt;%</code> with <code>select()</code> to select columns and use <code>filter()</code> to select rows.</p>
 
 </p>
 </div>
@@ -973,6 +712,7 @@ male
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
+<p><strong>Slicing 2</strong> In the iloc and loc functions, we can filter rows simultaneously by selecting columns. dataframe.loc[ criteria for rows, crteria for columns] dataframe.iloc[ criteria for rows, crteria for columns]</p>
 
 </p>
 </div>
@@ -990,6 +730,11 @@ male
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
+<div class="sourceCode" id="cb24"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select &#39;bill_depth_mm&#39; and &#39;bill_length_mm&#39; columns for Male sex</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">&#39;male&#39;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&#39;bill_depth_mm&#39;</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;bill_length_mm&#39;</span>)))</span></code></pre></div>
 
 </div>
  
@@ -998,6 +743,9 @@ male
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
+<div class="sourceCode" id="cb25"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select &#39;bill_depth_mm&#39; and &#39;bill_length_mm&#39; columns for Male sex</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>penguins.loc[penguins[<span class="st">&#39;sex&#39;</span>] <span class="op">==</span> <span class="st">&#39;Male&#39;</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>[<span class="st">&#39;bill_depth_mm&#39;</span>, <span class="st">&#39;bill_length_mm&#39;</span>]].head(<span class="dv">5</span>)</span></code></pre></div>
 
 </div>
  
@@ -1013,6 +761,7 @@ male
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
+<pre><code>## [1] &quot;bill_depth_mm&quot;  &quot;bill_length_mm&quot;</code></pre>
 
 </div>
  
@@ -1021,6 +770,12 @@ male
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
+<pre><code>##     bill_depth_mm  bill_length_mm
+## 0            18.7            39.1
+## 5            20.6            39.3
+## 7            19.6            39.2
+## 13           21.2            38.6
+## 14           21.1            34.6</code></pre>
 
 </div>
  
@@ -1040,6 +795,7 @@ male
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
+<p><strong>Select a type</strong> Many datasets contain different variable types. In some situations, we need to select a specific type. To identify all column data types, we use <code>is.numeric</code> or etc, and then we select data types.</p>
 
 </p>
 </div>
@@ -1050,6 +806,7 @@ male
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
+<p><strong>Select a type</strong> Many datasets contain different variable types. In some situations, we need to select a specific type. To identify all column data types, we use <code>dataframe.dtypes</code>, and then we select data types.</p>
 
 </p>
 </div>
@@ -1067,6 +824,9 @@ male
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
+<div class="sourceCode" id="cb28"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select dataset that contains numeric value</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_if</span>(is.numeric))</span></code></pre></div>
 
 </div>
  
@@ -1075,6 +835,8 @@ male
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
+<div class="sourceCode" id="cb29"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select dataset that contains numeric value</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.loc[:, (penguins.dtypes <span class="op">==</span> <span class="st">&#39;float64&#39;</span>).values].columns)</span></code></pre></div>
 
 </div>
  
@@ -1090,6 +852,8 @@ male
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
+<pre><code>## [1] &quot;bill_length_mm&quot;    &quot;bill_depth_mm&quot;     &quot;flipper_length_mm&quot;
+## [4] &quot;body_mass_g&quot;       &quot;year&quot;</code></pre>
 
 </div>
  
@@ -1098,6 +862,211 @@ male
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
+<pre><code>## Index([&#39;bill_length_mm&#39;, &#39;bill_depth_mm&#39;, &#39;flipper_length_mm&#39;, &#39;body_mass_g&#39;], dtype=&#39;object&#39;)</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 7, lang: r,python ------------------------------------------------>
+
+<div v-if="activeMotto === '7'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Contains a specific character</strong> The other way to select columns is to select with starting and ending characters or contains specific characters. For this purpose we use <code>starts_with</code>, <code>ends_with</code> and <code>contains</code> to find particular columns with their names. In this dot, we want to select columns that <strong>start</strong> with <strong><code>bill</code></strong> and select columns that <strong>finish</strong> with <strong><code>_mm</code></strong> and select columns that contain <strong><code>length</code></strong>.</p>
+
+</p>
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Contains a specific character</strong> The other way to select columns is to select with starting and ending characters. For this purpose, first, we need to get the columns’ names with <code>dataframe.columns.str</code>. Then we use <code>startswith</code> and <code>endswith</code> to find particular columns with their names. Some times Sometimes we want to select columns that contain some specific characters. For this idea, we can use the <code>re</code> package and its searching function call <code>search()</code>. In this dot, we want to select columns that <strong>start</strong> with <strong><code>bill</code></strong> and select columns that <strong>finish</strong> with <strong><code>_mm</code></strong> and select columns that contain <strong><code>length</code></strong>.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb32"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns which start with &#39;bill&#39;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&#39;bill&#39;</span>)))</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns which end with &#39;mm&#39;</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins <span class="sc">%&gt;%</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">&#39;mm&#39;</span>)))</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns which contain &#39;length&#39;</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(penguins <span class="sc">%&gt;%</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&#39;length&#39;</span>)))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb33"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns which start with &#39;bill&#39;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.loc[:,penguins.columns.<span class="bu">str</span>.startswith(<span class="st">&#39;bill&#39;</span>)].columns)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns which end with &#39;mm&#39;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.loc[:,penguins.columns.<span class="bu">str</span>.endswith(<span class="st">&#39;mm&#39;</span>)].columns)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Import re packages</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> re <span class="im">import</span> search</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns which contain &#39;length&#39;</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.loc[:,[<span class="va">True</span> <span class="cf">if</span> search(<span class="st">&#39;length+&#39;</span>,column) <span class="cf">else</span> <span class="va">False</span> <span class="cf">for</span> column <span class="kw">in</span> penguins.columns]].columns)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;bill_length_mm&quot; &quot;bill_depth_mm&quot;</code></pre>
+<pre><code>## [1] &quot;bill_length_mm&quot;    &quot;bill_depth_mm&quot;     &quot;flipper_length_mm&quot;</code></pre>
+<pre><code>## [1] &quot;bill_length_mm&quot;    &quot;flipper_length_mm&quot;</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## Index([&#39;bill_length_mm&#39;, &#39;bill_depth_mm&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## Index([&#39;bill_length_mm&#39;, &#39;bill_depth_mm&#39;, &#39;flipper_length_mm&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## Index([&#39;bill_length_mm&#39;, &#39;flipper_length_mm&#39;], dtype=&#39;object&#39;)</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 8, lang: r,python ------------------------------------------------>
+
+<div v-if="activeMotto === '8'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Check a condition</strong> Sometimes we want to select columns by condition. For instance, select columns that all of the values of the columns or any of them are upper than a specific value. Another example, some times we want to select columns that the mean of the column is upper or lower than a particular value. For these purposes, we use <code>sapply</code> and <code>select_if</code> to select columns that meet the conditions. In this dot, first, we select numeric columns then drop <code>Nan</code> from the <code>penguins</code>’ dataset. Finally, we select columns that all rows are greater than 50, columns that if one row is greater than 50, and columns that mean column is greater than 50.</p>
+
+</p>
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Check a condition</strong> Sometimes we want to select columns by condition. For instance, select columns that all of the values of the columns or any of them are upper than a specific value. Another example, some times we want to select columns that the mean of the column is upper or lower than a particular value. For these purposes, we use <code>all()</code> and <code>any()</code> to select columns that meet the conditions. In this dot, first, we select numeric columns then drop <code>Nan</code> from the <code>penguins</code>’ dataset. Finally, we select columns that all rows are greater than 50, columns that if one row is greater than 50, and columns that mean column is greater than 50.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb40"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select numeric columns without Nan</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>df_without_na <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns that if one row is greater than 50</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_without_na <span class="sc">%&gt;%</span> </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>         <span class="fu">select_if</span>(<span class="fu">as.vector</span>(<span class="fu">sapply</span>(df_without_na, min) <span class="sc">&gt;</span> <span class="dv">50</span>)))</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns that mean column is greater than 50</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_without_na <span class="sc">%&gt;%</span> </span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>         <span class="fu">select_if</span>(<span class="fu">as.vector</span>(<span class="fu">sapply</span>(df_without_na, mean) <span class="sc">&gt;</span> <span class="dv">50</span>)))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb41"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select numeric columns without Nan</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>df_without_na <span class="op">=</span> penguins.loc[:,(penguins.dtypes <span class="op">==</span> <span class="st">&#39;float64&#39;</span>).values].dropna()</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns that all rows are greater than 50</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_without_na.loc[:,[(df_without_na[col] <span class="op">&gt;</span> <span class="dv">50</span>).<span class="bu">all</span>() <span class="cf">for</span> col <span class="kw">in</span> df_without_na.columns]].columns)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns that if one row is greater than 50</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_without_na.loc[:,[(df_without_na[col] <span class="op">&gt;</span> <span class="dv">50</span>).<span class="bu">any</span>() <span class="cf">for</span> col <span class="kw">in</span> df_without_na.columns]].columns)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Select columns that mean column is greater than 50</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_without_na.loc[:,[(df_without_na[col].mean() <span class="op">&gt;</span> <span class="dv">50</span>) <span class="cf">for</span> col <span class="kw">in</span> df_without_na.columns]].columns)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;       &quot;year&quot;</code></pre>
+<pre><code>## [1] &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;       &quot;year&quot;</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## Index([&#39;flipper_length_mm&#39;, &#39;body_mass_g&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## Index([&#39;bill_length_mm&#39;, &#39;flipper_length_mm&#39;, &#39;body_mass_g&#39;], dtype=&#39;object&#39;)</code></pre>
+<pre><code>## Index([&#39;flipper_length_mm&#39;, &#39;body_mass_g&#39;], dtype=&#39;object&#39;)</code></pre>
 
 </div>
  

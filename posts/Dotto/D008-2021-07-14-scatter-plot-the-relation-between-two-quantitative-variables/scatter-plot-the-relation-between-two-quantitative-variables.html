@@ -349,145 +349,61 @@ class="btn dotto-main-dot-shape"
 
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-X
-</th>
-<th style="text-align:left;">
-Rooms
-</th>
-<th style="text-align:left;">
-Type
-</th>
-<th style="text-align:right;">
-Price
-</th>
-<th style="text-align:right;">
-Distance
-</th>
-<th style="text-align:right;">
-Landsize
-</th>
-<th style="text-align:left;">
-Regionname
-</th>
+<tr class="header">
+<th align="left">X</th>
+<th align="left">Rooms</th>
+<th align="left">Type</th>
+<th align="right">Price</th>
+<th align="right">Distance</th>
+<th align="right">Landsize</th>
+<th align="left">Regionname</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-8515
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
-h
-</td>
-<td style="text-align:right;">
-855000
-</td>
-<td style="text-align:right;">
-8.0
-</td>
-<td style="text-align:right;">
-160
-</td>
-<td style="text-align:left;">
-Western Metropolitan
-</td>
+<tr class="odd">
+<td align="left">4329</td>
+<td align="left">3</td>
+<td align="left">h</td>
+<td align="right">1155000</td>
+<td align="right">11.2</td>
+<td align="right">653</td>
+<td align="left">Western Metropolitan</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-974
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-h
-</td>
-<td style="text-align:right;">
-1715000
-</td>
-<td style="text-align:right;">
-13.1
-</td>
-<td style="text-align:right;">
-458
-</td>
-<td style="text-align:left;">
-Eastern Metropolitan
-</td>
+<tr class="even">
+<td align="left">11014</td>
+<td align="left">5</td>
+<td align="left">h</td>
+<td align="right">2050000</td>
+<td align="right">7.5</td>
+<td align="right">663</td>
+<td align="left">Western Metropolitan</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-12800
-</td>
-<td style="text-align:left;">
-4
-</td>
-<td style="text-align:left;">
-h
-</td>
-<td style="text-align:right;">
-792500
-</td>
-<td style="text-align:right;">
-34.1
-</td>
-<td style="text-align:right;">
-846
-</td>
-<td style="text-align:left;">
-South-Eastern Metropolitan
-</td>
+<tr class="odd">
+<td align="left">13547</td>
+<td align="left">4</td>
+<td align="left">h</td>
+<td align="right">763000</td>
+<td align="right">31.7</td>
+<td align="right">1011</td>
+<td align="left">Western Metropolitan</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-12736
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
-h
-</td>
-<td style="text-align:right;">
-605000
-</td>
-<td style="text-align:right;">
-11.2
-</td>
-<td style="text-align:right;">
-589
-</td>
-<td style="text-align:left;">
-Northern Metropolitan
-</td>
+<tr class="even">
+<td align="left">8091</td>
+<td align="left">4</td>
+<td align="left">h</td>
+<td align="right">2365000</td>
+<td align="right">11.8</td>
+<td align="right">636</td>
+<td align="left">Eastern Metropolitan</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-7006
-</td>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-h
-</td>
-<td style="text-align:right;">
-3020000
-</td>
-<td style="text-align:right;">
-7.5
-</td>
-<td style="text-align:right;">
-832
-</td>
-<td style="text-align:left;">
-Southern Metropolitan
-</td>
+<tr class="odd">
+<td align="left">9969</td>
+<td align="left">4</td>
+<td align="left">h</td>
+<td align="right">1387000</td>
+<td align="right">14.2</td>
+<td align="right">691</td>
+<td align="left">Eastern Metropolitan</td>
 </tr>
 </tbody>
 </table>
@@ -501,12 +417,12 @@ Southern Metropolitan
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 <pre><code>##     Unnamed: 0 Rooms Type      Price  Distance  Landsize             Regionname
-## 128       5411     2    u   712000.0       2.6       0.0  Northern Metropolitan
-## 123      12912     4    h  1300000.0      13.4     543.0   Eastern Metropolitan
-## 47       12461     3    h  1263000.0       1.6     110.0  Northern Metropolitan
-## 76        1280     3    h   910000.0       5.2     215.0  Northern Metropolitan
-## 58        8515     2    h   855000.0       8.0     160.0   Western Metropolitan</code></pre>
-<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7fed9414ddd8&gt;</code></pre>
+## 195       6137     2    h   680000.0      11.2     387.0  Southern Metropolitan
+## 48        8416     3    h   710000.0      12.6     483.0   Western Metropolitan
+## 54        5493     2    t   720000.0       6.6     126.0   Western Metropolitan
+## 291       9969     4    h  1387000.0      14.2     691.0   Eastern Metropolitan
+## 203      10918     2    t   730000.0      10.9     126.0   Eastern Metropolitan</code></pre>
+<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7f8f4219ec50&gt;</code></pre>
 <p><img src="scatter-plot-the-relation-between-two-quantitative-variables_files/figure-html/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto auto auto 0;" /></p>
 
 </div>
@@ -595,7 +511,7 @@ Southern Metropolitan
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7fed95d24208&gt;</code></pre>
+<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7f8f420e3f60&gt;</code></pre>
 <p><img src="scatter-plot-the-relation-between-two-quantitative-variables_files/figure-html/unnamed-chunk-12-1.png" width="1207" style="display: block; margin: auto auto auto 0;" /></p>
 
 </div>
@@ -684,7 +600,7 @@ Southern Metropolitan
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7fed96ad1d68&gt;</code></pre>
+<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7f8f27007908&gt;</code></pre>
 <p><img src="scatter-plot-the-relation-between-two-quantitative-variables_files/figure-html/unnamed-chunk-18-1.png" width="1440" style="display: block; margin: auto auto auto 0;" /></p>
 
 </div>
@@ -781,9 +697,9 @@ Southern Metropolitan
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7fed939a9780&gt;</code></pre>
+<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7f8f27804630&gt;</code></pre>
 <p><img src="scatter-plot-the-relation-between-two-quantitative-variables_files/figure-html/unnamed-chunk-24-1.png" width="1282" style="display: block; margin: auto auto auto 0;" /></p>
-<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7fed981546a0&gt;</code></pre>
+<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7f8f27200eb8&gt;</code></pre>
 <p><img src="scatter-plot-the-relation-between-two-quantitative-variables_files/figure-html/unnamed-chunk-24-2.png" width="1207" style="display: block; margin: auto auto auto 0;" /></p>
 
 </div>
@@ -870,7 +786,7 @@ Southern Metropolitan
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## &lt;seaborn.axisgrid.PairGrid object at 0x7fedb334d4a8&gt;</code></pre>
+<pre><code>## &lt;seaborn.axisgrid.PairGrid object at 0x7f8f2786aac8&gt;</code></pre>
 <p><img src="scatter-plot-the-relation-between-two-quantitative-variables_files/figure-html/unnamed-chunk-30-1.png" width="919" style="display: block; margin: auto auto auto 0;" /></p>
 
 </div>
@@ -963,7 +879,7 @@ Southern Metropolitan
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7fed947bc9e8&gt;</code></pre>
+<pre><code>## &lt;seaborn.axisgrid.FacetGrid object at 0x7f8f2c2c80b8&gt;</code></pre>
 <p><img src="scatter-plot-the-relation-between-two-quantitative-variables_files/figure-html/unnamed-chunk-36-1.png" width="1207" style="display: block; margin: auto auto auto 0;" /></p>
 
 </div>
