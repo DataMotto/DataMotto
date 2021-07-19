@@ -132,10 +132,10 @@ export default {
         "occupation": ["Data science intern"],
         "affiliation": ["DataMotto"],
         "url": ["https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4"],
-        "img": ["Parnian-Jahangiri-Rad.jpg"],
+        "img": ["Parnian-Jahangiri-Rad.jpeg"],
         "lang": ["r , python"],
-        "profile_img_for_Dotto": ["../../../assets/img/dotto.png"],
-        "profile_img": ["./posts/Dotto/D003-2021-07-14-basic-data-structure./../../assets/img/dotto.png"]
+        "profile_img_for_Dotto": ["./basic-data-structure_files/figure-html/Parnian-Jahangiri-Rad.jpeg"],
+        "profile_img": ["./posts/Dotto/D003-2021-07-14-basic-data-structure/basic-data-structure_files/figure-html/Parnian-Jahangiri-Rad.jpeg"]
       }
     ],
     "tech": [
@@ -320,10 +320,10 @@ export default {
         "occupation": ["Internship"],
         "affiliation": ["DataMotto"],
         "url": ["https://www.linkedin.com/in/mahyar-sharifi-06126616a"],
-        "img": ["Mahyar.jpg"],
+        "img": ["Mahyar.jpeg"],
         "lang": ["python", "r"],
-        "profile_img_for_Dotto": ["../../../assets/img/dotto.png"],
-        "profile_img": ["./posts/Dotto/D007-2021-07-14-interesting-ways-to-select-dataframe-columns./../../assets/img/dotto.png"]
+        "profile_img_for_Dotto": ["./interesting-ways-to-select-dataframe-columns_files/figure-html/Mahyar.jpeg"],
+        "profile_img": ["./posts/Dotto/D007-2021-07-14-interesting-ways-to-select-dataframe-columns/interesting-ways-to-select-dataframe-columns_files/figure-html/Mahyar.jpeg"]
       }
     ],
     "tech": [
@@ -461,10 +461,10 @@ export default {
         "occupation": ["Data science intern"],
         "affiliation": ["DataMotto"],
         "url": ["https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4"],
-        "img": ["Parnian-Jahangiri-Rad.jpg"],
+        "img": ["Parnian-Jahangiri-Rad.jpeg"],
         "lang": ["r , python"],
-        "profile_img_for_Dotto": ["../../../assets/img/dotto.png"],
-        "profile_img": ["./posts/Dotto/D010-2021-07-19-introduction-to-filter-dataframe-rows./../../assets/img/dotto.png"]
+        "profile_img_for_Dotto": ["./introduction-to-filter-dataframe-rows_files/figure-html/Parnian-Jahangiri-Rad.jpeg"],
+        "profile_img": ["./posts/Dotto/D010-2021-07-19-introduction-to-filter-dataframe-rows/introduction-to-filter-dataframe-rows_files/figure-html/Parnian-Jahangiri-Rad.jpeg"]
       }
     ],
     "tech": [
