@@ -1,0 +1,47 @@
+{
+  "file_name": ["joining-dataframes"],
+  "dir_name": ["D009-2021-07-19-joining-dataframes"],
+  "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+  "link": ["posts/Dotto/D009-2021-07-19-joining-dataframes/index.html"],
+  "base_url": ["https://datamotto.com"],
+  "social_networks_datamotto": {
+    "twitter": ["https://twitter.com/DataMotto"],
+    "linkedin": ["https://www.linkedin.com/company/datamotto"]
+  },
+  "dotto_number": [9],
+  "dotto_label": ["D009"],
+  "dotto_id": ["063df056-e8ea-11eb-8a49-acbc32baed85"],
+  "title": ["Joining Dataframes"],
+  "description": ["How to combining multiple dataframes and make the most out of them\n"],
+  "author": [
+    {
+      "name": ["Mohsen Jalali"],
+      "occupation": ["Data Scientist"],
+      "affiliation": ["DataMotto"],
+      "url": ["mohsenjalali.ir"],
+      "img": ["Mohsen-Jalali.jpeg"],
+      "lang": ["Python"],
+      "profile_img_for_Dotto": ["./joining-dataframes_files/figure-html/Mohsen-Jalali.jpeg"],
+      "profile_img": ["./posts/Dotto/D009-2021-07-19-joining-dataframes/joining-dataframes_files/figure-html/Mohsen-Jalali.jpeg"]
+    }
+  ],
+  "tech": [
+    {
+      "lang": ["r"],
+      "pkgs": ["dplyr"]
+    },
+    {
+      "lang": ["python"],
+      "pkgs": ["pandas"]
+    }
+  ],
+  "date": {
+    "created": ["2021-07-15"],
+    "last_updated": ["2021-07-15"]
+  },
+  "categories": ["Wrangling"],
+  "applications": ["General"],
+  "cover_image": {},
+  "slug": ["joining-dataframes"],
+  "output": ["DataMotto::Dotto"]
+}

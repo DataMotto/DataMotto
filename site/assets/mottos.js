@@ -392,6 +392,100 @@ export default {
     "cover_image": {},
     "slug": ["scatter-plot-the-relation-between-two-quantitative-variables"],
     "output": ["DataMotto::Dotto"]
+  },
+  "D009-2021-07-19-joining-dataframes": {
+    "file_name": ["joining-dataframes"],
+    "dir_name": ["D009-2021-07-19-joining-dataframes"],
+    "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+    "link": ["posts/Dotto/D009-2021-07-19-joining-dataframes/index.html"],
+    "base_url": ["https://datamotto.com"],
+    "social_networks_datamotto": {
+      "twitter": ["https://twitter.com/DataMotto"],
+      "linkedin": ["https://www.linkedin.com/company/datamotto"]
+    },
+    "dotto_number": [9],
+    "dotto_label": ["D009"],
+    "dotto_id": ["063df056-e8ea-11eb-8a49-acbc32baed85"],
+    "title": ["Joining Dataframes"],
+    "description": ["How to combining multiple dataframes and make the most out of them\n"],
+    "author": [
+      {
+        "name": ["Mohsen Jalali"],
+        "occupation": ["Data Scientist"],
+        "affiliation": ["DataMotto"],
+        "url": ["mohsenjalali.ir"],
+        "img": ["Mohsen-Jalali.jpeg"],
+        "lang": ["Python"],
+        "profile_img_for_Dotto": ["./joining-dataframes_files/figure-html/Mohsen-Jalali.jpeg"],
+        "profile_img": ["./posts/Dotto/D009-2021-07-19-joining-dataframes/joining-dataframes_files/figure-html/Mohsen-Jalali.jpeg"]
+      }
+    ],
+    "tech": [
+      {
+        "lang": ["r"],
+        "pkgs": ["dplyr"]
+      },
+      {
+        "lang": ["python"],
+        "pkgs": ["pandas"]
+      }
+    ],
+    "date": {
+      "created": ["2021-07-15"],
+      "last_updated": ["2021-07-15"]
+    },
+    "categories": ["Wrangling"],
+    "applications": ["General"],
+    "cover_image": {},
+    "slug": ["joining-dataframes"],
+    "output": ["DataMotto::Dotto"]
+  },
+  "D010-2021-07-19-introduction-to-filter-dataframe-rows": {
+    "file_name": ["introduction-to-filter-dataframe-rows"],
+    "dir_name": ["D010-2021-07-19-introduction-to-filter-dataframe-rows"],
+    "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+    "link": ["posts/Dotto/D010-2021-07-19-introduction-to-filter-dataframe-rows/index.html"],
+    "base_url": ["https://datamotto.com"],
+    "social_networks_datamotto": {
+      "twitter": ["https://twitter.com/DataMotto"],
+      "linkedin": ["https://www.linkedin.com/company/datamotto"]
+    },
+    "dotto_number": [10],
+    "dotto_label": ["D010"],
+    "dotto_id": ["e39b0966-e8ea-11eb-8a49-acbc32baed85"],
+    "title": ["Introduction to filter DataFrame Rows "],
+    "description": ["Using best practices, you can learn how to cut the data  and filter specific rows/observations.\n"],
+    "author": [
+      {
+        "name": ["Parnian Jahangiri Rad"],
+        "occupation": ["Data science intern"],
+        "affiliation": ["DataMotto"],
+        "url": ["https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4"],
+        "img": ["Parnian-Jahangiri-Rad.jpeg"],
+        "lang": ["r , python"],
+        "profile_img_for_Dotto": ["./introduction-to-filter-dataframe-rows_files/figure-html/Parnian-Jahangiri-Rad.jpeg"],
+        "profile_img": ["./posts/Dotto/D010-2021-07-19-introduction-to-filter-dataframe-rows/introduction-to-filter-dataframe-rows_files/figure-html/Parnian-Jahangiri-Rad.jpeg"]
+      }
+    ],
+    "tech": [
+      {
+        "lang": ["r"],
+        "pkgs": ["dplyr"]
+      },
+      {
+        "lang": ["python"],
+        "pkgs": ["pandas"]
+      }
+    ],
+    "date": {
+      "created": ["2021-07-15"],
+      "last_updated": ["2021-07-15"]
+    },
+    "categories": ["Wrangling"],
+    "applications": ["General"],
+    "cover_image": {},
+    "slug": ["introduction-to-filter-dataframe-rows-"],
+    "output": ["DataMotto::Dotto"]
   }
 }
 
