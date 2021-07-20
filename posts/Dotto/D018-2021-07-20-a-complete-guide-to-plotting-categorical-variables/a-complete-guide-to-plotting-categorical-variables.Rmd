@@ -1,0 +1,48 @@
+---
+title: "A Complete Guide to Plotting Categorical Variables"
+description: |
+  See how Seaborn & ggplot2 can make your plots looks nicer, convey more info, and require few lines of code.
+author:
+  - name: "Mohammad Hossein Malekpour"
+    occupation: "Data Scientist"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/mohammadhossein-malekpour/"
+    img: "MalekpourAvatar.jpg"
+    lang: ["python", "R"]
+tech:
+  - lang: r
+    pkgs: ["ggplot2", "dplyr"]
+  - lang: python
+    pkgs: ["seaborn", "pandas"]
+date:
+  created: "2021-07-20"
+  last_updated: "2021-07-20"
+categories: "Visualizer"
+applications: "Other"
+cover_image: NULL
+slug: "a-complete-guide-to-plotting-categorical-variables"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+
+```
+
+
+
+
+
