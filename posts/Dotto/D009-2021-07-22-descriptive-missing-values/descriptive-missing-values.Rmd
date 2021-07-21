@@ -1,0 +1,341 @@
+---
+title: "Descriptive Missing values"
+description: |
+  In many real-world datasets, we may miss some value in some rows or columns. We should know how to handle these missings in many kinds of research and decide if we should execute them or impute them.
+author:
+  - name: "Mahyar Sharifi"
+    occupation: "Internship"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/mahyar-sharifi"
+    img: "Mahyar.jpg"
+    lang: ["python", "r"]
+tech:
+  - lang: r
+    pkgs: ["dyplyr", "palmerpenguins"]
+  - lang: python
+    pkgs: ["pandas", "seaborn"]
+date:
+  created: "2021-07-22"
+  last_updated: "2021-07-22"
+categories: "Wrangling"
+applications: "General"
+cover_image: "Mahyar.jpg"
+slug: "descriptive-missing-values"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+
+```
+
+```{block, Dot = 1, part = "Instruction", lang = "python"}
+
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F}
+
+```
+
+```{python, Dot = 1, part = "Code", echo = T, eval = F}
+#Import Packages
+import pandas as pd
+import seaborn as sns
+
+#Load Dataset
+titanic = sns.load_dataset('titanic')
+
+#Show five samples of dataset
+titanic.sample(5)
+
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 1, part = "Result", echo = F, eval = T}
+#Import Packages
+import pandas as pd
+import seaborn as sns
+
+#Load Dataset
+titanic = sns.load_dataset('titanic')
+
+#Show five samples of dataset
+titanic.sample(5)
+
+```
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+
+```
+
+```{block, Dot = 2, part = "Instruction", lang = "python"}
+
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F}
+
+```
+
+```{python, Dot = 2, part = "Code", echo = T, eval = F}
+#Count missing value in all columns
+print(titanic.isnull().sum(axis = 0))
+
+#Calculate percentage of missing value in all columns
+print(titanic.isnull().sum(axis = 0) * 100 / titanic.shape[0])
+
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 2, part = "Result", echo = F, eval = T}
+#Count missing value in all columns
+print(titanic.isnull().sum(axis = 0))
+
+#Calculate percentage of missing value in all columns
+print(titanic.isnull().sum(axis = 0) * 100 / titanic.shape[0])
+
+```
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+
+```
+
+```{block, Dot = 3, part = "Instruction", lang = "python"}
+
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F}
+
+```
+
+```{python, Dot = 3, part = "Code", echo = T, eval = F}
+#Count missing value in all rows
+print(titanic.isnull().sum(axis = 1))
+
+#Calculate percentage of missing value in all rows
+print(titanic.isnull().sum(axis = 1) * 100 / titanic.shape[1])
+
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 3, part = "Result", echo = F, eval = T}
+#Count missing value in all rows
+print(titanic.isnull().sum(axis = 1))
+
+#Calculate percentage of missing value in all rows
+print(titanic.isnull().sum(axis = 1) * 100 / titanic.shape[1])
+
+```
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+
+```
+
+```{block, Dot = 4, part = "Instruction", lang = "python"}
+
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F}
+
+```
+
+```{python, Dot = 4, part = "Code", echo = T, eval = F}
+sns.heatmap(titanic.isnull(), cbar = False).set_title("Missing values heatmap")
+
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 4, part = "Result", echo = F, eval = T}
+sns.heatmap(titanic.isnull(), cbar = False).set_title("Missing values heatmap")
+
+```
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+
+```
+
+```{block, Dot = 5, part = "Instruction", lang = "python"}
+
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F}
+
+```
+
+```{python, Dot = 5, part = "Code", echo = T, eval = F}
+#Drop columns with ---
+titanic_deck_dropped = titanic.drop(['deck'], axis = 1)
+
+#Filter row with ---
+titanic_row_filtered = titanic[titanic.isnull().sum(axis = 1) * 100 / titanic.shape[1] < 13].sample(5)
+
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 5, part = "Result", echo = F, eval = T}
+#Drop columns with ---
+titanic_deck_dropped = titanic.drop(['deck'], axis = 1)
+
+#Filter row with ---
+titanic_row_filtered = titanic[titanic.isnull().sum(axis = 1) * 100 / titanic.shape[1] < 13].sample(5)
+
+```
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+
+```
+
+```{block, Dot = 6, part = "Instruction", lang = "python"}
+
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F}
+
+```
+
+```{python, Dot = 6, part = "Code", echo = T, eval = F}
+#Calculate mean of age ---
+mean_age = titanic['age'].mean()
+print(mean_age)
+
+#Fill missing value with constant value
+titanic_row_filtered['age'] = titanic_row_filtered['age'].fillna(mean_age)
+
+#Number of missing after filling
+print(titanic_row_filtered['age'].isnull().sum())
+
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 6, part = "Result", echo = F, eval = T}
+#Calculate mean of age ---
+mean_age = titanic['age'].mean()
+print(mean_age)
+
+#Fill missing value with constant value
+titanic_row_filtered['age'] = titanic_row_filtered['age'].fillna(mean_age)
+
+#Number of missing after filling
+print(titanic_row_filtered['age'].isnull().sum())
+
+```
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+
+```
+
+```{block, Dot = 7, part = "Instruction", lang = "python"}
+
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F}
+
+```
+
+```{python, Dot = 7, part = "Code", echo = T, eval = F}
+#Add columns ---
+titanic['Missing'] = titanic['age'].isnull()
+
+#Plot ---
+sns.catplot(x="Missing", hue="class", kind="count", data=titanic, row = 'sex')
+
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 7, part = "Result", echo = F, eval = T}
+#Add columns ---
+titanic['Missing'] = titanic['age'].isnull()
+
+#Plot ---
+sns.catplot(x="Missing", hue="class", kind="count", data=titanic, row = 'sex')
+
+```
+
+<!-- Dot 8, lang: r ------------------------------------------------>
+
+```{block, Dot = 8, part = "Instruction", lang = "r"}
+
+```
+
+```{block, Dot = 8, part = "Instruction", lang = "python"}
+
+```
+
+```{r, Dot = 8, part = "Code", echo = T, eval = F}
+
+```
+
+```{python, Dot = 8, part = "Code", echo = T, eval = F}
+#cal ---
+age_for_male = titanic[(titanic['sex']=='male') & (titanic['class']=='Third')].age.mean()
+
+#Cal---
+age_for_female= titanic[(titanic['sex']=='female') & (titanic['class']=='Third')].age.mean()
+
+#Fill for ---
+titanic.loc[titanic['sex']=='male',['age']] = titanic.loc[titanic['sex']=='male',['age']].fillna(age_for_male)
+
+#Fill for ---
+titanic.loc[titanic['sex']=='female',['age']] = titanic.loc[titanic['sex']=='female',['age']].fillna(age_for_female)
+
+```
+
+```{r, Dot = 8, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 8, part = "Result", echo = F, eval = T}
+#cal ---
+age_for_male = titanic[(titanic['sex']=='male') & (titanic['class']=='Third')].age.mean()
+
+#Cal---
+age_for_female= titanic[(titanic['sex']=='female') & (titanic['class']=='Third')].age.mean()
+
+#Fill for ---
+titanic.loc[titanic['sex']=='male',['age']] = titanic.loc[titanic['sex']=='male',['age']].fillna(age_for_male)
+
+#Fill for ---
+titanic.loc[titanic['sex']=='female',['age']] = titanic.loc[titanic['sex']=='female',['age']].fillna(age_for_female)
+
+```
+
+
+
+
