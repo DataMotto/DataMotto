@@ -1,0 +1,1045 @@
+---
+title: "How to work with api data?"
+description: |
+  Work with common type of API Rest API and GraphQL API.
+author:
+  - name: "Mohsen Jalali"
+    occupation: "Data Scientist"
+    affiliation: "DataMotto"
+    url: "mohsenjalali.ir"
+    img: "Mohsen-Jalali.jpeg"
+    lang: "Python"
+tech:
+  - lang: r
+    pkgs: ["httr","dplyr","jsonlite"]
+  - lang: python
+    pkgs: ["request","pandas"]
+date:
+  created: "2021-07-22"
+  last_updated: "2021-07-22"
+categories: Importing
+applications: General
+cover_image: NULL
+slug: "how-to-work-with-api-data-"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+- **Description About Package**
+  - [httr](https://cran.r-project.org/web/packages/httr/index.html) is Useful tools for working with HTTP organised by HTTP verbs (GET(), POST(), etc). Configuration functions make it easy to control additional request components (authenticate(), add_headers() and so on).
+  - [dplyr](https://dplyr.tidyverse.org/) is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges
+  - [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html) is package for work with JSON object.
+- **Description About Dataset**
+In this Dotto we use [Spacex API](https://docs.spacexdata.com/) and [Github API](https://docs.github.com/en).
+- **Prepare Environment**
+  Install packages with below commands:
+  `install.packages("httr")`
+  `install.packages("dplyr")`
+  `install.packages("jsonlite")`
+```
+
+```{block, Dot = 1, part = "Instruction", lang = "python"}
+- **Description About Package**
+  - [request](https://pypi.org/project/requests/) Requests allows you to send HTTP/1.1 requests extremely easily. There’s no need to manually add query strings to your URLs, or to form-encode your PUT & POST data — but nowadays, just use the json method!
+  - [pandas](https://pandas.pydata.org/) is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.
+- **Description About Dataset**
+In this Dotto we use [Spacex API](https://docs.spacexdata.com/) and [Github API](https://docs.github.com/en).
+- **Prepare Environment**
+  Install packages with below commands:
+  `pip install request`
+  `pip install pandas`
+
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+library(httr)
+library(dplyr)
+library(jsonlite)
+
+# Now check that libraries loaded or not
+if( 'httr' %in% (.packages()) &&
+    'dplyr' %in% (.packages()) &&
+    'jsonlite' %in% (.packages()) &&
+    )
+  print("all library have been loaded")
+```
+
+```{python, Dot = 1, part = "Code", echo = T, eval = F, }
+import requests
+import pandas as pd
+
+# Now check that libraries loaded or not
+if ("requests" in sys.modules) and ("pandas" in sys.modules):
+  print("all modules have been loaded")
+
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+library(httr)
+library(dplyr)
+library(jsonlite)
+
+# Now check that libraries loaded or not
+if('httr' %in% (.packages()) &&
+   'jsonlite' %in% (.packages()) &&
+   'dplyr' %in% (.packages())
+   )
+  print("all library have been loaded")
+```
+
+```{python, Dot = 1, part = "Result", echo = F, eval = T}
+import requests
+import pandas as pd
+
+# Now check that libraries loaded or not
+if ("requests" in sys.modules) and ("pandas" in sys.modules):
+  print("all modules have been loaded")
+
+```
+
+
+<!-- Dot 2------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+- **what is an API?**
+Suppose you go to the restaurant, In there you see waiter that his or her task is to give your instruction for a meal and then get your request back to the kitchen, where the chefs prepare a dish step by step, without you ever knowing about the steps that chefs have done. finally, you get back the meal you ordered.
+
+In our example, the waiter is like API that gets your order and gives it to the kitchen and then gets back to you the meal.
+
+- **Technical Description** 
+API is the acronym for Application Programming Interface, API is a connection between computers or between computer programs and common format that API return data is JSON. For example, we want to know about SpaceX company we can use this API `https://api.spacexdata.com/v3/info`. 
+
+- **what is the JSON?**
+JavaScript Object Notation (JSON) is key/value data structure like this:
+{
+  first_name: 'Mohsen'
+}
+`first_name` is key and `'Mohsen'` is value.
+In here we work with `rjson` package to read json data from the API.
+
+- **API has two kinds:**
+      `Rest API`
+      `Graphql API` 
+```
+
+```{block, Dot = 2, part = "Instruction", lang = "python"}
+- **what is an API?**
+Suppose you go to the restaurant, In there you see waiter that his or her task is to give your instruction for a meal and then get your request back to the kitchen, where the chefs prepare a dish step by step, without you ever knowing about the steps that chefs have done. finally, you get back the meal you ordered.
+
+In our example, the waiter is like API that gets your order and gives it to the kitchen and then gets back to you the meal.
+
+- **Technical Description** 
+API is the acronym for Application Programming Interface, API is a connection between computers or between computer programs and common format that API return data is JSON. For example, we want to know about SpaceX company we can use this API `https://api.spacexdata.com/v3/info`. 
+
+- **what is the JSON?**
+JavaScript Object Notation (JSON) is key/value data structure like this:
+{
+  first_name: 'Mohsen'
+}
+`first_name` is key and `'Mohsen'` is value.
+In here we work with `pandas` package to read json data from the API.
+
+- **API has two kinds:**
+      `Rest API`
+      `Graphql API` 
+
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+# get JSON with jsonlite::fromJSON() function
+api_data <- fromJSON(txt = 'https://api.spacexdata.com/v3/info')
+
+api_data_frame <- data.frame(api_data)
+# print property of api_data data frame
+colnames(api_data_frame)
+
+sprintf('number of columns: %d',ncol(api_data_frame))
+sprintf('number of rows: %d',nrow(api_data_frame))
+
+glimpse(api_data_frame)
+```
+
+```{python, Dot = 2, part = "Code", echo = T, eval = F, }
+# get JSON with read_json() function 
+api_data = pd.read_json(
+  'https://api.spacexdata.com/v3/info')
+
+# print property of api_data data frame
+print(api_data.columns)
+print(api_data.shape)
+
+
+print(api_data.head(1).transpose())
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+# get JSON with jsonlite::fromJSON() function
+api_data <- fromJSON(txt = 'https://api.spacexdata.com/v3/info')
+
+api_data_frame <- data.frame(api_data)
+# print property of api_data data frame
+colnames(api_data_frame)
+
+sprintf('number of columns: %d',ncol(api_data_frame))
+sprintf('number of rows: %d',nrow(api_data_frame))
+
+glimpse(api_data_frame)
+```
+
+
+```{python, Dot = 2, part = "Result", echo = F, eval = T}
+# get JSON with read_json() function 
+api_data = pd.read_json(
+  'https://api.spacexdata.com/v3/info')
+
+# print property of api_data data frame
+print(api_data.columns)
+print(api_data.shape)
+
+
+print(api_data.head(1).transpose())
+```
+
+<!--------------Dot3---------------------------->
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+- **What Is Rest API?**
+Representational state transfer (REST) is a software architectural style that emphasizes using resources identified by URL and the transfer of representations to describe and manipulate them. GET, POST, PUT and DELETE are the most common REST operations. GET is used to read data from resource URLs. POST creates a new resource while PUT updates a resource. Finally, DELETE destroys a resource.
+Rest API supports a wide range of data formats, such as JSON, XML, or YAML.
+- **Technical Description** 
+When we call Rest API we send request to the server that this request is made up of four different pieces:
+  `endpoint`: URL that we call
+  `method`: means Http method like GET, POST, PUT, and etc
+  `headers`: which provide information such as authentication keys
+  `data/body`: this part for send data to the server
+
+In the previous example we used `jsonlite` package to  get JSON from API easily but `jsonlite` package is not good for work with API because we can't add header to the request. For solve the problem we work with `httr` package. In here call API of SpaceX for get history of events.
+```
+
+```{block, Dot = 3, part = "Instruction", lang = "python"}
+- **What Is Rest API?**
+Representational state transfer (REST) is a software architectural style that emphasizes using resources identified by URL and the transfer of representations to describe and manipulate them. GET, POST, PUT and DELETE are the most common REST operations. GET is used to read data from resource URLs. POST creates a new resource while PUT updates a resource. Finally, DELETE destroys a resource.
+Rest API supports a wide range of data formats, such as JSON, XML, or YAML.
+- **Technical Description** 
+When we call Rest API we send request to the server that this request is made up of four different pieces:
+  `endpoint`: URL that we call
+  `method`: means Http method like GET, POST, PUT, and etc
+  `headers`: which provide information such as authentication keys
+  `data/body`: this part for send data to the server
+
+In the previous example we used `pandas` package to  get JSON from API easily but `pandas` package is not good for work with API because we can't add header to the request. For solve the problem we work with `requests` package. In here call API of SpaceX for get history of events.
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F,}
+# send request to SpaceX server with GET method for read data
+response_of_history_API <- httr::GET('https://api.spacexdata.com/v3/history')
+
+history_data_frame <- httr::content(response_of_history_API, as='text') %>% fromJSON()
+
+# print property of first row
+glimpse(head(history_data_frame,1))
+```
+
+```{python, Dot = 3, part = "Code", echo = T, eval = F,}
+# send request to SpaceX server with GET method for read data
+response_of_history_API = requests.get(
+  'https://api.spacexdata.com/v3/history')
+
+# extract JSON data from the response 
+history_api_json = response_of_history_API.json()
+
+# convert JSON to pandas data frame
+history_data_frame = pd.DataFrame(history_api_json)
+
+
+history_data_frame.head(1).transpose()
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+# send request to SpaceX server with GET method for read data
+response_of_history_API <- httr::GET('https://api.spacexdata.com/v3/history')
+
+history_data_frame <- httr::content(response_of_history_API, as='text') %>% fromJSON()
+
+
+glimpse(head(history_data_frame,1))
+```
+
+```{python, Dot = 3, part = "Result", echo = F, eval = T}
+# send request to SpaceX server with GET method for read data
+response_of_history_API = requests.get(
+  'https://api.spacexdata.com/v3/history')
+
+# extract JSON data from the response 
+history_api_json = response_of_history_API.json()
+
+# convert JSON to pandas data frame
+history_data_frame = pd.DataFrame(history_api_json)
+
+
+history_data_frame.head(1).transpose()
+```
+
+<!-------------------Dot4-------------------------->
+
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+- **Normalize JSON** In the previous part, we get data about the history of events if you see `history_data_frame$links` you notice that this column has three sub-columns. we should separate the `links` column as three new columns, it's normalizing JSON.
+
+- **Technical Description** In the R when we use `jsonlite::flatten()` this function normalized the JSON. After normalized the JSON we have three new columns `links.reddit`, `links.article`, `links.wikipedia`. 
+
+```
+
+```{block, Dot = 4, part = "Instruction", lang = "python"}
+- **Normalize JSON** In the previous part we get data about the history of events if you see `history_data_frame['links']` you notice that this column is a single JSON. we call it nested JSON. we should separate the `links` column as three new columns, it's normalizing JSON.
+
+- **Technical Description** Now we use `json_nomalize()` function to separate column to three new columns. After normalized the JSON we have three new columns `links.reddit`, `links.article`, `links.wikipedia`. 
+
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F,}
+# links column of history data frame
+# print first row for better understand of data structure
+glimpse(head(history_data_frame$links,1))
+
+colnames(history_data_frame)
+
+# Now we normalize this json with flatten()
+normalized_history_data_frame <- flatten(history_data_frame)
+
+colnames(normalized_history_data_frame)
+```
+
+```{python, Dot = 4, part = "Code", echo = T, eval = F,}
+# links column of history data frame
+# print first row for better understand of data structure
+history_data_frame['links'][0]
+
+print(history_data_frame.columns)
+
+# Now we normalize this json with json_nomalize()
+normalized_history_data_frame = pd.json_normalize(history_api_json)
+
+print(normalized_history_data_frame.columns)
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+# links column of history data frame
+# print first row for better understand of data structure
+glimpse(head(history_data_frame$links,1))
+
+colnames(history_data_frame)
+
+# Now we normalize this json with flatten()
+normalized_history_data_frame <- flatten(history_data_frame)
+
+colnames(normalized_history_data_frame)
+```
+
+```{python, Dot = 4, part = "Result", echo = F, eval = T}
+# links column of history data frame
+history_data_frame['links'][0]
+
+print(history_data_frame.columns)
+
+# Now we normalize this json with json_nomalize()
+normalized_history_data_frame = pd.json_normalize(history_api_json)
+
+print(normalized_history_data_frame.columns)
+```
+
+
+<!--------------Dot5---------------------------->
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+- **Add Parameters To Rest API**
+  we want to know about SpaceX Rockets or how many rockets SpaceX threw out? or something like that, you can get      this data from the SpaceX APIs.
+  
+- **Technical Description** 
+Now we want to know about the all rockets that SpaceX lunched from 2019 to 2021.
+For get this data we can use this API `api.spacexdata.com/v3/launches` and for filter the data from 2019 to 2021 add parameter `start=2019-01-01&end=2021-01-01` (you can read more about SpaceX API and parameters in [this link](https://docs.spacexdata.com/)).
+In here we want to sort data descending by launch date. For sort data add two parameters `sort=launch_date_utc&order=desc`.
+finally we have URL like this `api.spacexdata.com/v3/launches?start=2019-01-01&end=2021-01-01&sort=launch_date_utc&order=desc` (NOTE: when we want add parameters to API we should add `?` at the end of the API and after that add parameters and between parameters we should add `&`)
+
+```
+
+```{block, Dot = 5, part = "Instruction", lang = "python"}
+- **Add Parameters To Rest API**
+  we want to know about SpaceX Rockets or how many rockets SpaceX threw out? or something like that, you can get      this data from the SpaceX APIs.
+  
+- **Technical Description** 
+Now we want to know about the all rockets that SpaceX lunched from 2019 to 2021.
+For get this data we can use this API `api.spacexdata.com/v3/launches` and for filter the data from 2019 to 2021 add parameter `start=2019-01-01&end=2021-01-01` (you can read more about SpaceX API and parameters in [this link](https://docs.spacexdata.com/)).
+In here we want to sort data descending by launch date. For sort data add two parameters `sort=launch_date_utc&order=desc`.
+finally we have URL like this `api.spacexdata.com/v3/launches?start=2019-01-01&end=2021-01-01&sort=launch_date_utc&order=desc` (NOTE: when we want add parameters to API we should add `?` at the end of the API and after that add parameters and between parameters we should add `&`)
+
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F,}
+response_of_lunches_API <- httr::GET('https://api.spacexdata.com/v3/launches?start=2019-01-01&end=2021-01-01&sort=launch_date_utc&order=desc')
+
+lunches_data_frame <- httr::content(response_of_lunches_API, as='text') %>% fromJSON()
+
+colnames(lunches_data_frame)
+
+sprintf('number of columns: %d',ncol(lunches_data_frame))
+sprintf('number of rows: %d',nrow(lunches_data_frame))
+
+```
+
+```{python, Dot = 5, part = "Code", echo = T, eval = F,}
+response_of_lunches_API = requests.get('https://api.spacexdata.com/v3/launches?start=2019-01-01&end=2021-01-01&sort=launch_date_utc&order=desc')
+
+# extract JSON data from the response 
+lunches_api_json = response_of_lunches_API.json()
+
+# convert JSON to pandas data frame
+lunches_data_frame = pd.DataFrame(lunches_api_json)
+
+# print property of api_data data frame
+print(lunches_data_frame.columns)
+print(lunches_data_frame.shape)
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+response_of_lunches_API <- httr::GET('https://api.spacexdata.com/v3/launches?start=2019-01-01&end=2021-01-01&sort=launch_date_utc&order=desc')
+
+lunches_data_frame <- httr::content(response_of_lunches_API, as='text') %>% fromJSON()
+
+colnames(lunches_data_frame)
+
+sprintf('number of columns: %d',ncol(lunches_data_frame))
+sprintf('number of rows: %d',nrow(lunches_data_frame))
+```
+
+```{python, Dot = 5, part = "Result", echo = F, eval = T}
+response_of_lunches_API = requests.get('https://api.spacexdata.com/v3/launches?start=2019-01-01&end=2021-01-01&sort=launch_date_utc&order=desc')
+
+# extract JSON data from the response 
+lunches_api_json = response_of_lunches_API.json()
+
+# convert JSON to pandas data frame
+lunches_data_frame = pd.DataFrame(lunches_api_json)
+
+# print property of api_data data frame
+print(lunches_data_frame.columns)
+print(lunches_data_frame.shape)
+```
+
+<!--------------------------Dot6--------------------->
+
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+- **Add Header To Rest API** In here we want to work with HTTP header and authentication in API. Some kind of API is easy use like `SpaceX API` and we don't need authentication for work with this API but anther kind of APIs aren't easy use like `GitHub`, `Twitter`, and etc, for work with this API we need create account and authentication.
+Now we want to work with `GitHub API`. we suppose that you have and account in `github.com` (if you don't have an account you should create an account).
+
+Most of the `GitHub APIs` don't need authentication to use but we work with those that need authentication for learning purpose. 
+
+- **Technical Description** 
+After we create account we should build access token in our github account.(for more information about create personal access token you can read [this guide](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token))
+
+We can add header to the request for authentication with this parameter `add_headers(Authorization="token **YOUR_TOKEN_ID**")`.
+```
+
+```{block, Dot = 6, part = "Instruction", lang = "python"}
+- **Add Header To Rest API** In here we want to work with HTTP header and authentication in API. Some kind of API is easy use like `SpaceX API` and we don't need authentication for work with this API but anther kind of APIs aren't easy use like `GitHub`, `Twitter`, and etc, for work with this API we need create account and authentication.
+Now we want to work with `GitHub API`. we suppose that you have and account in `github.com` (if you don't have an account you should create an account).
+
+Most of the `GitHub APIs` don't need authentication to use but we work with those that need authentication for learning purpose. 
+
+- **Technical Description** 
+After we create account we should build access token in our github account.(for more information about create personal access token you can read [this guide](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token))
+
+We can add header to the request for authentication with this parameter `header = {'Authorization': 'token YOUR_TOKEN_ID'}`.
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F,}
+# call github API with header for Authentication
+# you should replace your token id with **YOUR_TOKEN_ID**
+response_of_github_api <- httr::GET('https://api.github.com/user',
+                                    add_headers(Authorization="token **YOUR_TOKEN_ID**"))
+
+github_data_frame <- httr::content(response_of_github_api, as='text') %>% fromJSON()
+
+glimpse(github_data_frame)
+```
+
+```{python, Dot = 6, part = "Code", echo = T, eval = F,}
+# call github API with header for Authentication
+# you should replace your token id with **YOUR_TOKEN_ID**
+response_of_github_api = requests.get(
+  'https://api.github.com/user',
+  headers={"Authorization":"token **YOUR_TOKEN_ID**"})
+
+github_api_json = response_of_github_api.json()
+
+github_data_frame = pd.DataFrame.from_dict(github_api_json,orient='index')
+
+github_data_frame
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+response_of_github_api <- httr::GET('https://api.github.com/user',
+                                    add_headers(Authorization="token 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"))
+
+github_data_frame <- httr::content(response_of_github_api, as='text') %>% fromJSON()
+
+glimpse(github_data_frame)
+```
+
+```{python, Dot = 6, part = "Result", echo = F, eval = T}
+# call github API with header for Authentication
+# you should replace your token id with **YOUR_TOKEN_ID**
+response_of_github_api = requests.get(
+  'https://api.github.com/user',
+  headers={"Authorization":"token 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"})
+
+github_api_json = response_of_github_api.json()
+
+github_data_frame = pd.DataFrame.from_dict(github_api_json,orient='index')
+
+github_data_frame
+```
+
+<!---------------------Dot7--------------------->
+
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+- **Error Handling** When we get response from the server and each response has status code. The status code tells us what happened with the request and they are a part of HTTP.
+
+The codes are split into different values in hundreds, depending on the information they’re returning:
+
+1xx: Provide information
+
+2xx: Generally are successful
+
+3xx: Provide information on redirects
+
+4xx: Refer to a client error (our bad)
+
+5xx: Refer to a server error (their bad)
+
+Note: may be you know `404 page can't be found`. This is what that status code is.
+
+- **Technical Description** We can use these status codes to handle the error for example if we call this API `https://api.github.com/user` and we get status code 401 this means our authentication had a problem.(When we want to work with API we should read the documentation and in there has been explained what kind of status codes return to you? and what is the meaning them?)
+
+We can access to the status code with read `status_code` feature of response.
+```
+
+```{block, Dot = 7, part = "Instruction", lang = "python"}
+- **Error Handling** When we get response from the server and each response has status code. The status code tells us what happened with the request and they are a part of HTTP.
+
+The codes are split into different values in hundreds, depending on the information they’re returning:
+
+1xx: Provide information
+
+2xx: Generally are successful
+
+3xx: Provide information on redirects
+
+4xx: Refer to a client error (our bad)
+
+5xx: Refer to a server error (their bad)
+
+Note: may be you know `404 page can't be found`. This is what that status code is.
+
+- **Technical Description** We can use these status codes to handle the error for example if we call this API `https://api.github.com/user` and we get status code 401 this means our authentication had a problem.(When we want to work with API we should read the documentation and in there has been explained what kind of status codes return to you? and what is the meaning them?)
+
+We can access to the status code with read `status_code` feature of response.
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F,}
+# call github API without authentication token
+response_of_github_api_without_token <- httr::GET('https://api.github.com/user')
+if(status_code(response_of_github_api_without_token) != 200){
+  print(status_code(response_of_github_api_without_token))
+  print(httr::content(response_of_github_api_without_token, as='text') %>% fromJSON())
+} else {
+  print(status_code(response_of_github_api_without_token))
+}
+# call spacex API with wrong path
+# replace v3 with v5
+response_spacex_with_wrong_path<- httr::GET('https://api.spacexdata.com/v5/history')
+if(status_code(response_spacex_with_wrong_path) != 200){
+  print(status_code(response_spacex_with_wrong_path))
+  print(httr::content(response_spacex_with_wrong_path, as='text'))
+} else {
+  print(status_code(response_spacex_with_wrong_path))
+}
+# call spacex API right way
+response_spacex_right_way <- httr::GET('https://api.spacexdata.com/v3/history')
+if(status_code(response_spacex_right_way) != 200){
+  print(status_code(response_spacex_right_way))
+  print(httr::content(response_spacex_right_way, as='text') %>% fromJSON())
+} else {
+  print(status_code(response_spacex_right_way))
+}
+```
+
+```{python, Dot = 7, part = "Code", echo = T, eval = F,}
+# call github API without authentication token
+response_of_github_api_without_token = requests.get(
+  'https://api.github.com/user')
+if(response_of_github_api_without_token.status_code != 200):
+  print(response_of_github_api_without_token.status_code)
+  print(response_of_github_api_without_token.json())
+else:
+  print(response_of_github_api_without_token.status_code)
+# call spacex API with wrong path
+# replace v3 with v5
+response_spacex_with_wrong_path = requests.get(
+  'https://api.spacexdata.com/v5/history')
+
+if(response_spacex_with_wrong_path.status_code != 200):
+  print(response_spacex_with_wrong_path.status_code)
+  print(response_spacex_with_wrong_path.text)
+else:
+  print(response_spacex_with_wrong_path.status_code)
+
+# call spacex API right way
+
+response_spacex_right_way = requests.get(
+  'https://api.spacexdata.com/v3/history')
+
+if(response_spacex_right_way.status_code != 200):
+  print(response_spacex_right_way.status_code)
+  print(response_spacex_right_way.json())
+else:
+  print(response_spacex_right_way.status_code)
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+# call github API without authentication token
+response_of_github_api_without_token <- httr::GET('https://api.github.com/user')
+if(status_code(response_of_github_api_without_token) != 200){
+  print(status_code(response_of_github_api_without_token))
+  print(httr::content(response_of_github_api_without_token, as='text') %>% fromJSON())
+} else {
+  print(status_code(response_of_github_api_without_token))
+}
+# call spacex API with wrong path
+# replace v3 with v5
+response_spacex_with_wrong_path<- httr::GET('https://api.spacexdata.com/v5/history')
+if(status_code(response_spacex_with_wrong_path) != 200){
+  print(status_code(response_spacex_with_wrong_path))
+  print(httr::content(response_spacex_with_wrong_path, as='text'))
+} else {
+  print(status_code(response_spacex_with_wrong_path))
+}
+# call spacex API right way
+response_spacex_right_way <- httr::GET('https://api.spacexdata.com/v3/history')
+if(status_code(response_spacex_right_way) != 200){
+  print(status_code(response_spacex_right_way))
+  print(httr::content(response_spacex_right_way, as='text') %>% fromJSON())
+} else {
+  print(status_code(response_spacex_right_way))
+}
+```
+
+```{python, Dot = 7, part = "Result", echo = F, eval = T}
+# call github API without authentication token
+response_of_github_api_without_token = requests.get(
+  'https://api.github.com/user')
+if(response_of_github_api_without_token.status_code != 200):
+  print(response_of_github_api_without_token.status_code)
+  print(response_of_github_api_without_token.json())
+else:
+  print(response_of_github_api_without_token.status_code)
+# call spacex API with wrong path
+# replace v3 with v5
+response_spacex_with_wrong_path = requests.get(
+  'https://api.spacexdata.com/v5/history')
+
+if(response_spacex_with_wrong_path.status_code != 200):
+  print(response_spacex_with_wrong_path.status_code)
+  print(response_spacex_with_wrong_path.text)
+else:
+  print(response_spacex_with_wrong_path.status_code)
+
+# call spacex API right way
+
+response_spacex_right_way = requests.get(
+  'https://api.spacexdata.com/v3/history')
+
+if(response_spacex_right_way.status_code != 200):
+  print(response_spacex_right_way.status_code)
+  print(response_spacex_right_way.json())
+else:
+  print(response_spacex_right_way.status_code)
+```
+
+<!-- Dot 8------------------------------------------------>
+
+```{block, Dot = 8, part = "Instruction", lang = "r"}
+- **What Is GraphQL?** GraphQL is a query language (that's what the “QL” stands for) for APIs and a run time for fulfilling those queries with your existing data (Note Rest is software architectural style but GraphQL is query language). GraphQL is new technology and in recent years get popular but not much as Rest. In GraphQL we don't have a different endpoint to get data instead we have a single endpoint that we can send different queries to get data. This feature has caused that we can get different types of data with one request instead of sending different requests to get different data.
+
+- **Technical Description** In here we want to work with [SpaceX GraphQL API](https://api.spacex.land/graphql/) and get data about `history` and `launches` with one request. The query for get histories data is like:
+    
+    histories {
+
+      links {
+
+        article
+
+      }
+
+      id
+
+      title
+
+    }
+
+this query means we need `id`,`title` of histories and in `links` we need `article` link. In `launches` query these parameters `sort: "launch_date_utc", order: "desc", find: {end: "2021-01-01", start: "2019-01-01"}` are like parameters that we added in Rest API.
+```
+
+```{block, Dot = 8, part = "Instruction", lang = "python"}
+- **What Is GraphQL?** GraphQL is a query language (that's what the “QL” stands for) for APIs and a run time for fulfilling those queries with your existing data (Note Rest is software architectural style but GraphQL is query language). GraphQL is new technology and in recent years get popular but not much as Rest. In GraphQL we don't have a different endpoint to get data instead we have a single endpoint that we can send different queries to get data. This feature has caused that we can get different types of data with one request instead of sending different requests to get different data.
+
+- **Technical Description** In here we want to work with [SpaceX GraphQL API](https://api.spacex.land/graphql/) and get data about `history` and `launches` with one request. The query for get histories data is like:
+    
+    histories {
+
+      links {
+
+        article
+
+      }
+
+      id
+
+      title
+
+    }
+
+this query means we need `id`,`title` of histories and in `links` we need `article` link. In `launches` query these parameters `sort: "launch_date_utc", order: "desc", find: {end: "2021-01-01", start: "2019-01-01"}` are like parameters that we added in Rest API.
+
+```
+
+```{r, Dot = 8, part = "Code", echo = T, eval = F, }
+query <- '{
+  histories {
+    links {
+      article
+      reddit
+      wikipedia
+    }
+    details
+    event_date_unix
+    event_date_utc
+    id
+    title
+  }
+  launches(sort: "launch_date_utc", order: "desc", find: {end: "2021-01-01", start: "2019-01-01"}) {
+    id
+    launch_year
+    launch_success
+    launch_date_utc
+    rocket {
+      rocket_name
+    }
+    mission_id
+  }
+}'
+# In here we should use POST method and set query as parameter to the endpoint
+response_of_sapacex_graphql <- httr::POST('https://api.spacex.land/graphql',body = list("query" = query),encode = "json")
+data_frame_of_sapacex_graphql <- httr::content(response_of_sapacex_graphql, as='text') %>% fromJSON()
+
+history_data_frame_graphql <- data_frame_of_sapacex_graphql$data$histories
+lunches_data_frame_graphql <- data_frame_of_sapacex_graphql$data$launches
+
+colnames(history_data_frame_graphql)
+sprintf('number of columns: %d',ncol(history_data_frame_graphql))
+sprintf('number of rows: %d',nrow(history_data_frame_graphql))
+
+colnames(lunches_data_frame_graphql)
+sprintf('number of columns: %d',ncol(lunches_data_frame_graphql))
+sprintf('number of rows: %d',nrow(lunches_data_frame_graphql))
+```
+
+```{python, Dot = 8, part = "Code", echo = T, eval = F, }
+import json
+
+query = '''{
+  histories {
+    links {
+      article
+      reddit
+      wikipedia
+    }
+    details
+    event_date_unix
+    event_date_utc
+    id
+    title
+  }
+  launches(sort: "launch_date_utc", order: "desc", find: {end: "2021-01-01", start: "2019-01-01"}) {
+    id
+    launch_year
+    launch_success
+    launch_date_utc
+    rocket {
+      rocket_name
+    }
+    mission_id
+  }
+}
+'''
+# In here we should use POST method and set query as parameter to the endpoint
+response_of_sapacex_graphql = requests.post('https://api.spacex.land/graphql',json={'query': query})
+
+json_of_sapacex_graphql = json.loads(response_of_sapacex_graphql.text)
+
+history_data_frame_graphql = pd.DataFrame(json_of_sapacex_graphql['data']['histories'])
+lunches_data_frame_graphql = pd.DataFrame(json_of_sapacex_graphql['data']['launches'])
+
+print(history_data_frame_graphql.columns)
+print(history_data_frame_graphql.shape)
+
+print(lunches_data_frame_graphql.columns)
+print(lunches_data_frame_graphql.shape)
+
+```
+
+```{r, Dot = 8, part = "Result", echo = F, eval = T}
+query <- '{
+  histories {
+    links {
+      article
+      reddit
+      wikipedia
+    }
+    details
+    event_date_unix
+    event_date_utc
+    id
+    title
+  }
+  launches(sort: "launch_date_utc", order: "desc", find: {end: "2021-01-01", start: "2019-01-01"}) {
+    id
+    launch_year
+    launch_success
+    launch_date_utc
+    rocket {
+      rocket_name
+    }
+    mission_id
+  }
+}'
+response_of_sapacex_graphql <- httr::POST('https://api.spacex.land/graphql',body = list("query" = query),encode = "json")
+data_frame_of_sapacex_graphql <- httr::content(response_of_sapacex_graphql, as='text') %>% fromJSON()
+
+history_data_frame_graphql <- data_frame_of_sapacex_graphql$data$histories
+lunches_data_frame_graphql <- data_frame_of_sapacex_graphql$data$launches
+
+colnames(history_data_frame_graphql)
+sprintf('number of columns: %d',ncol(history_data_frame_graphql))
+sprintf('number of rows: %d',nrow(history_data_frame_graphql))
+
+colnames(lunches_data_frame_graphql)
+sprintf('number of columns: %d',ncol(lunches_data_frame_graphql))
+sprintf('number of rows: %d',nrow(lunches_data_frame_graphql))
+```
+
+
+```{python, Dot = 8, part = "Result", echo = F, eval = T}
+import json
+
+query = '''{
+  histories {
+    links {
+      article
+      reddit
+      wikipedia
+    }
+    details
+    event_date_unix
+    event_date_utc
+    id
+    title
+  }
+  launches(sort: "launch_date_utc", order: "desc", find: {end: "2021-01-01", start: "2019-01-01"}) {
+    id
+    launch_year
+    launch_success
+    launch_date_utc
+    rocket {
+      rocket_name
+    }
+    mission_id
+  }
+}
+
+'''
+
+response_of_sapacex_graphql = requests.post('https://api.spacex.land/graphql',json={'query': query})
+
+json_of_sapacex_graphql = json.loads(response_of_sapacex_graphql.text)
+
+history_data_frame_graphql = pd.DataFrame(json_of_sapacex_graphql['data']['histories'])
+lunches_data_frame_graphql = pd.DataFrame(json_of_sapacex_graphql['data']['launches'])
+
+print(history_data_frame_graphql.columns)
+print(history_data_frame_graphql.shape)
+
+print(lunches_data_frame_graphql.columns)
+print(lunches_data_frame_graphql.shape)
+```
+
+<!-- Dot 9------------------------------------------------>
+
+```{block, Dot = 9, part = "Instruction", lang = "r"}
+- **Authorization In GraphQL** In the previous part we work with SpaceX GraphQL API that no need authentication, in here we want to work with [GitHub GraphQL API](https://docs.github.com/en/graphql). GitHub GraphQL API need authorization for work with that.
+
+- **Technical Description** For authentication in GraphQL API like Rest API we should add header parameter like this   `headers={"Authorization":"bearer **YOUR_TOKEN**"}`. (You should replace your toke with `**YOUR_TOKEN**`)
+
+Now we want to search about repositories are about `chatbot`. In the result of the API call we have `edges` key that value is list of repositories. For better represent data we need json normalize. we pass this `data_frame_github_graphql$data$search$edges` to the `flatten()` function, why?
+because each item in `edges` list is one row of our repositories data frame.
+
+```
+
+```{block, Dot = 9, part = "Instruction", lang = "python"}
+- **Authorization In GraphQL** In the previous part we work with SpaceX GraphQL API that no need authentication, in here we want to work with [GitHub GraphQL API](https://docs.github.com/en/graphql). GitHub GraphQL API need authorization for work with that.
+
+- **Technical Description** For authentication in GraphQL API like Rest API we should add header parameter like this   `headers={"Authorization":"bearer **YOUR_TOKEN**"}`. (You should replace your toke with `**YOUR_TOKEN**`)
+
+Now we want to search about repositories are about `chatbot`. In the result of the API call we have `edges` key that value is list of repositories. For better represent data we need json normalize. In the `json_normalize()` function we add parameter `record_path` and set this parameter equal to `edges`, why?
+because each item in `edges` list is one row of our repositories data frame. 
+```
+
+```{r, Dot = 9, part = "Code", echo = T, eval = F, }
+query <- '{
+  search(query: "chatbot", type: REPOSITORY, last: 100) {
+    repositoryCount
+    edges {
+      node {
+        ... on Repository {
+          name
+          isPrivate
+          isEmpty
+          owner {
+            login
+          }
+        }
+      }
+    }
+  }
+}'
+response_of_github_graphql_api <- httr::POST('https://api.github.com/graphql',
+                                          add_headers(Authorization= "bearer **YOUR_TOKEN**"),
+                                          body = list("query" = query),
+                                          encode = "json")
+data_frame_github_graphql <- httr::content(response_of_github_graphql_api, as='text') %>% fromJSON()
+repositories_data_frame <- flatten(data_frame_github_graphql$data$search$edges)
+
+colnames(repositories_data_frame)
+sprintf('number of columns: %d',ncol(repositories_data_frame))
+sprintf('number of rows: %d',nrow(repositories_data_frame))
+
+glimpse(head(repositories_data_frame,1))
+```
+
+```{python, Dot = 9, part = "Code", echo = T, eval = F, }
+query = '''
+{
+  search(query: "chatbot", type: REPOSITORY, last: 100) {
+    repositoryCount
+    edges {
+      node {
+        ... on Repository {
+          name
+          isPrivate
+          isEmpty
+          owner {
+            login
+          }
+        }
+      }
+    }
+  }
+}
+
+'''
+
+response_of_github_graphql_api = requests.post('https://api.github.com/graphql',
+                    headers={"Authorization":"bearer **YOUR_TOKEN**"},
+                    json={'query': query}
+                   )
+json_of_github_graphql = json.loads(response_of_github_graphql_api.text)
+
+repositories_data_frame = pd.json_normalize(json_of_github_graphql['data']['search'], record_path='edges')
+
+print(repositories_data_frame.columns)
+print(repositories_data_frame.shape)
+
+print(repositories_data_frame.head(1).transpose())
+```
+
+```{r, Dot = 9, part = "Result", echo = F, eval = T}
+query <- '{
+  search(query: "chatbot", type: REPOSITORY, last: 100) {
+    repositoryCount
+    edges {
+      node {
+        ... on Repository {
+          name
+          isPrivate
+          isEmpty
+          owner {
+            login
+          }
+        }
+      }
+    }
+  }
+}'
+response_of_github_graphql_api <- httr::POST('https://api.github.com/graphql',
+                                          add_headers(Authorization= "bearer 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"),
+                                          body = list("query" = query),
+                                          encode = "json")
+data_frame_github_graphql <- httr::content(response_of_github_graphql_api, as='text') %>% fromJSON()
+repositories_data_frame <- flatten(data_frame_github_graphql$data$search$edges)
+
+colnames(repositories_data_frame)
+sprintf('number of columns: %d',ncol(repositories_data_frame))
+sprintf('number of rows: %d',nrow(repositories_data_frame))
+
+glimpse(head(repositories_data_frame,1))
+```
+
+
+```{python, Dot = 9, part = "Result", echo = F, eval = T}
+query = '''
+{
+  search(query: "chatbot", type: REPOSITORY, last: 100) {
+    repositoryCount
+    edges {
+      node {
+        ... on Repository {
+          name
+          isPrivate
+          isEmpty
+          owner {
+            login
+          }
+        }
+      }
+    }
+  }
+}
+
+'''
+
+response_of_github_graphql_api = requests.post('https://api.github.com/graphql',
+                    headers={"Authorization":"bearer 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"},
+                    json={'query': query}
+                   )
+json_of_github_graphql = json.loads(response_of_github_graphql_api.text)
+
+repositories_data_frame = pd.json_normalize(json_of_github_graphql['data']['search'], record_path='edges')
+
+print(repositories_data_frame.columns)
+print(repositories_data_frame.shape)
+
+print(repositories_data_frame.head(1).transpose())
+```
