@@ -162,13 +162,14 @@ Like many other plots available in Seaborn, box plots can take an added `hue` ar
 # Basic boxplot
 ggplot(titanic, 
        aes(class, age)) + 
-  geom_boxplot()
+  geom_boxplot()+
+  ggtitle("Age by Passenger Class, Titanic")
 
 # Adding colour
 ggplot(titanic, 
        aes(class, age)) + 
-  geom_boxplot(aes(colour = factor(survived)))
-
+  geom_boxplot(aes(colour = factor(survived)))+
+  ggtitle("Age by Passenger Class, Separated by Survival")
 
 ```
 
@@ -189,12 +190,14 @@ plt.title("Age by Passenger Class, Separated by Survival")
 # Basic boxplot
 ggplot(titanic, 
        aes(class, age)) + 
-  geom_boxplot()
+  geom_boxplot()+
+  ggtitle("Age by Passenger Class, Titanic")
 
 # Adding colour
 ggplot(titanic, 
        aes(class, age)) + 
-  geom_boxplot(aes(colour = factor(survived)))
+  geom_boxplot(aes(colour = factor(survived)))+
+  ggtitle("Age by Passenger Class, Separated by Survival")
 
 ```
 
@@ -337,6 +340,9 @@ plt.title("Distribution of Age by Passenger Class, Separated by Survival")
 <!-- Dot 5, lang: r ------------------------------------------------>
 
 ```{block, Dot = 5, part = "Instruction", lang = "r"}
+# Bar Plot
+
+Bar charts are useful for comparing quantities corresponding to different groups. There are two types of bar charts: `geom_bar()` and `geom_col()`. `geom_bar()` makes the height of the bar proportional to the number of cases in each group (or if the `weight` aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use `geom_col()` instead. Check the [documentation](https://ggplot2.tidyverse.org/reference/geom_bar.html) for more details.
 
 ```
 
@@ -352,6 +358,11 @@ Now we can see that the average fare price in Cherbourg was so high due to some 
 ```
 
 ```{r, Dot = 5, part = "Code", echo = T, eval = F, }
+ggplot(data = titanic,
+       aes(x = embark_town,
+           y = fare)) +
+  geom_col(aes(fill = factor(class))) +
+  ggtitle("Fare of Passenger by Embarked Town, Divided by Class")
 
 ```
 
@@ -369,6 +380,11 @@ plt.title("Fare of Passenger by Embarked Town, Divided by Class")
 ```
 
 ```{r, Dot = 5, part = "Result", echo = F, eval = T}
+ggplot(data = titanic,
+       aes(x = embark_town,
+           y = fare)) +
+  geom_col(aes(fill = factor(class))) +
+  ggtitle("Fare of Passenger by Embarked Town, Divided by Class")
 
 ```
 
@@ -445,6 +461,9 @@ Count Plots are essentially histograms across a categorical variable. They take 
 ```
 
 ```{r, Dot = 7, part = "Code", echo = T, eval = F, }
+ggplot(titanic,
+  aes(embark_town)) +
+  geom_bar(aes(fill = factor(sex)))
 
 ```
 
@@ -485,15 +504,15 @@ plt.title("Count of Passengers that Embarked in Each City, Separated by Sex")
 ```
 
 ```{block, Dot = 8, part = "Instruction", lang = "python"}
-# Strip Plot
+# jitter geom
 
-Draw a scatterplot where one variable is categorical. A strip plot can be drawn on its own, but it is also a good complement to a box or violin plot in cases where you want to show all observations along with some representation of the underlying distribution.
-
-I don’t love the way strip plots look when you have a lot of data points. But swarm plots might make this a little more useful. Strip plots can look great with less data points and they can convey really interesting attributes of your data since they don’t hide details behind aggregation.
+The jitter geom is a convenient shortcut for geom_point(position = "jitter"). It adds a small amount of random variation to the location of each point, and is a useful way of handling overplotting caused by discreteness in smaller datasets.
 
 ```
 
 ```{r, Dot = 8, part = "Code", echo = T, eval = F, }
+ggplot(titanic, aes(class, age)) +
+  geom_jitter(aes(colour = alive))
 
 ```
 
@@ -504,6 +523,8 @@ sns.stripplot(x='class', y='age', data=titanic, jitter=True, hue='alive', dodge=
 ```
 
 ```{r, Dot = 8, part = "Result", echo = F, eval = T}
+ggplot(titanic, aes(class, age)) +
+  geom_jitter(aes(colour = alive))
 
 ```
 
@@ -516,10 +537,16 @@ sns.stripplot(x='class', y='age', data=titanic, jitter=True, hue='alive', dodge=
 <!-- Dot 9, lang: r ------------------------------------------------>
 
 ```{block, Dot = 9, part = "Instruction", lang = "r"}
+# Bee Swarm Plot
+
+Create a bee swarm plot. A bee swarm plot is a one-dimensional scatter plot similar to stripchart,
+but with various methods to separate coincident points such that each point is visible. Also,
+beeswarm introduces additional features unavailable in stripchart, such as the ability to control
+the color and plotting character of each point.
 
 ```
 
-```{block, Dot = 99, part = "Instruction", lang = "python"}
+```{block, Dot = 9, part = "Instruction", lang = "python"}
 # Swarm Plot
 
 Swarm plots are fantastic because they offer an easy way to show the individual data points in a distribution. Instead of a big blob like the strip plot, the swarm plot simply adjusts the points along the x-axis. Although they also don’t scale well with tons of values, they offer more organized insight.
@@ -529,6 +556,9 @@ Swarm plots are fantastic because they offer an easy way to show the individual 
 ```
 
 ```{r, Dot = 9, part = "Code", echo = T, eval = F, }
+library(ggbeeswarm)
+
+ggplot(titanic, aes(class, age, col = alive)) + geom_beeswarm()
 
 ```
 
@@ -540,12 +570,15 @@ plt.title("Age by Passenger Class, Separated by Survival")
 ```
 
 ```{r, Dot = 9, part = "Result", echo = F, eval = T}
+library(ggbeeswarm)
+
+ggplot(titanic, aes(class, age, col = alive)) + geom_beeswarm()
 
 ```
 
 ```{python, Dot = 9, part = "Result", echo = F, eval = T}
 plt.figure(figsize=(10, 6))
-sns.swarmplot(x='class', y='age', data=titanic, hue='alive', dodge=True, palette='viridis')
+sns.swarmplot(x='class', y='age', data=titanic, hue='alive', palette='viridis')
 plt.title("Age by Passenger Class, Separated by Survival")
 
 ```
