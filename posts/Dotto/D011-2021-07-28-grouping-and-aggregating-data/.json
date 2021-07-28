@@ -1,0 +1,47 @@
+{
+  "file_name": ["grouping-and-aggregating-data"],
+  "dir_name": ["D011-2021-07-28-grouping-and-aggregating-data"],
+  "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+  "link": ["posts/Dotto/D011-2021-07-28-grouping-and-aggregating-data/index.html"],
+  "base_url": ["https://datamotto.com"],
+  "social_networks_datamotto": {
+    "twitter": ["https://twitter.com/DataMotto"],
+    "linkedin": ["https://www.linkedin.com/company/datamotto"]
+  },
+  "dotto_number": [11],
+  "dotto_label": ["D011"],
+  "dotto_id": ["4fda3ede-efd1-11eb-aeda-c8b29b64e24a"],
+  "title": ["Grouping and aggregating data"],
+  "description": ["See how group by can make data analysis  efficient\n"],
+  "author": [
+    {
+      "name": ["Parnian Jahangiri rad"],
+      "occupation": ["Data science intern"],
+      "affiliation": ["DataMotto"],
+      "url": ["https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4"],
+      "img": ["Parnian-Jahangiri-Rad.jpg"],
+      "lang": ["r , python"],
+      "profile_img_for_Dotto": ["./grouping-and-aggregating-data_files/figure-html/Parnian-Jahangiri-Rad.jpg"],
+      "profile_img": ["./posts/Dotto/D011-2021-07-28-grouping-and-aggregating-data/grouping-and-aggregating-data_files/figure-html/Parnian-Jahangiri-Rad.jpg"]
+    }
+  ],
+  "tech": [
+    {
+      "lang": ["r"],
+      "pkgs": ["dplyr"]
+    },
+    {
+      "lang": ["python"],
+      "pkgs": ["pandas"]
+    }
+  ],
+  "date": {
+    "created": ["2021-07-22"],
+    "last_updated": ["2021-07-22"]
+  },
+  "categories": ["Wrangling"],
+  "applications": ["General"],
+  "cover_image": {},
+  "slug": ["grouping-and-aggregating-data"],
+  "output": ["DataMotto::Dotto"]
+}

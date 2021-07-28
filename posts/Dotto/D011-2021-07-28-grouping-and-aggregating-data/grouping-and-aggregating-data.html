@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+    
+    
+    <title>Grouping and aggregating data</title>
+
+        <script src="grouping-and-aggregating-data_files/header-attrs-2.9/header-attrs.js"></script>
+        <script src="grouping-and-aggregating-data_files/jquery-1.11.3/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="grouping-and-aggregating-data_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="grouping-and-aggregating-data_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+        <script src="grouping-and-aggregating-data_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+        <script src="grouping-and-aggregating-data_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+        <style>h1 {font-size: 34px;}
+               h1.title {font-size: 38px;}
+               h2 {font-size: 30px;}
+               h3 {font-size: 24px;}
+               h4 {font-size: 18px;}
+               h5 {font-size: 16px;}
+               h6 {font-size: 12px;}
+               code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+               pre:not([class]) { background-color: white }</style>
+        <script src="grouping-and-aggregating-data_files/navigation-1.1/tabsets.js"></script>
+        <script src="grouping-and-aggregating-data_files/kePrint-0.0.1/kePrint.js"></script>
+        <link href="grouping-and-aggregating-data_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+        
+          <meta property="og:title" content="Grouping and aggregating data" />
+          <meta property="og:type" content="article">
+          <meta property="og:description" content="See how group by can make data analysis  efficient
+        " />
+          <meta property="og:url" content="https://datamotto.com/posts/dotto/D011-2021-07-28-grouping-and-aggregating-data/" />
+          <meta property="og:locale" content="en_US">
+          <meta property="og:site_name" content="Data Motto">
+          <meta property="og:image" content="https://datamotto.com/assets/img/logo.svg" />
+          
+        
+          <meta property="twitter:card" content="summary_large_image">
+          <meta property="twitter:title" content="Grouping and aggregating data">
+          <meta property="twitter:description" content="See how group by can make data analysis  efficient
+        ">
+          <meta property="twitter:url" content="https://datamotto.com/posts/dotto/D011-2021-07-28-grouping-and-aggregating-data/">
+          <meta property="twitter:image" content="https://datamotto.com/assets/img/logo.svg">
+          
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WZMEMQM0Y2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WZMEMQM0Y2');
+</script>
+<link rel="shortcut icon" href="../../../assets/img/favicon/favicon-32x32.png" />
+<link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../../../assets/css/Font-Awesome-5-Brands.css" />
+<link rel="stylesheet" href="../../../assets/css/Font-Awesome-5-Free.css" />
+<link rel="stylesheet" href="../../../assets/css/icomoon.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata" />
+<link rel="stylesheet" href="../../../assets/fonts/fontawesome-all.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/font-awesome.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/ionicons.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/fontawesome5-overrides.min.css" />
+<link rel="stylesheet" href="../../../assets/css/Footer-Basic.css" />
+<link rel="stylesheet" href="../../../assets/css/home-cards.css" />
+<link rel="stylesheet" href="../../../assets/css/site.css" />
+<link rel="stylesheet" href="../../../assets/css/style.css" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" />
+<link rel="stylesheet" href="../../../assets/css/Team-Boxed.css" />
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="../../../assets/js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="../../../assets/highlight/styles/dracula.css" />
+<script src="../../../assets/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+<script src="../../../assets/js/vue.js"></script>
+
+</head>
+
+<body style="height: 100vh;">
+<div class="d-flex flex-column" id="all_page">
+
+<!-- Body Header ------------------------------>
+
+<section id="dotto-row-header">
+<div class="row dotto-header">
+
+<div class="col-1 d-flex justify-content-start align-items-center header-logo">
+<a href="/" class="text-muted"><img id="logo" src="../../../assets/img/logo.svg" /></a>
+</div>
+
+
+<div class="col-6 col-sm-7">
+<div class="header-title">
+<h6 class="dotto-header-maintitle">
+Grouping and aggregating data
+</h6>
+<p class="dotto-header-description">
+See how group by can make data analysis  efficient
+
+</p>
+<p class="dotto-header-tags">
+<i class="fas fa-tags"></i>&nbsp; Wrangling
+</p>
+</div>
+</div>
+
+
+<div class="col-1 d-flex justify-content-center align-items-center">
+<button class="btn btn-outline-light btn-block header-like-btn" style="background-color:white" type="button">
+<!-- LikeBtn.com BEGIN -->
+<span class="likebtn-wrapper" data-theme="custom" data-btn_size="30" data-f_size="18" data-icon_size="30" data-icon_l="hrt13" data-icon_l_c="rgba(255,121,198,0.68)" data-icon_l_c_v="#ff79c6" data-icon_d_c_v="green" data-label_c="red" data-label_c_v="yellow" data-bg_c="#ffffff" data-bg_c_v="#ffffff" data-brdr_c="#ffffff" data-label_fs="r" data-i18n_like="  " data-identifier="4fda3ede-efd1-11eb-aeda-c8b29b64e24a" data-dislike_enabled="false" data-site_id="604e13966fd08bbf03672c5b" data-counter_clickable="true" data-popup_disabled="true" data-share_enabled="false" data-tooltip_enabled="false"></span>
+<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+<!-- LikeBtn.com END -->
+</button>
+</div>
+
+
+<div class="col-3 d-flex justify-content-end dotto-header-user">
+
+<div class="d-flex flex-column mx-3">
+<div class="row">
+<div @click="authorOneModal = true" type="button"
+class="col d-flex d-md-flex flex-row flex-shrink-1 justify-content-sm-end align-items-sm-center justify-content-md-end align-items-md-center dotto-header-user-icon">
+<img class="img-fluid user-image lang-color-r mx-auto" src="grouping-and-aggregating-data_files/figure-html/Parnian-Jahangiri-Rad.jpg" />
+</div>
+</div>
+<h6 class="d-flex justify-content-end dotto-header-user-name mx-auto">
+Parnian Jahangiri rad
+</h6>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<div v-if="authorOneModal" class="modal">
+<!-- Modal content -->
+<div class="modal-content">
+<span @click="authorOneModal = false" class="close">&times;</span>
+<div class="card" style="max-width: 540px">
+<div class="row g-0">
+<div class="col-md-4">
+<img src="grouping-and-aggregating-data_files/figure-html/Parnian-Jahangiri-Rad.jpg" class="img-fluid" />
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<ins><a href="https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4" class="text-dark" target="_blank"><h3 class="card-title mb-0">Parnian Jahangiri rad</h3></a></ins>
+<div class="card-text fs-4 my-2">Data science intern, DataMotto</div>
+<small class="card-text text-muted my-2 fs-4">Language: r , python</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div v-show="commentOpen" class="modal overflow-auto">
+<div class="modal-comment overflow-auto">
+<span @click="commentOpen = false" class="close">&times;</span>
+<div id="disqus_thread"></div>
+</div>
+</div>
+
+
+<section>
+<div id="dotto-row-info" class="d-flex">
+
+<div class="col-4 d-flex flex-grow-0 justify-content-start align-items-center align-items-xl-center">
+<div class="d-flex mx-4 justify-content-around align-items-center bg-social-icons">
+
+<div>
+<i type="button" @click="activeLang = 'r'"
+class="fab fa-r-project mx-2"
+:class="{'lang-color-r': activeLang === 'r'}" >
+  </i>
+</div>
+
+
+<div>
+<i type="button" @click="activeLang = 'python'"
+class="fab fa-python mx-2"
+:class="{'lang-color-python': activeLang === 'python'}" >
+  </i>
+</div>
+
+</div>
+</div>
+
+
+<div
+class="col-8 d-flex justify-content-end align-items-center" style="padding-right: 15px">
+<!--
+<div class="d-flex justify-content-center align-items-center align-content-center bg-social-icons"
+style="margin-right: 7px; width: 146.3px">
+<span class="d-flex justify-content-lg-center align-items-lg-center" style="width: 133.7px">
+<i class="fas fa-music" style="padding-right: 12px"> </i>
+</span>
+</div>
+---->
+<div class="d-flex justify-content-around align-items-center bg-social-icons">
+<a href="https://twitter.com/share?text=Grouping and aggregating data&amp;url=https://datamotto.com/posts/Dotto/D011-2021-07-28-grouping-and-aggregating-data/index.html&amp;hashtags=rstats,Python" target="_blank" class="text-reset">
+<i class="fab fa-twitter"></i></a>
+<a href="https://www.linkedin.com/sharing/share-offsite/?url=https://datamotto.com/posts/Dotto/D011-2021-07-28-grouping-and-aggregating-data/index.html" target="_blank" class="text-reset">
+<i class="fa fa-linkedin-square"></i></a>
+</div>
+<div class="text-nowrap d-flex justify-content-around align-items-center bg-social-icons bg-bugs-icons">
+<a href="https://github.com/DataMotto/DataMotto/blob/master/posts/Dotto/D011-2021-07-28-grouping-and-aggregating-data/grouping-and-aggregating-data.Rmd" target="_blank" class="text-reset">
+<i class="fab fa-github header-social-icon"></i></a>
+<a href="https://github.com/DataMotto/DataMotto/issues/new?assignees=&labels=bug&template=bug_report.md&title=" target="_blank" class="text-reset">
+<i class="fas fa-bug header-social-icon"></i></a>
+</div>
+</div>
+
+</div>
+</section>
+
+
+
+
+<section v-if="activeDotto === '1'"
+class="text-left d-flex flex-row flex-grow-1 flex-wrap" id="dotto-row-main">
+<div class="col-12 col-lg-1" id="dotto-main-dots">
+
+<button type="button" @click="activeMotto = '1'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '1', 'btn-outline-light': activeMotto !== '1'}">1</button>
+
+
+<button type="button" @click="activeMotto = '2'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '2', 'btn-outline-light': activeMotto !== '2'}">2</button>
+
+
+<button type="button" @click="activeMotto = '3'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '3', 'btn-outline-light': activeMotto !== '3'}">3</button>
+
+
+<button type="button" @click="activeMotto = '4'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '4', 'btn-outline-light': activeMotto !== '4'}">4</button>
+
+
+<button type="button" @click="activeMotto = '5'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '5', 'btn-outline-light': activeMotto !== '5'}">5</button>
+
+
+<button type="button" @click="activeMotto = '6'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '6', 'btn-outline-light': activeMotto !== '6'}">6</button>
+
+
+<button type="button" @click="activeMotto = '7'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '7', 'btn-outline-light': activeMotto !== '7'}">7</button>
+
+
+<button type="button" @click="activeMotto = '8'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '8', 'btn-outline-light': activeMotto !== '8'}">8</button>
+
+</div>
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '1'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p>In this Dotto,we are using <code>titanic</code> dataset that can be downloaded from <a href="https://www.kaggle.com/c/titanic/data?select=train.csv">here</a> . This dataset contains 891 rows and 12 columns.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 1, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p>In this Dotto,we are using <code>titanic</code> dataset that can be downloaded from <a href="https://www.kaggle.com/c/titanic/data?select=train.csv">here</a> . This dataset contains 891 rows and 12 columns.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>raw_titanic <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;/home/parnian/Documents/sprintt4/titanic_train.csv&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>titanic_data <span class="ot">&lt;-</span> raw_titanic <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb2"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> janitor</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>raw_titanic <span class="op">=</span> pd.read_csv(<span class="st">&quot;/home/parnian/Documents/sprintt4/titanic_train.csv&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>titanic_data <span class="op">=</span> raw_titanic.clean_names()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>titanic_data.head(<span class="dv">5</span>)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+first 5 records of titanic_data
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+passenger_id
+</th>
+<th style="text-align:right;">
+survived
+</th>
+<th style="text-align:right;">
+pclass
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+sib_sp
+</th>
+<th style="text-align:right;">
+parch
+</th>
+<th style="text-align:left;">
+ticket
+</th>
+<th style="text-align:right;">
+fare
+</th>
+<th style="text-align:left;">
+cabin
+</th>
+<th style="text-align:left;">
+embarked
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Braund, Mr. Owen Harris
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+A/5 21171
+</td>
+<td style="text-align:right;">
+7.2500
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Cumings, Mrs. John Bradley (Florence Briggs Thayer)
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+PC 17599
+</td>
+<td style="text-align:right;">
+71.2833
+</td>
+<td style="text-align:left;">
+C85
+</td>
+<td style="text-align:left;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Heikkinen, Miss. Laina
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+STON/O2. 3101282
+</td>
+<td style="text-align:right;">
+7.9250
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Futrelle, Mrs. Jacques Heath (Lily May Peel)
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+113803
+</td>
+<td style="text-align:right;">
+53.1000
+</td>
+<td style="text-align:left;">
+C123
+</td>
+<td style="text-align:left;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Allen, Mr. William Henry
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+373450
+</td>
+<td style="text-align:right;">
+8.0500
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+S
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>##    passengerid  survived  pclass  ...     fare cabin  embarked
+## 0            1         0       3  ...   7.2500   NaN         S
+## 1            2         1       1  ...  71.2833   C85         C
+## 2            3         1       3  ...   7.9250   NaN         S
+## 3            4         1       1  ...  53.1000  C123         S
+## 4            5         0       3  ...   8.0500   NaN         S
+## 
+## [5 rows x 12 columns]</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '2'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><code>group_by()</code>is a function of <code>dplyr</code> package that creates a “grouped” copy of a table.<br />
+dplyr functions will manipulate each “group” separately and then , they will combine the results.<br />
+We can get group by categories using <code>group_vars()</code> function , and we can also get size of each group using <code>group_size()</code> function.</p>
+<p>We can also group data by multiple categories.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 2, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><code>groupby()</code> is a function from <code>pandas</code> library that groups rows of data frame by some categories.<br />
+For example, <code>titanic_data.group_by('sex')</code> means that we want to analyze our data by different sex values.<br />
+The <code>groupby()</code> function returns a <code>DataFrameGroupBy</code> object.<br />
+There are some methods and attributes that makes it possible to access groups information:<br />
+- We can use <code>ngroups</code> attribute to get number of groups.<br />
+- We can use <code>size()</code> method to get group sizes.<br />
+- We can use <code>get_group()</code> method to retrieve groups.</p>
+<p>If we pass a list of labels to <code>groupby()</code> function , we will group our data by multiple categories.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb4"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>group_by_sex <span class="ot">&lt;-</span> titanic_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">group_vars</span>(group_by_sex)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">group_size</span>(group_by_sex)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>multiple_group_by <span class="ot">&lt;-</span> titanic_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex,pclass)</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb5"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_groupby_sex <span class="op">=</span> titanic_data.groupby(<span class="st">&#39;sex&#39;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(data_groupby_sex)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>data_groupby_sex.ngroups</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>data_groupby_sex.size()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>female_data <span class="op">=</span> data_groupby_sex.get_group(<span class="st">&#39;female&#39;</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>female_data[[<span class="st">&quot;sex&quot;</span> , <span class="st">&quot;age&quot;</span>]].head(<span class="dv">5</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#group by multiple categories:</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>subset_data <span class="op">=</span> titanic_data[[<span class="st">&quot;pclass&quot;</span> , <span class="st">&quot;sex&quot;</span> , <span class="st">&quot;fare&quot;</span>]]</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>multiple_groupby <span class="op">=</span> subset_data.groupby([<span class="st">&#39;sex&#39;</span> , <span class="st">&#39;pclass&#39;</span>])</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>multiple_groupby.head(<span class="dv">3</span>)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;sex&quot;</code></pre>
+<pre><code>## [1] 314 577</code></pre>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+first 5 records of multiple_group_by
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+passenger_id
+</th>
+<th style="text-align:right;">
+survived
+</th>
+<th style="text-align:right;">
+pclass
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+sib_sp
+</th>
+<th style="text-align:right;">
+parch
+</th>
+<th style="text-align:left;">
+ticket
+</th>
+<th style="text-align:right;">
+fare
+</th>
+<th style="text-align:left;">
+cabin
+</th>
+<th style="text-align:left;">
+embarked
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Braund, Mr. Owen Harris
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+A/5 21171
+</td>
+<td style="text-align:right;">
+7.2500
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Cumings, Mrs. John Bradley (Florence Briggs Thayer)
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+PC 17599
+</td>
+<td style="text-align:right;">
+71.2833
+</td>
+<td style="text-align:left;">
+C85
+</td>
+<td style="text-align:left;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Heikkinen, Miss. Laina
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+STON/O2. 3101282
+</td>
+<td style="text-align:right;">
+7.9250
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Futrelle, Mrs. Jacques Heath (Lily May Peel)
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+113803
+</td>
+<td style="text-align:right;">
+53.1000
+</td>
+<td style="text-align:left;">
+C123
+</td>
+<td style="text-align:left;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Allen, Mr. William Henry
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+373450
+</td>
+<td style="text-align:right;">
+8.0500
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+S
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## pandas.core.groupby.generic.DataFrameGroupBy</code></pre>
+<pre><code>## 2</code></pre>
+<pre><code>## sex
+## female    314
+## male      577
+## dtype: int64</code></pre>
+<pre><code>##       sex   age
+## 1  female  38.0
+## 2  female  26.0
+## 3  female  35.0
+## 8  female  27.0
+## 9  female  14.0</code></pre>
+<pre><code>##     pclass     sex      fare
+## 0        3    male    7.2500
+## 1        1  female   71.2833
+## 2        3  female    7.9250
+## 3        1  female   53.1000
+## 4        3    male    8.0500
+## 5        3    male    8.4583
+## 6        1    male   51.8625
+## 8        3  female   11.1333
+## 9        2  female   30.0708
+## 10       3  female   16.7000
+## 11       1  female   26.5500
+## 15       2  female   16.0000
+## 17       2    male   13.0000
+## 20       2    male   26.0000
+## 21       2    male   13.0000
+## 23       1    male   35.5000
+## 27       1    male  263.0000
+## 41       2  female   21.0000</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '3'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Aggregation functions</strong> are used to summarize information from multiple rows into a single row summary.<br />
+<code>summarise()</code> function from <code>dplyr</code>, applies summary functions to columns to create a new table.<br />
+So , once we created groups using <code>groupby()</code> function, we can create statistical summary for each group using <code>summarise()</code> and aggregation functions.</p>
+<p>These are some useful summary functions in dplyr:<br />
+- <code>n()</code> : numbers of rows<br />
+- <code>n_distinct()</code> : This is a faster and more concise equivalent of <code>length(unique(x))</code>.<br />
+- <code>min()</code> : compute min of group values.<br />
+- <code>max()</code> : compute max of group values.<br />
+- <code>mean()</code> : compute mean of groups.<br />
+- <code>sum()</code> : compute sum of group values.<br />
+For more information , please visit <a href="https://dplyr.tidyverse.org/reference/summarise.html">here</a>.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 3, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Aggregation functions</strong> are used to summarize information from multiple rows into a single row summary.<br />
+So , once we created groups using <code>groupby()</code> function, we can create statistical summary for each group using aggregation functions. This is the list of some of important aggregation functions in pandas:<br />
+-<code>mean()</code> : compute mean of groups.<br />
+- <code>sum()</code> : compute sum of group values.<br />
+- <code>count()</code> : compute count of groups.<br />
+- <code>size()</code> : compute group sizes.<br />
+- <code>min()</code> : compute min of group values.<br />
+- <code>max()</code> : compute max of group values. - <code>describe()</code> : generates descriptive statistics. For more information,please visit <a href="https://cmdlinetips.com/2019/10/pandas-groupby-13-functions-to-aggregate/">here</a>.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb13"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>groups_count <span class="ot">&lt;-</span> data_group_by_sex <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">size =</span> <span class="fu">n</span>() )</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb14"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>titanic_data.groupby(<span class="st">&quot;sex&quot;</span>).describe()</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+size of each group
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+314
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+577
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>##        passengerid                          ...  fare                 
+##              count        mean         std  ...   50%    75%       max
+## sex                                         ...                       
+## female       314.0  431.028662  256.846324  ...  23.0  55.00  512.3292
+## male         577.0  454.147314  257.486139  ...  10.5  26.55  512.3292
+## 
+## [2 rows x 56 columns]</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '4'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p>We can use <code>summarise_all()</code> , <code>summarise_at()</code> and <code>summarise_if()</code> functions from <code>dplyr</code> package to summarise multiple columns at once:</p>
+<ul>
+<li><code>summarise_all()</code> affects every variable.<br />
+</li>
+<li><code>summarise_at()</code> affects variables selected with a character vector or vars().<br />
+</li>
+<li><code>summarise_if()</code> affects variables selected with a predicate function.</li>
+</ul>
+<p><strong>syntax :</strong><br />
+summarise_all(.tbl, .funs, …)<br />
+summarise_at(.tbl, .vars, .funs, …, .cols = NULL)<br />
+summarize_if(.tbl, .predicate, .funs, …)</p>
+<p><strong>Arguments</strong> :<br />
+<code>.tbl</code> : A tbl object.</p>
+<p><code>.funs</code> : A function fun, a quosure style lambda ~ fun(.) or a list of either form.</p>
+<p><code>.predicate</code> : A predicate function to be applied to the columns or a logical vector. The variables for which .predicate is or returns TRUE are selected. This argument is passed to rlang::as_function() and thus supports quosure-style lambda functions and strings representing function names.</p>
+<p><code>vars</code> : A list of columns generated by vars(), a character vector of column names, a numeric vector of column positions, or NULL.</p>
+<p><code>.cols</code> : This argument has been renamed to .vars to fit dplyr’s terminology and is deprecated.</p>
+<p>Please visit <a href="https://dplyr.tidyverse.org/reference/summarise_all.html?q=summarise%20_%20all">here</a> for more information.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 4, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p>Using <code>agg()</code> method , we can apply multiple aggregation functions at once. Without specifying column(s) , agg will perform aggregation functions on <strong>every numeric</strong> column.<br />
+We can also use Different aggregate functions on different columns.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb16"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>multiple_aggregation_1 <span class="ot">&lt;-</span> titanic_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pclass ,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>         sex  , </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>         age  , </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>         fare ,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>         cabin) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( <span class="sc">!</span><span class="fu">is.na</span>(age) <span class="sc">&amp;</span> <span class="sc">!</span>age <span class="sc">==</span> <span class="st">&quot;&quot;</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(fare) <span class="sc">&amp;</span> <span class="sc">!</span>fare <span class="sc">==</span> <span class="st">&quot;&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_if</span>(<span class="at">.predicate =</span> <span class="cf">function</span>(x) <span class="fu">is.numeric</span>(x),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">.funs =</span> <span class="fu">list</span>(<span class="at">min=</span><span class="st">&quot;min&quot;</span> , <span class="at">max =</span> <span class="st">&quot;max&quot;</span>))</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>multiple_aggregation_2 <span class="ot">&lt;-</span> titanic_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pclass ,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>         sex  , </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>         age  , </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>         fare ,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>         cabin) <span class="sc">%&gt;%</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( <span class="sc">!</span><span class="fu">is.na</span>(age) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(fare) ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex,pclass) <span class="sc">%&gt;%</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min_age =</span> <span class="fu">min</span>(age) , <span class="at">max_age =</span> <span class="fu">max</span>(age) , <span class="at">max_fare =</span> <span class="fu">max</span>(fare))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb17"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>selected_columns <span class="op">=</span> titanic_data[[<span class="st">&quot;pclass&quot;</span> ,<span class="st">&quot;sex&quot;</span> , <span class="st">&quot;age&quot;</span> , <span class="st">&quot;fare&quot;</span> , <span class="st">&quot;cabin&quot;</span> ]]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#using &quot;agg&quot; without specifying columns </span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>selected_columns.groupby(<span class="st">&#39;sex&#39;</span>).agg([<span class="st">&#39;min&#39;</span>,<span class="st">&#39;max&#39;</span>])</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#apply different aggs on columns with dictionary:</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>selected_columns.groupby([<span class="st">&quot;sex&quot;</span> , <span class="st">&quot;pclass&quot;</span>]).agg({<span class="st">&quot;age&quot;</span> : [<span class="st">&quot;min&quot;</span> , <span class="st">&quot;max&quot;</span>] , <span class="st">&quot;fare&quot;</span> : <span class="st">&quot;max&quot;</span>})</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+applying aggregation functions on enery numerical column
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+pclass_min
+</th>
+<th style="text-align:right;">
+age_min
+</th>
+<th style="text-align:right;">
+fare_min
+</th>
+<th style="text-align:right;">
+pclass_max
+</th>
+<th style="text-align:right;">
+age_max
+</th>
+<th style="text-align:right;">
+fare_max
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+6.75
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+512.3292
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+512.3292
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+applying different aggregation functions on different columns
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+pclass
+</th>
+<th style="text-align:right;">
+min_age
+</th>
+<th style="text-align:right;">
+max_age
+</th>
+<th style="text-align:right;">
+max_fare
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+512.3292
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+65.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+46.9000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.92
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+512.3292
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.67
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+73.5000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+56.4958
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>##        pclass       age        fare          
+##           min max   min   max   min       max
+## sex                                          
+## female      1   3  0.75  63.0  6.75  512.3292
+## male        1   3  0.42  80.0  0.00  512.3292</code></pre>
+<pre><code>##                 age            fare
+##                 min   max       max
+## sex    pclass                      
+## female 1       2.00  63.0  512.3292
+##        2       2.00  57.0   65.0000
+##        3       0.75  63.0   69.5500
+## male   1       0.92  80.0  512.3292
+##        2       0.67  70.0   73.5000
+##        3       0.42  74.0   69.5500</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '5'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p>We can apply functions and formulas to groups with <code>group_by()</code> and <code>summarise()</code>.<br />
+Suppose that we want to get number of passengers in each pclass.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 5, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html">apply()</a> from <code>pandas</code> is used to apply a function along an axis of the data frame.<br />
+In this dot , we want to see that how many passengers have pclass equal to 3.</p>
+<p><strong>Introducing lambda function</strong> :<br />
+A lambda function is a small anonymous function (has no name when defining it) ,and it can take any number of arguments, but can only have one expression.<br />
+<strong>syntax</strong>:<br />
+<code>lambda arguments : expression</code><br />
+lambda function is usually used just once , and it can make your code shorter (because it is contained in one line of code).<br />
+The power of lambda is better shown when you use them as an anonymous function inside another function.<br />
+For more information about lambda function , please visit <a href="https://www.w3schools.com/python/python_lambda.asp">here</a>.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb20"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>num_each_pclass <span class="ot">&lt;-</span> titanic_data <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(pclass) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">num =</span> <span class="fu">n</span>())</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb21"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>titanic_data.groupby(titanic_data[<span class="st">&#39;pclass&#39;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x : x <span class="op">==</span> <span class="dv">3</span>)).size()</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+number of passengers in each pclass
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+pclass
+</th>
+<th style="text-align:right;">
+num
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+216
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+184
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+491
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## pclass
+## False    400
+## True     491
+## dtype: int64</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '6'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p>We can add new columns to our data frame using <code>mutate()</code> function from <code>dplyr</code> package.<br />
+combination of <code>group_by()</code> and <code>mutate()</code> makes it possible to transform data frame.<br />
+In this dot, we want to have a new column that shows difference of each passenger’s fare from the mean fare.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 6, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><code>transform()</code> is a useful function from <code>pandas</code> library that helps us to manipulate rows or columns.<br />
+One of the most common usages of <code>transform()</code> function is <strong>combining group by results</strong>.<br />
+Suppose that we want to have a new column that shows difference of each passenger’s fare from the mean fare.<br />
+We can do this using <code>groupby()</code> and <code>transform()</code>.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb23"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>transformed_data <span class="ot">&lt;-</span> titanic_data <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">distance_from_mean =</span> fare <span class="sc">-</span> <span class="fu">mean</span>(fare))</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb24"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>titanic_data[<span class="st">&#39;distance_from_mean&#39;</span>] <span class="op">=</span> titanic_data.groupby(<span class="st">&#39;sex&#39;</span>)[<span class="st">&#39;fare&#39;</span>].transform(<span class="kw">lambda</span> x: x <span class="op">-</span> x.mean())</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+first 5 records of transformed_data table(with new column ‘distance_from_mean’
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+passenger_id
+</th>
+<th style="text-align:right;">
+survived
+</th>
+<th style="text-align:right;">
+pclass
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+sib_sp
+</th>
+<th style="text-align:right;">
+parch
+</th>
+<th style="text-align:left;">
+ticket
+</th>
+<th style="text-align:right;">
+fare
+</th>
+<th style="text-align:left;">
+cabin
+</th>
+<th style="text-align:left;">
+embarked
+</th>
+<th style="text-align:right;">
+distance_from_mean
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Braund, Mr. Owen Harris
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+A/5 21171
+</td>
+<td style="text-align:right;">
+7.2500
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+-18.273893
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Cumings, Mrs. John Bradley (Florence Briggs Thayer)
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+PC 17599
+</td>
+<td style="text-align:right;">
+71.2833
+</td>
+<td style="text-align:left;">
+C85
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+26.803482
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Heikkinen, Miss. Laina
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+STON/O2. 3101282
+</td>
+<td style="text-align:right;">
+7.9250
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+-36.554818
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Futrelle, Mrs. Jacques Heath (Lily May Peel)
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+113803
+</td>
+<td style="text-align:right;">
+53.1000
+</td>
+<td style="text-align:left;">
+C123
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+8.620182
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Allen, Mr. William Henry
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+373450
+</td>
+<td style="text-align:right;">
+8.0500
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+-17.473893
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>##    passengerid  survived  pclass  ... cabin embarked  distance_from_mean
+## 0            1         0       3  ...   NaN        S          -18.273893
+## 1            2         1       1  ...   C85        C           26.803482
+## 2            3         1       3  ...   NaN        S          -36.554818
+## 3            4         1       1  ...  C123        S            8.620182
+## 4            5         0       3  ...   NaN        S          -17.473893
+## 
+## [5 rows x 13 columns]</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '7'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p>We can filter some of our groups based on conditions.<br />
+Let’s filter data to find all passengers that lives in cabin with more than 3 people.<br />
+(We filter missing values before grouping because group by considers rows with missing value of cabin as one group).</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 7, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p>We can filter some of our groups based on conditions.<br />
+Let’s filter data to find all passengers that lives in cabin with more than 3 people.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb26"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>more_than_3 <span class="ot">&lt;-</span> titanic_data <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(cabin) <span class="sc">&amp;</span> <span class="sc">!</span>cabin <span class="sc">==</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cabin) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">num_of_people =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(num_of_people <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb27"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>titanic_data.groupby(<span class="st">&#39;cabin&#39;</span>).<span class="bu">filter</span>(<span class="kw">lambda</span> x : <span class="bu">len</span>(x) <span class="op">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+passengesr that lived in cabin with more than 3 people
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+passenger_id
+</th>
+<th style="text-align:right;">
+survived
+</th>
+<th style="text-align:right;">
+pclass
+</th>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+sib_sp
+</th>
+<th style="text-align:right;">
+parch
+</th>
+<th style="text-align:left;">
+ticket
+</th>
+<th style="text-align:right;">
+fare
+</th>
+<th style="text-align:left;">
+cabin
+</th>
+<th style="text-align:left;">
+embarked
+</th>
+<th style="text-align:right;">
+num_of_people
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Sandstrom, Miss. Marguerite Rut
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+PP 9549
+</td>
+<td style="text-align:right;">
+16.7000
+</td>
+<td style="text-align:left;">
+G6
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Fortune, Mr. Charles Alexander
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+19950
+</td>
+<td style="text-align:right;">
+263.0000
+</td>
+<td style="text-align:left;">
+C23 C25 C27
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Fortune, Miss. Mabel Helen
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+19950
+</td>
+<td style="text-align:right;">
+263.0000
+</td>
+<td style="text-align:left;">
+C23 C25 C27
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+206
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Strom, Miss. Telma Matilda
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+347054
+</td>
+<td style="text-align:right;">
+10.4625
+</td>
+<td style="text-align:left;">
+G6
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+252
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Strom, Mrs. Wilhelm (Elna Matilda Persson)
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+347054
+</td>
+<td style="text-align:right;">
+10.4625
+</td>
+<td style="text-align:left;">
+G6
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+342
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Fortune, Miss. Alice Elizabeth
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+19950
+</td>
+<td style="text-align:right;">
+263.0000
+</td>
+<td style="text-align:left;">
+C23 C25 C27
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+391
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Carter, Mr. William Ernest
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+113760
+</td>
+<td style="text-align:right;">
+120.0000
+</td>
+<td style="text-align:left;">
+B96 B98
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+395
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Sandstrom, Mrs. Hjalmar (Agnes Charlotta Bengtsson)
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+PP 9549
+</td>
+<td style="text-align:right;">
+16.7000
+</td>
+<td style="text-align:left;">
+G6
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+436
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Carter, Miss. Lucile Polk
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+113760
+</td>
+<td style="text-align:right;">
+120.0000
+</td>
+<td style="text-align:left;">
+B96 B98
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+439
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Fortune, Mr. Mark
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+19950
+</td>
+<td style="text-align:right;">
+263.0000
+</td>
+<td style="text-align:left;">
+C23 C25 C27
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+764
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Carter, Mrs. William Ernest (Lucile Polk)
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+113760
+</td>
+<td style="text-align:right;">
+120.0000
+</td>
+<td style="text-align:left;">
+B96 B98
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+803
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Carter, Master. William Thornton II
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+113760
+</td>
+<td style="text-align:right;">
+120.0000
+</td>
+<td style="text-align:left;">
+B96 B98
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>##      passengerid  survived  pclass  ...        cabin embarked  distance_from_mean
+## 10            11         1       3  ...           G6        S          -27.779818
+## 27            28         0       1  ...  C23 C25 C27        S          237.476107
+## 88            89         1       1  ...  C23 C25 C27        S          218.520182
+## 205          206         0       3  ...           G6        S          -34.017318
+## 251          252         0       3  ...           G6        S          -34.017318
+## 341          342         1       1  ...  C23 C25 C27        S          218.520182
+## 390          391         1       1  ...      B96 B98        S           94.476107
+## 394          395         1       3  ...           G6        S          -27.779818
+## 435          436         1       1  ...      B96 B98        S           75.520182
+## 438          439         0       1  ...  C23 C25 C27        S          237.476107
+## 763          764         1       1  ...      B96 B98        S           75.520182
+## 802          803         1       1  ...      B96 B98        S           94.476107
+## 
+## [12 rows x 13 columns]</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 8, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '8'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p>We can visualized our grouped data using <code>ggplot2</code> package.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 8, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p>We can visualized our grouped data using <code>matplotlib</code> package.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb29"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>group_by_pclass <span class="ot">&lt;-</span> titanic_data <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(pclass) <span class="sc">%&gt;%</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">size =</span> <span class="fu">n</span>())</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(group_by_pclass ,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> pclass,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> size)) <span class="sc">+</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span> ,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">&quot;darkmagenta&quot;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb30"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>titanic_data.groupby(<span class="st">&#39;pclass&#39;</span>).size().plot(kind <span class="op">=</span> <span class="st">&#39;bar&#39;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<p><img src="grouping-and-aggregating-data_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<p><img src="grouping-and-aggregating-data_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+</section>
+<!-- Body Footer ----------------------------------->
+
+<section id="dotto-footer">
+<div class="col-12 col-md-9">
+<div class="d-flex" id="dotto-row-lines">
+<img src="../../../assets/img/Dotto.svg" width="35" height="35" type="button" class=" ml-5 icon d-sm-flex justify-content-sm-center dotto-lines-icons">
+</i>
+</div>
+</div>
+<div class="col-12 col-md-3 pt-2">
+<div class="alert alert-danger dotto-alert-comment text-center" role="alert">
+<span type="button" @click="commentOpen = true" class="footer-disqus-text">
+<strong><i class="fas fa-comments fa-1x" style="font-size: 21px"> </i>
+<span class="disqus-comment-count" data-disqus-url="https://datamotto.com/posts/Dotto/D011-2021-07-28-grouping-and-aggregating-data/index.html" data-disqus-identifier="4fda3ede-efd1-11eb-aeda-c8b29b64e24a"></span>
+</strong>
+<span> for this Dotto.</span>
+<span> Write yours here!</span>
+</span>
+
+<script>
+var disqus_config = function () {
+  this.page.url = "https://datamotto.com/posts/Dotto/D011-2021-07-28-grouping-and-aggregating-data/index.html";
+  this.page.identifier = "4fda3ede-efd1-11eb-aeda-c8b29b64e24a";
+};
+
+(function() {
+var d = document, s = d.createElement("script");
+s.src = "https://datamotto-com.disqus.com/embed.js";
+s.setAttribute("data-timestamp", +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//datamotto-com.disqus.com/count.js" async></script>
+
+</div>
+</div>
+</section>
+
+
+</div>
+<!-- Don't indent these lines or it will mess pre blocks indentation -->
+<script src="../../../assets/js/post.js"></script>
+<script src="../../../assets/js/jquery.min.js"></script>
+<script src="../../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../assets/js/bs-init.js"></script>
+<script src="../../../assets/js/carts.js"></script>
+<script src="../../../assets/js/Index_page.js"></script>
+<script src="../../../assets/js/jquery-3.5.1.min.js"></script>
+</body>
+</html>
