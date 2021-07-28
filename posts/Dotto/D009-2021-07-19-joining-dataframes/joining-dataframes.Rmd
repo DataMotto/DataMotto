@@ -32,23 +32,23 @@ DataMotto::use_Dotto()
 
 ```{block, Dot = 1, part = "Instruction", lang = "r"}
 - **Description About Package**
-  - [pandas](https://pandas.pydata.org/) is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.
-- **Description About Dataset**
-If we want to start an online shop on Instagram and sell coffee, who are our customers? In this Dotto we use [Instagram coffee page in US](https://www.kaggle.com/mohsenjalali/instagram-coffee-page-in-us).
-- **Prepare Environment**
-  Install packages with below commands:
-  `pip install pandas`
-```
-
-
-```{block, Dot = 1, part = "Instruction", lang = "python"}
-- **Description About Package**
   - [dplyr](https://dplyr.tidyverse.org/) is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges
 - **Description About Dataset**
 If we want to start an online shop on Instagram and sell coffee, who are our customers? In this Dotto we use [Instagram coffee page in US](https://www.kaggle.com/mohsenjalali/instagram-coffee-page-in-us).
 - **Prepare Environment**
   Install packages with below commands:
   `install.packages("dplyr")`
+```
+
+
+```{block, Dot = 1, part = "Instruction", lang = "python"}
+- **Description About Package**
+  - [pandas](https://pandas.pydata.org/) is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.
+- **Description About Dataset**
+If we want to start an online shop on Instagram and sell coffee, who are our customers? In this Dotto we use [Instagram coffee page in US](https://www.kaggle.com/mohsenjalali/instagram-coffee-page-in-us).
+- **Prepare Environment**
+  Install packages with below commands:
+  `pip install pandas`
 ```
 
 ```{r, Dot = 1, part = "Code", echo = T, eval = F, }
@@ -148,8 +148,8 @@ inner_joined = inner_join(
   suffix=c('_novocoffee', '_heartroasters'))
 # print property of result of joining two tables
 colnames(inner_joined)
-sprintf('number of column: %d',ncol(inner_joined))
-sprintf('number of column: %d',nrow(inner_joined))
+sprintf('number of columns: %d',ncol(inner_joined))
+sprintf('number of rows: %d',nrow(inner_joined))
 #who follow both of these pages?
 print(inner_joined["username"])
 ```
@@ -175,8 +175,8 @@ inner_joined = inner_join(
   suffix=c('_novocoffee', '_heartroasters'))
 # print property of result of joining two tables
 colnames(inner_joined)
-sprintf('number of column: %d',ncol(inner_joined))
-sprintf('number of column: %d',nrow(inner_joined))
+sprintf('number of columns: %d',ncol(inner_joined))
+sprintf('number of rows: %d',nrow(inner_joined))
 #who follow both of these pages?
 print(inner_joined["username"])
 ```
@@ -220,8 +220,8 @@ left_joined = left_join(
 )
 # print property of result of joining two tables
 colnames(left_joined)
-sprintf('number of column: %d',ncol(left_joined))
-sprintf('number of column: %d',nrow(left_joined))
+sprintf('number of columns: %d',ncol(left_joined))
+sprintf('number of rows: %d',nrow(left_joined))
 glimpse(head(left_joined,1))
 ```
 
@@ -246,8 +246,8 @@ left_joined = left_join(
 )
 # print property of result of joining two tables
 colnames(left_joined)
-sprintf('number of column: %d',ncol(left_joined))
-sprintf('number of column: %d',nrow(left_joined))
+sprintf('number of columns: %d',ncol(left_joined))
+sprintf('number of rows: %d',nrow(left_joined))
 glimpse(head(left_joined,1))
 ```
 
@@ -289,8 +289,8 @@ right_joined = right_join(
 )
 # print property of result of joining two tables
 colnames(right_joined)
-sprintf('number of column: %d',ncol(right_joined))
-sprintf('number of column: %d',nrow(right_joined))
+sprintf('number of columns: %d',ncol(right_joined))
+sprintf('number of rows: %d',nrow(right_joined))
 glimpse(head(right_joined,1))
 ```
 
@@ -315,8 +315,8 @@ right_joined = right_join(
 )
 # print property of result of joining two tables
 colnames(right_joined)
-sprintf('number of column: %d',ncol(right_joined))
-sprintf('number of column: %d',nrow(right_joined))
+sprintf('number of columns: %d',ncol(right_joined))
+sprintf('number of rows: %d',nrow(right_joined))
 glimpse(head(right_joined[right_joined$username=='aylinlongoria28',],1))
 ```
 
@@ -364,8 +364,8 @@ outer_joined = full_join(
 )
 # print property of result of joining two tables
 colnames(outer_joined)
-sprintf('number of column: %d',ncol(outer_joined))
-sprintf('number of column: %d',nrow(outer_joined))
+sprintf('number of columns: %d',ncol(outer_joined))
+sprintf('number of rows: %d',nrow(outer_joined))
 # this show you that outer join combine right join and left join but we should subtract intersection of right join and left join
 print(nrow(right_joined) + nrow(left_joined) - nrow(inner_joined == nrow(outer_joined)))
 glimpse(head(outer_joined,1))
@@ -394,8 +394,8 @@ outer_joined = full_join(
 )
 # print property of result of joining two tables
 colnames(outer_joined)
-sprintf('number of column: %d',ncol(outer_joined))
-sprintf('number of column: %d',nrow(outer_joined))
+sprintf('number of columns: %d',ncol(outer_joined))
+sprintf('number of rows: %d',nrow(outer_joined))
 # this show you that outer join combine right join and left join but we should subtract intersection of right join and left join
 print(nrow(right_joined) + nrow(left_joined) - nrow(inner_joined) == nrow(outer_joined))
 glimpse(head(outer_joined,1))

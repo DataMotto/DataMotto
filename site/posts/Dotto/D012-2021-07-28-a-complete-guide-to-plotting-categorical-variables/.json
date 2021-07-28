@@ -1,0 +1,47 @@
+{
+  "file_name": ["a-complete-guide-to-plotting-categorical-variables"],
+  "dir_name": ["D012-2021-07-28-a-complete-guide-to-plotting-categorical-variables"],
+  "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+  "link": ["posts/Dotto/D012-2021-07-28-a-complete-guide-to-plotting-categorical-variables/index.html"],
+  "base_url": ["https://datamotto.com"],
+  "social_networks_datamotto": {
+    "twitter": ["https://twitter.com/DataMotto"],
+    "linkedin": ["https://www.linkedin.com/company/datamotto"]
+  },
+  "dotto_number": [12],
+  "dotto_label": ["D012"],
+  "dotto_id": ["0bf23734-eff5-11eb-9c3d-acbc32baed85"],
+  "title": ["A Complete Guide to Plotting Categorical Variables"],
+  "description": ["See how Seaborn & ggplot2 can make your plots looks nicer, convey more info, and require few lines of code.\n"],
+  "author": [
+    {
+      "name": ["Mohammad Hossein Malekpour"],
+      "occupation": ["Data Scientist"],
+      "affiliation": ["DataMotto"],
+      "url": ["https://www.linkedin.com/in/mohammadhossein-malekpour/"],
+      "img": ["MalekpourAvatar.jpeg"],
+      "lang": ["python", "R"],
+      "profile_img_for_Dotto": ["./a-complete-guide-to-plotting-categorical-variables_files/figure-html/MalekpourAvatar.jpeg"],
+      "profile_img": ["./posts/Dotto/D012-2021-07-28-a-complete-guide-to-plotting-categorical-variables/a-complete-guide-to-plotting-categorical-variables_files/figure-html/MalekpourAvatar.jpeg"]
+    }
+  ],
+  "tech": [
+    {
+      "lang": ["r"],
+      "pkgs": ["ggplot2", "dplyr"]
+    },
+    {
+      "lang": ["python"],
+      "pkgs": ["seaborn", "pandas"]
+    }
+  ],
+  "date": {
+    "created": ["2021-07-20"],
+    "last_updated": ["2021-07-20"]
+  },
+  "categories": ["Visualizer"],
+  "applications": ["Other"],
+  "cover_image": {},
+  "slug": ["a-complete-guide-to-plotting-categorical-variables"],
+  "output": ["DataMotto::Dotto"]
+}

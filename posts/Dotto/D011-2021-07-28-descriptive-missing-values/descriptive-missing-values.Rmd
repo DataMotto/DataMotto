@@ -1,0 +1,404 @@
+---
+title: "Descriptive Missing values"
+description: |
+  In many real-world datasets, we may miss some value in some rows or columns. We should know how to handle these missings in many kinds of research and decide if we should execute them or impute them.
+author:
+  - name: "Mahyar Sharifi"
+    occupation: "Internship"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/mahyar-sharifi"
+    img: "Mahyar.jpeg"
+    lang: ["python", "r"]
+tech:
+  - lang: r
+    pkgs: ["dyplyr", "palmerpenguins"]
+  - lang: python
+    pkgs: ["pandas", "seaborn"]
+date:
+  created: "2021-07-22"
+  last_updated: "2021-07-22"
+categories: "Wrangling"
+applications: "General"
+cover_image: "Mahyar.jpg"
+slug: "descriptive-missing-values"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+The titanic dataset contains information on 891 passengers of the **RMS Titanic**, which sank in 1912. This dataset has 12 features described in the [Titanic Competition](https://www.kaggle.com/c/titanic/data) on Kaggle.
+In this Dotto, we want to focus on missing values. First, we try to identify and count missing values in rows and columns. Then we decide to exclude or keep rows that have missing values. Finally, we try a simple way to impute missing values in a column. 
+In this Dotto we use `dplyr` package for data warngling and `ggplot2` package for visulaizaton.
+```
+
+```{block, Dot = 1, part = "Instruction", lang = "python"}
+The titanic dataset contains information on 891 passengers of the **RMS Titanic**, which sank in 1912. This dataset has 12 features described in the [Titanic Competition](https://www.kaggle.com/c/titanic/data) on Kaggle.
+In this Dotto, we want to focus on missing values. First, we try to identify and count missing values in rows and columns. Then we decide to exclude or keep rows that have missing values. Finally, we try a simple way to impute missing values in a column. 
+In this Dotto we use `pandas` package for data warngling and `seaborn` package for visulaizaton.
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F}
+#Import Packages
+library(dplyr)
+library(ggplot2)
+#Import Titanic dataset
+titanic = read.csv('Titanic_train.csv',na.strings=c(""))
+#Show five sample rows
+sample_n(titanic, 5)
+```
+
+```{python, Dot = 1, part = "Code", echo = T, eval = F}
+#Import Packages
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+#Load Dataset
+titanic = pd.read_csv('Titanic_train.csv')
+#Show five samples of dataset
+titanic.sample(5)
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+#Import Packages
+library(dplyr)
+library(ggplot2)
+#Import Titanic dataset
+titanic = read.csv('Titanic_train.csv',na.strings=c(""))
+#Show five sample rows
+sample_n(titanic, 5)
+```
+
+```{python, Dot = 1, part = "Result", echo = F, eval = T}
+#Import Packages
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+#Load Dataset
+titanic = pd.read_csv('Titanic_train.csv')
+#Show five samples of dataset
+titanic.sample(5)
+```
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+In the `R` language, we can check if data is missing or not with `is.na()`. To calculate the total number of missing in each column, we use `colSums()`.
+Sometimes we need to calculate the percentage of missing values in each column. For this purpose, we should divide the total number of missing data in a column by the number of rows in our dataset.
+According to the results, three columns (**Age**, **Cabin**, **Ebmark**) have missing data.
+```
+
+```{block, Dot = 2, part = "Instruction", lang = "python"}
+In the `pandas` package, we can check if data is missing or not with `isnull()`. To calculate the total number of missing in each column, we use `sum(axis = 0)`.
+Sometimes we need to calculate the percentage of missing values in each column. For this purpose, we should divide the total number of missing data in a column by the number of rows in our dataset.
+According to the results, three columns (**Age**, **Cabin**, **Ebmark**) have missing data.
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F}
+#Count number of missing values in each column
+colSums(is.na(titanic))
+#Percentage of missing values in each column
+colSums(is.na(titanic)*100/nrow(titanic))
+```
+
+```{python, Dot = 2, part = "Code", echo = T, eval = F}
+#Count missing value in all columns
+print(titanic.isnull().sum(axis = 0))
+#Calculate percentage of missing value in all columns
+print(titanic.isnull().sum(axis = 0) * 100 / titanic.shape[0])
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+#Count number of missing values in each column
+colSums(is.na(titanic))
+#Percentage of missing values in each column
+colSums(is.na(titanic)*100/nrow(titanic))
+```
+
+```{python, Dot = 2, part = "Result", echo = F, eval = T}
+#Count missing value in all columns
+print(titanic.isnull().sum(axis = 0))
+#Calculate percentage of missing value in all columns
+print(titanic.isnull().sum(axis = 0) * 100 / titanic.shape[0])
+```
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+Similar to the last Dot, we check if data is missing or not, and then we use `rowSums()` to calculate the total number of missing in each row.
+To calculate the percentage of missing values in each row, we divide the total number of missing data in a row by the number of columns in our dataset.
+```
+
+```{block, Dot = 3, part = "Instruction", lang = "python"}
+Similar to the last Dot, we check if data is missing or not, and then we use `sum(axis = 1)` to calculate the total number of missing in each row.
+To calculate the percentage of missing values in each row, we divide the total number of missing data in a row by the number of columns in our dataset.
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F}
+#Count number of missing values in each row
+head(rowSums(is.na(titanic)),5)
+#Percentage of missing values in each row
+head(rowSums(is.na(titanic) * 100/ncol(titanic)), 5)
+```
+
+```{python, Dot = 3, part = "Code", echo = T, eval = F}
+#Count missing value in all rows
+print(titanic.isnull().sum(axis = 1))
+#Calculate percentage of missing value in all rows
+print(titanic.isnull().sum(axis = 1) * 100 / titanic.shape[1])
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+#Count number of missing values in each row
+head(rowSums(is.na(titanic)),5)
+#Percentage of missing values in each row
+head(rowSums(is.na(titanic) * 100/ncol(titanic)), 5)
+```
+
+```{python, Dot = 3, part = "Result", echo = F, eval = T}
+#Count missing value in all rows
+print(titanic.isnull().sum(axis = 1))
+#Calculate percentage of missing value in all rows
+print(titanic.isnull().sum(axis = 1) * 100 / titanic.shape[1])
+```
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+Visualization helps us to more beneficial understanding. We can plot a heatmap to show missing data in each column. For this purpose, we use the `missmap()` function from `Amelia` package. 
+As we can see in this heatmap, **Age**, **Cabin** and **Embarked** columns have high missing data.
+```
+
+```{block, Dot = 4, part = "Instruction", lang = "python"}
+Visualization helps us to more beneficial understanding. We can plot a heatmap to show missing data in each column. For this purpose, we use the `heatmap()` function from `seaborn` package. 
+As we can see in this heatmap, **Age**, **Cabin** and **Embarked** columns have high missing data. 
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F}
+#Import "Amelia" Package
+library('Amelia')
+#Plot the heatmap missing value in each column
+missmap(titanic, col=c("black", "grey"), legend=FALSE)
+```
+
+```{python, Dot = 4, part = "Code", echo = T, eval = F}
+#Plot the heatmap missing value in each column
+sns.heatmap(titanic.isnull(), cbar = False).set_title("Missing values heatmap")
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+#Import "Amelia" Package
+library('Amelia')
+#Plot the heatmap missing value in each column
+missmap(titanic, col=c("black", "grey"), legend=FALSE)
+```
+
+```{python, Dot = 4, part = "Result", echo = F, eval = T}
+#Plot the heatmap missing value in each column
+sns.heatmap(titanic.isnull(), cbar = False).set_title("Missing values heatmap")
+plt.show()
+```
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+When we find the number of missing values in each column and row and the reasons for missed values, we should decide about that columns or rows. We have two ways to confront the missing value problem. These two ways are: 
+1. Exclude columns or rows with at least one missing data.
+2. Impute missing data with different strategies.
+We assume that we want to exclude a "Cabin" column because of the high number of missing in this dot. 
+We may exclude rows with more than 10 percent missing data in a row and filter the dataset for another example.
+```
+
+```{block, Dot = 5, part = "Instruction", lang = "python"}
+When we find the number of missing values in each column and row and the reasons for missed values, we should decide about that columns or rows. We have two ways to confront the missing value problem. These two ways are: 
+1. Exclude columns or rows with at least one missing data.
+2. Impute missing data with different strategies.
+We assume that we want to exclude a "Cabin" column because of the high number of missing in this dot. For this purpose, we use `drop(axis = 1)` to drop the "Cabin" column.
+We may exclude rows with more than 10 percent missing data in a row and filter the dataset for another example. 
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F}
+#Drop "Cabin" column
+titanic_Cabin_dropped = select(titanic, -c('Cabin'))
+#Show five sample rows
+sample_n(titanic_Cabin_dropped, 5)
+#Filter row with more than 10% missing in each row
+```
+
+```{python, Dot = 5, part = "Code", echo = T, eval = F}
+#Drop "Cabin" column
+titanic_Cabin_dropped = titanic.drop(['Cabin'], axis = 1)
+#Filter row with more than 10% missing in each row
+titanic_row_filtered = titanic[titanic.isnull().sum(axis = 1) * 100 / titanic.shape[1] < 10]
+titanic_row_filtered.shape
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+#Drop "Cabin" column
+titanic_Cabin_dropped = select(titanic, -c('Cabin'))
+#Show five sample rows
+sample_n(titanic_Cabin_dropped, 5)
+#Filter row with more than 10% missing in each row
+```
+
+```{python, Dot = 5, part = "Result", echo = F, eval = T}
+#Drop "Cabin" column
+titanic_Cabin_dropped = titanic.drop(['Cabin'], axis = 1)
+#Filter row with more than 10% missing in each row
+titanic_row_filtered = titanic[titanic.isnull().sum(axis = 1) * 100 / titanic.shape[1] < 10]
+titanic_row_filtered.shape
+```
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+There are many different strategies for missing data imputation. One of these strategies is imputing with a constant value. 
+In this dot, we want to impute missing data in the **Age** column with the mean of this column. For this purpose, first, we calculate the mean of this column. Then we impute missing by mean.
+Finally, we check the total number of missing values in the **Age** column, and we see that this column has no missing anymore.
+```
+
+```{block, Dot = 6, part = "Instruction", lang = "python"}
+There are many different strategies for missing data imputation. One of these strategies is imputing with a constant value. 
+In this dot, we want to impute missing data in the **Age** column with the mean of this column. For this purpose, first, we calculate the mean of this column. Then we use the `fillna()` function to impute missing by mean.
+Finally, we check the total number of missing values in the **Age** column, and we see that this column has no missing anymore.
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F}
+#Clculate mean of "Age"
+mean_age = mean(titanic$Age, na.rm = TRUE )
+print(mean_age)
+#Fill missing value in "Age" by mean
+titanic$Age[is.na(titanic$Age)] <- mean_age
+```
+
+```{python, Dot = 6, part = "Code", echo = T, eval = F}
+#Calculate mean of "Age"
+mean_age = titanic['Age'].mean()
+print(mean_age)
+#Fill missing value with constant value
+titanic_row_filtered['Age'] = titanic_row_filtered['Age'].fillna(mean_age)
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+#Clculate mean of "Age"
+mean_age = mean(titanic$Age, na.rm = TRUE )
+print(mean_age)
+#Fill missing value in "Age" by mean
+titanic$Age[is.na(titanic$Age)] <- mean_age
+```
+
+```{python, Dot = 6, part = "Result", echo = F, eval = T}
+#Calculate mean of "Age"
+mean_age = titanic['Age'].mean()
+print(mean_age)
+#Fill missing value with constant value
+titanic_row_filtered['Age'] = titanic_row_filtered['Age'].fillna(mean_age)
+```
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+Sometimes we want to impute missing data with different values for different categories to achieve an accurate result. In these situations, we should find some meaningful relation among features and categories.
+For example,  we can see the total number of passengers are in the Third class, and we have a large number of missing values in Age in this class. According to this bar chart, it might be a good idea to impute missing values in the "Age" column with the mean of males and females in the Third class for males and females independently. First we add the new `Missing` column that show if a record has missing value or not. Then plot a bar plot for this purpose.
+```
+
+```{block, Dot = 7, part = "Instruction", lang = "python"}
+Sometimes we want to impute missing data with different values for different categories to achieve an accurate result. In these situations, we should find some meaningful relation among features and categories.
+For example,  we can see the total number of passengers are in the Third class, and we have a large number of missing values in Age in this class. According to this bar chart, it might be a good idea to impute missing values in the "Age" column with the mean of males and females in the Third class for males and females independently. First we add the new `Missing` column that show if a record has missing value or not. Then plot a bar plot for this purpose.
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F}
+#Import Titanic dataset again
+titanic = read.csv('Titanic_train.csv')
+#Add new "Missing" column
+titanic$Missing <- is.na(titanic$Age)
+#Plot Bar plot
+ggplot(data = titanic, aes(x = Missing, fill = as.character(Pclass)))+
+  geom_bar(position = "dodge")+
+  facet_wrap(~ Sex, nrow = 2)
+```
+
+```{python, Dot = 7, part = "Code", echo = T, eval = F}
+#Add new "Missing" column
+titanic['Missing'] = titanic['Age'].isnull()
+#Plot Bar plot
+sns.catplot(x="Missing", hue="Pclass", kind="count", data=titanic, row = 'Sex')
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+#Import Titanic dataset again
+titanic = read.csv('Titanic_train.csv')
+#Add new "Missing" column
+titanic$Missing <- is.na(titanic$Age)
+#Plot Bar plot
+ggplot(data = titanic, aes(x = Missing, fill = as.character(Pclass)))+
+  geom_bar(position = "dodge")+
+  facet_wrap(~ Sex, nrow = 2)
+```
+
+```{python, Dot = 7, part = "Result", echo = F, eval = T}
+#Add new "Missing" column
+titanic['Missing'] = titanic['Age'].isnull()
+#Plot Bar plot
+sns.catplot(x="Missing", hue="Pclass", kind="count", data=titanic, row = 'Sex')
+plt.show()
+```
+
+<!-- Dot 8, lang: r ------------------------------------------------>
+
+```{block, Dot = 8, part = "Instruction", lang = "r"}
+We want to impute the missing values in the `Age` column with two different values in the last dot. First, we calculate the mean of the `Age` column for male records in the Third class and females records in the Third class. Then we impute missing values in the `Age` columns independently. This strategy may be more accurate than imputing missing values with a constant value.
+```
+
+```{block, Dot = 8, part = "Instruction", lang = "python"}
+We want to impute the missing values in the `Age` column with two different values in the last dot. First, we calculate the mean of the `Age` column for male records in the Third class and females records in the Third class. Then we impute missing values in the `Age` columns independently. This strategy may be more accurate than imputing missing values with a constant value.
+```
+
+```{r, Dot = 8, part = "Code", echo = T, eval = F}
+#Calculate mean of "Age" for male passengers in Third class
+mean_age_male <- mean((titanic %>% filter(Sex == 'male' & Pclass == 3))$Age, na.rm = TRUE)
+print(mean_age_male)
+#Calculate mean of "Age" for female passengers in Third class
+mean_age_female <- mean((titanic %>% filter(Sex == 'female' & Pclass == 3))$Age, na.rm = TRUE)
+print(mean_age_female)
+#Fill missing with calculated mean for male
+#Fill missing with calculated mean for female
+```
+
+```{python, Dot = 8, part = "Code", echo = T, eval = F}
+#Calculate mean of "Age" for male passengers in Third class
+age_for_male = titanic[(titanic['Sex']=='male') & (titanic['Pclass']=='Third')].Age.mean()
+#Calculate mean of "Age" for female passengers in Third class
+age_for_female= titanic[(titanic['Sex']=='female') & (titanic['Pclass']=='Third')].Age.mean()
+#Fill missing with calculated mean for male
+titanic.loc[titanic['Sex']=='male',['Age']] = titanic.loc[titanic['Sex']=='male',['Age']].fillna(age_for_male)
+#Fill missing with calculated mean for female
+titanic.loc[titanic['Sex']=='female',['Age']] = titanic.loc[titanic['Sex']=='female',['Age']].fillna(age_for_female)
+```
+
+```{r, Dot = 8, part = "Result", echo = F, eval = T}
+#Calculate mean of "Age" for male passengers in Third class
+mean_age_male <- mean((titanic %>% filter(Sex == 'male' & Pclass == 3))$Age, na.rm = TRUE)
+print(mean_age_male)
+#Calculate mean of "Age" for female passengers in Third class
+mean_age_female <- mean((titanic %>% filter(Sex == 'female' & Pclass == 3))$Age, na.rm = TRUE)
+print(mean_age_female)
+#Fill missing with calculated mean for male
+#Fill missing with calculated mean for female
+```
+
+```{python, Dot = 8, part = "Result", echo = F, eval = T}
+#Calculate mean of "Age" for male passengers in Third class
+age_for_male = titanic[(titanic['Sex']=='male') & (titanic['Pclass']=='Third')].Age.mean()
+#Calculate mean of "Age" for female passengers in Third class
+age_for_female= titanic[(titanic['Sex']=='female') & (titanic['Pclass']=='Third')].Age.mean()
+#Fill missing with calculated mean for male
+titanic.loc[titanic['Sex']=='male',['Age']] = titanic.loc[titanic['Sex']=='male',['Age']].fillna(age_for_male)
+#Fill missing with calculated mean for female
+titanic.loc[titanic['Sex']=='female',['Age']] = titanic.loc[titanic['Sex']=='female',['Age']].fillna(age_for_female)
+```
+

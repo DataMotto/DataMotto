@@ -281,10 +281,10 @@ class="btn dotto-main-dot-shape"
 <ul>
 <li><strong>Description About Package</strong>
 <ul>
-<li><a href="https://pandas.pydata.org/">pandas</a> is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.</li>
+<li><a href="https://dplyr.tidyverse.org/">dplyr</a> is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges</li>
 </ul></li>
 <li><strong>Description About Dataset</strong> If we want to start an online shop on Instagram and sell coffee, who are our customers? In this Dotto we use <a href="https://www.kaggle.com/mohsenjalali/instagram-coffee-page-in-us">Instagram coffee page in US</a>.</li>
-<li><strong>Prepare Environment</strong> Install packages with below commands: <code>pip install pandas</code></li>
+<li><strong>Prepare Environment</strong> Install packages with below commands: <code>install.packages("dplyr")</code></li>
 </ul>
 
 </p>
@@ -299,10 +299,10 @@ class="btn dotto-main-dot-shape"
 <ul>
 <li><strong>Description About Package</strong>
 <ul>
-<li><a href="https://dplyr.tidyverse.org/">dplyr</a> is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges</li>
+<li><a href="https://pandas.pydata.org/">pandas</a> is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language.</li>
 </ul></li>
 <li><strong>Description About Dataset</strong> If we want to start an online shop on Instagram and sell coffee, who are our customers? In this Dotto we use <a href="https://www.kaggle.com/mohsenjalali/instagram-coffee-page-in-us">Instagram coffee page in US</a>.</li>
-<li><strong>Prepare Environment</strong> Install packages with below commands: <code>install.packages("dplyr")</code></li>
+<li><strong>Prepare Environment</strong> Install packages with below commands: <code>pip install pandas</code></li>
 </ul>
 
 </p>
@@ -461,8 +461,8 @@ class="btn dotto-main-dot-shape"
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">suffix=</span><span class="fu">c</span>(<span class="st">&#39;_novocoffee&#39;</span>, <span class="st">&#39;_heartroasters&#39;</span>))</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(inner_joined)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">ncol</span>(inner_joined))</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">nrow</span>(inner_joined))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of columns: %d&#39;</span>,<span class="fu">ncol</span>(inner_joined))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of rows: %d&#39;</span>,<span class="fu">nrow</span>(inner_joined))</span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#who follow both of these pages?</span></span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(inner_joined[<span class="st">&quot;username&quot;</span>])</span></code></pre></div>
 
@@ -505,8 +505,8 @@ class="btn dotto-main-dot-shape"
 ## [5] &quot;is_verified_heartroasters&quot;        
 ## [6] &quot;is_private_heartroasters&quot;         
 ## [7] &quot;is_business_account_heartroasters&quot;</code></pre>
-<pre><code>## [1] &quot;number of column: 7&quot;</code></pre>
-<pre><code>## [1] &quot;number of column: 12&quot;</code></pre>
+<pre><code>## [1] &quot;number of columns: 7&quot;</code></pre>
+<pre><code>## [1] &quot;number of rows: 12&quot;</code></pre>
 <pre><code>##              username
 ## 1        camelkordish
 ## 2  packagingbest_lucy
@@ -614,8 +614,8 @@ class="btn dotto-main-dot-shape"
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(left_joined)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">ncol</span>(left_joined))</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">nrow</span>(left_joined))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of columns: %d&#39;</span>,<span class="fu">ncol</span>(left_joined))</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of rows: %d&#39;</span>,<span class="fu">nrow</span>(left_joined))</span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(left_joined,<span class="dv">1</span>))</span></code></pre></div>
 
 </div>
@@ -656,8 +656,8 @@ class="btn dotto-main-dot-shape"
 ## [5] &quot;is_verified_heartroasters&quot;        
 ## [6] &quot;is_private_heartroasters&quot;         
 ## [7] &quot;is_business_account_heartroasters&quot;</code></pre>
-<pre><code>## [1] &quot;number of column: 7&quot;</code></pre>
-<pre><code>## [1] &quot;number of column: 523&quot;</code></pre>
+<pre><code>## [1] &quot;number of columns: 7&quot;</code></pre>
+<pre><code>## [1] &quot;number of rows: 523&quot;</code></pre>
 <pre><code>## Rows: 1
 ## Columns: 7
 ## $ username                          &lt;chr&gt; &quot;amycharlenem&quot;
@@ -756,8 +756,8 @@ class="btn dotto-main-dot-shape"
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(right_joined)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">ncol</span>(right_joined))</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">nrow</span>(right_joined))</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of columns: %d&#39;</span>,<span class="fu">ncol</span>(right_joined))</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of rows: %d&#39;</span>,<span class="fu">nrow</span>(right_joined))</span>
 <span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(right_joined,<span class="dv">1</span>))</span></code></pre></div>
 
 </div>
@@ -798,8 +798,8 @@ class="btn dotto-main-dot-shape"
 ## [5] &quot;is_verified_heartroasters&quot;        
 ## [6] &quot;is_private_heartroasters&quot;         
 ## [7] &quot;is_business_account_heartroasters&quot;</code></pre>
-<pre><code>## [1] &quot;number of column: 7&quot;</code></pre>
-<pre><code>## [1] &quot;number of column: 1440&quot;</code></pre>
+<pre><code>## [1] &quot;number of columns: 7&quot;</code></pre>
+<pre><code>## [1] &quot;number of rows: 1440&quot;</code></pre>
 <pre><code>## Rows: 1
 ## Columns: 7
 ## $ username                          &lt;chr&gt; &quot;aylinlongoria28&quot;
@@ -898,8 +898,8 @@ class="btn dotto-main-dot-shape"
 <span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print property of result of joining two tables</span></span>
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(outer_joined)</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">ncol</span>(outer_joined))</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of column: %d&#39;</span>,<span class="fu">nrow</span>(outer_joined))</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of columns: %d&#39;</span>,<span class="fu">ncol</span>(outer_joined))</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">&#39;number of rows: %d&#39;</span>,<span class="fu">nrow</span>(outer_joined))</span>
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="co"># this show you that outer join combine right join and left join but we should subtract intersection of right join and left join</span></span>
 <span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">nrow</span>(right_joined) <span class="sc">+</span> <span class="fu">nrow</span>(left_joined) <span class="sc">-</span> <span class="fu">nrow</span>(inner_joined <span class="sc">==</span> <span class="fu">nrow</span>(outer_joined)))</span>
 <span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(<span class="fu">head</span>(outer_joined,<span class="dv">1</span>))</span></code></pre></div>
@@ -944,8 +944,8 @@ class="btn dotto-main-dot-shape"
 ## [5] &quot;is_verified_heartroasters&quot;        
 ## [6] &quot;is_private_heartroasters&quot;         
 ## [7] &quot;is_business_account_heartroasters&quot;</code></pre>
-<pre><code>## [1] &quot;number of column: 7&quot;</code></pre>
-<pre><code>## [1] &quot;number of column: 1951&quot;</code></pre>
+<pre><code>## [1] &quot;number of columns: 7&quot;</code></pre>
+<pre><code>## [1] &quot;number of rows: 1951&quot;</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre><code>## Rows: 1
 ## Columns: 7
