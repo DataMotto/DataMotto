@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+    
+    
+    <title>A Complete Guide to Plotting Categorical Variables</title>
+
+        <script src="a-complete-guide-to-plotting-categorical-variables_files/header-attrs-2.5/header-attrs.js"></script>
+        <script src="a-complete-guide-to-plotting-categorical-variables_files/jquery-1.11.3/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="a-complete-guide-to-plotting-categorical-variables_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="a-complete-guide-to-plotting-categorical-variables_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+        <script src="a-complete-guide-to-plotting-categorical-variables_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+        <script src="a-complete-guide-to-plotting-categorical-variables_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+        <script src="a-complete-guide-to-plotting-categorical-variables_files/navigation-1.1/tabsets.js"></script>
+        <link href="a-complete-guide-to-plotting-categorical-variables_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+        <script src="a-complete-guide-to-plotting-categorical-variables_files/anchor-sections-1.0/anchor-sections.js"></script>
+        
+          <meta property="og:title" content="A Complete Guide to Plotting Categorical Variables" />
+          <meta property="og:type" content="article">
+          <meta property="og:description" content="See how Seaborn & ggplot2 can make your plots looks nicer, convey more info, and require few lines of code.
+        " />
+          <meta property="og:url" content="https://datamotto.com/posts/dotto/D018-2021-07-20-a-complete-guide-to-plotting-categorical-variables/" />
+          <meta property="og:locale" content="en_US">
+          <meta property="og:site_name" content="Data Motto">
+          <meta property="og:image" content="https://datamotto.com/assets/img/logo.svg" />
+          
+        
+          <meta property="twitter:card" content="summary_large_image">
+          <meta property="twitter:title" content="A Complete Guide to Plotting Categorical Variables">
+          <meta property="twitter:description" content="See how Seaborn & ggplot2 can make your plots looks nicer, convey more info, and require few lines of code.
+        ">
+          <meta property="twitter:url" content="https://datamotto.com/posts/dotto/D018-2021-07-20-a-complete-guide-to-plotting-categorical-variables/">
+          <meta property="twitter:image" content="https://datamotto.com/assets/img/logo.svg">
+          
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WZMEMQM0Y2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WZMEMQM0Y2');
+</script>
+<link rel="shortcut icon" href="../../../assets/img/favicon/favicon-32x32.png" />
+<link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../../../assets/css/Font-Awesome-5-Brands.css" />
+<link rel="stylesheet" href="../../../assets/css/Font-Awesome-5-Free.css" />
+<link rel="stylesheet" href="../../../assets/css/icomoon.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata" />
+<link rel="stylesheet" href="../../../assets/fonts/fontawesome-all.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/font-awesome.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/ionicons.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/fontawesome5-overrides.min.css" />
+<link rel="stylesheet" href="../../../assets/css/Footer-Basic.css" />
+<link rel="stylesheet" href="../../../assets/css/home-cards.css" />
+<link rel="stylesheet" href="../../../assets/css/site.css" />
+<link rel="stylesheet" href="../../../assets/css/style.css" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" />
+<link rel="stylesheet" href="../../../assets/css/Team-Boxed.css" />
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="../../../assets/js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="../../../assets/highlight/styles/dracula.css" />
+<script src="../../../assets/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+<script src="../../../assets/js/vue.js"></script>
+
+</head>
+
+<body style="height: 100vh;">
+<div class="d-flex flex-column" id="all_page">
+
+<!-- Body Header ------------------------------>
+
+<section id="dotto-row-header">
+<div class="row dotto-header">
+
+<div class="col-1 d-flex justify-content-start align-items-center header-logo">
+<a href="/" class="text-muted"><img id="logo" src="../../../assets/img/logo.svg" /></a>
+</div>
+
+
+<div class="col-6 col-sm-7">
+<div class="header-title">
+<h6 class="dotto-header-maintitle">
+A Complete Guide to Plotting Categorical Variables
+</h6>
+<p class="dotto-header-description">
+See how Seaborn & ggplot2 can make your plots looks nicer, convey more info, and require few lines of code.
+
+</p>
+<p class="dotto-header-tags">
+<i class="fas fa-tags"></i>&nbsp; Visualizer
+</p>
+</div>
+</div>
+
+
+<div class="col-1 d-flex justify-content-center align-items-center">
+<button class="btn btn-outline-light btn-block header-like-btn" style="background-color:white" type="button">
+<!-- LikeBtn.com BEGIN -->
+<span class="likebtn-wrapper" data-theme="custom" data-btn_size="30" data-f_size="18" data-icon_size="30" data-icon_l="hrt13" data-icon_l_c="rgba(255,121,198,0.68)" data-icon_l_c_v="#ff79c6" data-icon_d_c_v="green" data-label_c="red" data-label_c_v="yellow" data-bg_c="#ffffff" data-bg_c_v="#ffffff" data-brdr_c="#ffffff" data-label_fs="r" data-i18n_like="  " data-identifier="3ae377cc-e98f-11eb-a334-4d42c553adcf" data-dislike_enabled="false" data-site_id="604e13966fd08bbf03672c5b" data-counter_clickable="true" data-popup_disabled="true" data-share_enabled="false" data-tooltip_enabled="false"></span>
+<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+<!-- LikeBtn.com END -->
+</button>
+</div>
+
+
+<div class="col-3 d-flex justify-content-end dotto-header-user">
+
+<div class="d-flex flex-column mx-3">
+<div class="row">
+<div @click="authorOneModal = true" type="button"
+class="col d-flex d-md-flex flex-row flex-shrink-1 justify-content-sm-end align-items-sm-center justify-content-md-end align-items-md-center dotto-header-user-icon">
+<img class="img-fluid user-image lang-color-r mx-auto" src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/MalekpourAvatar.jpg" />
+</div>
+</div>
+<h6 class="d-flex justify-content-end dotto-header-user-name mx-auto">
+Mohammad Hossein Malekpour
+</h6>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<div v-if="authorOneModal" class="modal">
+<!-- Modal content -->
+<div class="modal-content">
+<span @click="authorOneModal = false" class="close">&times;</span>
+<div class="card" style="max-width: 540px">
+<div class="row g-0">
+<div class="col-md-4">
+<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/MalekpourAvatar.jpg" class="img-fluid" />
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<ins><a href="https://www.linkedin.com/in/mohammadhossein-malekpour/" class="text-dark" target="_blank"><h3 class="card-title mb-0">Mohammad Hossein Malekpour</h3></a></ins>
+<div class="card-text fs-4 my-2">Data Scientist, DataMotto</div>
+<small class="card-text text-muted my-2 fs-4">Language: python, R</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div v-show="commentOpen" class="modal overflow-auto">
+<div class="modal-comment overflow-auto">
+<span @click="commentOpen = false" class="close">&times;</span>
+<div id="disqus_thread"></div>
+</div>
+</div>
+
+
+<section>
+<div id="dotto-row-info" class="d-flex">
+
+<div class="col-4 d-flex flex-grow-0 justify-content-start align-items-center align-items-xl-center">
+<div class="d-flex mx-4 justify-content-around align-items-center bg-social-icons">
+
+<div>
+<i type="button" @click="activeLang = 'r'"
+class="fab fa-r-project mx-2"
+:class="{'lang-color-r': activeLang === 'r'}" >
+  </i>
+</div>
+
+
+<div>
+<i type="button" @click="activeLang = 'python'"
+class="fab fa-python mx-2"
+:class="{'lang-color-python': activeLang === 'python'}" >
+  </i>
+</div>
+
+</div>
+</div>
+
+
+<div
+class="col-8 d-flex justify-content-end align-items-center" style="padding-right: 15px">
+<!--
+<div class="d-flex justify-content-center align-items-center align-content-center bg-social-icons"
+style="margin-right: 7px; width: 146.3px">
+<span class="d-flex justify-content-lg-center align-items-lg-center" style="width: 133.7px">
+<i class="fas fa-music" style="padding-right: 12px"> </i>
+</span>
+</div>
+---->
+<div class="d-flex justify-content-around align-items-center bg-social-icons">
+<a href="https://twitter.com/share?text=A Complete Guide to Plotting Categorical Variables&amp;url=https://datamotto.com/posts/Dotto/D018-2021-07-20-a-complete-guide-to-plotting-categorical-variables/index.html&amp;hashtags=rstats,Python" target="_blank" class="text-reset">
+<i class="fab fa-twitter"></i></a>
+<a href="https://www.linkedin.com/sharing/share-offsite/?url=https://datamotto.com/posts/Dotto/D018-2021-07-20-a-complete-guide-to-plotting-categorical-variables/index.html" target="_blank" class="text-reset">
+<i class="fa fa-linkedin-square"></i></a>
+</div>
+<div class="text-nowrap d-flex justify-content-around align-items-center bg-social-icons bg-bugs-icons">
+<a href="https://github.com/DataMotto/DataMotto/blob/master/posts/Dotto/D018-2021-07-20-a-complete-guide-to-plotting-categorical-variables/a-complete-guide-to-plotting-categorical-variables.Rmd" target="_blank" class="text-reset">
+<i class="fab fa-github header-social-icon"></i></a>
+<a href="https://github.com/DataMotto/DataMotto/issues/new?assignees=&labels=bug&template=bug_report.md&title=" target="_blank" class="text-reset">
+<i class="fas fa-bug header-social-icon"></i></a>
+</div>
+</div>
+
+</div>
+</section>
+
+
+
+
+<section v-if="activeDotto === '1'"
+class="text-left d-flex flex-row flex-grow-1 flex-wrap" id="dotto-row-main">
+<div class="col-12 col-lg-1" id="dotto-main-dots">
+
+<button type="button" @click="activeMotto = '1'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '1', 'btn-outline-light': activeMotto !== '1'}">1</button>
+
+
+<button type="button" @click="activeMotto = '2'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '2', 'btn-outline-light': activeMotto !== '2'}">2</button>
+
+
+<button type="button" @click="activeMotto = '3'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '3', 'btn-outline-light': activeMotto !== '3'}">3</button>
+
+
+<button type="button" @click="activeMotto = '4'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '4', 'btn-outline-light': activeMotto !== '4'}">4</button>
+
+
+<button type="button" @click="activeMotto = '5'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '5', 'btn-outline-light': activeMotto !== '5'}">5</button>
+
+
+<button type="button" @click="activeMotto = '6'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '6', 'btn-outline-light': activeMotto !== '6'}">6</button>
+
+
+<button type="button" @click="activeMotto = '7'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '7', 'btn-outline-light': activeMotto !== '7'}">7</button>
+
+
+<button type="button" @click="activeMotto = '8'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '8', 'btn-outline-light': activeMotto !== '8'}">8</button>
+
+
+<button type="button" @click="activeMotto = '9'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '9', 'btn-outline-light': activeMotto !== '9'}">9</button>
+
+</div>
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '1'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+In this Dotto we will use one of Seaborn’s conveniently available datasets about the Titanic, which I’m sure many readers have seen before. Seaborn has quite a few datasets ready to be loaded into Python to practice with; they are great for practicing data processing, exploration, and basic machine learning techniques. This data set is great because it has a decent number of entries — almost 900 — while also having an interesting story to dig into. There are lots of questions to ask and relationships between variables to explore making it a great example data set. Most critical for this article is that there is also a good mix of numerical and categorical variables to explore.</p>
+<p>In this Dotto we will see:</p>
+<ul>
+<li><p><strong>Categorical Distribution Plots</strong></p>
+<p>We have two different kinds of categorical distribution plots, box plots and violin plots. These kinds of plots allow us to choose a numerical variable, like age, and plot the distribution of age for each category in a selected categorical variable.</p></li>
+<li><p><strong>Categorical Estimate Plot</strong></p></li>
+<li><p><strong>Categorical Scatter Plots</strong></p>
+<p>Both strip plots and swarm plots are essentially scatter plots where one variable is categorical. I like to use them as additions to other kinds of plots, which we’ll discuss as they are useful for quickly visualizing the number of data points in a group. 
+</p>
+</div>
+ 
+</p></li>
+</ul>
+<p>
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> sns.load_dataset(<span class="st">&#39;titanic&#39;</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>titanic.info()</span></code></pre></div>
+
+</div>
+ 
+
+<p>
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## C:\Users\ASUS\Documents\R\win-library\4.0\reticulate\python\rpytools\call.py:13: MatplotlibDeprecationWarning: The &#39;warn&#39; parameter of use() is deprecated since Matplotlib 3.1 and will be removed in 3.3.  If any parameter follows &#39;warn&#39;, they should be pass as keyword, not positionally.
+##   res = rpycall.call_r_function(f, *args, **kwargs)</code></pre>
+<pre><code>## &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+## RangeIndex: 891 entries, 0 to 890
+## Data columns (total 15 columns):
+## survived       891 non-null int64
+## pclass         891 non-null int64
+## sex            891 non-null object
+## age            714 non-null float64
+## sibsp          891 non-null int64
+## parch          891 non-null int64
+## fare           891 non-null float64
+## embarked       889 non-null object
+## class          891 non-null category
+## who            891 non-null object
+## adult_male     891 non-null bool
+## deck           203 non-null category
+## embark_town    889 non-null object
+## alive          891 non-null object
+## alone          891 non-null bool
+## dtypes: bool(2), category(2), float64(2), int64(4), object(5)
+## memory usage: 80.6+ KB</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '2'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+# Box Plots</p>
+<p>Many of us have probably made quite a few box plots over the years. They are an easy and effective way to visualize groups of numerical data through their quartiles. Seaborn makes creating attractive box plots simple and allows us to easily compare an extra dimension with the hue argument that appears in many Seaborn functions.</p>
+<p><strong>Basic Boxplot</strong></p>
+<p>Lets take a look at distribution of age by passenger class. We can see that age tends to decrease as you go down in passenger class. That makes sense, young people tend to travel on a budget.</p>
+<p><strong>Adding Hue</strong></p>
+<p>Like many other plots available in Seaborn, box plots can take an added <code>hue</code> argument to add another variable for comparison. Adding the hue shows us that regardless of class the age of passengers that survived was generally lower than those who passed away. Having the <code>hue</code> for additional comparison allows this box plot to be quite information dense. The more complex the plot gets the longer it will take for viewers to comprehend it, but it is nice to have the option when interesting insights are more easily shown with an added dimension. 
+</p>
+</div>
+ 
+</p>
+<p>
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb4"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Boxplot</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Age by Passenger Class, Titanic&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;survived&#39;</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+<p>
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x00000256438749B0&gt;</code></pre>
+<pre><code>## Text(0.5, 1.0, &#39;Age by Passenger Class, Titanic&#39;)</code></pre>
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x00000256450FDCF8&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+</div>
+ 
+</div>
+</div>
+</div>
+</p>
+<!-- Dot 3, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '3'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+# Violin Plots</p>
+<p>Violin plots are not very frequently used but I have found them to be useful on occasion, and they are an interesting change from more popular options. They plot a vertical kernel density plot for each category and a small box plot to summarize important statistics.</p>
+<p>While I like this plot, I think it is easier to compare the genders with slightly different formatting: When we split the violin on the hue it is a lot easier to see the differences in each KDE. However, the IQR stats aren’t split by the sex anymore; instead they apply to the entire class. So there are trade-offs to styling your plot in certain ways. 
+</p>
+</div>
+ 
+</p>
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb8"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Violinplot</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.figure</span>(<span class="at">figsize=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sns.violinplot</span>(<span class="at">x=</span><span class="st">&#39;class&#39;</span>,<span class="at">y=</span><span class="st">&quot;age&quot;</span>,<span class="at">data=</span>titanic, <span class="at">hue=</span><span class="st">&#39;sex&#39;</span>, <span class="at">palette=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.title</span>(<span class="st">&quot;Violin Plot of Age by Class, Separated by Sex&quot;</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Split</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.figure</span>(<span class="at">figsize=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sns.violinplot</span>(<span class="at">x=</span><span class="st">&#39;class&#39;</span>, <span class="at">y=</span><span class="st">&quot;age&quot;</span>, <span class="at">data=</span>titanic, <span class="at">hue=</span><span class="st">&#39;sex&#39;</span>, <span class="at">split=</span><span class="st">&#39;True&#39;</span>, <span class="at">palette=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.title</span>(<span class="st">&quot;Violin Plot of Age by Class, Separated by Sex&quot;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+</div>
+ 
+</p>
+<p>
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x00000256451392B0&gt;</code></pre>
+<pre><code>## Text(0.5, 1.0, &#39;Violin Plot of Age by Class, Separated by Sex&#39;)</code></pre>
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002564512D630&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+</div>
+ 
+</div>
+</div>
+</div>
+</p>
+<!-- Dot 4, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '4'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+# Boxen Plot</p>
+<p>The boxen plot, otherwise known as a Letter-value plot, is a box plot meant for large data sets (n &gt; 10,000). It is similar to a traditional box plot, however it essentially just plots more quantiles. With more quantiles, we can see more info about the distribution shape beyond the central 50% of the data; this extra detail is especially present in the tails, where box plots tend to give limited information.</p>
+<p>Just in case there still isn’t enough going on here for you, we can also add a <code>hue</code> to a boxen plot! We can see that the boxen plot gives us much more information beyond the central 50% of the data. However, keep in mind that boxen plots are meant for larger data sets with entries between 10,000 and 100,000. This data set of under 1,000 entries is definitely not ideal. Here is a <a href="(https://vita.had.co.nz/papers/letter-value-plot.html)">link</a> to the paper where boxen plots were created that explains them very well. 
+</p>
+</div>
+ 
+</p>
+<p>
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb12"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Boxenplot</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sns.boxenplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Distribution of Age by Passenger Class&quot;</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>sns.boxenplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;survived&#39;</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Distribution of Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+<p>
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x0000025645D36320&gt;</code></pre>
+<pre><code>## Text(0.5, 1.0, &#39;Distribution of Age by Passenger Class&#39;)</code></pre>
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x00000256454DCB00&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+</div>
+ 
+</div>
+</div>
+</div>
+</p>
+<!-- Dot 5, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '5'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+# Bar Plot</p>
+<p>Bar plots are classic. You get an estimate of central tendency for a numerical variable for each class on the x axis. Say we were interested in knowing the average fare price of passengers that embarked from different towns.</p>
+<p>Seaborn will take the mean as default, but you can use other measures of central tendency as well. There is a noticeable difference between Cherbourg and the other two, let’s separate the bars by class to see who was boarding in each town.</p>
+<p>Now we can see that the average fare price in Cherbourg was so high due to some very expensive first class tickets. The large error bar on the fare price in first class from Cherbourg is also interesting; that could mean there is a lot of separation between some very high price outlier tickets and the rest. 
+</p>
+</div>
+ 
+</p>
+<p>
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb16"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Barplot</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, y<span class="op">=</span><span class="st">&#39;fare&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Fare of Passenger by Embarked Town&quot;</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, y<span class="op">=</span><span class="st">&#39;fare&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;class&#39;</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Fare of Passenger by Embarked Town, Divided by Class&quot;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+<p>
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002564551B048&gt;</code></pre>
+<pre><code>## Text(0.5, 1.0, &#39;Fare of Passenger by Embarked Town&#39;)</code></pre>
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x00000256457FFEF0&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+</div>
+ 
+</div>
+</div>
+</div>
+</p>
+<!-- Dot 6, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '6'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+# Point Plot</p>
+<p>Point plots convey the same information as a bar plot with a different style. They can be good for overlaying with different plots since they have a smaller footprint in the space. 
+</p>
+</div>
+ 
+</p>
+<p>
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb20"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Pointplot</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>sns.pointplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>,y<span class="op">=</span><span class="st">&#39;fare&#39;</span>,data<span class="op">=</span>titanic)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Average Fare Price by Embarked Town&quot;</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>sns.pointplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, y<span class="op">=</span><span class="st">&#39;fare&#39;</span>, data<span class="op">=</span>titanic, hue<span class="op">=</span><span class="st">&#39;class&#39;</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Average Fare Price by Embarked Town, Separated by Sex&quot;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+<p>
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x0000025645885EB8&gt;</code></pre>
+<pre><code>## Text(0.5, 1.0, &#39;Average Fare Price by Embarked Town&#39;)</code></pre>
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x0000025645851E10&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+</div>
+ 
+</div>
+</div>
+</div>
+ <!-- Dot 7, lang: r ------------------------------------------------></p>
+<p>
+<div v-if="activeMotto === '7'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+# Count Plot</p>
+<p>Count Plots are essentially histograms across a categorical variable. They take all the same arguments as bar plots in Seaborn, which helps keep things simple. 
+</p>
+</div>
+ 
+</p>
+<p>
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb24"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Countplot</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Count of Passengers that Embarked in Each City&quot;</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;sex&#39;</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Count of Passengers that Embarked in Each City, Separated by Sex&quot;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+<p>
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002564590DAC8&gt;</code></pre>
+<pre><code>## Text(0.5, 1.0, &#39;Count of Passengers that Embarked in Each City&#39;)</code></pre>
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x0000025645923D68&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+</div>
+ 
+</div>
+</div>
+</div>
+</p>
+<!-- Dot 8, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '8'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+# Strip Plot</p>
+<p>Draw a scatterplot where one variable is categorical. A strip plot can be drawn on its own, but it is also a good complement to a box or violin plot in cases where you want to show all observations along with some representation of the underlying distribution.</p>
+<p>I don’t love the way strip plots look when you have a lot of data points. But swarm plots might make this a little more useful. Strip plots can look great with less data points and they can convey really interesting attributes of your data since they don’t hide details behind aggregation. 
+</p>
+</div>
+ 
+</p>
+<p>
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb28"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>sns.stripplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, jitter<span class="op">=</span><span class="va">True</span>, hue<span class="op">=</span><span class="st">&#39;alive&#39;</span>, dodge<span class="op">=</span><span class="va">True</span>, palette<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+<p>
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+</div>
+ 
+</div>
+</div>
+</div>
+</p>
+<!-- Dot 9, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '9'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+# Swarm Plot</p>
+<p>Swarm plots are fantastic because they offer an easy way to show the individual data points in a distribution. Instead of a big blob like the strip plot, the swarm plot simply adjusts the points along the x-axis. Although they also don’t scale well with tons of values, they offer more organized insight.</p>
+<p>Here we can more easily see where the dense age groups are rather than the difficult to interpret strip plot above. 
+</p>
+</div>
+ 
+</p>
+<p>
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb29"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>sns.swarmplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, hue<span class="op">=</span><span class="st">&#39;alive&#39;</span>, dodge<span class="op">=</span><span class="va">True</span>, palette<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+<p>
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+</div>
+ 
+</p>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x00000256457FF0B8&gt;
+## 
+## C:\Users\ASUS\AppData\Local\R-MINI~1\envs\R-RETI~1\lib\site-packages\seaborn\categorical.py:1296: UserWarning: 10.2% of the points cannot be placed; you may want to decrease the size of the markers or use stripplot.
+##   warnings.warn(msg, UserWarning)</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+</div>
+ 
+</div>
+</div>
+</div>
+</p>
+
+</section>
+<!-- Body Footer ----------------------------------->
+
+<section id="dotto-footer">
+<div class="col-12 col-md-9">
+<div class="d-flex" id="dotto-row-lines">
+<img src="../../../assets/img/Dotto.svg" width="35" height="35" type="button" class=" ml-5 icon d-sm-flex justify-content-sm-center dotto-lines-icons">
+</i>
+</div>
+</div>
+<div class="col-12 col-md-3 pt-2">
+<div class="alert alert-danger dotto-alert-comment text-center" role="alert">
+<span type="button" @click="commentOpen = true" class="footer-disqus-text">
+<strong><i class="fas fa-comments fa-1x" style="font-size: 21px"> </i>
+<span class="disqus-comment-count" data-disqus-url="https://datamotto.com/posts/Dotto/D018-2021-07-20-a-complete-guide-to-plotting-categorical-variables/index.html" data-disqus-identifier="3ae377cc-e98f-11eb-a334-4d42c553adcf"></span>
+</strong>
+<span> for this Dotto.</span>
+<span> Write yours here!</span>
+</span>
+
+<script>
+var disqus_config = function () {
+  this.page.url = "https://datamotto.com/posts/Dotto/D018-2021-07-20-a-complete-guide-to-plotting-categorical-variables/index.html";
+  this.page.identifier = "3ae377cc-e98f-11eb-a334-4d42c553adcf";
+};
+
+(function() {
+var d = document, s = d.createElement("script");
+s.src = "https://datamotto-com.disqus.com/embed.js";
+s.setAttribute("data-timestamp", +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//datamotto-com.disqus.com/count.js" async></script>
+
+</div>
+</div>
+</section>
+
+
+</div>
+<!-- Don't indent these lines or it will mess pre blocks indentation -->
+<script src="../../../assets/js/post.js"></script>
+<script src="../../../assets/js/jquery.min.js"></script>
+<script src="../../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../assets/js/bs-init.js"></script>
+<script src="../../../assets/js/carts.js"></script>
+<script src="../../../assets/js/Index_page.js"></script>
+<script src="../../../assets/js/jquery-3.5.1.min.js"></script>
+</body>
+</html>
