@@ -31,7 +31,21 @@ DataMotto::use_Dotto()
 <!-- Dot 1, lang: r ------------------------------------------------>
 
 ```{block, Dot = 1, part = "Instruction", lang = "r"}
+In this Dotto we will use Titanic dataset. This dataset is great because it has a decent number of entries — almost 900 — while also having an interesting story to dig into. There are lots of questions to ask and relationships between variables to explore making it a great example data set. Most critical for this article is that there is also a good mix of numerical and categorical variables to explore.
 
+
+In this Dotto we will see:
+
+- **Categorical Distribution Plots**
+
+  We have two different kinds of categorical distribution plots, box plots and violin plots. These kinds of plots allow us to choose a numerical variable, like age, and plot the distribution of age for each category in a selected categorical variable.
+
+- **Categorical Estimate Plot**
+
+- **Categorical Scatter Plots**
+
+  Both strip plots and swarm plots are essentially scatter plots where one variable is categorical. I like to use them as additions to other kinds of plots, which we’ll discuss as they are useful for quickly visualizing the number of data points in a group.
+  
 ```
 
 ```{block, Dot = 1, part = "Instruction", lang = "python"}
@@ -53,6 +67,20 @@ In this Dotto we will see:
 ```
 
 ```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+# There are a few lines of code that you'll need to run at the top of every notebook to set up your coding environment.
+library(readr)   # Read tabular data.
+library(dplyr)   # General data frame manipulation.
+library(ggplot2) # Flexible plotting.
+
+
+# Path of the file to read
+auto_filepath <- "data/titanic.csv"
+
+# Read the file into a variable titanic.csv
+titanic <- read.csv(auto_filepath)
+
+# Print the five random rows of the data
+knitr::kable(sample_n(titanic, 5))
 
 ```
 
@@ -69,6 +97,20 @@ titanic.info()
 ```
 
 ```{r, Dot = 1, part = "Result", echo = F, eval = T}
+# There are a few lines of code that you'll need to run at the top of every notebook to set up your coding environment.
+library(readr)   # Read tabular data.
+library(dplyr)   # General data frame manipulation.
+library(ggplot2) # Flexible plotting.
+
+
+# Path of the file to read
+auto_filepath <- "data/titanic.csv"
+
+# Read the file into a variable titanic.csv
+titanic <- read.csv(auto_filepath)
+
+# Print the five random rows of the data
+knitr::kable(sample_n(titanic, 5))
 
 ```
 
@@ -87,6 +129,17 @@ titanic.info()
 <!-- Dot 2, lang: r ------------------------------------------------>
 
 ```{block, Dot = 2, part = "Instruction", lang = "r"}
+# Box Plots
+
+Many of us have probably made quite a few box plots over the years. They are an easy and effective way to visualize groups of numerical data through their quartiles. Seaborn makes creating attractive box plots simple and allows us to easily compare an extra dimension with the hue argument that appears in many Seaborn functions.
+
+**Basic Boxplot**
+
+Lets take a look at distribution of age by passenger class. We can see that age tends to decrease as you go down in passenger class. That makes sense, young people tend to travel on a budget.
+
+**Adding colour**
+
+Like many other plots available in ggplot, geom_boxplot can take an added `colour` argument to add another variable for comparison. Adding the hue shows us that regardless of class the age of passengers that survived was generally lower than those who passed away. Having the `colour` for additional comparison allows this box plot to be quite information dense. The more complex the plot gets the longer it will take for viewers to comprehend it, but it is nice to have the option when interesting insights are more easily shown with an added dimension.
 
 ```
 
@@ -106,6 +159,16 @@ Like many other plots available in Seaborn, box plots can take an added `hue` ar
 ```
 
 ```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+# Basic boxplot
+ggplot(titanic, 
+       aes(class, age)) + 
+  geom_boxplot()
+
+# Adding colour
+ggplot(titanic, 
+       aes(class, age)) + 
+  geom_boxplot(aes(colour = factor(survived)))
+
 
 ```
 
@@ -123,6 +186,15 @@ plt.title("Age by Passenger Class, Separated by Survival")
 ```
 
 ```{r, Dot = 2, part = "Result", echo = F, eval = T}
+# Basic boxplot
+ggplot(titanic, 
+       aes(class, age)) + 
+  geom_boxplot()
+
+# Adding colour
+ggplot(titanic, 
+       aes(class, age)) + 
+  geom_boxplot(aes(colour = factor(survived)))
 
 ```
 
@@ -142,6 +214,9 @@ plt.title("Age by Passenger Class, Separated by Survival")
 <!-- Dot 3, lang: r ------------------------------------------------>
 
 ```{block, Dot = 3, part = "Instruction", lang = "r"}
+# Violin Plots
+
+Violin plots are not very frequently used but I have found them to be useful on occasion, and they are an interesting change from more popular options. They plot a vertical kernel density plot for each category and a small box plot to summarize important statistics.
 
 ```
 
@@ -155,6 +230,21 @@ While I like this plot, I think it is easier to compare the genders with slightl
 ```
 
 ```{r, Dot = 3, part = "Code", echo = T, eval = F, }
+# Basic violinplot
+ggplot(titanic, 
+       aes(class, age)) + 
+  geom_violin() +
+  ggtitle("Violin Plot of Age by Class")
+
+# Adding colour
+ggplot(titanic, 
+       aes(class, age)) + 
+  geom_violin(aes(colour = factor(sex))) +
+  ggtitle("Violin Plot of Age by Class, Separated by Sex")
+
+```
+
+```{python, Dot = 3, part = "Code", echo = T, eval = F, }
 # Basic Violinplot
 plt.figure(figsize=(10,6))
 sns.violinplot(x='class',y="age",data=titanic, hue='sex', palette='rainbow')
@@ -167,11 +257,18 @@ plt.title("Violin Plot of Age by Class, Separated by Sex")
 
 ```
 
-```{python, Dot = 3, part = "Code", echo = T, eval = F, }
-
-```
-
 ```{r, Dot = 3, part = "Result", echo = F, eval = T}
+# Basic violinplot
+ggplot(titanic, 
+       aes(class, age)) + 
+  geom_violin() +
+  ggtitle("Violin Plot of Age by Class")
+
+# Adding colour
+ggplot(titanic, 
+       aes(class, age)) + 
+  geom_violin(aes(colour = factor(sex))) +
+  ggtitle("Violin Plot of Age by Class, Separated by Sex")
 
 ```
 
