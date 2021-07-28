@@ -486,6 +486,194 @@ export default {
     "cover_image": {},
     "slug": ["introduction-to-filter-dataframe-rows-"],
     "output": ["DataMotto::Dotto"]
+  },
+  "D011-2021-07-28-descriptive-missing-values": {
+    "file_name": ["descriptive-missing-values"],
+    "dir_name": ["D011-2021-07-28-descriptive-missing-values"],
+    "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+    "link": ["posts/Dotto/D011-2021-07-28-descriptive-missing-values/index.html"],
+    "base_url": ["https://datamotto.com"],
+    "social_networks_datamotto": {
+      "twitter": ["https://twitter.com/DataMotto"],
+      "linkedin": ["https://www.linkedin.com/company/datamotto"]
+    },
+    "dotto_number": [11],
+    "dotto_label": ["D011"],
+    "dotto_id": ["21b9116a-eff4-11eb-9c3d-acbc32baed85"],
+    "title": ["Descriptive Missing values"],
+    "description": ["In many real-world datasets, we may miss some value in some rows or columns. We should know how to handle these missings in many kinds of research and decide if we should execute them or impute them.\n"],
+    "author": [
+      {
+        "name": ["Mahyar Sharifi"],
+        "occupation": ["Internship"],
+        "affiliation": ["DataMotto"],
+        "url": ["https://www.linkedin.com/in/mahyar-sharifi"],
+        "img": ["Mahyar.jpeg"],
+        "lang": ["python", "r"],
+        "profile_img_for_Dotto": ["./descriptive-missing-values_files/figure-html/Mahyar.jpeg"],
+        "profile_img": ["./posts/Dotto/D011-2021-07-28-descriptive-missing-values/descriptive-missing-values_files/figure-html/Mahyar.jpeg"]
+      }
+    ],
+    "tech": [
+      {
+        "lang": ["r"],
+        "pkgs": ["dyplyr", "palmerpenguins"]
+      },
+      {
+        "lang": ["python"],
+        "pkgs": ["pandas", "seaborn"]
+      }
+    ],
+    "date": {
+      "created": ["2021-07-22"],
+      "last_updated": ["2021-07-22"]
+    },
+    "categories": ["Wrangling"],
+    "applications": ["General"],
+    "cover_image": ["Mahyar.jpg"],
+    "slug": ["descriptive-missing-values"],
+    "output": ["DataMotto::Dotto"]
+  },
+  "D012-2021-07-28-a-complete-guide-to-plotting-categorical-variables": {
+    "file_name": ["a-complete-guide-to-plotting-categorical-variables"],
+    "dir_name": ["D012-2021-07-28-a-complete-guide-to-plotting-categorical-variables"],
+    "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+    "link": ["posts/Dotto/D012-2021-07-28-a-complete-guide-to-plotting-categorical-variables/index.html"],
+    "base_url": ["https://datamotto.com"],
+    "social_networks_datamotto": {
+      "twitter": ["https://twitter.com/DataMotto"],
+      "linkedin": ["https://www.linkedin.com/company/datamotto"]
+    },
+    "dotto_number": [12],
+    "dotto_label": ["D012"],
+    "dotto_id": ["0bf23734-eff5-11eb-9c3d-acbc32baed85"],
+    "title": ["A Complete Guide to Plotting Categorical Variables"],
+    "description": ["See how Seaborn & ggplot2 can make your plots looks nicer, convey more info, and require few lines of code.\n"],
+    "author": [
+      {
+        "name": ["Mohammad Hossein Malekpour"],
+        "occupation": ["Data Scientist"],
+        "affiliation": ["DataMotto"],
+        "url": ["https://www.linkedin.com/in/mohammadhossein-malekpour/"],
+        "img": ["MalekpourAvatar.jpg"],
+        "lang": ["python", "R"],
+        "profile_img_for_Dotto": ["../../../assets/img/dotto.png"],
+        "profile_img": ["./posts/Dotto/D012-2021-07-28-a-complete-guide-to-plotting-categorical-variables./../../assets/img/dotto.png"]
+      }
+    ],
+    "tech": [
+      {
+        "lang": ["r"],
+        "pkgs": ["ggplot2", "dplyr"]
+      },
+      {
+        "lang": ["python"],
+        "pkgs": ["seaborn", "pandas"]
+      }
+    ],
+    "date": {
+      "created": ["2021-07-20"],
+      "last_updated": ["2021-07-20"]
+    },
+    "categories": ["Visualizer"],
+    "applications": ["Other"],
+    "cover_image": {},
+    "slug": ["a-complete-guide-to-plotting-categorical-variables"],
+    "output": ["DataMotto::Dotto"]
+  },
+  "D013-2021-07-28-how-to-work-with-api-data-": {
+    "file_name": ["how-to-work-with-api-data-"],
+    "dir_name": ["D013-2021-07-28-how-to-work-with-api-data-"],
+    "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+    "link": ["posts/Dotto/D013-2021-07-28-how-to-work-with-api-data-/index.html"],
+    "base_url": ["https://datamotto.com"],
+    "social_networks_datamotto": {
+      "twitter": ["https://twitter.com/DataMotto"],
+      "linkedin": ["https://www.linkedin.com/company/datamotto"]
+    },
+    "dotto_number": [13],
+    "dotto_label": ["D013"],
+    "dotto_id": ["ad718498-eff5-11eb-9c3d-acbc32baed85"],
+    "title": ["How to work with api data?"],
+    "description": ["Work with common type of API Rest API and GraphQL API.\n"],
+    "author": [
+      {
+        "name": ["Mohsen Jalali"],
+        "occupation": ["Data Scientist"],
+        "affiliation": ["DataMotto"],
+        "url": ["mohsenjalali.ir"],
+        "img": ["Mohsen-Jalali.jpeg"],
+        "lang": ["Python"],
+        "profile_img_for_Dotto": ["./how-to-work-with-api-data-_files/figure-html/Mohsen-Jalali.jpeg"],
+        "profile_img": ["./posts/Dotto/D013-2021-07-28-how-to-work-with-api-data-/how-to-work-with-api-data-_files/figure-html/Mohsen-Jalali.jpeg"]
+      }
+    ],
+    "tech": [
+      {
+        "lang": ["r"],
+        "pkgs": ["httr", "dplyr", "jsonlite"]
+      },
+      {
+        "lang": ["python"],
+        "pkgs": ["request", "pandas"]
+      }
+    ],
+    "date": {
+      "created": ["2021-07-22"],
+      "last_updated": ["2021-07-22"]
+    },
+    "categories": ["Importing"],
+    "applications": ["General"],
+    "cover_image": {},
+    "slug": ["how-to-work-with-api-data-"],
+    "output": ["DataMotto::Dotto"]
+  },
+  "D014-2021-07-28-grouping-and-aggregating-data": {
+    "file_name": ["grouping-and-aggregating-data"],
+    "dir_name": ["D014-2021-07-28-grouping-and-aggregating-data"],
+    "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+    "link": ["posts/Dotto/D014-2021-07-28-grouping-and-aggregating-data/index.html"],
+    "base_url": ["https://datamotto.com"],
+    "social_networks_datamotto": {
+      "twitter": ["https://twitter.com/DataMotto"],
+      "linkedin": ["https://www.linkedin.com/company/datamotto"]
+    },
+    "dotto_number": [14],
+    "dotto_label": ["D014"],
+    "dotto_id": ["53814dd6-eff7-11eb-bf87-acbc32baed85"],
+    "title": ["Grouping and aggregating data"],
+    "description": ["See how group by can make data analysis  efficient\n"],
+    "author": [
+      {
+        "name": ["Parnian Jahangiri rad"],
+        "occupation": ["Data science intern"],
+        "affiliation": ["DataMotto"],
+        "url": ["https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4"],
+        "img": ["Parnian-Jahangiri-Rad.jpeg"],
+        "lang": ["r , python"],
+        "profile_img_for_Dotto": ["./grouping-and-aggregating-data_files/figure-html/Parnian-Jahangiri-Rad.jpeg"],
+        "profile_img": ["./posts/Dotto/D014-2021-07-28-grouping-and-aggregating-data/grouping-and-aggregating-data_files/figure-html/Parnian-Jahangiri-Rad.jpeg"]
+      }
+    ],
+    "tech": [
+      {
+        "lang": ["r"],
+        "pkgs": ["dplyr"]
+      },
+      {
+        "lang": ["python"],
+        "pkgs": ["pandas"]
+      }
+    ],
+    "date": {
+      "created": ["2021-07-22"],
+      "last_updated": ["2021-07-22"]
+    },
+    "categories": ["Wrangling"],
+    "applications": ["General"],
+    "cover_image": {},
+    "slug": ["grouping-and-aggregating-data"],
+    "output": ["DataMotto::Dotto"]
   }
 }
 

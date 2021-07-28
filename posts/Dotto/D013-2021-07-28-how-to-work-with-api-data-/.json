@@ -1,0 +1,47 @@
+{
+  "file_name": ["how-to-work-with-api-data-"],
+  "dir_name": ["D013-2021-07-28-how-to-work-with-api-data-"],
+  "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+  "link": ["posts/Dotto/D013-2021-07-28-how-to-work-with-api-data-/index.html"],
+  "base_url": ["https://datamotto.com"],
+  "social_networks_datamotto": {
+    "twitter": ["https://twitter.com/DataMotto"],
+    "linkedin": ["https://www.linkedin.com/company/datamotto"]
+  },
+  "dotto_number": [13],
+  "dotto_label": ["D013"],
+  "dotto_id": ["ad718498-eff5-11eb-9c3d-acbc32baed85"],
+  "title": ["How to work with api data?"],
+  "description": ["Work with common type of API Rest API and GraphQL API.\n"],
+  "author": [
+    {
+      "name": ["Mohsen Jalali"],
+      "occupation": ["Data Scientist"],
+      "affiliation": ["DataMotto"],
+      "url": ["mohsenjalali.ir"],
+      "img": ["Mohsen-Jalali.jpeg"],
+      "lang": ["Python"],
+      "profile_img_for_Dotto": ["./how-to-work-with-api-data-_files/figure-html/Mohsen-Jalali.jpeg"],
+      "profile_img": ["./posts/Dotto/D013-2021-07-28-how-to-work-with-api-data-/how-to-work-with-api-data-_files/figure-html/Mohsen-Jalali.jpeg"]
+    }
+  ],
+  "tech": [
+    {
+      "lang": ["r"],
+      "pkgs": ["httr", "dplyr", "jsonlite"]
+    },
+    {
+      "lang": ["python"],
+      "pkgs": ["request", "pandas"]
+    }
+  ],
+  "date": {
+    "created": ["2021-07-22"],
+    "last_updated": ["2021-07-22"]
+  },
+  "categories": ["Importing"],
+  "applications": ["General"],
+  "cover_image": {},
+  "slug": ["how-to-work-with-api-data-"],
+  "output": ["DataMotto::Dotto"]
+}

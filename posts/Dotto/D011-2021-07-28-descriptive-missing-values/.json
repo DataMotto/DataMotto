@@ -1,0 +1,47 @@
+{
+  "file_name": ["descriptive-missing-values"],
+  "dir_name": ["D011-2021-07-28-descriptive-missing-values"],
+  "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+  "link": ["posts/Dotto/D011-2021-07-28-descriptive-missing-values/index.html"],
+  "base_url": ["https://datamotto.com"],
+  "social_networks_datamotto": {
+    "twitter": ["https://twitter.com/DataMotto"],
+    "linkedin": ["https://www.linkedin.com/company/datamotto"]
+  },
+  "dotto_number": [11],
+  "dotto_label": ["D011"],
+  "dotto_id": ["21b9116a-eff4-11eb-9c3d-acbc32baed85"],
+  "title": ["Descriptive Missing values"],
+  "description": ["In many real-world datasets, we may miss some value in some rows or columns. We should know how to handle these missings in many kinds of research and decide if we should execute them or impute them.\n"],
+  "author": [
+    {
+      "name": ["Mahyar Sharifi"],
+      "occupation": ["Internship"],
+      "affiliation": ["DataMotto"],
+      "url": ["https://www.linkedin.com/in/mahyar-sharifi"],
+      "img": ["Mahyar.jpeg"],
+      "lang": ["python", "r"],
+      "profile_img_for_Dotto": ["./descriptive-missing-values_files/figure-html/Mahyar.jpeg"],
+      "profile_img": ["./posts/Dotto/D011-2021-07-28-descriptive-missing-values/descriptive-missing-values_files/figure-html/Mahyar.jpeg"]
+    }
+  ],
+  "tech": [
+    {
+      "lang": ["r"],
+      "pkgs": ["dyplyr", "palmerpenguins"]
+    },
+    {
+      "lang": ["python"],
+      "pkgs": ["pandas", "seaborn"]
+    }
+  ],
+  "date": {
+    "created": ["2021-07-22"],
+    "last_updated": ["2021-07-22"]
+  },
+  "categories": ["Wrangling"],
+  "applications": ["General"],
+  "cover_image": ["Mahyar.jpg"],
+  "slug": ["descriptive-missing-values"],
+  "output": ["DataMotto::Dotto"]
+}

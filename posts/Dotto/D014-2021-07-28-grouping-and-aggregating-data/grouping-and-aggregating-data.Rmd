@@ -1,0 +1,477 @@
+---
+title: "Grouping and aggregating data"
+description: |
+  See how group by can make data analysis  efficient
+author:
+  - name: "Parnian Jahangiri rad"
+    occupation: "Data science intern"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4"
+    img: "Parnian-Jahangiri-Rad.jpeg"
+    lang: "r , python"
+tech:
+  - lang: r
+    pkgs: ["dplyr"]
+  - lang: python
+    pkgs: ["pandas"]
+date:
+  created: "2021-07-22"
+  last_updated: "2021-07-22"
+categories: ["Wrangling"]
+applications: ["General"]
+cover_image: NULL
+slug: "grouping-and-aggregating-data"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+In this Dotto,we are using `titanic` dataset that can be downloaded from [here](https://www.kaggle.com/c/titanic/data?select=train.csv) .
+This dataset contains 891 rows and 12 columns.
+```
+<!-- Dot 1, lang: python ------------------------------------------------>
+```{block, Dot = 1, part = "Instruction", lang = "python"}
+In this Dotto,we are using `titanic` dataset that can be downloaded from [here](https://www.kaggle.com/c/titanic/data?select=train.csv) .
+This dataset contains 891 rows and 12 columns.
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+library(dplyr)
+library(janitor)
+library(kableExtra)
+raw_titanic <- read.csv("Titanic_train.csv")
+titanic_data <- raw_titanic %>%
+  clean_names()
+```
+
+```{python, Dot = 1, part = "Code", echo = T, eval = F, }
+import pandas as pd
+import janitor
+raw_titanic = pd.read_csv("Titanic_train.csv")
+titanic_data = raw_titanic.clean_names()
+titanic_data.head(5)
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+library(dplyr)
+library(janitor)
+library(kableExtra)
+raw_titanic <- read.csv("Titanic_train.csv")
+titanic_data <- raw_titanic %>%
+  clean_names()
+titanic_data %>%
+  head(5) %>% 
+  kbl(caption = "first 5 records of titanic_data") %>%
+  kable_material(c("striped", "hover"))
+```
+
+```{python, Dot = 1, part = "Result", echo = F, eval = T}
+import pandas as pd
+import janitor
+raw_titanic = pd.read_csv("Titanic_train.csv")
+titanic_data = raw_titanic.clean_names()
+titanic_data.head(5)
+```
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+`group_by()`is a function of `dplyr` package that creates a "grouped" copy of a table.  
+dplyr functions will manipulate each "group" separately and then , they will combine 
+the results.  
+We can get group by categories using `group_vars()` function , and we can also get
+size of each group using `group_size()` function.  
+We can also group data by multiple categories.
+```
+<!-- Dot 2, lang: python ------------------------------------------------>
+```{block, Dot = 2, part = "Instruction", lang = "python"}
+`groupby()` is a function from `pandas` library that groups rows of data frame by some categories.  
+For example, `titanic_data.group_by('sex')` means that we want to analyze our data by different
+sex values.  
+The `groupby()` function returns a `DataFrameGroupBy` object.  
+There are some methods and attributes that makes it possible to access groups information:  
+- We can use `ngroups` attribute to get number of groups.  
+- We can use `size()` method to get group sizes.  
+- We can use `get_group()` method to retrieve groups.  
+  
+If we pass a list of labels to `groupby()` function , we will group our data 
+by multiple categories.
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+group_by_sex <- titanic_data %>%
+  group_by(sex)
+group_vars(group_by_sex)
+group_size(group_by_sex)
+multiple_group_by <- titanic_data %>%
+  group_by(sex,pclass)
+```
+
+```{python, Dot = 2, part = "Code", echo = T, eval = F, }
+data_groupby_sex = titanic_data.groupby('sex')
+type(data_groupby_sex)
+data_groupby_sex.ngroups
+data_groupby_sex.size()
+female_data = data_groupby_sex.get_group('female')
+female_data[["sex" , "age"]].head(5)
+#group by multiple categories:
+subset_data = titanic_data[["pclass" , "sex" , "fare"]]
+multiple_groupby = subset_data.groupby(['sex' , 'pclass'])
+multiple_groupby.head(3)
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+data_group_by_sex <- titanic_data %>%
+  group_by(sex)
+group_vars(data_group_by_sex)
+group_size(data_group_by_sex)
+multiple_group_by <- titanic_data %>%
+  group_by(sex,pclass)
+multiple_group_by %>%
+  head(5) %>% 
+  kbl(caption = "first 5 records of multiple_group_by") %>%
+  kable_material(c("striped", "hover"))
+```
+
+```{python, Dot = 2, part = "Result", echo = F, eval = T}
+data_groupby_sex = titanic_data.groupby('sex')
+type(data_groupby_sex)
+data_groupby_sex.ngroups
+data_groupby_sex.size()
+female_data = data_groupby_sex.get_group('female')
+female_data[["sex" , "age"]].head(5)
+#group by multiple categories:
+subset_data = titanic_data[["pclass" , "sex" , "fare"]]
+multiple_groupby = subset_data.groupby(['sex' , 'pclass'])
+multiple_groupby.head(3)
+```
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+**Aggregation functions** are used  to summarize information from multiple rows into a single
+row summary.  
+`summarise()` function from `dplyr`, applies summary functions to
+columns to create a new table.  
+So , once we created groups using `groupby()` function, we can create statistical summary for
+each group using `summarise()` and  aggregation functions.  
+These are some useful summary functions in dplyr:  
+- `n()`          : numbers of rows  
+- `n_distinct()` : This is a faster and more concise equivalent of `length(unique(x))`.  
+- `min()`        : compute min of group values.  
+- `max()`        : compute max of group values.  
+- `mean()`       : compute mean of groups.  
+- `sum()`      : compute sum of group values.  
+For more information , please visit [here](https://dplyr.tidyverse.org/reference/summarise.html).
+```
+<!-- Dot 3, lang: python ------------------------------------------------>
+```{block, Dot = 3, part = "Instruction", lang = "python"}
+**Aggregation functions** are used  to summarize information from multiple rows into a single
+row summary.  
+So , once we created groups using `groupby()` function, we can create statistical summary for
+each group using aggregation functions.
+This is the list of some of important aggregation functions in pandas:  
+-`mean()`      : compute mean of groups.  
+- `sum()`      : compute sum of group values.  
+- `count()`    : compute count of groups.  
+- `size()`     : compute group sizes.  
+- `min()`      : compute min of group values.  
+- `max()`      : compute max of group values. 
+- `describe()` : generates descriptive statistics.
+For more information,please visit [here](https://cmdlinetips.com/2019/10/pandas-groupby-13-functions-to-aggregate/).
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F, }
+groups_count <- data_group_by_sex %>%
+  summarise(size = n() )
+```
+
+```{python, Dot = 3, part = "Code", echo = T, eval = F, }
+titanic_data.groupby("sex").describe()
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+groups_count <- data_group_by_sex %>%
+  summarise(size = n() )
+groups_count %>%
+  kbl(caption = "size of each group") %>%
+  kable_material(c("striped", "hover"))
+```
+
+```{python, Dot = 3, part = "Result", echo = F, eval = T}
+titanic_data.groupby("sex").describe()
+```
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+We can use `summarise_all()` , `summarise_at()` and `summarise_if()` functions from `dplyr`
+package to summarise multiple columns at once:  
+  
+  - `summarise_all()` affects every variable.  
+  - `summarise_at()` affects variables selected with a character vector or vars().  
+  - `summarise_if()` affects variables selected with a predicate function.  
+    
+**syntax :**  
+summarise_all(.tbl, .funs, ...)  
+summarise_at(.tbl, .vars, .funs, ..., .cols = NULL)  
+summarize_if(.tbl, .predicate, .funs, ...)  
+**Arguments** :   
+`.tbl` :	A tbl object.  
+  
+`.funs` :	A function fun, a quosure style lambda ~ fun(.) or a list of either form.  
+  
+`.predicate` :	A predicate function to be applied to the columns or a logical vector. The variables for which .predicate is or returns TRUE are selected. This argument is passed to rlang::as_function() and thus supports quosure-style lambda functions and strings representing function names.  
+`vars` : 	A list of columns generated by vars(), a character vector of column names, a numeric vector of column positions, or NULL.  
+  
+`.cols` : 	This argument has been renamed to .vars to fit dplyr's terminology and is deprecated.  
+  
+Please visit [here](https://dplyr.tidyverse.org/reference/summarise_all.html?q=summarise%20_%20all)
+ for more information. 
+```
+<!-- Dot 4, lang: python ------------------------------------------------>
+```{block, Dot = 4, part = "Instruction", lang = "python"}
+Using `agg()` method , we can apply multiple aggregation functions at once. 
+Without specifying column(s) , agg will perform aggregation functions on
+**every numeric** column.  
+We can also use Different aggregate functions on different columns.
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F, }
+multiple_aggregation_1 <- titanic_data %>%
+  select(pclass ,
+         sex  , 
+         age  , 
+         fare ,
+         cabin) %>%
+  filter( !is.na(age) & !age == "" & !is.na(fare) & !fare == "" ) %>%
+  group_by(sex) %>%
+  summarise_if(.predicate = function(x) is.numeric(x),
+               .funs = list(min="min" , max = "max"))
+multiple_aggregation_2 <- titanic_data %>%
+  select(pclass ,
+         sex  , 
+         age  , 
+         fare ,
+         cabin) %>%
+  filter( !is.na(age) & !is.na(fare) ) %>%
+  group_by(sex,pclass) %>%
+  summarise(min_age = min(age) , max_age = max(age) , max_fare = max(fare))
+```
+
+```{python, Dot = 4, part = "Code", echo = T, eval = F, }
+selected_columns = titanic_data[["pclass" ,"sex" , "age" , "fare" , "cabin" ]]
+#using "agg" without specifying columns 
+selected_columns.groupby('sex').agg(['min','max'])
+#apply different aggs on columns with dictionary:
+selected_columns.groupby(["sex" , "pclass"]).agg({"age" : ["min" , "max"] , "fare" : "max"})
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+multiple_aggregation_1 <- titanic_data %>%
+  select(pclass ,
+         sex  , 
+         age  , 
+         fare ,
+         cabin) %>%
+  filter( !is.na(age) & !age == "" & !is.na(fare) & !fare == "" ) %>%
+  group_by(sex) %>%
+  summarise_if(.predicate = function(x) is.numeric(x),
+               .funs = list(min="min" , max = "max"))
+multiple_aggregation_2 <- titanic_data %>%
+  select(pclass ,
+         sex  , 
+         age  , 
+         fare ,
+         cabin) %>%
+  filter( !is.na(age) & !is.na(fare) ) %>%
+  group_by(sex,pclass) %>%
+  summarise(min_age = min(age) , max_age = max(age) , max_fare = max(fare))
+multiple_aggregation_1 %>%
+  kbl(caption = "applying aggregation functions on enery numerical column") %>%
+  kable_material(c("striped", "hover"))
+multiple_aggregation_2 %>%
+  kbl(caption = "applying different aggregation functions on different columns") %>%
+  kable_material(c("striped", "hover"))
+```
+
+```{python, Dot = 4, part = "Result", echo = F, eval = T}
+selected_columns = titanic_data[["pclass" ,"sex" , "age" , "fare" , "cabin" ]]
+#using "agg" without specifying columns 
+selected_columns.groupby('sex').agg(['min','max'])
+#apply different aggs on columns with dictionary:
+selected_columns.groupby(["sex" , "pclass"]).agg({"age" : ["min" , "max"] , "fare" : "max"})
+```
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+We can apply functions and formulas to groups with `group_by()` and `summarise()`.  
+Suppose that we want to get number of passengers in each pclass.
+```
+<!-- Dot 5, lang: python ------------------------------------------------>
+```{block, Dot = 5, part = "Instruction", lang = "python"}
+[apply()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html) 
+from `pandas` is used to apply a function along an axis of the data frame.  
+In this dot , we want to see that how many passengers have pclass equal to 3.  
+    
+**Introducing lambda function** :  
+A lambda function is a small anonymous function (has no name when defining it) ,and it 
+can take any number of arguments, but can only have one expression.  
+**syntax**:  
+`lambda arguments : expression`  
+lambda function is usually used just once , and it can make your code shorter 
+(because it is contained in one line of code).  
+The power of lambda is better shown when you use them as an anonymous function inside another function.  
+For more information about lambda function , please visit [here](https://www.w3schools.com/python/python_lambda.asp).
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F, }
+num_each_pclass <- titanic_data %>%
+  group_by(pclass) %>%
+  summarise(num = n())
+```
+
+```{python, Dot = 5, part = "Code", echo = T, eval = F, }
+titanic_data.groupby(titanic_data['pclass'].apply(lambda x : x == 3)).size()
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+num_each_pclass <- titanic_data %>%
+  group_by(pclass) %>%
+  summarise(num = n())
+num_each_pclass %>%
+  kbl(caption = "number of passengers in each pclass") %>%
+  kable_material(c("striped", "hover"))
+```
+
+```{python, Dot = 5, part = "Result", echo = F, eval = T}
+titanic_data.groupby(titanic_data['pclass'].apply(lambda x : x == 3)).size()
+```
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+We can add new columns to our data frame using `mutate()` function from `dplyr` package.  
+combination of `group_by()` and `mutate()` makes it possible to transform data frame.  
+In this dot,  we want to have a new column that shows difference of each passenger's fare
+from the mean fare.
+```
+<!-- Dot 6, lang: python ------------------------------------------------>
+```{block, Dot = 6, part = "Instruction", lang = "python"}
+`transform()` is a useful function from `pandas` library that helps us to manipulate 
+rows or columns.  
+One of the most common usages of `transform()` function is **combining group by results**.  
+Suppose that we want to have a new column that shows difference of each passenger's fare
+from the mean fare.  
+We can do this using `groupby()` and `transform()`.  
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F, }
+transformed_data <- titanic_data %>%
+  group_by(sex) %>%
+  mutate(distance_from_mean = fare - mean(fare))
+```
+
+```{python, Dot = 6, part = "Code", echo = T, eval = F, }
+titanic_data['distance_from_mean'] = titanic_data.groupby('sex')['fare'].transform(lambda x: x - x.mean())
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+transformed_data <- titanic_data %>%
+  group_by(sex) %>%
+  mutate(distance_from_mean = fare - mean(fare))
+transformed_data %>%
+  head(5) %>%
+  kbl(caption = "first 5 records of transformed_data table(with new column 'distance_from_mean'") %>%
+  kable_material(c("striped", "hover"))
+```
+
+```{python, Dot = 6, part = "Result", echo = F, eval = T}
+titanic_data['distance_from_mean'] = titanic_data.groupby('sex')['fare'].transform(lambda x: x - x.mean())
+titanic_data.head(5)
+```
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+We can filter some of our groups based on conditions.  
+Let's filter data to find all passengers that lives in cabin with more than 3 people.  
+(We filter missing values before grouping because group by considers rows with missing
+value of cabin as one group).
+```
+<!-- Dot 7, lang: python ------------------------------------------------>
+```{block, Dot = 7, part = "Instruction", lang = "python"}
+We can filter some of our groups based on conditions.  
+Let's filter data to find all passengers that lives in cabin with more than 3 people.
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F, }
+more_than_3 <- titanic_data %>%
+  filter(!is.na(cabin) & !cabin == "") %>%
+  group_by(cabin) %>%
+  mutate(num_of_people = n()) %>%
+  filter(num_of_people > 3)
+```
+
+```{python, Dot = 7, part = "Code", echo = T, eval = F, }
+titanic_data.groupby('cabin').filter(lambda x : len(x) > 3)
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+more_than_3 <- titanic_data %>%
+  filter(!is.na(cabin) & !cabin == "") %>%
+  group_by(cabin) %>%
+  mutate(num_of_people = n()) %>%
+  filter(num_of_people > 3)
+more_than_3 %>%
+  kbl(caption = "passengesr that lived in cabin with more than 3 people") %>%
+  kable_material(c("striped", "hover"))
+```
+
+```{python, Dot = 7, part = "Result", echo = F, eval = T}
+titanic_data.groupby('cabin').filter(lambda x : len(x) > 3)
+```
+
+<!-- Dot 8, lang: r ------------------------------------------------>
+```{block, Dot = 8, part = "Instruction", lang = "r"}
+We can visualized our grouped data using `ggplot2` package.
+```
+<!-- Dot 8, lang: python ------------------------------------------------>
+```{block, Dot = 8, part = "Instruction", lang = "python"}
+We can visualized our grouped data using `matplotlib` package.
+```
+
+```{r, Dot = 8, part = "Code", echo = T, eval = F, }
+library(ggplot2)
+group_by_pclass <- titanic_data %>%
+  group_by(pclass) %>%
+  summarise(size = n())
+ggplot(group_by_pclass ,
+       aes(x = pclass,
+           y = size)) +
+  geom_bar(stat = "identity" ,
+           fill = "darkmagenta")
+```
+
+```{python, Dot = 8, part = "Code", echo = T, eval = F, }
+import matplotlib.pyplot as plt
+titanic_data.groupby('pclass').size().plot(kind = 'bar')
+```
+
+```{r, Dot = 8, part = "Result", echo = F, eval = T}
+library(ggplot2)
+group_by_pclass <- titanic_data %>%
+  group_by(pclass) %>%
+  summarise(size = n())
+ggplot(group_by_pclass ,
+       aes(x = pclass,
+           y = size)) +
+  geom_bar(stat = "identity" ,
+           fill = "darkmagenta")
+```
+
+```{python, Dot = 8, part = "Result", echo = F, eval = T}
+import matplotlib.pyplot as plt
+titanic_data.groupby('pclass').size().plot(kind = 'bar')
+```
+
