@@ -124,7 +124,7 @@ See how Seaborn & ggplot2 can make your plots looks nicer, convey more info, and
 <div class="row">
 <div @click="authorOneModal = true" type="button"
 class="col d-flex d-md-flex flex-row flex-shrink-1 justify-content-sm-end align-items-sm-center justify-content-md-end align-items-md-center dotto-header-user-icon">
-<img class="img-fluid user-image lang-color-r mx-auto" src="../../../assets/img/dotto.png" />
+<img class="img-fluid user-image lang-color-r mx-auto" src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/MalekpourAvatar.jpeg" />
 </div>
 </div>
 <h6 class="d-flex justify-content-end dotto-header-user-name mx-auto">
@@ -144,7 +144,7 @@ Mohammad Hossein Malekpour
 <div class="card" style="max-width: 540px">
 <div class="row g-0">
 <div class="col-md-4">
-<img src="../../../assets/img/dotto.png" class="img-fluid" />
+<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/MalekpourAvatar.jpeg" class="img-fluid" />
 </div>
 <div class="col-md-8">
 <div class="card-body">
@@ -352,135 +352,305 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
-<table style="width:100%;">
-<colgroup>
-<col width="3%" />
-<col width="7%" />
-<col width="6%" />
-<col width="6%" />
-<col width="3%" />
-<col width="5%" />
-<col width="5%" />
-<col width="7%" />
-<col width="7%" />
-<col width="6%" />
-<col width="5%" />
-<col width="9%" />
-<col width="4%" />
-<col width="10%" />
-<col width="5%" />
-<col width="5%" />
-</colgroup>
+<table>
 <thead>
-<tr class="header">
-<th align="right">X</th>
-<th align="right">survived</th>
-<th align="right">pclass</th>
-<th align="left">sex</th>
-<th align="right">age</th>
-<th align="right">sibsp</th>
-<th align="right">parch</th>
-<th align="right">fare</th>
-<th align="left">embarked</th>
-<th align="left">class</th>
-<th align="left">who</th>
-<th align="left">adult_male</th>
-<th align="left">deck</th>
-<th align="left">embark_town</th>
-<th align="left">alive</th>
-<th align="left">alone</th>
+<tr>
+<th style="text-align:right;">
+X
+</th>
+<th style="text-align:right;">
+survived
+</th>
+<th style="text-align:right;">
+pclass
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+sibsp
+</th>
+<th style="text-align:right;">
+parch
+</th>
+<th style="text-align:right;">
+fare
+</th>
+<th style="text-align:left;">
+embarked
+</th>
+<th style="text-align:left;">
+class
+</th>
+<th style="text-align:left;">
+who
+</th>
+<th style="text-align:left;">
+adult_male
+</th>
+<th style="text-align:left;">
+deck
+</th>
+<th style="text-align:left;">
+embark_town
+</th>
+<th style="text-align:left;">
+alive
+</th>
+<th style="text-align:left;">
+alone
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">804</td>
-<td align="right">1</td>
-<td align="right">3</td>
-<td align="left">male</td>
-<td align="right">27</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">6.9750</td>
-<td align="left">S</td>
-<td align="left">Third</td>
-<td align="left">man</td>
-<td align="left">True</td>
-<td align="left"></td>
-<td align="left">Southampton</td>
-<td align="left">yes</td>
-<td align="left">True</td>
+<tr>
+<td style="text-align:right;">
+253
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+16.1000
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:left;">
+Third
+</td>
+<td style="text-align:left;">
+man
+</td>
+<td style="text-align:left;">
+True
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Southampton
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+False
+</td>
 </tr>
-<tr class="even">
-<td align="right">726</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="left">female</td>
-<td align="right">30</td>
-<td align="right">3</td>
-<td align="right">0</td>
-<td align="right">21.0000</td>
-<td align="left">S</td>
-<td align="left">Second</td>
-<td align="left">woman</td>
-<td align="left">False</td>
-<td align="left"></td>
-<td align="left">Southampton</td>
-<td align="left">yes</td>
-<td align="left">False</td>
+<tr>
+<td style="text-align:right;">
+161
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+15.7500
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:left;">
+Second
+</td>
+<td style="text-align:left;">
+woman
+</td>
+<td style="text-align:left;">
+False
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Southampton
+</td>
+<td style="text-align:left;">
+yes
+</td>
+<td style="text-align:left;">
+True
+</td>
 </tr>
-<tr class="odd">
-<td align="right">715</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="left">male</td>
-<td align="right">19</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">7.6500</td>
-<td align="left">S</td>
-<td align="left">Third</td>
-<td align="left">man</td>
-<td align="left">True</td>
-<td align="left">F</td>
-<td align="left">Southampton</td>
-<td align="left">no</td>
-<td align="left">True</td>
+<tr>
+<td style="text-align:right;">
+766
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+39.6000
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+First
+</td>
+<td style="text-align:left;">
+man
+</td>
+<td style="text-align:left;">
+True
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cherbourg
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+True
+</td>
 </tr>
-<tr class="even">
-<td align="right">619</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="left">male</td>
-<td align="right">26</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">10.5000</td>
-<td align="left">S</td>
-<td align="left">Second</td>
-<td align="left">man</td>
-<td align="left">True</td>
-<td align="left"></td>
-<td align="left">Southampton</td>
-<td align="left">no</td>
-<td align="left">True</td>
+<tr>
+<td style="text-align:right;">
+882
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+10.5167
+</td>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:left;">
+Third
+</td>
+<td style="text-align:left;">
+woman
+</td>
+<td style="text-align:left;">
+False
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Southampton
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+True
+</td>
 </tr>
-<tr class="odd">
-<td align="right">859</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="left">male</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">7.2292</td>
-<td align="left">C</td>
-<td align="left">Third</td>
-<td align="left">man</td>
-<td align="left">True</td>
-<td align="left"></td>
-<td align="left">Cherbourg</td>
-<td align="left">no</td>
-<td align="left">True</td>
+<tr>
+<td style="text-align:right;">
+539
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+49.5000
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+First
+</td>
+<td style="text-align:left;">
+woman
+</td>
+<td style="text-align:left;">
+False
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+Cherbourg
+</td>
+<td style="text-align:left;">
+yes
+</td>
+<td style="text-align:left;">
+False
+</td>
 </tr>
 </tbody>
 </table>

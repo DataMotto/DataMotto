@@ -19,10 +19,10 @@
       "occupation": ["Data Scientist"],
       "affiliation": ["DataMotto"],
       "url": ["https://www.linkedin.com/in/mohammadhossein-malekpour/"],
-      "img": ["MalekpourAvatar.jpg"],
+      "img": ["MalekpourAvatar.jpeg"],
       "lang": ["python", "R"],
-      "profile_img_for_Dotto": ["../../../assets/img/dotto.png"],
-      "profile_img": ["./posts/Dotto/D012-2021-07-28-a-complete-guide-to-plotting-categorical-variables./../../assets/img/dotto.png"]
+      "profile_img_for_Dotto": ["./a-complete-guide-to-plotting-categorical-variables_files/figure-html/MalekpourAvatar.jpeg"],
+      "profile_img": ["./posts/Dotto/D012-2021-07-28-a-complete-guide-to-plotting-categorical-variables/a-complete-guide-to-plotting-categorical-variables_files/figure-html/MalekpourAvatar.jpeg"]
     }
   ],
   "tech": [
