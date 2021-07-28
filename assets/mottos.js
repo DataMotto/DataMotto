@@ -219,7 +219,7 @@ export default {
     "dotto_label": ["D009"],
     "dotto_id": ["1af238c0-eae0-11eb-a614-34e6adc52272"],
     "title": ["How to work with api data?"],
-    "description": ["A short description of the Dotto.\n"],
+    "description": ["Work with common type of API Rest API and GraphQL API.\n"],
     "author": [
       {
         "name": ["Mohsen Jalali"],
@@ -235,11 +235,11 @@ export default {
     "tech": [
       {
         "lang": ["r"],
-        "pkgs": ["httr"]
+        "pkgs": ["httr", "dplyr", "jsonlite"]
       },
       {
         "lang": ["python"],
-        "pkgs": ["request"]
+        "pkgs": ["request", "pandas"]
       }
     ],
     "date": {
