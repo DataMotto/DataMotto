@@ -45,7 +45,7 @@ library(dplyr)
 library(janitor)
 library(kableExtra)
 
-raw_titanic <- read.csv("/home/parnian/Documents/sprintt4/titanic_train.csv")
+raw_titanic <- read.csv("Data/titanic_train.csv")
 titanic_data <- raw_titanic %>%
   clean_names()
 ```
@@ -54,7 +54,7 @@ titanic_data <- raw_titanic %>%
 import pandas as pd
 import janitor
 
-raw_titanic = pd.read_csv("/home/parnian/Documents/sprintt4/titanic_train.csv")
+raw_titanic = pd.read_csv("Data/titanic_train.csv")
 titanic_data = raw_titanic.clean_names()
 titanic_data.head(5)
 ```
@@ -64,7 +64,7 @@ library(dplyr)
 library(janitor)
 library(kableExtra)
 
-raw_titanic <- read.csv("/home/parnian/Documents/sprintt4/titanic_train.csv")
+raw_titanic <- read.csv("Data/titanic_train.csv")
 titanic_data <- raw_titanic %>%
   clean_names()
 
@@ -78,7 +78,7 @@ titanic_data %>%
 import pandas as pd
 import janitor
 
-raw_titanic = pd.read_csv("/home/parnian/Documents/sprintt4/titanic_train.csv")
+raw_titanic = pd.read_csv("Data/titanic_train.csv")
 titanic_data = raw_titanic.clean_names()
 titanic_data.head(5)
 ```
