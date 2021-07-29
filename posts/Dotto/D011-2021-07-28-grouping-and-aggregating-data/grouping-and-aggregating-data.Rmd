@@ -31,13 +31,38 @@ DataMotto::use_Dotto()
 <!-- Dot 1, lang: r ------------------------------------------------>
 
 ```{block, Dot = 1, part = "Instruction", lang = "r"}
-In this Dotto,we are using `titanic` dataset that can be downloaded from [here](https://www.kaggle.com/c/titanic/data?select=train.csv) .
-This dataset contains 891 rows and 12 columns.
+In this Dotto,we are using `titanic` dataset that can be downloaded from [here](https://www.kaggle.com/c/titanic/data?select=train.csv) .  
+This dataset contains 891 rows and 12 columns.  
+  
+  In this Dotto , we will discuss:  
+  - Introduce group by  
+  - Introduce aggregation functions  
+  - Multiple aggregation functions  
+  - Apply a function in group by  
+  - Transformation with group by  
+  - Filter using group by  
+  -Visualization with group by  
+    
+**janitor package**:  
+Here, we use `janitor` package ,`clean_names()` function to clean data frame names.
+`clean_name()` works in `%>%` (pipe).
 ```
 <!-- Dot 1, lang: python ------------------------------------------------>
 ```{block, Dot = 1, part = "Instruction", lang = "python"}
 In this Dotto,we are using `titanic` dataset that can be downloaded from [here](https://www.kaggle.com/c/titanic/data?select=train.csv) .
-This dataset contains 891 rows and 12 columns.
+This dataset contains 891 rows and 12 columns.  
+  
+  In this Dotto , we will discuss:  
+  - Introduce group by  
+  - Introduce aggregation functions  
+  - Multiple aggregation functions  
+  - Apply a function in group by  
+  - Transformation with group by  
+  - Filter using group by  
+  -Visualization with group by  
+    
+**janitor package**:  
+Here, we use `janitor` package ,`clean_names()` function to clean dataframe names.
 ```
 
 ```{r, Dot = 1, part = "Code", echo = T, eval = F, }
