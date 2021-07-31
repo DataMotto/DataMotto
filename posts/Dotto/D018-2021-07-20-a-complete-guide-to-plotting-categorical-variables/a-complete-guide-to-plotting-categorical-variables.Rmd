@@ -295,62 +295,13 @@ plt.title("Violin Plot of Age by Class, Separated by Sex")
 <!-- Dot 4, lang: r ------------------------------------------------>
 
 ```{block, Dot = 4, part = "Instruction", lang = "r"}
-
-```
-
-```{block, Dot = 4, part = "Instruction", lang = "python"}
-# Boxen Plot
-
-The boxen plot, otherwise known as a Letter-value plot, is a box plot meant for large data sets (n > 10,000). It is similar to a traditional box plot, however it essentially just plots more quantiles. With more quantiles, we can see more info about the distribution shape beyond the central 50% of the data; this extra detail is especially present in the tails, where box plots tend to give limited information.
-
-Just in case there still isn’t enough going on here for you, we can also add a `hue` to a boxen plot! We can see that the boxen plot gives us much more information beyond the central 50% of the data. However, keep in mind that boxen plots are meant for larger data sets with entries between 10,000 and 100,000. This data set of under 1,000 entries is definitely not ideal. Here is a [link]((https://vita.had.co.nz/papers/letter-value-plot.html)) to the paper where boxen plots were created that explains them very well.
-
-```
-
-```{r, Dot = 4, part = "Code", echo = T, eval = F, }
-
-```
-
-```{python, Dot = 4, part = "Code", echo = T, eval = F, }
-# Basic Boxenplot
-plt.figure(figsize=(10, 6))
-sns.boxenplot(x='class', y='age', data=titanic, palette='rainbow')
-plt.title("Distribution of Age by Passenger Class")
-
-# Adding Hue
-plt.figure(figsize=(10, 6))
-sns.boxenplot(x='class', y='age', data=titanic, palette='rainbow', hue='survived')
-plt.title("Distribution of Age by Passenger Class, Separated by Survival")
-
-```
-
-```{r, Dot = 4, part = "Result", echo = F, eval = T}
-
-```
-
-```{python, Dot = 4, part = "Result", echo = F, eval = T}
-# Basic Boxenplot
-plt.figure(figsize=(10, 6))
-sns.boxenplot(x='class', y='age', data=titanic, palette='rainbow')
-plt.title("Distribution of Age by Passenger Class")
-
-# Adding Hue
-plt.figure(figsize=(10, 6))
-sns.boxenplot(x='class', y='age', data=titanic, palette='rainbow', hue='survived')
-plt.title("Distribution of Age by Passenger Class, Separated by Survival")
-
-```
-
-<!-- Dot 5, lang: r ------------------------------------------------>
-
-```{block, Dot = 5, part = "Instruction", lang = "r"}
 # Bar Plot
 
 Bar charts are useful for comparing quantities corresponding to different groups. There are two types of bar charts: `geom_bar()` and `geom_col()`. `geom_bar()` makes the height of the bar proportional to the number of cases in each group (or if the `weight` aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use `geom_col()` instead. Check the [documentation](https://ggplot2.tidyverse.org/reference/geom_bar.html) for more details.
 
 ```
 
-```{block, Dot = 5, part = "Instruction", lang = "python"}
+```{block, Dot = 4, part = "Instruction", lang = "python"}
 # Bar Plot
 
 Bar plots are classic. You get an estimate of central tendency for a numerical variable for each class on the x axis. Say we were interested in knowing the average fare price of passengers that embarked from different towns. 
@@ -361,7 +312,7 @@ Now we can see that the average fare price in Cherbourg was so high due to some 
 
 ```
 
-```{r, Dot = 5, part = "Code", echo = T, eval = F, }
+```{r, Dot = 4, part = "Code", echo = T, eval = F, }
 ggplot(data = titanic,
        aes(x = embark_town,
            y = fare)) +
@@ -370,7 +321,7 @@ ggplot(data = titanic,
 
 ```
 
-```{python, Dot = 5, part = "Code", echo = T, eval = F, }
+```{python, Dot = 4, part = "Code", echo = T, eval = F, }
 # Basic Barplot
 plt.figure(figsize=(10, 6))
 sns.barplot(x='embark_town', y='fare', data=titanic, palette='rainbow')
@@ -383,7 +334,7 @@ plt.title("Fare of Passenger by Embarked Town, Divided by Class")
 
 ```
 
-```{r, Dot = 5, part = "Result", echo = F, eval = T}
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
 ggplot(data = titanic,
        aes(x = embark_town,
            y = fare)) +
@@ -392,7 +343,7 @@ ggplot(data = titanic,
 
 ```
 
-```{python, Dot = 5, part = "Result", echo = F, eval = T}
+```{python, Dot = 4, part = "Result", echo = F, eval = T}
 # Basic Barplot
 plt.figure(figsize=(10, 6))
 sns.barplot(x='embark_town', y='fare', data=titanic, palette='rainbow')
@@ -405,142 +356,46 @@ plt.title("Fare of Passenger by Embarked Town, Divided by Class")
 
 ```
 
-<!-- Dot 6, lang: r ------------------------------------------------>
+<!-- Dot 5, lang: r ------------------------------------------------>
 
-```{block, Dot = 6, part = "Instruction", lang = "r"}
-
-```
-
-```{block, Dot = 6, part = "Instruction", lang = "python"}
-# Point Plot
-
-Point plots convey the same information as a bar plot with a different style. They can be good for overlaying with different plots since they have a smaller footprint in the space.
+```{block, Dot = 5, part = "Instruction", lang = "r"}
 
 ```
 
-```{r, Dot = 6, part = "Code", echo = T, eval = F, }
-
-```
-
-```{python, Dot = 6, part = "Code", echo = T, eval = F, }
-# Basic Pointplot
-plt.figure(figsize=(10, 6))
-sns.pointplot(x='embark_town',y='fare',data=titanic)
-plt.title("Average Fare Price by Embarked Town")
-
-# Adding Hue
-plt.figure(figsize=(10, 6))
-sns.pointplot(x='embark_town', y='fare', data=titanic, hue='class')
-plt.title("Average Fare Price by Embarked Town, Separated by Sex")
-
-```
-
-```{r, Dot = 6, part = "Result", echo = F, eval = T}
-
-```
-
-```{python, Dot = 6, part = "Result", echo = F, eval = T}
-# Basic Pointplot
-plt.figure(figsize=(10, 6))
-sns.pointplot(x='embark_town',y='fare',data=titanic)
-plt.title("Average Fare Price by Embarked Town")
-
-# Adding Hue
-plt.figure(figsize=(10, 6))
-sns.pointplot(x='embark_town', y='fare', data=titanic, hue='class')
-plt.title("Average Fare Price by Embarked Town, Separated by Sex")
-
-```
-<!-- Dot 7, lang: r ------------------------------------------------>
-
-```{block, Dot = 7, part = "Instruction", lang = "r"}
-
-```
-
-```{block, Dot = 7, part = "Instruction", lang = "python"}
-# Count Plot
-
-Count Plots are essentially histograms across a categorical variable. They take all the same arguments as bar plots in Seaborn, which helps keep things simple.
-
-```
-
-```{r, Dot = 7, part = "Code", echo = T, eval = F, }
-ggplot(titanic,
-  aes(embark_town)) +
-  geom_bar(aes(fill = factor(sex)))
-
-```
-
-```{python, Dot = 7, part = "Code", echo = T, eval = F, }
-# Basic Countplot
-plt.figure(figsize=(10, 6))
-sns.countplot(x='embark_town', data=titanic, palette='rainbow')
-plt.title("Count of Passengers that Embarked in Each City")
-
-# Adding Hue
-plt.figure(figsize=(10, 6))
-sns.countplot(x='embark_town', data=titanic, palette='rainbow', hue='sex')
-plt.title("Count of Passengers that Embarked in Each City, Separated by Sex")
-
-```
-
-```{r, Dot = 7, part = "Result", echo = F, eval = T}
-
-```
-
-```{python, Dot = 7, part = "Result", echo = F, eval = T}
-# Basic Countplot
-plt.figure(figsize=(10, 6))
-sns.countplot(x='embark_town', data=titanic, palette='rainbow')
-plt.title("Count of Passengers that Embarked in Each City")
-
-# Adding Hue
-plt.figure(figsize=(10, 6))
-sns.countplot(x='embark_town', data=titanic, palette='rainbow', hue='sex')
-plt.title("Count of Passengers that Embarked in Each City, Separated by Sex")
-
-```
-
-<!-- Dot 8, lang: r ------------------------------------------------>
-
-```{block, Dot = 8, part = "Instruction", lang = "r"}
-
-```
-
-```{block, Dot = 8, part = "Instruction", lang = "python"}
+```{block, Dot = 5, part = "Instruction", lang = "python"}
 # jitter geom
 
 The jitter geom is a convenient shortcut for geom_point(position = "jitter"). It adds a small amount of random variation to the location of each point, and is a useful way of handling overplotting caused by discreteness in smaller datasets.
 
 ```
 
-```{r, Dot = 8, part = "Code", echo = T, eval = F, }
+```{r, Dot = 5, part = "Code", echo = T, eval = F, }
 ggplot(titanic, aes(class, age)) +
   geom_jitter(aes(colour = alive))
 
 ```
 
-```{python, Dot = 8, part = "Code", echo = T, eval = F, }
+```{python, Dot = 5, part = "Code", echo = T, eval = F, }
 plt.figure(figsize=(10, 6))
 sns.stripplot(x='class', y='age', data=titanic, jitter=True, hue='alive', dodge=True, palette='viridis')
 
 ```
 
-```{r, Dot = 8, part = "Result", echo = F, eval = T}
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
 ggplot(titanic, aes(class, age)) +
   geom_jitter(aes(colour = alive))
 
 ```
 
-```{python, Dot = 8, part = "Result", echo = F, eval = T}
+```{python, Dot = 5, part = "Result", echo = F, eval = T}
 plt.figure(figsize=(10, 6))
 sns.stripplot(x='class', y='age', data=titanic, jitter=True, hue='alive', dodge=True, palette='viridis')
 
 ```
 
-<!-- Dot 9, lang: r ------------------------------------------------>
+<!-- Dot 6, lang: r ------------------------------------------------>
 
-```{block, Dot = 9, part = "Instruction", lang = "r"}
+```{block, Dot = 6, part = "Instruction", lang = "r"}
 # Bee Swarm Plot
 
 Create a bee swarm plot. A bee swarm plot is a one-dimensional scatter plot similar to stripchart,
@@ -550,7 +405,7 @@ the color and plotting character of each point.
 
 ```
 
-```{block, Dot = 9, part = "Instruction", lang = "python"}
+```{block, Dot = 6, part = "Instruction", lang = "python"}
 # Swarm Plot
 
 Swarm plots are fantastic because they offer an easy way to show the individual data points in a distribution. Instead of a big blob like the strip plot, the swarm plot simply adjusts the points along the x-axis. Although they also don’t scale well with tons of values, they offer more organized insight.
@@ -559,28 +414,28 @@ Swarm plots are fantastic because they offer an easy way to show the individual 
 
 ```
 
-```{r, Dot = 9, part = "Code", echo = T, eval = F, }
+```{r, Dot = 6, part = "Code", echo = T, eval = F, }
 library(ggbeeswarm)
 
 ggplot(titanic, aes(class, age, col = alive)) + geom_beeswarm()
 
 ```
 
-```{python, Dot = 9, part = "Code", echo = T, eval = F, }
+```{python, Dot = 7, part = "Code", echo = T, eval = F, }
 plt.figure(figsize=(10, 6))
 sns.swarmplot(x='class', y='age', data=titanic, hue='alive', dodge=True, palette='viridis')
 plt.title("Age by Passenger Class, Separated by Survival")
 
 ```
 
-```{r, Dot = 9, part = "Result", echo = F, eval = T}
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
 library(ggbeeswarm)
 
 ggplot(titanic, aes(class, age, col = alive)) + geom_beeswarm()
 
 ```
 
-```{python, Dot = 9, part = "Result", echo = F, eval = T}
+```{python, Dot = 7, part = "Result", echo = F, eval = T}
 plt.figure(figsize=(10, 6))
 sns.swarmplot(x='class', y='age', data=titanic, hue='alive', palette='viridis')
 plt.title("Age by Passenger Class, Separated by Survival")
