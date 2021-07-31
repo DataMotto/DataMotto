@@ -349,13 +349,13 @@ Exploratory data visualization allows us to get an idea of the data, before star
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
-<table>
+<table style="width:100%;">
 <colgroup>
 <col width="3%" />
 <col width="7%" />
 <col width="6%" />
 <col width="6%" />
-<col width="4%" />
+<col width="3%" />
 <col width="5%" />
 <col width="5%" />
 <col width="7%" />
@@ -390,50 +390,86 @@ Exploratory data visualization allows us to get an idea of the data, before star
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">116</td>
-<td align="right">0</td>
+<td align="right">612</td>
+<td align="right">1</td>
 <td align="right">3</td>
-<td align="left">male</td>
-<td align="right">70.5</td>
+<td align="left">female</td>
+<td align="right">NA</td>
+<td align="right">1</td>
 <td align="right">0</td>
-<td align="right">0</td>
-<td align="right">7.7500</td>
+<td align="right">15.5000</td>
 <td align="left">Q</td>
 <td align="left">Third</td>
-<td align="left">man</td>
-<td align="left">True</td>
+<td align="left">woman</td>
+<td align="left">False</td>
 <td align="left"></td>
 <td align="left">Queenstown</td>
-<td align="left">no</td>
-<td align="left">True</td>
+<td align="left">yes</td>
+<td align="left">False</td>
 </tr>
 <tr class="even">
-<td align="right">793</td>
+<td align="right">304</td>
 <td align="right">0</td>
-<td align="right">1</td>
+<td align="right">3</td>
 <td align="left">male</td>
 <td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">30.6958</td>
-<td align="left">C</td>
-<td align="left">First</td>
+<td align="right">8.0500</td>
+<td align="left">S</td>
+<td align="left">Third</td>
 <td align="left">man</td>
 <td align="left">True</td>
 <td align="left"></td>
-<td align="left">Cherbourg</td>
+<td align="left">Southampton</td>
 <td align="left">no</td>
 <td align="left">True</td>
 </tr>
 <tr class="odd">
-<td align="right">800</td>
+<td align="right">266</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="left">male</td>
+<td align="right">16</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">39.6875</td>
+<td align="left">S</td>
+<td align="left">Third</td>
+<td align="left">man</td>
+<td align="left">True</td>
+<td align="left"></td>
+<td align="left">Southampton</td>
+<td align="left">no</td>
+<td align="left">False</td>
+</tr>
+<tr class="even">
+<td align="right">97</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">male</td>
+<td align="right">23</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">63.3583</td>
+<td align="left">C</td>
+<td align="left">First</td>
+<td align="left">man</td>
+<td align="left">True</td>
+<td align="left">D</td>
+<td align="left">Cherbourg</td>
+<td align="left">yes</td>
+<td align="left">False</td>
+</tr>
+<tr class="odd">
+<td align="right">674</td>
 <td align="right">0</td>
 <td align="right">2</td>
 <td align="left">male</td>
-<td align="right">34.0</td>
+<td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">13.0000</td>
+<td align="right">0.0000</td>
 <td align="left">S</td>
 <td align="left">Second</td>
 <td align="left">man</td>
@@ -442,42 +478,6 @@ Exploratory data visualization allows us to get an idea of the data, before star
 <td align="left">Southampton</td>
 <td align="left">no</td>
 <td align="left">True</td>
-</tr>
-<tr class="even">
-<td align="right">743</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="left">male</td>
-<td align="right">24.0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">16.1000</td>
-<td align="left">S</td>
-<td align="left">Third</td>
-<td align="left">man</td>
-<td align="left">True</td>
-<td align="left"></td>
-<td align="left">Southampton</td>
-<td align="left">no</td>
-<td align="left">False</td>
-</tr>
-<tr class="odd">
-<td align="right">68</td>
-<td align="right">1</td>
-<td align="right">3</td>
-<td align="left">female</td>
-<td align="right">17.0</td>
-<td align="right">4</td>
-<td align="right">2</td>
-<td align="right">7.9250</td>
-<td align="left">S</td>
-<td align="left">Third</td>
-<td align="left">woman</td>
-<td align="left">False</td>
-<td align="left"></td>
-<td align="left">Southampton</td>
-<td align="left">yes</td>
-<td align="left">False</td>
 </tr>
 </tbody>
 </table>
@@ -614,10 +614,10 @@ Draw a <strong>box plot</strong> to show distributions with respect to categorie
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA4696BBE0&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA444D1A20&gt;</code></pre>
 <pre><code>## Text(0.5, 1.0, &#39;Age by Passenger Class, Titanic&#39;)</code></pre>
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA45233240&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA472F09E8&gt;</code></pre>
 <p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
@@ -648,7 +648,7 @@ Draw a combination of boxplot and kernel density estimate with <strong>Violin Pl
 <p class="mx-2">
 Draw a combination of boxplot and kernel density estimate with <strong>Violin Plots</strong>.</p>
 <p>Violin plots are not very frequently used but I have found them to be useful on occasion, and they are an interesting change from more popular options. They plot a vertical kernel density plot for each category and a small box plot to summarize important statistics.</p>
-<p>While I like this plot, I think it is easier to compare the genders with slightly different formatting: When we split the violin on the hue it is a lot easier to see the differences in each KDE. However, the IQR stats aren’t split by the sex anymore; instead they apply to the entire class. So there are trade-offs to styling your plot in certain ways. 
+<p>It is easier to compare the genders with slightly different formatting: When we split the violin on the hue it is a lot easier to see the differences in each KDE. However, the IQR stats aren’t split by the sex anymore; instead they apply to the entire class. So there are trade-offs to styling your plot in certain ways. 
 </p>
 </div>
  
@@ -716,10 +716,10 @@ Draw a combination of boxplot and kernel density estimate with <strong>Violin Pl
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA448A6860&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA4524D438&gt;</code></pre>
 <pre><code>## Text(0.5, 1.0, &#39;Violin Plot of Age by Class, Separated by Sex&#39;)</code></pre>
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA445A2F60&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA4894F2E8&gt;</code></pre>
 <p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
@@ -738,8 +738,7 @@ Draw a combination of boxplot and kernel density estimate with <strong>Violin Pl
  
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
-# Bar Plot</p>
-<p>Bar charts are useful for comparing quantities corresponding to different groups. There are two types of bar charts: <code>geom_bar()</code> and <code>geom_col()</code>. <code>geom_bar()</code> makes the height of the bar proportional to the number of cases in each group (or if the <code>weight</code> aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use <code>geom_col()</code> instead. Check the <a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">documentation</a> for more details. 
+<strong>Bar charts</strong> are useful for comparing quantities corresponding to different groups. There are two types of bar charts: <code>geom_bar()</code> and <code>geom_col()</code>. <code>geom_bar()</code> makes the height of the bar proportional to the number of cases in each group (or if the <code>weight</code> aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use <code>geom_col()</code> instead. Check the <a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">documentation</a> for more details. 
 </p>
 </div>
  
@@ -748,10 +747,9 @@ Draw a combination of boxplot and kernel density estimate with <strong>Violin Pl
  
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
-# Bar Plot</p>
-<p>Bar plots are classic. You get an estimate of central tendency for a numerical variable for each class on the x axis. Say we were interested in knowing the average fare price of passengers that embarked from different towns.</p>
+<strong>Bar plots</strong> are classic. You get an estimate of central tendency for a numerical variable for each class on the x axis. Say we were interested in knowing the average fare price of passengers that embarked from different towns.</p>
 <p>Seaborn will take the mean as default, but you can use other measures of central tendency as well. There is a noticeable difference between Cherbourg and the other two, let’s separate the bars by class to see who was boarding in each town.</p>
-<p>Now we can see that the average fare price in Cherbourg was so high due to some very expensive first class tickets. The large error bar on the fare price in first class from Cherbourg is also interesting; that could mean there is a lot of separation between some very high price outlier tickets and the rest. 
+<p>we can see that the average fare price in Cherbourg was so high due to some very expensive first class tickets. The large error bar on the fare price in first class from Cherbourg is also interesting; that could mean there is a lot of separation between some very high price outlier tickets and the rest. 
 </p>
 </div>
  
@@ -813,10 +811,10 @@ Draw a combination of boxplot and kernel density estimate with <strong>Violin Pl
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA4446A240&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA49C3B198&gt;</code></pre>
 <pre><code>## Text(0.5, 1.0, &#39;Fare of Passenger by Embarked Town&#39;)</code></pre>
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA448715C0&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA47385048&gt;</code></pre>
 <p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
@@ -835,23 +833,41 @@ Draw a combination of boxplot and kernel density estimate with <strong>Violin Pl
  
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
-The <em>jitter geom</em> is a convenient shortcut for geom_point(position = “jitter”). It adds a small amount of random variation to the location of each point, and is a useful way of handling overplotting caused by discreteness in smaller datasets.</p>
+The <strong>jitter geom</strong> is a convenient shortcut for geom_point(position = “jitter”). It adds a small amount of random variation to the location of each point, and is a useful way of handling overplotting caused by discreteness in smaller datasets.</p>
 <p>A geom that draws a point defined by an x and y coordinate, like geom_point, but jitters the points.</p>
 <p>Default statistic: stat_identity Default position adjustment: position_jitter</p>
-<p>Parameters - x - (required) x coordinate of the point - y - (required) y coordinate of the point - size - (default: 0.5) diameter of the point - shape - (default: 16=dot) the shape of the point - colour - (default: “black”) the color of the point - fill - (default: NA) the fill of the point (only a small minority of shapes actually can be filled; see shape) - alpha - (default: 1=opaque) the transparency of the point - na.rm - (default: FALSE) silently remove points with NA coordinates 
+<p>Parameters</p>
+<ul>
+<li>x - (required) x coordinate of the point</li>
+<li>y - (required) y coordinate of the point</li>
+<li>size - (default: 0.5) diameter of the point</li>
+<li>shape - (default: 16=dot) the shape of the point</li>
+<li>colour - (default: “black”) the color of the point</li>
+<li>fill - (default: NA) the fill of the point (only a small minority of shapes actually can be filled; see shape)</li>
+<li>alpha - (default: 1=opaque) the transparency of the point</li>
+<li>na.rm - (default: FALSE) silently remove points with NA coordinates 
 </p>
 </div>
  
-</p>
+</li>
+</ul>
 <p>
  
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
- 
+Draw a scatterplot where one variable is categorical.</p>
+<p>A <strong>strip plot</strong> can be drawn on its own, but it is also a good complement to a box or violin plot in cases where you want to show all observations along with some representation of the underlying distribution.</p>
+<p>Input data can be passed in a variety of formats, including:</p>
+<ul>
+<li>Vectors of data represented as lists, numpy arrays, or pandas Series objects passed directly to the <code>x</code>, <code>y</code>, and/or <code>hue</code> parameters.</li>
+<li>A “long-form” DataFrame, in which case the <code>x</code>, <code>y</code>, and <code>hue</code> variables will determine how the data are plotted.</li>
+<li>A “wide-form” DataFrame, such that each numeric column will be plotted.</li>
+<li>An array or list of vectors. 
 </p>
 </div>
  
-</p>
+</li>
+</ul>
 
 </div>
 <div class="handler dotto-main-intro"></div>
@@ -917,8 +933,7 @@ The <em>jitter geom</em> is a convenient shortcut for geom_point(position = “j
  
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
-# Bee Swarm Plot</p>
-<p>Create a bee swarm plot. A bee swarm plot is a one-dimensional scatter plot similar to stripchart, but with various methods to separate coincident points such that each point is visible. Also, beeswarm introduces additional features unavailable in stripchart, such as the ability to control the color and plotting character of each point. 
+Create a <strong>bee swarm plot</strong>. A bee swarm plot is a one-dimensional scatter plot similar to stripchart, but with various methods to separate coincident points such that each point is visible. Also, beeswarm introduces additional features unavailable in stripchart, such as the ability to control the color and plotting character of each point. 
 </p>
 </div>
  
@@ -927,9 +942,8 @@ The <em>jitter geom</em> is a convenient shortcut for geom_point(position = “j
  
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
-# Swarm Plot</p>
-<p>Swarm plots are fantastic because they offer an easy way to show the individual data points in a distribution. Instead of a big blob like the strip plot, the swarm plot simply adjusts the points along the x-axis. Although they also don’t scale well with tons of values, they offer more organized insight.</p>
-<p>Here we can more easily see where the dense age groups are rather than the difficult to interpret strip plot above. 
+<strong>Swarm plots</strong> are fantastic because they offer an easy way to show the individual data points in a distribution. Instead of a big blob like the strip plot, the swarm plot simply adjusts the points along the x-axis. Although they also don’t scale well with tons of values, they offer more organized insight.</p>
+<p>Here we can more easily see where the dense age groups are rather than the difficult to interpret strip plot in last Dot. 
 </p>
 </div>
  
@@ -983,7 +997,7 @@ The <em>jitter geom</em> is a convenient shortcut for geom_point(position = “j
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA444E7550&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA4909C400&gt;</code></pre>
 <p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  

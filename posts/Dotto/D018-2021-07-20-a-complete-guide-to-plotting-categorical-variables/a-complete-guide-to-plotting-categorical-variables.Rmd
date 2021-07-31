@@ -354,6 +354,7 @@ plt.title("Fare of Passenger by Embarked Town, Divided by Class")
 
 <!-- Dot 5, lang: r ------------------------------------------------>
 
+```{block, Dot = 5, part = "Instruction", lang = "r"}
 The **jitter geom** is a convenient shortcut for geom_point(position = "jitter"). It adds a small amount of random variation to the location of each point, and is a useful way of handling overplotting caused by discreteness in smaller datasets.
 
 A geom that draws a point defined by an x and y coordinate, like geom_point, but jitters the points.
