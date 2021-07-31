@@ -232,7 +232,7 @@ Draw a combination of boxplot and kernel density estimate with **Violin Plots**.
 
 Violin plots are not very frequently used but I have found them to be useful on occasion, and they are an interesting change from more popular options. They plot a vertical kernel density plot for each category and a small box plot to summarize important statistics.
 
-While I like this plot, I think it is easier to compare the genders with slightly different formatting: When we split the violin on the hue it is a lot easier to see the differences in each KDE. However, the IQR stats aren’t split by the sex anymore; instead they apply to the entire class. So there are trade-offs to styling your plot in certain ways.
+It is easier to compare the genders with slightly different formatting: When we split the violin on the hue it is a lot easier to see the differences in each KDE. However, the IQR stats aren’t split by the sex anymore; instead they apply to the entire class. So there are trade-offs to styling your plot in certain ways.
 
 ```
 
@@ -295,20 +295,16 @@ plt.title("Violin Plot of Age by Class, Separated by Sex")
 <!-- Dot 4, lang: r ------------------------------------------------>
 
 ```{block, Dot = 4, part = "Instruction", lang = "r"}
-# Bar Plot
-
-Bar charts are useful for comparing quantities corresponding to different groups. There are two types of bar charts: `geom_bar()` and `geom_col()`. `geom_bar()` makes the height of the bar proportional to the number of cases in each group (or if the `weight` aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use `geom_col()` instead. Check the [documentation](https://ggplot2.tidyverse.org/reference/geom_bar.html) for more details.
+**Bar charts** are useful for comparing quantities corresponding to different groups. There are two types of bar charts: `geom_bar()` and `geom_col()`. `geom_bar()` makes the height of the bar proportional to the number of cases in each group (or if the `weight` aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use `geom_col()` instead. Check the [documentation](https://ggplot2.tidyverse.org/reference/geom_bar.html) for more details.
 
 ```
 
 ```{block, Dot = 4, part = "Instruction", lang = "python"}
-# Bar Plot
-
-Bar plots are classic. You get an estimate of central tendency for a numerical variable for each class on the x axis. Say we were interested in knowing the average fare price of passengers that embarked from different towns. 
+**Bar plots** are classic. You get an estimate of central tendency for a numerical variable for each class on the x axis. Say we were interested in knowing the average fare price of passengers that embarked from different towns. 
 
 Seaborn will take the mean as default, but you can use other measures of central tendency as well. There is a noticeable difference between Cherbourg and the other two, let’s separate the bars by class to see who was boarding in each town.
 
-Now we can see that the average fare price in Cherbourg was so high due to some very expensive first class tickets. The large error bar on the fare price in first class from Cherbourg is also interesting; that could mean there is a lot of separation between some very high price outlier tickets and the rest. 
+we can see that the average fare price in Cherbourg was so high due to some very expensive first class tickets. The large error bar on the fare price in first class from Cherbourg is also interesting; that could mean there is a lot of separation between some very high price outlier tickets and the rest. 
 
 ```
 
@@ -358,14 +354,37 @@ plt.title("Fare of Passenger by Embarked Town, Divided by Class")
 
 <!-- Dot 5, lang: r ------------------------------------------------>
 
-```{block, Dot = 5, part = "Instruction", lang = "r"}
+The **jitter geom** is a convenient shortcut for geom_point(position = "jitter"). It adds a small amount of random variation to the location of each point, and is a useful way of handling overplotting caused by discreteness in smaller datasets.
+
+A geom that draws a point defined by an x and y coordinate, like geom_point, but jitters the points.
+
+Default statistic: stat_identity
+Default position adjustment: position_jitter
+
+Parameters
+
+- x - (required) x coordinate of the point
+- y - (required) y coordinate of the point
+- size - (default: 0.5) diameter of the point
+- shape - (default: 16=dot) the shape of the point
+- colour - (default: "black") the color of the point
+- fill - (default: NA) the fill of the point (only a small minority of shapes actually can be filled; see shape)
+- alpha - (default: 1=opaque) the transparency of the point
+- na.rm - (default: FALSE) silently remove points with NA coordinates
 
 ```
 
 ```{block, Dot = 5, part = "Instruction", lang = "python"}
-# jitter geom
+Draw a scatterplot where one variable is categorical.
 
-The jitter geom is a convenient shortcut for geom_point(position = "jitter"). It adds a small amount of random variation to the location of each point, and is a useful way of handling overplotting caused by discreteness in smaller datasets.
+A **strip plot** can be drawn on its own, but it is also a good complement to a box or violin plot in cases where you want to show all observations along with some representation of the underlying distribution.
+
+Input data can be passed in a variety of formats, including:
+
+- Vectors of data represented as lists, numpy arrays, or pandas Series objects passed directly to the `x`, `y`, and/or `hue` parameters.
+- A “long-form” DataFrame, in which case the `x`, `y`, and `hue` variables will determine how the data are plotted.
+- A “wide-form” DataFrame, such that each numeric column will be plotted.
+- An array or list of vectors.
 
 ```
 
@@ -396,9 +415,7 @@ sns.stripplot(x='class', y='age', data=titanic, jitter=True, hue='alive', dodge=
 <!-- Dot 6, lang: r ------------------------------------------------>
 
 ```{block, Dot = 6, part = "Instruction", lang = "r"}
-# Bee Swarm Plot
-
-Create a bee swarm plot. A bee swarm plot is a one-dimensional scatter plot similar to stripchart,
+Create a **bee swarm plot**. A bee swarm plot is a one-dimensional scatter plot similar to stripchart,
 but with various methods to separate coincident points such that each point is visible. Also,
 beeswarm introduces additional features unavailable in stripchart, such as the ability to control
 the color and plotting character of each point.
@@ -406,11 +423,9 @@ the color and plotting character of each point.
 ```
 
 ```{block, Dot = 6, part = "Instruction", lang = "python"}
-# Swarm Plot
+**Swarm plots** are fantastic because they offer an easy way to show the individual data points in a distribution. Instead of a big blob like the strip plot, the swarm plot simply adjusts the points along the x-axis. Although they also don’t scale well with tons of values, they offer more organized insight.
 
-Swarm plots are fantastic because they offer an easy way to show the individual data points in a distribution. Instead of a big blob like the strip plot, the swarm plot simply adjusts the points along the x-axis. Although they also don’t scale well with tons of values, they offer more organized insight.
-
- Here we can more easily see where the dense age groups are rather than the difficult to interpret strip plot above.
+ Here we can more easily see where the dense age groups are rather than the difficult to interpret strip plot in last Dot.
 
 ```
 
@@ -421,21 +436,21 @@ ggplot(titanic, aes(class, age, col = alive)) + geom_beeswarm()
 
 ```
 
-```{python, Dot = 7, part = "Code", echo = T, eval = F, }
+```{python, Dot = 6, part = "Code", echo = T, eval = F, }
 plt.figure(figsize=(10, 6))
 sns.swarmplot(x='class', y='age', data=titanic, hue='alive', dodge=True, palette='viridis')
 plt.title("Age by Passenger Class, Separated by Survival")
 
 ```
 
-```{r, Dot = 7, part = "Result", echo = F, eval = T}
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
 library(ggbeeswarm)
 
 ggplot(titanic, aes(class, age, col = alive)) + geom_beeswarm()
 
 ```
 
-```{python, Dot = 7, part = "Result", echo = F, eval = T}
+```{python, Dot = 6, part = "Result", echo = F, eval = T}
 plt.figure(figsize=(10, 6))
 sns.swarmplot(x='class', y='age', data=titanic, hue='alive', palette='viridis')
 plt.title("Age by Passenger Class, Separated by Survival")
