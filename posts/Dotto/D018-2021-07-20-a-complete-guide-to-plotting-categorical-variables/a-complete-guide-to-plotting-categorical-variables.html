@@ -275,8 +275,9 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
-In this Dotto we will use Titanic dataset. This dataset is great because it has a decent number of entries — almost 900 — while also having an interesting story to dig into. There are lots of questions to ask and relationships between variables to explore making it a great example data set. Most critical for this article is that there is also a good mix of numerical and categorical variables to explore.</p>
-<p>In this Dotto we will see:</p>
+Exploratory data visualization allows us to get an idea of the data, before starting any modeling. Usually scatter plot is a good choice to visualize data with numerical features which allows us to see relationships/ patterns within the data. The challenge starts when the data set includes Categorical variables (e.g., Country, Gender, Race). How do we visualize such a data set to understand patterns?</p>
+<p>In this Dotto we will use Titanic dataset. This dataset is great because it has a decent number of entries — almost 900 — while also having an interesting story to dig into. There are lots of questions to ask and relationships between variables to explore making it a great example data set. Most critical for this article is that there is also a good mix of numerical and categorical variables to explore.</p>
+<p>The common plots used to visualize categorical data are</p>
 <ul>
 <li><p><strong>Categorical Distribution Plots</strong></p>
 <p>We have two different kinds of categorical distribution plots, box plots and violin plots. These kinds of plots allow us to choose a numerical variable, like age, and plot the distribution of age for each category in a selected categorical variable.</p></li>
@@ -367,17 +368,17 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <col width="3%" />
 <col width="8%" />
 <col width="6%" />
-<col width="4%" />
-<col width="3%" />
-<col width="5%" />
-<col width="5%" />
-<col width="7%" />
-<col width="8%" />
 <col width="6%" />
 <col width="3%" />
-<col width="10%" />
+<col width="5%" />
+<col width="5%" />
+<col width="6%" />
+<col width="8%" />
+<col width="6%" />
+<col width="5%" />
+<col width="9%" />
 <col width="4%" />
-<col width="11%" />
+<col width="10%" />
 <col width="5%" />
 <col width="5%" />
 </colgroup>
@@ -403,50 +404,14 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">868</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="left">male</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">9.5000</td>
-<td align="left">S</td>
-<td align="left">Third</td>
-<td align="left">man</td>
-<td align="left">True</td>
-<td align="left"></td>
-<td align="left">Southampton</td>
-<td align="left">no</td>
-<td align="left">True</td>
-</tr>
-<tr class="even">
-<td align="right">643</td>
-<td align="right">1</td>
-<td align="right">3</td>
-<td align="left">male</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">56.4958</td>
-<td align="left">S</td>
-<td align="left">Third</td>
-<td align="left">man</td>
-<td align="left">True</td>
-<td align="left"></td>
-<td align="left">Southampton</td>
-<td align="left">yes</td>
-<td align="left">True</td>
-</tr>
-<tr class="odd">
-<td align="right">236</td>
+<td align="right">213</td>
 <td align="right">0</td>
 <td align="right">2</td>
 <td align="left">male</td>
-<td align="right">44</td>
-<td align="right">1</td>
+<td align="right">30</td>
 <td align="right">0</td>
-<td align="right">26.0000</td>
+<td align="right">0</td>
+<td align="right">13.000</td>
 <td align="left">S</td>
 <td align="left">Second</td>
 <td align="left">man</td>
@@ -454,9 +419,63 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <td align="left"></td>
 <td align="left">Southampton</td>
 <td align="left">no</td>
+<td align="left">True</td>
+</tr>
+<tr class="even">
+<td align="right">15</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="left">female</td>
+<td align="right">55</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">16.000</td>
+<td align="left">S</td>
+<td align="left">Second</td>
+<td align="left">woman</td>
+<td align="left">False</td>
+<td align="left"></td>
+<td align="left">Southampton</td>
+<td align="left">yes</td>
+<td align="left">True</td>
+</tr>
+<tr class="odd">
+<td align="right">133</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="left">female</td>
+<td align="right">29</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">26.000</td>
+<td align="left">S</td>
+<td align="left">Second</td>
+<td align="left">woman</td>
+<td align="left">False</td>
+<td align="left"></td>
+<td align="left">Southampton</td>
+<td align="left">yes</td>
 <td align="left">False</td>
 </tr>
 <tr class="even">
+<td align="right">604</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">male</td>
+<td align="right">35</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">26.550</td>
+<td align="left">C</td>
+<td align="left">First</td>
+<td align="left">man</td>
+<td align="left">True</td>
+<td align="left"></td>
+<td align="left">Cherbourg</td>
+<td align="left">yes</td>
+<td align="left">True</td>
+</tr>
+<tr class="odd">
 <td align="right">761</td>
 <td align="right">0</td>
 <td align="right">3</td>
@@ -464,31 +483,13 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <td align="right">41</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">7.1250</td>
+<td align="right">7.125</td>
 <td align="left">S</td>
 <td align="left">Third</td>
 <td align="left">man</td>
 <td align="left">True</td>
 <td align="left"></td>
 <td align="left">Southampton</td>
-<td align="left">no</td>
-<td align="left">True</td>
-</tr>
-<tr class="odd">
-<td align="right">517</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="left">male</td>
-<td align="right">NA</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">24.1500</td>
-<td align="left">Q</td>
-<td align="left">Third</td>
-<td align="left">man</td>
-<td align="left">True</td>
-<td align="left"></td>
-<td align="left">Queenstown</td>
 <td align="left">no</td>
 <td align="left">True</td>
 </tr>
@@ -502,8 +503,6 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## C:\Users\ASUS\Documents\R\win-library\4.0\reticulate\python\rpytools\call.py:13: MatplotlibDeprecationWarning: The &#39;warn&#39; parameter of use() is deprecated since Matplotlib 3.1 and will be removed in 3.3.  If any parameter follows &#39;warn&#39;, they should be pass as keyword, not positionally.
-##   res = rpycall.call_r_function(f, *args, **kwargs)</code></pre>
 <pre><code>## &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 ## RangeIndex: 891 entries, 0 to 890
 ## Data columns (total 15 columns):
@@ -578,17 +577,17 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb5"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic boxplot</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(class, age)) <span class="sc">+</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Age by Passenger Class, Titanic&quot;</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding colour</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(class, age)) <span class="sc">+</span> </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">factor</span>(survived)))<span class="sc">+</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic boxplot</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(class, age)) <span class="sc">+</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Age by Passenger Class, Titanic&quot;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding colour</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(class, age)) <span class="sc">+</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">factor</span>(survived)))<span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -597,15 +596,15 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb6"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Boxplot</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Age by Passenger Class, Titanic&quot;</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;survived&#39;</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Boxplot</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Age by Passenger Class, Titanic&quot;</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;survived&#39;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -620,7 +619,7 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <br>
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
-<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto auto auto 0;" /><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-16-2.png" width="672" style="display: block; margin: auto auto auto 0;" />
+<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto auto auto 0;" /><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-11-2.png" width="672" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </p>
@@ -629,11 +628,11 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50C2CC3C8&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA42B19160&gt;</code></pre>
 <pre><code>## Text(0.5, 1.0, &#39;Age by Passenger Class, Titanic&#39;)</code></pre>
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50DB6A5F8&gt;</code></pre>
-<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA444C3B38&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </div>
@@ -680,17 +679,17 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb10"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic violinplot</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(class, age)) <span class="sc">+</span> </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Violin Plot of Age by Class&quot;</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding colour</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(class, age)) <span class="sc">+</span> </span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">factor</span>(sex))) <span class="sc">+</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Violin Plot of Age by Class, Separated by Sex&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic violinplot</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(class, age)) <span class="sc">+</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Violin Plot of Age by Class&quot;</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding colour</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(class, age)) <span class="sc">+</span> </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="fu">factor</span>(sex))) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Violin Plot of Age by Class, Separated by Sex&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -699,15 +698,15 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb11"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Violinplot</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sns.violinplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>,y<span class="op">=</span><span class="st">&quot;age&quot;</span>,data<span class="op">=</span>titanic, hue<span class="op">=</span><span class="st">&#39;sex&#39;</span>, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Violin Plot of Age by Class, Separated by Sex&quot;</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Split</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>sns.violinplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&quot;age&quot;</span>, data<span class="op">=</span>titanic, hue<span class="op">=</span><span class="st">&#39;sex&#39;</span>, split<span class="op">=</span><span class="st">&#39;True&#39;</span>, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Violin Plot of Age by Class, Separated by Sex&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Violinplot</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>sns.violinplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>,y<span class="op">=</span><span class="st">&quot;age&quot;</span>,data<span class="op">=</span>titanic, hue<span class="op">=</span><span class="st">&#39;sex&#39;</span>, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Violin Plot of Age by Class, Separated by Sex&quot;</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Split</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>sns.violinplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&quot;age&quot;</span>, data<span class="op">=</span>titanic, hue<span class="op">=</span><span class="st">&#39;sex&#39;</span>, split<span class="op">=</span><span class="st">&#39;True&#39;</span>, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Violin Plot of Age by Class, Separated by Sex&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -722,7 +721,7 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <br>
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
-<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto auto auto 0;" /><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-22-2.png" width="672" style="display: block; margin: auto auto auto 0;" />
+<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto auto auto 0;" /><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-17-2.png" width="672" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </p>
@@ -731,11 +730,11 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50DB9D2B0&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA444C3898&gt;</code></pre>
 <pre><code>## Text(0.5, 1.0, &#39;Violin Plot of Age by Class, Separated by Sex&#39;)</code></pre>
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50DBFFBE0&gt;</code></pre>
-<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA42B11C50&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </div>
@@ -788,15 +787,15 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb15"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Boxenplot</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>sns.boxenplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Distribution of Age by Passenger Class&quot;</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>sns.boxenplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;survived&#39;</span>)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Distribution of Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Boxenplot</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sns.boxenplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Distribution of Age by Passenger Class&quot;</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>sns.boxenplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;survived&#39;</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Distribution of Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -820,11 +819,11 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50E496320&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA4343AD68&gt;</code></pre>
 <pre><code>## Text(0.5, 1.0, &#39;Distribution of Age by Passenger Class&#39;)</code></pre>
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50E82AF28&gt;</code></pre>
-<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA456C4208&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </div>
@@ -872,11 +871,11 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb19"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> titanic,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> embark_town,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> fare)) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">factor</span>(class))) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fare of Passenger by Embarked Town, Divided by Class&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> titanic,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> embark_town,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> fare)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">factor</span>(class))) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Fare of Passenger by Embarked Town, Divided by Class&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -885,15 +884,15 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb20"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Barplot</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, y<span class="op">=</span><span class="st">&#39;fare&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Fare of Passenger by Embarked Town&quot;</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, y<span class="op">=</span><span class="st">&#39;fare&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;class&#39;</span>)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Fare of Passenger by Embarked Town, Divided by Class&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Barplot</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, y<span class="op">=</span><span class="st">&#39;fare&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Fare of Passenger by Embarked Town&quot;</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, y<span class="op">=</span><span class="st">&#39;fare&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;class&#39;</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Fare of Passenger by Embarked Town, Divided by Class&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -908,7 +907,7 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <br>
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
-<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto auto auto 0;" />
+<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </p>
@@ -917,11 +916,11 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B57E2B5940&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA4520D0B8&gt;</code></pre>
 <pre><code>## Text(0.5, 1.0, &#39;Fare of Passenger by Embarked Town&#39;)</code></pre>
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50EB72F60&gt;</code></pre>
-<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA4570CA58&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </div>
@@ -973,15 +972,15 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb24"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Pointplot</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>sns.pointplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>,y<span class="op">=</span><span class="st">&#39;fare&#39;</span>,data<span class="op">=</span>titanic)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Average Fare Price by Embarked Town&quot;</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>sns.pointplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, y<span class="op">=</span><span class="st">&#39;fare&#39;</span>, data<span class="op">=</span>titanic, hue<span class="op">=</span><span class="st">&#39;class&#39;</span>)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Average Fare Price by Embarked Town, Separated by Sex&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Pointplot</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>sns.pointplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>,y<span class="op">=</span><span class="st">&#39;fare&#39;</span>,data<span class="op">=</span>titanic)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Average Fare Price by Embarked Town&quot;</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>sns.pointplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, y<span class="op">=</span><span class="st">&#39;fare&#39;</span>, data<span class="op">=</span>titanic, hue<span class="op">=</span><span class="st">&#39;class&#39;</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Average Fare Price by Embarked Town, Separated by Sex&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -1005,11 +1004,11 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50EBA62E8&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA456D2940&gt;</code></pre>
 <pre><code>## Text(0.5, 1.0, &#39;Average Fare Price by Embarked Town&#39;)</code></pre>
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50EE94F28&gt;</code></pre>
-<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA457C0198&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </div>
@@ -1053,9 +1052,9 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb28"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic,</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(embark_town)) <span class="sc">+</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">factor</span>(sex)))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(embark_town)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">factor</span>(sex)))</span></code></pre></div>
 
 </div>
  
@@ -1064,15 +1063,15 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb29"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Countplot</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Count of Passengers that Embarked in Each City&quot;</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;sex&#39;</span>)</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Count of Passengers that Embarked in Each City, Separated by Sex&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Countplot</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Count of Passengers that Embarked in Each City&quot;</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding Hue</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">&#39;embark_town&#39;</span>, data<span class="op">=</span>titanic, palette<span class="op">=</span><span class="st">&#39;rainbow&#39;</span>, hue<span class="op">=</span><span class="st">&#39;sex&#39;</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Count of Passengers that Embarked in Each City, Separated by Sex&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -1096,11 +1095,11 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50EBF1940&gt;</code></pre>
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA45785CF8&gt;</code></pre>
 <pre><code>## Text(0.5, 1.0, &#39;Count of Passengers that Embarked in Each City&#39;)</code></pre>
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50E452EB8&gt;</code></pre>
-<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA4693BD68&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </div>
@@ -1145,8 +1144,8 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb33"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, <span class="fu">aes</span>(class, age)) <span class="sc">+</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">colour =</span> alive))</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, <span class="fu">aes</span>(class, age)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">colour =</span> alive))</span></code></pre></div>
 
 </div>
  
@@ -1155,8 +1154,8 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb34"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>sns.stripplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, jitter<span class="op">=</span><span class="va">True</span>, hue<span class="op">=</span><span class="st">&#39;alive&#39;</span>, dodge<span class="op">=</span><span class="va">True</span>, palette<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>sns.stripplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, jitter<span class="op">=</span><span class="va">True</span>, hue<span class="op">=</span><span class="st">&#39;alive&#39;</span>, dodge<span class="op">=</span><span class="va">True</span>, palette<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span></code></pre></div>
 
 </div>
  
@@ -1171,7 +1170,7 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <br>
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
-<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto auto auto 0;" />
+<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </p>
@@ -1180,7 +1179,7 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </div>
@@ -1227,9 +1226,9 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb35"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, <span class="fu">aes</span>(class, age, <span class="at">col =</span> alive)) <span class="sc">+</span> <span class="fu">geom_beeswarm</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic, <span class="fu">aes</span>(class, age, <span class="at">col =</span> alive)) <span class="sc">+</span> <span class="fu">geom_beeswarm</span>()</span></code></pre></div>
 
 </div>
  
@@ -1238,9 +1237,9 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb36"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>sns.swarmplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, hue<span class="op">=</span><span class="st">&#39;alive&#39;</span>, dodge<span class="op">=</span><span class="va">True</span>, palette<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>sns.swarmplot(x<span class="op">=</span><span class="st">&#39;class&#39;</span>, y<span class="op">=</span><span class="st">&#39;age&#39;</span>, data<span class="op">=</span>titanic, hue<span class="op">=</span><span class="st">&#39;alive&#39;</span>, dodge<span class="op">=</span><span class="va">True</span>, palette<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Age by Passenger Class, Separated by Survival&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -1255,7 +1254,7 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <br>
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
-<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-58-1.png" width="672" style="display: block; margin: auto auto auto 0;" />
+<img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </p>
@@ -1264,8 +1263,8 @@ In this Dotto we will use one of Seaborn’s conveniently available datasets abo
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 
-<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001B50EB7BFD0&gt;</code></pre>
-<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000001BA469C3BA8&gt;</code></pre>
+<p><img src="a-complete-guide-to-plotting-categorical-variables_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" />
 </div>
  
 </div>

@@ -31,10 +31,12 @@ DataMotto::use_Dotto()
 <!-- Dot 1, lang: r ------------------------------------------------>
 
 ```{block, Dot = 1, part = "Instruction", lang = "r"}
+Exploratory data visualization allows us to get an idea of the data, before starting any modeling. Usually scatter plot is a good choice to visualize data with numerical features which allows us to see relationships/ patterns within the data.
+The challenge starts when the data set includes Categorical variables (e.g., Country, Gender, Race). How do we visualize such a data set to understand patterns?
+
 In this Dotto we will use Titanic dataset. This dataset is great because it has a decent number of entries — almost 900 — while also having an interesting story to dig into. There are lots of questions to ask and relationships between variables to explore making it a great example data set. Most critical for this article is that there is also a good mix of numerical and categorical variables to explore.
 
-
-In this Dotto we will see:
+The common plots used to visualize categorical data are
 
 - **Categorical Distribution Plots**
 
@@ -49,10 +51,12 @@ In this Dotto we will see:
 ```
 
 ```{block, Dot = 1, part = "Instruction", lang = "python"}
-In this Dotto we will use one of Seaborn’s conveniently available datasets about the Titanic, which I’m sure many readers have seen before. Seaborn has quite a few datasets ready to be loaded into Python to practice with; they are great for practicing data processing, exploration, and basic machine learning techniques. This data set is great because it has a decent number of entries — almost 900 — while also having an interesting story to dig into. There are lots of questions to ask and relationships between variables to explore making it a great example data set. Most critical for this article is that there is also a good mix of numerical and categorical variables to explore.
+Exploratory data visualization allows us to get an idea of the data, before starting any modeling. Usually scatter plot is a good choice to visualize data with numerical features which allows us to see relationships/ patterns within the data.
+The challenge starts when the data set includes Categorical variables (e.g., Country, Gender, Race). How do we visualize such a data set to understand patterns?
 
+In this Dotto we will use Titanic dataset. This dataset is great because it has a decent number of entries — almost 900 — while also having an interesting story to dig into. There are lots of questions to ask and relationships between variables to explore making it a great example data set. Most critical for this article is that there is also a good mix of numerical and categorical variables to explore.
 
-In this Dotto we will see:
+The common plots used to visualize categorical data are
 
 - **Categorical Distribution Plots**
 
@@ -63,7 +67,7 @@ In this Dotto we will see:
 - **Categorical Scatter Plots**
 
   Both strip plots and swarm plots are essentially scatter plots where one variable is categorical. I like to use them as additions to other kinds of plots, which we’ll discuss as they are useful for quickly visualizing the number of data points in a group.
-
+  
 ```
 
 ```{r, Dot = 1, part = "Code", echo = T, eval = F, }
@@ -129,7 +133,7 @@ titanic.info()
 <!-- Dot 2, lang: r ------------------------------------------------>
 
 ```{block, Dot = 2, part = "Instruction", lang = "r"}
-# Box Plots
+Draw a **box plot** to show distributions with respect to categories. 
 
 Many of us have probably made quite a few box plots over the years. They are an easy and effective way to visualize groups of numerical data through their quartiles. Seaborn makes creating attractive box plots simple and allows us to easily compare an extra dimension with the hue argument that appears in many Seaborn functions.
 
@@ -144,7 +148,7 @@ Like many other plots available in ggplot, geom_boxplot can take an added `colou
 ```
 
 ```{block, Dot = 2, part = "Instruction", lang = "python"}
-# Box Plots
+Draw a **box plot** to show distributions with respect to categories. 
 
 Many of us have probably made quite a few box plots over the years. They are an easy and effective way to visualize groups of numerical data through their quartiles. Seaborn makes creating attractive box plots simple and allows us to easily compare an extra dimension with the hue argument that appears in many Seaborn functions.
 
@@ -217,14 +221,14 @@ plt.title("Age by Passenger Class, Separated by Survival")
 <!-- Dot 3, lang: r ------------------------------------------------>
 
 ```{block, Dot = 3, part = "Instruction", lang = "r"}
-# Violin Plots
+Draw a combination of boxplot and kernel density estimate with **Violin Plots**.
 
 Violin plots are not very frequently used but I have found them to be useful on occasion, and they are an interesting change from more popular options. They plot a vertical kernel density plot for each category and a small box plot to summarize important statistics.
 
 ```
 
 ```{block, Dot = 3, part = "Instruction", lang = "python"}
-# Violin Plots
+Draw a combination of boxplot and kernel density estimate with **Violin Plots**.
 
 Violin plots are not very frequently used but I have found them to be useful on occasion, and they are an interesting change from more popular options. They plot a vertical kernel density plot for each category and a small box plot to summarize important statistics.
 
