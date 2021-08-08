@@ -1,0 +1,47 @@
+{
+  "file_name": ["working-with-date-and-time"],
+  "dir_name": ["D022-2021-08-08-working-with-date-and-time"],
+  "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+  "link": ["posts/Dotto/D022-2021-08-08-working-with-date-and-time/index.html"],
+  "base_url": ["https://datamotto.com"],
+  "social_networks_datamotto": {
+    "twitter": ["https://twitter.com/DataMotto"],
+    "linkedin": ["https://www.linkedin.com/company/datamotto"]
+  },
+  "dotto_number": [9],
+  "dotto_label": ["D009"],
+  "dotto_id": ["0cf344fe-f80e-11eb-978b-cd8c330b9773"],
+  "title": ["Working with Date and Time"],
+  "description": ["Become a master of dates and times in no time.\n"],
+  "author": [
+    {
+      "name": ["Mohammad Hossein Malekpour"],
+      "occupation": ["Data Scientist"],
+      "affiliation": ["DataMotto"],
+      "url": ["https://www.linkedin.com/in/mohammadhossein-malekpour/"],
+      "img": ["MalekpourAvatar.jpg"],
+      "lang": ["python", "R"],
+      "profile_img_for_Dotto": ["../../../assets/img/dotto.png"],
+      "profile_img": ["./posts/Dotto/D022-2021-08-08-working-with-date-and-time./../../assets/img/dotto.png"]
+    }
+  ],
+  "tech": [
+    {
+      "lang": ["r"],
+      "pkgs": ["lubridate", "dplyr"]
+    },
+    {
+      "lang": ["python"],
+      "pkgs": ["datetime", "pandas"]
+    }
+  ],
+  "date": {
+    "created": ["2021-08-08"],
+    "last_updated": ["2021-08-08"]
+  },
+  "categories": ["Wrangler"],
+  "applications": ["General"],
+  "cover_image": {},
+  "slug": ["working-with-date-and-time"],
+  "output": ["DataMotto::Dotto"]
+}

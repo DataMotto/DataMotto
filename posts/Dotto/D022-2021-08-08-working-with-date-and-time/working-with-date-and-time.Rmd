@@ -31,10 +31,52 @@ DataMotto::use_Dotto()
 <!-- Dot 1, lang: r ------------------------------------------------>
 
 ```{block, Dot = 1, part = "Instruction", lang = "r"}
+Throughout your career as a data scientist, it’s inevitable that you’ll come across data containing date and time. For this reason, this extensive guide is here to help make manipulating date and time data using R’s `lubridate` package. We’ll cover a range of topics such as handling date and time strings and measuring time span.
+
+**DateTime Classes**
+
+This chapter will focus on the **lubridate** package, which makes it easier to work with dates and times in R. lubridate is not part of core tidyverse because you only need it when you’re working with dates/times. There are three types of date/time data that refer to an instant in time:
+
+- A **date**. Tibbles print this as `<date>`.
+- A **time** within a day. Tibbles print this as `<time>`.
+- A **date-time** is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as `<dttm>`. Elsewhere in R these are called POSIXct, but I don’t think that’s a very useful name.
+
+In this chapter we are only going to focus on dates and date-times as R doesn’t have a native class for storing times. If you need one, you can use the **hms** package.
+
+```
+
+
+```{block, Dot = 1, part = "Instruction", lang = "python"}
+Throughout your career as a data scientist, it’s inevitable that you’ll come across data containing date and time. For this reason, this extensive guide is here to help make manipulating date and time data using Python’s `datetime` module. We’ll cover a range of topics such as handling date and time strings, measuring time span, and working with datetime objects in `pandas`.
+
+**Python’s DateTime Classes**
+
+To introduce you to the `datetime` module, there are five main object classes that come in handy for different purposes. They are as follows:
+
+- `datetime` — allows us to manipulate dates and times together (month, day, year, hour, second, microsecond).
+- `date`— allows us to manipulate dates only (month, day, year).
+- `time` — you probably guessed it; this class allows us to manipulate time only (hour, minute, second, microsecond).
+- `timedelta` — used for measuring duration, the difference between two dates or times.
+- `tzinfo` — used for dealing with time zones. We won’t be covering this one in this Dotto.
 
 ```
 
 ```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+# To install package from CRAN:
+install.packages("lubridate")
+
+# To install development version from Github:
+library(devtools)
+# dev mode allows testing of development packages in a sandbox, without interfering
+# with the other packages you have installed.
+dev_mode(on=T)
+install_github("hadley/lubridate")
+dev_mode(on=F)
+```
+
+```{python, Dot = 1, part = "Code", echo = T, eval = F, }
+# import datetime
+from datetime import datetime
 
 ```
 
@@ -42,7 +84,237 @@ DataMotto::use_Dotto()
 
 ```
 
+```{python, Dot = 1, part = "Result", echo = F, eval = T}
+
+```
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+**Working With Datetime**
+
+You should always use the simplest possible data type that works for your needs. That means if you can use a date instead of a date-time, you should. Date-times are substantially more complicated because of the need to handle time zones.
+
+To get the current date or date-time you can use `today()` or `now()`.
+
+Otherwise, there are three ways you’re likely to create a date/time:
+
+- From a string.
+- From individual date-time components.
+- From an existing date/time object.
+
+```
+
+```{block, Dot = 2, part = "Instruction", lang = "python"}
+**Working With Datetime**
+
+First things first, it’s important to note that `datetime` is both a module and a class within that module for when you’re writing your imports. We’ll demonstrate two ways in which you can work with a`datetime` object.
+
+First, you can pass the arguments to `datetime` starting with the largest time unit and ending with the smallest (year, month, day, hours, minutes, second). It’s worth mentioning that you won’t often come across this method in real life as you’ll most probably find yourself using readily available data, but it’s still good to know nonetheless.
+
+Second, if you want to get the current `datetime` you can easily do so using the `.now()` function.
+
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+# import lubridate
+library(lubridate)
+
+# create date-time
+datetime_object1 <- ymd_hms("2020-01-31 20:11:59")
+print(datetime_object1)
+
+# get current date
+datetime_object2 <- now()
+print(datetime_object2)
+
+```
+
+```{python, Dot = 2, part = "Code", echo = T, eval = F, }
+# import datetime
+from datetime import datetime
+
+# create datetime object 
+datetime_object1 = datetime(2021, 6, 1, 15, 23, 25)
+print(datetime_object1)
+
+# get current date
+datetime_object2 = datetime.now()
+print(datetime_object2)
+
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+# import lubridate
+library(lubridate)
+
+# create date-time
+datetime_object1 <- ymd_hms("2020-01-31 20:11:59")
+print(datetime_object1)
+
+# get current date
+datetime_object2 <- now()
+print(datetime_object2)
+
+```
+
+```{python, Dot = 2, part = "Result", echo = F, eval = T}
+# import datetime
+from datetime import datetime
+
+# create datetime object 
+datetime_object1 = datetime(2021, 6, 1, 15, 23, 25)
+print(datetime_object1)
+
+# get current date
+datetime_object2 = datetime.now()
+print(datetime_object2)
+
+```
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+**Date-time components**
+
+Now that you know how to get date-time data into R’s date-time data structures, let’s explore what you can do with them. This Dot will focus on the accessor functions that let you get and set individual components. 
+
+You can pull out individual parts of the date with the accessor functions `year()`, `month()`, `mday()` (day of the month), `yday()` (day of the year), `wday()` (day of the week), `hour()`, `minute()`, and `second()`.
+
+For `month()` and `wday()` you can set `label = TRUE` to return the abbreviated name of the month or day of the week. Set `abbr = FALSE` to return the full name.
+
+```
+
+```{block, Dot = 3, part = "Instruction", lang = "python"}
+**Accessing Individual Components**
+
+You can access individual components of a`datetime` object using the datetime’s attributes; such as year, day, and hour attributes for instance.
+
+Further, you can also find the day of the week using the `.weekday()` function.
+
+Note that Python counts weekdays from 0, starting on Monday. Meaning that:
+
+- 0 = Monday
+- 1 = Tuesday
+- 2 = Wednesday
+- …
+- 6 = Sunday
+
+Now that we’ve covered the ins and outs of the`datetime` object, you can also easily work with `date` and `time` objects as they use the same methods.
+
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F, }
+# import lubridate
+library(lubridate)
+
+datetime_object <- ymd_hms("2016-07-08 12:34:56")
+
+year(datetime_object)
+#> [1] 2016
+month(datetime_object)
+#> [1] 7
+mday(datetime_object)
+#> [1] 8
+
+yday(datetime_object)
+#> [1] 190
+wday(datetime_object)
+#> [1] 6
+
+month(datetime_object, label = TRUE)
+#> [1] Jul
+
+```
+
+```{python, Dot = 3, part = "Code", echo = T, eval = F, }
+# import datetime
+from datetime import datetime
+
+# get current date
+datetime_object = datetime.now()
+print(datetime_object)
+
+# extract data
+y = datetime_object.year
+d = datetime_object.day 
+h = datetime_object.hour
+print(y, d, h)
+
+# find the day of the week
+w = datetime_object2.weekday()
+print(w)
+
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+# import lubridate
+library(lubridate)
+
+datetime_object <- ymd_hms("2016-07-08 12:34:56")
+
+year(datetime_object)
+#> [1] 2016
+month(datetime_object)
+#> [1] 7
+mday(datetime_object)
+#> [1] 8
+
+yday(datetime_object)
+#> [1] 190
+wday(datetime_object)
+#> [1] 6
+
+month(datetime_object, label = TRUE)
+#> [1] Jul
+
+```
 
 
+```{python, Dot = 3, part = "Result", echo = F, eval = T}
+# import datetime
+from datetime import datetime
+
+# get current date
+datetime_object = datetime.now()
+print(datetime_object)
+
+# extract data
+y = datetime_object.year
+d = datetime_object.day 
+h = datetime_object.hour
+print(y, d, h)
+
+# find the day of the week
+w = datetime_object2.weekday()
+print(w)
+
+```
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+
+```
+
+```{block, Dot = 4, part = "Instruction", lang = "python"}
 
 
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F, }
+
+```
+
+```{python, Dot = 4, part = "Code", echo = T, eval = F, }
+
+
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 4, part = "Result", echo = F, eval = T}
+
+```
