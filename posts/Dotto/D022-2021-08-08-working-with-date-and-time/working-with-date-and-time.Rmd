@@ -1,0 +1,48 @@
+---
+title: "Working with Date and Time"
+description: |
+  Become a master of dates and times in no time.
+author:
+  - name: "Mohammad Hossein Malekpour"
+    occupation: "Data Scientist"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/mohammadhossein-malekpour/"
+    img: "MalekpourAvatar.jpg"
+    lang: ["python", "R"]
+tech:
+  - lang: r
+    pkgs: ["lubridate", "dplyr"]
+  - lang: python
+    pkgs: ["datetime", "pandas"]
+date:
+  created: "2021-08-08"
+  last_updated: "2021-08-08"
+categories: "Wrangler"
+applications: "General"
+cover_image: NULL
+slug: "working-with-date-and-time"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+
+```
+
+
+
+
+
