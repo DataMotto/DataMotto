@@ -294,27 +294,222 @@ print(w)
 <!-- Dot 4, lang: r ------------------------------------------------>
 
 ```{block, Dot = 4, part = "Instruction", lang = "r"}
+**Time spans**
+
+Next you’ll learn about how arithmetic with dates works, including subtraction, addition, and division. Along the way, you’ll learn about three important classes that represent time spans:
+
+- **durations**, which represent an exact number of seconds.
+- **periods**, which represent human units like weeks and months.
+- **intervals**, which represent a starting and ending point.
+
+In R, when you subtract two dates, you get a difftime object. A difftime class object records a time span of seconds, minutes, hours, days, or weeks. This ambiguity can make difftimes a little painful to work with, so lubridate provides an alternative which always uses seconds: the **duration**.
+
+**Periods** are time spans but don’t have a fixed length in seconds, instead they work with “human” times, like days and months. That allows them to work in a more intuitive way.
+
+If you want a more accurate measurement, you’ll have to use an **interval**. An interval is a duration with a starting point: that makes it precise so you can determine exactly how long it is.
 
 ```
 
 ```{block, Dot = 4, part = "Instruction", lang = "python"}
+**Working With Timedelta**
 
+The`timedelta` class comes in handy in situations where we want to measure duration as it represents the amount of time between two dates or times. This is particularly useful when we want to add or subtract from dates or times.
+
+We’ll go ahead and demonstrate how `timedelta` objects and `datetime`objects can be used together to do mathematical operations. For instance, we’ll add 27 days to the current time.
+
+Similar to what we did in code, we can also use `timedelta` to subtract from the current date or any other date.
+
+Note that `timedelta` can be used with any number of weeks, days, hours, minutes, etc. It can be used with time units as small as a microsecond or as large as *2.7 million years*! That’s impressive.
 
 ```
 
 ```{r, Dot = 4, part = "Code", echo = T, eval = F, }
+# Durations:
+h_age <- today() - ymd(19791014)
+h_age
+#> Time difference of 14971 days
+as.duration(h_age)
+#> [1] "1293494400s (~40.99 years)"
+
+# Periods:
+datetime_object <- ymd_hms("2016-07-08 12:34:56")
+datetime_object + days(1)
+#> [1] "2016-07-09 12:34:56 UTC"
+
+# Interval:
+next_year <- today() + years(1)
+(today() %--% next_year) / ddays(1)
+#> [1] 365
 
 ```
 
 ```{python, Dot = 4, part = "Code", echo = T, eval = F, }
+# import timedelta
+from datetime import timedelta
+from datetime import datetime
 
+# create a 27 day timedelta
+td = timedelta(days=27)
+
+# get current date
+datetime_object = datetime.now()
+print(datetime_object)
+
+#add 27 days to current date
+_27_days_later = datetime_object + td
+print(_27_days_later)
 
 ```
 
 ```{r, Dot = 4, part = "Result", echo = F, eval = T}
+# Durations:
+h_age <- today() - ymd(19791014)
+h_age
+#> Time difference of 14971 days
+as.duration(h_age)
+#> [1] "1293494400s (~40.99 years)"
+
+# Periods:
+datetime_object <- ymd_hms("2016-07-08 12:34:56")
+datetime_object + days(1)
+#> [1] "2016-07-09 12:34:56 UTC"
+
+# Interval:
+next_year <- today() + years(1)
+(today() %--% next_year) / ddays(1)
+#> [1] 365
 
 ```
 
 ```{python, Dot = 4, part = "Result", echo = F, eval = T}
+# import timedelta
+from datetime import timedelta
+from datetime import datetime
+
+# create a 27 day timedelta
+td = timedelta(days=27)
+
+# get current date
+datetime_object = datetime.now()
+print(datetime_object)
+
+#add 27 days to current date
+_27_days_later = datetime_object + td
+print(_27_days_later)
+
+```
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+**Working with Date and Time Strings**
+
+Date/time data often comes as strings. You’ve seen one approach to parsing strings into date-times in [date-times](https://r4ds.had.co.nz/data-import.html#readr-datetimes). Another approach is to use the helpers provided by lubridate. They automatically work out the format once you specify the order of the component. To use them, identify the order in which year, month, and day appear in your dates, then arrange “y”, “m”, and “d” in the same order. That gives you the name of the lubridate function that will parse your date. 
+
+These functions also take unquoted numbers. This is the most concise way to create a single date/time object, as you might need when filtering date/time data. `ymd()` is short and unambiguous. `ymd()` and friends create dates. To create a date-time, add an underscore and one or more of “h”, “m”, and “s” to the name of the parsing function
+
+```
+
+```{block, Dot = 5, part = "Instruction", lang = "python"}
+**Working with Date and Time Strings**
+
+Oftentimes, we’ll find that we want to convert objects from strings to `datetime` objects and vice versa. `datetime` includes two useful methods that can help us achieve this; namely, `strptime()` and `strftime().` We can use `strptime()` to read strings containing date and time information and convert them to `datetime` objects, and `strftime()` to convert `datetime` objects back into strings.
+
+When working with`strptime()` we have to take into consideration that it can’t turn any string into a date and time, and therefore we’ll have to indicate the time format ourselves. 
+
+Note that `strptime()` takes two arguments:
+
+- string — time in string format
+- format — specific formatting of the time in the string
+
+If you’re unfamiliar with the formatting codes required to help `strptime()` interpret our string input you can find a [useful reference here](https://strftime.org/).
+
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F, }
+ymd("2017-01-31")
+#> [1] "2017-01-31"
+mdy("January 31st, 2017")
+#> [1] "2017-01-31"
+dmy("31-Jan-2017")
+#> [1] "2017-01-31"
+
+
+ymd(20170131)
+#> [1] "2017-01-31"
+
+ymd_hms("2017-01-31 20:11:59")
+#> [1] "2017-01-31 20:11:59 UTC"
+mdy_hm("01/31/2017 08:01")
+#> [1] "2017-01-31 08:01:00 UTC"
+
+```
+
+```{python, Dot = 5, part = "Code", echo = T, eval = F, }
+from datetime import datetime
+
+date_string = '2020-11-27'
+
+# Create date object with time format yyyy-mm-dd
+date = datetime.strptime(date_string, "%Y-%m-%d")
+print(date)
+
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+ymd("2017-01-31")
+#> [1] "2017-01-31"
+mdy("January 31st, 2017")
+#> [1] "2017-01-31"
+dmy("31-Jan-2017")
+#> [1] "2017-01-31"
+
+
+ymd(20170131)
+#> [1] "2017-01-31"
+
+ymd_hms("2017-01-31 20:11:59")
+#> [1] "2017-01-31 20:11:59 UTC"
+mdy_hm("01/31/2017 08:01")
+#> [1] "2017-01-31 08:01:00 UTC"
+
+```
+
+```{python, Dot = 5, part = "Result", echo = F, eval = T}
+from datetime import datetime
+
+date_string = '2020-11-27'
+
+# Create date object with time format yyyy-mm-dd
+date = datetime.strptime(date_string, "%Y-%m-%d")
+print(date)
+
+```
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+
+```
+
+```{block, Dot = 6, part = "Instruction", lang = "python"}
+
+
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F, }
+
+```
+
+```{python, Dot = 6, part = "Code", echo = T, eval = F, }
+
+
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 6, part = "Result", echo = F, eval = T}
 
 ```

@@ -237,6 +237,16 @@ class="btn dotto-main-dot-shape"
 class="btn dotto-main-dot-shape"
 :class="{'btn-light': activeMotto === '4', 'btn-outline-light': activeMotto !== '4'}">4</button>
 
+
+<button type="button" @click="activeMotto = '5'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '5', 'btn-outline-light': activeMotto !== '5'}">5</button>
+
+
+<button type="button" @click="activeMotto = '6'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '6', 'btn-outline-light': activeMotto !== '6'}">6</button>
+
 </div>
 
 <!-- Dot 1, lang: r ------------------------------------------------>
@@ -433,7 +443,7 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
 <pre><code>## [1] &quot;2020-01-31 20:11:59 UTC&quot;</code></pre>
-<pre><code>## [1] &quot;2021-08-08 12:21:22 +0430&quot;</code></pre>
+<pre><code>## [1] &quot;2021-08-08 15:22:30 +0430&quot;</code></pre>
 
 </div>
  
@@ -443,7 +453,7 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 <pre><code>## 2021-06-01 15:23:25</code></pre>
-<pre><code>## 2021-08-08 12:21:22.323034</code></pre>
+<pre><code>## 2021-08-08 15:22:30.497670</code></pre>
 
 </div>
  
@@ -575,8 +585,8 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## 2021-08-08 12:21:22.590019</code></pre>
-<pre><code>## 2021 8 12</code></pre>
+<pre><code>## 2021-08-08 15:22:30.763672</code></pre>
+<pre><code>## 2021 8 15</code></pre>
 <pre><code>## 6</code></pre>
 
 </div>
@@ -588,6 +598,244 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
 <!-- Dot 4, lang: r ------------------------------------------------>
 <p>
 <div v-if="activeMotto === '4'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+<strong>Time spans</strong></p>
+<p>Next you’ll learn about how arithmetic with dates works, including subtraction, addition, and division. Along the way, you’ll learn about three important classes that represent time spans:</p>
+<ul>
+<li><strong>durations</strong>, which represent an exact number of seconds.</li>
+<li><strong>periods</strong>, which represent human units like weeks and months.</li>
+<li><strong>intervals</strong>, which represent a starting and ending point.</li>
+</ul>
+<p>In R, when you subtract two dates, you get a difftime object. A difftime class object records a time span of seconds, minutes, hours, days, or weeks. This ambiguity can make difftimes a little painful to work with, so lubridate provides an alternative which always uses seconds: the <strong>duration</strong>.</p>
+<p><strong>Periods</strong> are time spans but don’t have a fixed length in seconds, instead they work with “human” times, like days and months. That allows them to work in a more intuitive way.</p>
+<p>If you want a more accurate measurement, you’ll have to use an <strong>interval</strong>. An interval is a duration with a starting point: that makes it precise so you can determine exactly how long it is. 
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+<strong>Working With Timedelta</strong></p>
+<p>The<code>timedelta</code> class comes in handy in situations where we want to measure duration as it represents the amount of time between two dates or times. This is particularly useful when we want to add or subtract from dates or times.</p>
+<p>We’ll go ahead and demonstrate how <code>timedelta</code> objects and <code>datetime</code>objects can be used together to do mathematical operations. For instance, we’ll add 27 days to the current time.</p>
+<p>Similar to what we did in code, we can also use <code>timedelta</code> to subtract from the current date or any other date.</p>
+<p>Note that <code>timedelta</code> can be used with any number of weeks, days, hours, minutes, etc. It can be used with time units as small as a microsecond or as large as <em>2.7 million years</em>! That’s impressive. 
+</p>
+</div>
+ 
+</p>
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb20"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Durations:</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>h_age <span class="ot">&lt;-</span> <span class="fu">today</span>() <span class="sc">-</span> <span class="fu">ymd</span>(<span class="dv">19791014</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>h_age</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Time difference of 14971 days</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">as.duration</span>(h_age)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;1293494400s (~40.99 years)&quot;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Periods:</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>datetime_object <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">&quot;2016-07-08 12:34:56&quot;</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>datetime_object <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">1</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2016-07-09 12:34:56 UTC&quot;</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Interval:</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>next_year <span class="ot">&lt;-</span> <span class="fu">today</span>() <span class="sc">+</span> <span class="fu">years</span>(<span class="dv">1</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>(<span class="fu">today</span>() <span class="sc">%--%</span> next_year) <span class="sc">/</span> <span class="fu">ddays</span>(<span class="dv">1</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 365</span></span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb21"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import timedelta</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> timedelta</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create a 27 day timedelta</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>td <span class="op">=</span> timedelta(days<span class="op">=</span><span class="dv">27</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># get current date</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>datetime_object <span class="op">=</span> datetime.now()</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(datetime_object)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co">#add 27 days to current date</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>_27_days_later <span class="op">=</span> datetime_object <span class="op">+</span> td</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(_27_days_later)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## Time difference of 15274 days</code></pre>
+<pre><code>## [1] &quot;1319673600s (~41.82 years)&quot;</code></pre>
+<pre><code>## [1] &quot;2016-07-09 12:34:56 UTC&quot;</code></pre>
+<pre><code>## [1] 365</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## 2021-08-08 15:22:31.074675</code></pre>
+<pre><code>## 2021-09-04 15:22:31.074675</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '5'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+<strong>Working with Date and Time Strings</strong></p>
+<p>Date/time data often comes as strings. You’ve seen one approach to parsing strings into date-times in <a href="https://r4ds.had.co.nz/data-import.html#readr-datetimes">date-times</a>. Another approach is to use the helpers provided by lubridate. They automatically work out the format once you specify the order of the component. To use them, identify the order in which year, month, and day appear in your dates, then arrange “y”, “m”, and “d” in the same order. That gives you the name of the lubridate function that will parse your date.</p>
+<p>These functions also take unquoted numbers. This is the most concise way to create a single date/time object, as you might need when filtering date/time data. <code>ymd()</code> is short and unambiguous. <code>ymd()</code> and friends create dates. To create a date-time, add an underscore and one or more of “h”, “m”, and “s” to the name of the parsing function 
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+<strong>Working with Date and Time Strings</strong></p>
+<p>Oftentimes, we’ll find that we want to convert objects from strings to <code>datetime</code> objects and vice versa. <code>datetime</code> includes two useful methods that can help us achieve this; namely, <code>strptime()</code> and <code>strftime().</code> We can use <code>strptime()</code> to read strings containing date and time information and convert them to <code>datetime</code> objects, and <code>strftime()</code> to convert <code>datetime</code> objects back into strings.</p>
+<p>When working with<code>strptime()</code> we have to take into consideration that it can’t turn any string into a date and time, and therefore we’ll have to indicate the time format ourselves.</p>
+<p>Note that <code>strptime()</code> takes two arguments:</p>
+<ul>
+<li>string — time in string format</li>
+<li>format — specific formatting of the time in the string</li>
+</ul>
+<p>If you’re unfamiliar with the formatting codes required to help <code>strptime()</code> interpret our string input you can find a <a href="https://strftime.org/">useful reference here</a>. 
+</p>
+</div>
+ 
+</p>
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb28"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">&quot;2017-01-31&quot;</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2017-01-31&quot;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(<span class="st">&quot;January 31st, 2017&quot;</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2017-01-31&quot;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dmy</span>(<span class="st">&quot;31-Jan-2017&quot;</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2017-01-31&quot;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="dv">20170131</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2017-01-31&quot;</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd_hms</span>(<span class="st">&quot;2017-01-31 20:11:59&quot;</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2017-01-31 20:11:59 UTC&quot;</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy_hm</span>(<span class="st">&quot;01/31/2017 08:01&quot;</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;2017-01-31 08:01:00 UTC&quot;</span></span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb29"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>date_string <span class="op">=</span> <span class="st">&#39;2020-11-27&#39;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create date object with time format yyyy-mm-dd</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>date <span class="op">=</span> datetime.strptime(date_string, <span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st">&quot;</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(date)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;2017-01-31&quot;</code></pre>
+<pre><code>## [1] &quot;2017-01-31&quot;</code></pre>
+<pre><code>## [1] &quot;2017-01-31&quot;</code></pre>
+<pre><code>## [1] &quot;2017-01-31&quot;</code></pre>
+<pre><code>## [1] &quot;2017-01-31 20:11:59 UTC&quot;</code></pre>
+<pre><code>## [1] &quot;2017-01-31 08:01:00 UTC&quot;</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## 2020-11-27 00:00:00</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '6'" class="col-12 col-lg-11 d-flex p-0 wrapper">
 <div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
 <div class="card-header">
 <h1>&nbsp;Instructions:</h1>
