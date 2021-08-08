@@ -1,0 +1,479 @@
+---
+title: "Categorical variables are more important than what you think"
+description: |
+  A short description of the Dotto.
+author:
+  - name: "Mahyar Sharifi"
+    occupation: "Internship"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/mahyar-sharifi"
+    img: "Mahyar.jpg"
+    lang: ["python", "r"]
+tech:
+  - lang: r
+    pkgs: ["dyplyr", "palmerpenguins"]
+  - lang: python
+    pkgs: ["pandas", "seaborn"]
+date:
+  created: "2021-07-22"
+  last_updated: "2021-07-22"
+categories: "Wrangling"
+applications: "General"
+cover_image: "Mahyar.jpg"
+slug: "descriptive-missing-values"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r,python ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+DESC
+
+```
+
+```{block, Dot = 1, part = "Instruction", lang = "python"}
+DESC
+
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F}
+library(dplyr)
+library(ggplot2)
+
+data1 = read.csv('loan_data_set.csv',na.strings=c(""))
+print(dim(data1))
+
+colSums(is.na(data1))
+
+data = na.omit(data1)
+print(dim(data))
+
+```
+
+```{python, Dot = 1, part = "Code", echo = T, eval = F}
+#Import packages
+import pandas as pd
+import seaborn as sns
+import numpy as np
+
+#Load dataset
+data = pd.read_csv('E:/loan_data_set.csv')
+
+#Show dataset information
+data.info()
+
+#Drop Na
+data = data.dropna()
+
+#show dataset samples
+data.sample(5)
+
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+library(dplyr)
+library(ggplot2)
+
+data1 = read.csv('loan_data_set.csv',na.strings=c(""))
+print(dim(data1))
+
+colSums(is.na(data1))
+
+data = na.omit(data1)
+print(dim(data))
+
+```
+
+```{python, Dot = 1, part = "Result", echo = F, eval = T}
+#Import packages
+import pandas as pd
+import seaborn as sns
+import numpy as np
+
+#Load dataset
+data = pd.read_csv('E:/loan_data_set.csv')
+
+#Show dataset information
+data.info()
+
+#Drop Na
+data = data.dropna()
+
+#show dataset samples
+data.sample(5)
+
+```
+
+<!-- Dot 2, lang: r,python ------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+DESC
+
+```
+
+```{block, Dot = 2, part = "Instruction", lang = "python"}
+DESC
+
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F}
+print(table(data$Property_Area))
+
+library(ggplot2)
+library(forcats)
+
+data %>%
+    count(Property_Area) %>%
+    mutate(Property_Area = fct_reorder(Property_Area, n, .desc = TRUE)) %>%
+    ggplot(aes(x = Property_Area, y = n, fill=Property_Area)) + geom_bar(stat = 'identity') 
+
+```
+
+```{python, Dot = 2, part = "Code", echo = T, eval = F}
+print(data['Property_Area'].value_counts())
+
+sns.catplot(data = data, x = 'Property_Area', kind = 'count')
+
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+print(table(data$Property_Area))
+
+library(ggplot2)
+library(forcats)
+
+data %>%
+    count(Property_Area) %>%
+    mutate(Property_Area = fct_reorder(Property_Area, n, .desc = TRUE)) %>%
+    ggplot(aes(x = Property_Area, y = n, fill=Property_Area)) + geom_bar(stat = 'identity') 
+
+```
+
+```{python, Dot = 2, part = "Result", echo = F, eval = T}
+print(data['Property_Area'].value_counts())
+
+sns.catplot(data = data, x = 'Property_Area', kind = 'count')
+
+```
+
+<!-- Dot 3, lang: r,python ------------------------------------------------>
+
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+DESC
+
+```
+
+```{block, Dot = 3, part = "Instruction", lang = "python"}
+DESC
+
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F}
+ggplot(data, aes(x = Dependents, y = LoanAmount, color = Dependents))+
+geom_jitter()+
+theme(legend.position = "none")
+
+```
+
+```{python, Dot = 3, part = "Code", echo = T, eval = F}
+sns.catplot(data = data, x = 'Dependents', y = 'LoanAmount')
+
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+ggplot(data, aes(x = Dependents, y = LoanAmount, color = Dependents))+
+geom_jitter()+
+theme(legend.position = "none")
+
+```
+
+```{python, Dot = 3, part = "Result", echo = F, eval = T}
+sns.catplot(data = data, x = 'Dependents', y = 'LoanAmount')
+
+```
+
+<!-- Dot 4, lang: r,python ------------------------------------------------>
+
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+DESC
+
+```
+
+```{block, Dot = 4, part = "Instruction", lang = "python"}
+DESC
+
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F}
+ggplot(data, aes(x=Dependents, y=LoanAmount, color = Dependents)) +
+  geom_boxplot() + theme(legend.position = "none")
+
+```
+
+```{python, Dot = 4, part = "Code", echo = T, eval = F}
+sns.catplot(data = data, x = 'Dependents', y = 'LoanAmount', kind = 'box')
+
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+ggplot(data, aes(x=Dependents, y=LoanAmount, color = Dependents)) +
+  geom_boxplot() + theme(legend.position = "none")
+
+```
+
+```{python, Dot = 4, part = "Result", echo = F, eval = T}
+sns.catplot(data = data, x = 'Dependents', y = 'LoanAmount', kind = 'box')
+
+```
+
+<!-- Dot 5, lang: r,python ------------------------------------------------>
+
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+DESC
+
+```
+
+```{block, Dot = 5, part = "Instruction", lang = "python"}
+DESC
+
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F}
+library(superml)
+
+df_Property_Area <- data %>% select(Property_Area)
+Property_Area_encoded <- LabelEncoder$new()
+print(Property_Area_encoded$fit(df_Property_Area$Property_Area))
+df_Property_Area$Property_Area_encoded <- Property_Area_encoded$fit_transform(df_Property_Area$Property_Area)
+
+sample_n(df_Property_Area,5)
+
+```
+
+```{python, Dot = 5, part = "Code", echo = T, eval = F}
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+Property_labels = le.fit_transform(data[['Property_Area']])
+le.classes_
+
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+library(superml)
+
+df_Property_Area <- data %>% select(Property_Area)
+Property_Area_encoded <- LabelEncoder$new()
+print(Property_Area_encoded$fit(df_Property_Area$Property_Area))
+df_Property_Area$Property_Area_encoded <- Property_Area_encoded$fit_transform(df_Property_Area$Property_Area)
+
+sample_n(df_Property_Area,5)
+
+```
+
+```{python, Dot = 5, part = "Result", echo = F, eval = T}
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+Property_labels = le.fit_transform(data[['Property_Area']])
+le.classes_
+
+```
+
+<!-- Dot 6, lang: r,python ------------------------------------------------>
+
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+DESC
+
+```
+
+```{block, Dot = 6, part = "Instruction", lang = "python"}
+DESC
+
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F}
+library(fastDummies)
+sample_n(dummy_cols(df_Property_Area, select_columns = c("Property_Area")),5)
+
+```
+
+```{python, Dot = 6, part = "Code", echo = T, eval = F}
+from sklearn.preprocessing import OneHotEncoder
+ohe = OneHotEncoder()
+Property_one_hot = ohe.fit_transform(data[['Property_Area']])
+ohe_features = pd.DataFrame(Property_one_hot.toarray(), 
+                            columns=le.classes_)
+ohe_features.head(5)
+
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+library(fastDummies)
+sample_n(dummy_cols(df_Property_Area, select_columns = c("Property_Area")),5)
+
+```
+
+```{python, Dot = 6, part = "Result", echo = F, eval = T}
+from sklearn.preprocessing import OneHotEncoder
+ohe = OneHotEncoder()
+Property_one_hot = ohe.fit_transform(data[['Property_Area']])
+ohe_features = pd.DataFrame(Property_one_hot.toarray(), 
+                            columns=le.classes_)
+ohe_features.head(5)
+
+```
+
+<!-- Dot 7, lang: r,python ------------------------------------------------>
+
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+DESC
+
+```
+
+```{block, Dot = 7, part = "Instruction", lang = "python"}
+DESC
+
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F}
+df_dependents <- data %>% select(Dependents)
+df_dependents$Dependents <- recode_factor(df_dependents$Dependents, "3+" = "3" )
+
+```
+
+```{python, Dot = 7, part = "Code", echo = T, eval = F}
+print(data['Dependents'].value_counts())
+dependents_map = { '0' : 0, '1' : 1, '2' : 2, '3+' : 3}
+data['Dependents'] = data['Dependents'].map(dependents_map)
+
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+df_dependents <- data %>% select(Dependents)
+df_dependents$Dependents <- recode_factor(df_dependents$Dependents, "3+" = "3" )
+
+```
+
+```{python, Dot = 7, part = "Result", echo = F, eval = T}
+print(data['Dependents'].value_counts())
+dependents_map = { '0' : 0, '1' : 1, '2' : 2, '3+' : 3}
+data['Dependents'] = data['Dependents'].map(dependents_map)
+
+```
+
+<!-- Dot 8, lang: r,python ------------------------------------------------>
+
+```{block, Dot = 8, part = "Instruction", lang = "r"}
+DESC
+
+```
+
+```{block, Dot = 8, part = "Instruction", lang = "python"}
+DESC
+
+```
+
+```{r, Dot = 8, part = "Code", echo = T, eval = F}
+df_bin <- data %>% select(Gender, Married, Self_Employed, Loan_Status)
+unique(df_bin$Loan_Status)
+sample_n(dummy_cols(df_bin, select_columns = c("Gender" ),remove_first_dummy = TRUE),5)
+df_bin$Married <- recode_factor(df_bin$Married, "Yes" = 1, "No" = 0 )
+
+```
+
+```{python, Dot = 8, part = "Code", echo = T, eval = F}
+print(pd.unique(data['Gender']))
+print(pd.unique(data['Married']))
+print(pd.unique(data['Self_Employed']))
+print(pd.unique(data['Loan_Status']))
+
+
+gender_level = {'Male':1, 'Female':0}
+married_level = {'Yes':1, 'No':0}
+self_employed_level = {'Yes':1, 'No':0}
+Loan_status = {'Y':1, 'N':0}
+
+data['Gender'] = data['Gender'].map(gender_level)
+data['Married'] = data['Married'].map(married_level)
+data['Self_Employed'] = data['Self_Employed'].map(self_employed_level)
+data['Loan_Status'] = data['Loan_Status'].map(Loan_status)
+
+```
+
+```{r, Dot = 8, part = "Result", echo = F, eval = T}
+df_bin <- data %>% select(Gender, Married, Self_Employed, Loan_Status)
+unique(df_bin$Loan_Status)
+sample_n(dummy_cols(df_bin, select_columns = c("Gender" ),remove_first_dummy = TRUE),5)
+df_bin$Married <- recode_factor(df_bin$Married, "Yes" = 1, "No" = 0 )
+
+```
+
+```{python, Dot = 8, part = "Result", echo = F, eval = T}
+print(pd.unique(data['Gender']))
+print(pd.unique(data['Married']))
+print(pd.unique(data['Self_Employed']))
+print(pd.unique(data['Loan_Status']))
+
+
+gender_level = {'Male':1, 'Female':0}
+married_level = {'Yes':1, 'No':0}
+self_employed_level = {'Yes':1, 'No':0}
+Loan_status = {'Y':1, 'N':0}
+
+data['Gender'] = data['Gender'].map(gender_level)
+data['Married'] = data['Married'].map(married_level)
+data['Self_Employed'] = data['Self_Employed'].map(self_employed_level)
+data['Loan_Status'] = data['Loan_Status'].map(Loan_status)
+
+```
+
+<!-- Dot 9, lang: r,python ------------------------------------------------>
+
+```{block, Dot = 9, part = "Instruction", lang = "r"}
+DESC
+
+```
+
+```{block, Dot = 9, part = "Instruction", lang = "python"}
+DESC
+
+```
+
+```{r, Dot = 9, part = "Code", echo = T, eval = F}
+print('NOT Completed')
+
+```
+
+```{python, Dot = 9, part = "Code", echo = T, eval = F}
+from sklearn.feature_extraction import FeatureHasher
+data['Loan_Amount_Term'] = data['Loan_Amount_Term'].astype('str')
+fh = FeatureHasher(n_features=4, input_type='string')
+hashed_features = fh.fit_transform(data['Loan_Amount_Term'])
+hashed_features = hashed_features.toarray()
+pd.DataFrame(hashed_features)
+
+```
+
+```{r, Dot = 9, part = "Result", echo = F, eval = T}
+print('NOT Completed')
+
+```
+
+```{python, Dot = 9, part = "Result", echo = F, eval = T}
+from sklearn.feature_extraction import FeatureHasher
+data['Loan_Amount_Term'] = data['Loan_Amount_Term'].astype('str')
+fh = FeatureHasher(n_features=4, input_type='string')
+hashed_features = fh.fit_transform(data['Loan_Amount_Term'])
+hashed_features = hashed_features.toarray()
+pd.DataFrame(hashed_features)
+
+```
+
+
+
+
+
+

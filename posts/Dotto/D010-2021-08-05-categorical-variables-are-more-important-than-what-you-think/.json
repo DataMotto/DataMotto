@@ -1,0 +1,47 @@
+{
+  "file_name": ["categorical-variables-are-more-important-than-what-you-think"],
+  "dir_name": ["D010-2021-08-05-categorical-variables-are-more-important-than-what-you-think"],
+  "cover_image_url": ["./posts/Dotto/D010-2021-08-05-categorical-variables-are-more-important-than-what-you-think/categorical-variables-are-more-important-than-what-you-think_files/figure-html/Mahyar.jpg"],
+  "link": ["posts/Dotto/D010-2021-08-05-categorical-variables-are-more-important-than-what-you-think/index.html"],
+  "base_url": ["https://datamotto.com"],
+  "social_networks_datamotto": {
+    "twitter": ["https://twitter.com/DataMotto"],
+    "linkedin": ["https://www.linkedin.com/company/datamotto"]
+  },
+  "dotto_number": [10],
+  "dotto_label": ["D010"],
+  "dotto_id": ["f96870b6-f55c-11eb-a8cf-7f12180e7498"],
+  "title": ["Categorical variables are more important than what you think"],
+  "description": ["A short description of the Dotto.\n"],
+  "author": [
+    {
+      "name": ["Mahyar Sharifi"],
+      "occupation": ["Internship"],
+      "affiliation": ["DataMotto"],
+      "url": ["https://www.linkedin.com/in/mahyar-sharifi"],
+      "img": ["Mahyar.jpg"],
+      "lang": ["python", "r"],
+      "profile_img_for_Dotto": ["./categorical-variables-are-more-important-than-what-you-think_files/figure-html/Mahyar.jpg"],
+      "profile_img": ["./posts/Dotto/D010-2021-08-05-categorical-variables-are-more-important-than-what-you-think/categorical-variables-are-more-important-than-what-you-think_files/figure-html/Mahyar.jpg"]
+    }
+  ],
+  "tech": [
+    {
+      "lang": ["r"],
+      "pkgs": ["dyplyr", "palmerpenguins"]
+    },
+    {
+      "lang": ["python"],
+      "pkgs": ["pandas", "seaborn"]
+    }
+  ],
+  "date": {
+    "created": ["2021-07-22"],
+    "last_updated": ["2021-07-22"]
+  },
+  "categories": ["Wrangling"],
+  "applications": ["General"],
+  "cover_image": ["Mahyar.jpg"],
+  "slug": ["descriptive-missing-values"],
+  "output": ["DataMotto::Dotto"]
+}
