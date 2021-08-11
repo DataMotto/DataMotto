@@ -1,0 +1,740 @@
+---
+title: "Random forest classifier"
+description: |
+  An introduction to one of the most efficient algorithms for classification.
+author:
+  - name: "Parnian Jahangiri Rad"
+    occupation: "Data science intern"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4"
+    img: "Parnian-Jahangiri-Rad.jpg"
+    lang: "r , python"
+tech:
+  - lang: r
+    pkgs: ["randomForest"]
+  - lang: python
+    pkgs: ["scikit-learn"] 
+date:
+  created: "2021-08-11"
+  last_updated: "2021-08-11"
+categories: ["Modeling"]
+applications: ["General"]
+cover_image: NULL
+slug: "random-forest-classifier"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+**intro to data**  
+This famous `iris dataset`  gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 150 flowers from each of 3 species of iris. The species are Iris `setosa`, `versicolor`, and `virginica`.   
+iris is a data frame with 150 cases (rows) and 5 variables (columns) named :  
+- `Sepal_Length`  
+- `Sepal_Width`  
+- `Petal_Length`  
+- `Petal_Width`  
+- `Species`    
+  
+An important part of supervised machine learning is `Classification`:finding out that what class
+an observation belongs to.`Random forest classifier` is one of the most efficient algorithms in 
+classification.(There is also the `Random forest regressor` but it is not the topic of this Dotto).  
+  
+**janitor package**:  
+Here, we use `janitor` package ,`clean_names()` function to clean data frame names. 
+```
+
+<!-- Dot 1, lang: python ------------------------------------------------>
+```{block, Dot = 1, part = "Instruction", lang = "python"}
+**intro to data**  
+This famous `iris dataset`  gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 150 flowers from each of 3 species of iris. The species are Iris `setosa`, `versicolor`, and `virginica`.  
+iris is a data frame with 150 cases (rows) and 5 variables (columns) named :
+- `Sepal_Length`  
+- `Sepal_Width`  
+- `Petal_Length`  
+- `Petal_Width`  
+- `Species`    
+  
+An important part of supervised machine learning is `Classification`:finding out that what class
+an observation belongs to.`Random forest classifier` is one of the most efficient algorithms in 
+classification.(There is also the `Random forest regressor` but it is not the topic of this Dotto).  
+  
+**janitor package**:  
+Here, we use `janitor` package ,`clean_names()` function to clean data frame names.  
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+library(tidyverse)
+library(janitor)
+
+data_iris <- iris %>% clean_names()
+head(data_iris , 5)
+```
+
+```{python, Dot = 1, part = "Code", echo = T, eval = F, }
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+import janitor
+
+row_iris = sns.load_dataset("iris")
+data_iris = row_iris.clean_names()
+data_iris.head(5)
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+library(tidyverse)
+library(janitor)
+library(kableExtra)
+
+data_iris <- iris %>% clean_names()
+data_iris %>%
+  head(5) %>%
+  kbl(caption = "first 5 records of data_iris") %>%
+  kable_material(c("striped", "hover"))
+```
+
+```{python, Dot = 1, part = "Result", echo = F, eval = T}
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+import janitor
+
+row_iris = sns.load_dataset("iris")
+data_iris = row_iris.clean_names()
+data_iris.head(5)
+```
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+**decision tree classifier**  
+A decision tree is the building block of a random forest model.In other words , a random forest
+builds many trees and predicts by using means of decision trees predictions.  
+  
+  We can consider decision tree as a binary tree that splits dataset into different categories
+  in case of a classification problem.  
+  A decision tree has 2 types of nodes:  
+  - **decision nodes**: contains a yes/no question to split data.  
+  - **leaf nodes**: contains the predicted class of the data.  
+In R ,we use `tree()` function from `tree` package to implement our decision tree.  
+As there are so many possible splitting conditions ,now the main question is that
+How th choose conditions that enable our model to make predictions with highest accuracy?   
+```
+
+<!-- Dot 2, lang: python ------------------------------------------------>
+```{block, Dot = 2, part = "Instruction", lang = "python"}
+**decision tree classifier**  
+A decision tree is the building block of a random forest model.In other words , a random forest
+builds many trees and predicts by using means of decision trees predictions.  
+  
+  We can consider decision tree as a binary tree that splits dataset into different categories
+  in case of a classification problem.  
+  A decision tree has 2 types of nodes:  
+  - **decision nodes**: contains a yes/no question to split data.  
+  - **leaf nodes**: contains the predicted class of the data.  
+We can implement decision tree (and random forest) using `Scikit_Learn` library in python.      
+As there are so many possible splitting conditions ,now the main question is that
+How th choose conditions that enable our model to make predictions with highest accuracy?   
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+library(tree)
+library(caTools)
+
+#splitting dataset
+set.seed(78)
+
+sample <- sample.split(data_iris$species, SplitRatio = 0.7)
+train_data <- subset(data_iris, sample == TRUE)
+test_data <- subset(data_iris, sample == FALSE)
+
+#build model
+decision_tree_model <- tree(species~. , data = train_data)
+decision_tree_test_prediction <- predict(decision_tree_model, test_data, type = "class")
+summary(decision_tree_model)
+```
+
+```{python, Dot = 2, part = "Code", echo = T, eval = F, }
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+import numpy as np
+np.random.seed(78)
+
+iris_features = ['sepal_length'  ,
+                  'sepal_width'  , 
+                  'petal_length',
+                  'petal_width' ]
+
+X = data_iris[iris_features]
+y = data_iris.species
+
+train_X, test_X, train_y, test_y = train_test_split(X, y,test_size=0.3)
+#build decision tree model
+
+decision_tree_classifier_model = DecisionTreeClassifier(max_depth = 4)
+decision_tree_classifier_model.fit(train_X , train_y)
+decision_tree_predict = decision_tree_classifier_model.predict(test_X)
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+library(tree)
+library(caTools)
+
+#splitting dataset
+set.seed(78)
+
+sample <- sample.split(data_iris$species, SplitRatio = 0.7)
+train_data <- subset(data_iris, sample == TRUE)
+test_data <- subset(data_iris, sample == FALSE)
+
+#build model
+decision_tree_model <- tree(species~. , data = train_data)
+decision_tree_test_prediction <- predict(decision_tree_model, test_data, type = "class")
+summary(decision_tree_model)
+```
+
+```{python, Dot = 2, part = "Result", echo = F, eval = T}
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+import numpy as np
+np.random.seed(78)
+
+iris_features = ['sepal_length'  ,
+                  'sepal_width'  , 
+                  'petal_length',
+                  'petal_width' ]
+
+X = data_iris[iris_features]
+y = data_iris.species
+
+train_X, test_X, train_y, test_y = train_test_split(X, y,test_size=0.3)
+#build decision tree model
+
+decision_tree_classifier_model = DecisionTreeClassifier(max_depth = 4)
+decision_tree_classifier_model.fit(train_X , train_y)
+decision_tree_predict = decision_tree_classifier_model.predict(test_X)
+```
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+**Different approaches for splitting decision tree**  
+**Gini impurity** :  
+is a measurement that shows the probability of an incorrect classification 
+of a randomly chosen datapoint in our dataset, when it  was randomly classified according to the 
+distribution of class labels from the dataset.  
+We can compute gini impurity of node `n` using this formula:  
+$I_{G}(n) = 1-\sum_{i=1}^{J} (p_{i})^2$  
+  
+- J : number of all classes(in our dataset , `J` is 3).  
+- $p_{i}$ : fraction of items labeled with class `i`  in the set of datapoints in node `n`.    
+The lowest (and best) value for gini impurity is 0.It happens when all elements of the node
+belong to the same class.  
+random forest will choose the split that minimizes the gini impurity.  
+  
+**entropy**:  
+is a measurment that shows how *mixed* the column is.  
+Consider a binary classification that target column can get values `yes` and `no`.
+if target column has equal amounts of `yes`s and `no`s , then entropy will be equal to `1`,
+which is the highest value for entropy.We can compute entropy using this formula:  
+$-\sum_{i=1}^{c} p(x_{i}) log_{2}p(x_{i})$  
+  
+- c : number of classes(in our case , c is 3).  
+- $p_{i}$ : probability of class `i`.  
+  
+decision tree will choose the split that minimizes the entropy.  
+  
+**information gain**:  
+measures **reduction in entropy** by splitting dataset on values of column we are testing.  
+In other words , the higher the information gain is , the more we have reduced entropy.  
+We can compute information gain using this formula:  
+$IG(T,A) = Entropy(T) - \sum_{v \in A} \frac{T_{v}}{T} . Entropy(T_{v})$  
+  
+-`T` : Target column  
+-`A` : the column we are testing  
+-`v` : each value in `A`.  
+  
+decision tree will choose the split that maximizes the information gain.  
+In this dot,we want to calculate the entropy of `species` column of our dataset,
+using `entropy()` function from `entropy` package.  
+```
+
+<!-- Dot 3, lang: python ------------------------------------------------>
+```{block, Dot = 3, part = "Instruction", lang = "python"}
+**Different approaches for splitting decision tree**  
+**Gini impurity** :  
+is a measurement that shows the probability of an incorrect classification 
+of a randomly chosen datapoint in our dataset, when it  was randomly classified according to the 
+distribution of class labels from the dataset.  
+We can compute gini impurity of node `n` using this formula:  
+$I_{G}(n) = 1-\sum_{i=1}^{J} (p_{i})^2$  
+  
+- J : number of all classes(in our dataset , `J` is 3).  
+- $p_{i}$ : probability of class `i` in node `n`.    
+  
+The lowest (and best) value for gini impurity is 0.It happens when all elements of the node
+belong to the same class.  
+decision tree will choose the split that minimizes the gini impurity.  
+  
+**entropy**:  
+is a measurment that shows how *mixed* the column is.  
+Consider a binary classification that target column can get values `yes` and `no`.
+if target column has equal amounts of `yes`s and `no`s , then entropy will be equal to `1`,
+which is the highest value for entropy.We can compute entropy using this formula:  
+$-\sum_{i=1}^{c} p(x_{i}) log_{2}p(x_{i})$  
+  
+- c : number of classes(in our case , c is 3).  
+- $p_{i}$ : probability of class `i`.  
+  
+decision tree will choose the split that minimizes the entropy.  
+  
+**information gain**:  
+measures **reduction in entropy** by splitting dataset on values of column we are testing.  
+In other words , the higher the information gain is , the more we have reduced entropy.  
+We can compute information gain using this formula:  
+$IG(T,A) = Entropy(T) - \sum_{v \in A} \frac{T_{v}}{T} . Entropy(T_{v})$  
+  
+-`T` : Target column  
+-`A` : the column we are testing  
+-`v` : each value in `A`.  
+  
+decision tree will choose the split that maximizes the information gain.    
+In this dot,we want to calculate the entropy of species column of our dataset,
+using `entropy()` function from `scipy` package.  
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F, }
+library(entropy)
+counts <- table(data_iris$species) / length(data_iris$species)
+species_entropy <- format(round(entropy(counts) , 
+                                2) ,
+                                nsmall = 2)
+print(species_entropy)
+```
+
+```{python, Dot = 3, part = "Code", echo = T, eval = F, }
+from scipy.stats import entropy
+counts = data_iris.species.value_counts()
+species_entropy = entropy(counts)
+print("species entropy is : {:.2f}".format(species_entropy))
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+library(entropy)
+counts <- table(data_iris$species) / length(data_iris$species)
+species_entropy <- format(round(entropy(counts) , 
+                                2) ,
+                                nsmall = 2)
+print(species_entropy)
+```
+
+```{python, Dot = 3, part = "Result", echo = F, eval = T}
+from scipy.stats import entropy
+counts = data_iris.species.value_counts()
+species_entropy = entropy(counts)
+print("species entropy is : {:.2f}".format(species_entropy))
+```
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+**Random forest classifier**  
+Random forest is one of the most commonly used algorithms in data science.  
+Random forest is an **ensemble model**,which
+means more than one model is built in the process to make the prediction.  
+In other words , random forest is made up by many decision trees that can vary in depth.  
+It shows that this algorithm uses **different subsets of data**
+to built each decision tree , and **different subset of features** to split nodes.  
+This randomness improves the performance of the model output.  
+We use `randomForest` library to implement our random forest model.  
+By default, the number of decision trees in the forest is 500 and the number of features used as potential candidates for each split is 3.  
+```
+
+<!-- Dot 4, lang: python ------------------------------------------------>
+```{block, Dot = 4, part = "Instruction", lang = "python"}
+**Random forest classifier**  
+Random forest is one of the most commonly used algorithms in data science.  
+Random forest is an **ensemble model**,which
+means more than one model is built in the process to make the prediction.  
+In other words , random forest is made up by many decision trees that can vary in depth.  
+It shows that this algorithm uses **different subsets of data**
+to built each decision tree , and **different subset of features** to split nodes.  
+This randomness improves the performance of the model output.  
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F, }
+library(randomForest)
+set.seed(78)
+
+randomForest_model <- randomForest(species ~. ,
+                                   data = train_data)
+randomForest_predict <- predict(randomForest_model ,
+                                newdata = test_data)
+
+rm_pred <- predict(randomForest_model , 
+                   newdata = test_data)
+```
+
+```{python, Dot = 4, part = "Code", echo = T, eval = F, }
+from sklearn.ensemble import RandomForestClassifier
+np.random.seed(78)
+#build random forest model
+
+randomForest_model = RandomForestClassifier(n_estimators = 100)
+
+randomForest_model.fit(train_X , train_y)
+randomForest_predict = randomForest_model.predict(test_X)
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+library(randomForest)
+set.seed(78)
+
+randomForest_model <- randomForest(species ~. ,
+                                   data = train_data)
+randomForest_predict <- predict(randomForest_model ,
+                                newdata = test_data)
+
+rm_pred <- predict(randomForest_model , 
+                   newdata = test_data)
+```
+
+```{python, Dot = 4, part = "Result", echo = F, eval = T}
+from sklearn.ensemble import RandomForestClassifier
+np.random.seed(78)
+#build random forest model
+
+randomForest_model = RandomForestClassifier(n_estimators = 100)
+
+randomForest_model.fit(train_X , train_y)
+randomForest_predict = randomForest_model.predict(test_X)
+```
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+**Decision tree vs random forest**  
+Decision tree is easy to implement and has high performance on classification problems.It is also 
+faster that random forest to train.However , It is prone to **overfitting**.  
+Overfitting happens when our model is very flexible and perfectly matches training dataset , 
+but does not match well in test dataset.  
+decision tree can have *high variance* , which means that small change in data can result in a large change in stucture of tree , and also on model predictions.An easy way to prevent overfitting is 
+setting a limitation for `max_depth` of the tree.  
+However , random forest builds many decision trees and uses the average of all predictions to 
+classify data , so it is unlikely that random forest overfits to the data.  
+```
+
+<!-- Dot 5, lang: python ------------------------------------------------>
+```{block, Dot = 5, part = "Instruction", lang = "python"}
+**Decision tree vs random forest**  
+Decision tree is easy to implement and has high performance on classification problems.It is also 
+faster that random forest to train.However , It is prone to **overfitting**.  
+Overfitting happens when our model is very flexible and perfectly matches training dataset , 
+but does not match well in test dataset.  
+decision tree can have *high variance* , which means that small change in data can result in a large change in stucture of tree , and also on model predictions.An easy way to prevent overfitting is 
+setting a limitation for `max_depth` of the tree.  
+However , random forest builds many decision trees and uses the average of all predictions to 
+classify data , so it is unlikely that random forest overfits to the data.  
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F, }
+#decision tree accuracy on test data
+decision_tree_accuracy <- mean(decision_tree_test_prediction == test_data$species)
+#round accuracy to 2 decimal places
+decision_tree_accuracy <- format(round(decision_tree_accuracy , 
+                                       2 ) ,
+                                 nsmall = 2)
+print(decision_tree_accuracy)
+#random forest accuracy on test_data
+randomForest_accuracy <- mean(rm_pred == test_data$species)
+#round accuracy to 2 decimal places
+randomForest_accuracy <- format(round(randomForest_accuracy ,
+                                      2 ) ,
+                                nsmall = 2)
+print(randomForest_accuracy)
+```
+
+```{python, Dot = 5, part = "Code", echo = T, eval = F, }
+from sklearn.metrics import accuracy_score
+print("decision tree accuracy: {:.2f}".format(accuracy_score(test_y , decision_tree_predict)))
+print("random forest accuracy : {:.2f}".format(accuracy_score(test_y , randomForest_predict)))
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+#decision tree accuracy on test data
+decision_tree_accuracy <- mean(decision_tree_test_prediction == test_data$species)
+#round accuracy to 2 decimal places
+decision_tree_accuracy <- format(round(decision_tree_accuracy , 
+                                       2 ) ,
+                                 nsmall = 2)
+print(decision_tree_accuracy)
+#random forest accuracy on test_data
+randomForest_accuracy <- mean(rm_pred == test_data$species)
+#round accuracy to 2 decimal places
+randomForest_accuracy <- format(round(randomForest_accuracy ,
+                                      2 ) ,
+                                nsmall = 2)
+print(randomForest_accuracy)
+```
+
+```{python, Dot = 5, part = "Result", echo = F, eval = T}
+from sklearn.metrics import accuracy_score
+print("decision tree accuracy: {:.2f}".format(accuracy_score(test_y , decision_tree_predict)))
+print("random forest accuracy : {:.2f}".format(accuracy_score(test_y , randomForest_predict)))
+```
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+**Visualizing random forest result with confusion matrix**  
+**confusion matrix** is used to measure the performance of a calssification algorithm.
+there are 4 possible output types for confusion matrix:  
+- `True Positivi(TP)` :  Model predicts that a record belongs to a specific class , and
+the prediction is true.  
+- `True Negative(TN)` : Model predicts that a record does not belong to a specific class ,
+and the prediction is true.  
+- `False Positive(FP)` :  Model predicts that a record belongs to a specific class ,
+but it actually is not.This type of error is called **Type 1 error**.  
+- `False Negative(FN)` : Model predicts that a record does not belong to a specific class,
+but it actually is.This type of error is called **Type 2 error**.  
+  
+In this dot , we will visualize confusion matrix of our random forest model.  
+```
+
+<!-- Dot 6, lang: python ------------------------------------------------>
+```{block, Dot = 6, part = "Instruction", lang = "python"}
+**Visualizing random forest result with confusion matrix**  
+**confusion matrix** is used to measure the performance of a calssification algorithm.
+there are 4 possible output types for confusion matrix:  
+- `True Positivi(TP)` :  Model predicts that a record belongs to a specific class , and
+the prediction is true.  
+- `True Negative(TN)` : Model predicts that a record does not belong to a specific class ,
+and the prediction is true.  
+- `False Positive(FP)` :  Model predicts that a record belongs to a specific class ,
+but it actually is not.This type of error is called **Type 1 error**.  
+- `False Negative(FN)` : Model predicts that a record does not belong to a specific class,
+but it actually is.This type of error is called **Type 2 error**.  
+  
+In this dot , we will visualize confusion matrix of our random forest model.  
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F, }
+#confusion matrix
+cm <- as_data_frame(table(predicted = rm_pred , actual = test_data$species))
+#plot confusion matrix
+ggplot(data = cm ,aes(x = actual , y = predicted)) +
+  geom_tile(aes(fill = n)) +
+  theme(axis.text.x = element_text(
+    angle = 90,
+    vjust = 0.5,
+    hjust = 1
+  )) 
+```
+
+```{python, Dot = 6, part = "Code", echo = T, eval = F, }
+from sklearn.metrics import confusion_matrix
+
+ConfusionMatrix= confusion_matrix(test_y, randomForest_predict , labels=np.unique(y))
+#plot confusionMatrix
+cm = pd.DataFrame(ConfusionMatrix, index=np.unique(y), columns=np.unique(y))
+cm.index.name = 'Actual'
+cm.columns.name = 'Predicted'
+fig, ax = plt.subplots(figsize=(10 , 10))
+sns.heatmap(cm,annot = True, fmt='', ax=ax)
+plt.show()
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+#confusion matrix
+cm <- as_data_frame(table(predicted = rm_pred , actual = test_data$species))
+#plot confusion matrix
+ggplot(data = cm ,aes(x = actual , y = predicted)) +
+  geom_tile(aes(fill = n)) +
+  theme(axis.text.x = element_text(
+    angle = 90,
+    vjust = 0.5,
+    hjust = 1
+  )) 
+```
+
+```{python, Dot = 6, part = "Result", echo = F, eval = T}
+from sklearn.metrics import confusion_matrix
+
+ConfusionMatrix= confusion_matrix(test_y, randomForest_predict , labels=np.unique(y))
+#plot confusionMatrix
+cm = pd.DataFrame(ConfusionMatrix, index=np.unique(y), columns=np.unique(y))
+cm.index.name = 'Actual'
+cm.columns.name = 'Predicted'
+fig, ax = plt.subplots(figsize=(10 , 10))
+sns.heatmap(cm,annot = True, fmt='', ax=ax)
+plt.show()
+```
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+**Feature importance **  
+For calculating feature importance score of each feature,we use `importance()` function from
+`randomForest` package.This function calculates feature importance of each column using
+`MeanDecreaseGini`.  
+```
+
+<!-- Dot 7, lang: python ------------------------------------------------>
+```{block, Dot = 7, part = "Instruction", lang = "python"}
+**Feature importance **  
+For calculating feature importance score of each feature,
+we use *sum of the reductions in gini impurity* of all nodes that are split on the feature.  
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F, }
+#get a list of columns
+Features <- colnames(data_iris)
+#drop target column
+Features <- Features[-length(Features)] 
+importance_scores <- as.vector(importance(randomForest_model))
+#create feature importance data frame
+FI <- data.frame(feature = Features , importance_score = importance_scores) %>%
+  arrange(desc(importance_score))
+
+ggplot(data = FI ,
+       aes(x = reorder(feature , - importance_score) ,
+           y = importance_score)) +
+  ggtitle("Feature importance bar plot") +
+  xlab("") +
+  geom_bar(stat = "identity" , 
+           fill = "cyan")
+```
+
+```{python, Dot = 7, part = "Code", echo = T, eval = F, }
+FI = pd.DataFrame({'Feature' : list(train_X.columns) , 'importance_score' : randomForest_model.feature_importances_}).sort_values('importance_score', ascending=False)
+
+#create bar plot
+plt.clf()
+sns.barplot(data = FI, x = 'Feature' , y = 'importance_score' , color = 'cyan')
+plt.title('Feature importance bar plot')
+plt.show()
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+#get a list of columns
+Features <- colnames(data_iris)
+#drop target column
+Features <- Features[-length(Features)] 
+importance_scores <- as.vector(importance(randomForest_model))
+#create feature importance data frame
+FI <- data.frame(feature = Features , importance_score = importance_scores) %>%
+  arrange(desc(importance_score))
+
+ggplot(data = FI ,
+       aes(x = reorder(feature , - importance_score) ,
+           y = importance_score)) +
+  ggtitle("Feature importance bar plot") +
+  xlab("") +
+  geom_bar(stat = "identity" , 
+           fill = "cyan")
+```
+
+```{python, Dot = 7, part = "Result", echo = F, eval = T}
+FI = pd.DataFrame({'Feature' : list(train_X.columns) , 'importance_score' : randomForest_model.feature_importances_}).sort_values('importance_score', ascending=False)
+
+#create bar plot
+#plt.clf()
+sns.barplot(data = FI, x = 'Feature' , y = 'importance_score' , color = 'cyan')
+plt.title('Feature importance bar plot')
+plt.show()
+```
+
+<!-- Dot 8, lang: r ------------------------------------------------>
+```{block, Dot = 8, part = "Instruction", lang = "r"}
+**Generate random forest model on selected features**  
+In this dot ,we drop the least important feature(`sepal_width`) from model,to check its effect on accuracy.  
+We see that the accuracy is not changed,so it has no effect on accuracy and we can drop it from model.  
+```
+
+<!-- Dot 8, lang: python ------------------------------------------------>
+```{block, Dot = 8, part = "Instruction", lang = "python"}
+**Generate random forest model on selected features**  
+In this dot ,we drop the least important feature(`sepal_width`) from model,to check its effect on accuracy.  
+We see that the accuracy is not changed,so it has no effect on accuracy and we can drop it from model.  
+```
+
+```{r, Dot = 8, part = "Code", echo = T, eval = F, }
+set.seed(78)
+#remove 'sepal_width'  from our dataset
+data_iris_2 <- data_iris %>%
+  select(petal_width ,
+         petal_length ,
+         sepal_length)
+
+sample_2 <- sample.split(data_iris$species, SplitRatio = 0.7)
+train_data_2 <- subset(data_iris, sample == TRUE)
+test_data_2 <- subset(data_iris, sample == FALSE)
+
+randomForest_model <- randomForest(species ~. ,
+                                   data = train_data_2)
+randomForest_predict <- predict(randomForest_model ,
+                                newdata = test_data_2)
+
+rm_pred_2 <- predict(randomForest_model , newdata = test_data)
+#accuracy of new model
+randomForest_2_accuracy <- mean(rm_pred_2 == test_data_2$species)
+randomForest_2_accuracy <- format(round(randomForest_2_accuracy ,
+                                        2) ,
+                                  nsmall = 2)
+print(randomForest_2_accuracy)
+```
+
+```{python, Dot = 8, part = "Code", echo = T, eval = F, }
+np.random.seed(78)
+#remove feature 'sepal_width' 
+X2 = data_iris[['petal_length', 'petal_width' ,'sepal_length']]
+y2 = data_iris['species']
+train_X2 , test_X2 , train_y2 , test_y2 = train_test_split(X2 , y2 , test_size = 0.3)
+
+#build a new random forest model with selected features
+randomForest_model2 = RandomForestClassifier(n_estimators=100)
+randomForest_model2.fit(train_X2 , train_y2)
+randomForest2_predict = randomForest_model2.predict(test_X2)
+
+print("random forest2 accuracy : {:.2f}".format(accuracy_score(test_y2 , randomForest2_predict)))
+```
+
+```{r, Dot = 8, part = "Result", echo = F, eval = T}
+set.seed(78)
+#remove 'sepal_width'  from our dataset
+data_iris_2 <- data_iris %>%
+  select(petal_width ,
+         petal_length ,
+         sepal_length)
+
+sample_2 <- sample.split(data_iris$species, SplitRatio = 0.7)
+train_data_2 <- subset(data_iris, sample == TRUE)
+test_data_2 <- subset(data_iris, sample == FALSE)
+
+randomForest_model <- randomForest(species ~. ,
+                                   data = train_data_2)
+randomForest_predict <- predict(randomForest_model ,
+                                newdata = test_data_2)
+
+rm_pred_2 <- predict(randomForest_model , newdata = test_data)
+#accuracy of new model
+randomForest_2_accuracy <- mean(rm_pred_2 == test_data_2$species)
+randomForest_2_accuracy <- format(round(randomForest_2_accuracy ,
+                                        2) ,
+                                  nsmall = 2)
+print(randomForest_2_accuracy)
+```
+
+```{python, Dot = 8, part = "Result", echo = F, eval = T}
+np.random.seed(78)
+#remove feature 'sepal_width' 
+X2 = data_iris[['petal_length', 'petal_width' ,'sepal_length']]
+y2 = data_iris['species']
+train_X2 , test_X2 , train_y2 , test_y2 = train_test_split(X2 , y2 , test_size = 0.3)
+
+#build a new random forest model with selected features
+randomForest_model2 = RandomForestClassifier(n_estimators=100)
+randomForest_model2.fit(train_X2 , train_y2)
+randomForest2_predict = randomForest_model2.predict(test_X2)
+
+print("random forest2 accuracy : {:.2f}".format(accuracy_score(test_y2 , randomForest2_predict)))
+```

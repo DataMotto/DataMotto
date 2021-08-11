@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+    
+    
+    <title>Random forest classifier</title>
+
+        <script src="random-forest-classifier_files/header-attrs-2.9/header-attrs.js"></script>
+        <script src="random-forest-classifier_files/jquery-1.11.3/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="random-forest-classifier_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="random-forest-classifier_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+        <script src="random-forest-classifier_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+        <script src="random-forest-classifier_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+        <style>h1 {font-size: 34px;}
+               h1.title {font-size: 38px;}
+               h2 {font-size: 30px;}
+               h3 {font-size: 24px;}
+               h4 {font-size: 18px;}
+               h5 {font-size: 16px;}
+               h6 {font-size: 12px;}
+               code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+               pre:not([class]) { background-color: white }</style>
+        <script src="random-forest-classifier_files/navigation-1.1/tabsets.js"></script>
+        <script src="random-forest-classifier_files/kePrint-0.0.1/kePrint.js"></script>
+        <link href="random-forest-classifier_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+        
+          <meta property="og:title" content="Random forest classifier" />
+          <meta property="og:type" content="article">
+          <meta property="og:description" content="An introduction to one of the most efficient algorithms for classification.
+        " />
+          <meta property="og:url" content="https://datamotto.com/posts/dotto/D015-2021-08-11-random-forest-classifier/" />
+          <meta property="og:locale" content="en_US">
+          <meta property="og:site_name" content="Data Motto">
+          <meta property="og:image" content="https://datamotto.com/assets/img/logo.svg" />
+          
+        
+          <meta property="twitter:card" content="summary_large_image">
+          <meta property="twitter:title" content="Random forest classifier">
+          <meta property="twitter:description" content="An introduction to one of the most efficient algorithms for classification.
+        ">
+          <meta property="twitter:url" content="https://datamotto.com/posts/dotto/D015-2021-08-11-random-forest-classifier/">
+          <meta property="twitter:image" content="https://datamotto.com/assets/img/logo.svg">
+          
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WZMEMQM0Y2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WZMEMQM0Y2');
+</script>
+<link rel="shortcut icon" href="../../../assets/img/favicon/favicon-32x32.png" />
+<link rel="stylesheet" href="../../../assets/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../../../assets/css/Font-Awesome-5-Brands.css" />
+<link rel="stylesheet" href="../../../assets/css/Font-Awesome-5-Free.css" />
+<link rel="stylesheet" href="../../../assets/css/icomoon.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata" />
+<link rel="stylesheet" href="../../../assets/fonts/fontawesome-all.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/font-awesome.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/ionicons.min.css" />
+<link rel="stylesheet" href="../../../assets/fonts/fontawesome5-overrides.min.css" />
+<link rel="stylesheet" href="../../../assets/css/Footer-Basic.css" />
+<link rel="stylesheet" href="../../../assets/css/home-cards.css" />
+<link rel="stylesheet" href="../../../assets/css/site.css" />
+<link rel="stylesheet" href="../../../assets/css/style.css" />
+<link rel="stylesheet" href="../../../assets/css/styles.css" />
+<link rel="stylesheet" href="../../../assets/css/Team-Boxed.css" />
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="../../../assets/js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="../../../assets/highlight/styles/dracula.css" />
+<script src="../../../assets/highlight/highlight.pack.js"></script>
+<script>hljs.highlightAll();</script>
+<script src="../../../assets/js/vue.js"></script>
+
+</head>
+
+<body style="height: 100vh;">
+<div class="d-flex flex-column" id="all_page">
+
+<!-- Body Header ------------------------------>
+
+<section id="dotto-row-header">
+<div class="row dotto-header">
+
+<div class="col-1 d-flex justify-content-start align-items-center header-logo">
+<a href="/" class="text-muted"><img id="logo" src="../../../assets/img/logo.svg" /></a>
+</div>
+
+
+<div class="col-6 col-sm-7">
+<div class="header-title">
+<h6 class="dotto-header-maintitle">
+Random forest classifier
+</h6>
+<p class="dotto-header-description">
+An introduction to one of the most efficient algorithms for classification.
+
+</p>
+<p class="dotto-header-tags">
+<i class="fas fa-tags"></i>&nbsp; Modeling
+</p>
+</div>
+</div>
+
+
+<div class="col-1 d-flex justify-content-center align-items-center">
+<button class="btn btn-outline-light btn-block header-like-btn" style="background-color:white" type="button">
+<!-- LikeBtn.com BEGIN -->
+<span class="likebtn-wrapper" data-theme="custom" data-btn_size="30" data-f_size="18" data-icon_size="30" data-icon_l="hrt13" data-icon_l_c="rgba(255,121,198,0.68)" data-icon_l_c_v="#ff79c6" data-icon_d_c_v="green" data-label_c="red" data-label_c_v="yellow" data-bg_c="#ffffff" data-bg_c_v="#ffffff" data-brdr_c="#ffffff" data-label_fs="r" data-i18n_like="  " data-identifier="c4ca940e-faa4-11eb-9676-c8b29b64e24a" data-dislike_enabled="false" data-site_id="604e13966fd08bbf03672c5b" data-counter_clickable="true" data-popup_disabled="true" data-share_enabled="false" data-tooltip_enabled="false"></span>
+<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+<!-- LikeBtn.com END -->
+</button>
+</div>
+
+
+<div class="col-3 d-flex justify-content-end dotto-header-user">
+
+<div class="d-flex flex-column mx-3">
+<div class="row">
+<div @click="authorOneModal = true" type="button"
+class="col d-flex d-md-flex flex-row flex-shrink-1 justify-content-sm-end align-items-sm-center justify-content-md-end align-items-md-center dotto-header-user-icon">
+<img class="img-fluid user-image lang-color-r mx-auto" src="random-forest-classifier_files/figure-html/Parnian-Jahangiri-Rad.jpg" />
+</div>
+</div>
+<h6 class="d-flex justify-content-end dotto-header-user-name mx-auto">
+Parnian Jahangiri Rad
+</h6>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<div v-if="authorOneModal" class="modal">
+<!-- Modal content -->
+<div class="modal-content">
+<span @click="authorOneModal = false" class="close">&times;</span>
+<div class="card" style="max-width: 540px">
+<div class="row g-0">
+<div class="col-md-4">
+<img src="random-forest-classifier_files/figure-html/Parnian-Jahangiri-Rad.jpg" class="img-fluid" />
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<ins><a href="https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4" class="text-dark" target="_blank"><h3 class="card-title mb-0">Parnian Jahangiri Rad</h3></a></ins>
+<div class="card-text fs-4 my-2">Data science intern, DataMotto</div>
+<small class="card-text text-muted my-2 fs-4">Language: r , python</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div v-show="commentOpen" class="modal overflow-auto">
+<div class="modal-comment overflow-auto">
+<span @click="commentOpen = false" class="close">&times;</span>
+<div id="disqus_thread"></div>
+</div>
+</div>
+
+
+<section>
+<div id="dotto-row-info" class="d-flex">
+
+<div class="col-4 d-flex flex-grow-0 justify-content-start align-items-center align-items-xl-center">
+<div class="d-flex mx-4 justify-content-around align-items-center bg-social-icons">
+
+<div>
+<i type="button" @click="activeLang = 'r'"
+class="fab fa-r-project mx-2"
+:class="{'lang-color-r': activeLang === 'r'}" >
+  </i>
+</div>
+
+
+<div>
+<i type="button" @click="activeLang = 'python'"
+class="fab fa-python mx-2"
+:class="{'lang-color-python': activeLang === 'python'}" >
+  </i>
+</div>
+
+</div>
+</div>
+
+
+<div
+class="col-8 d-flex justify-content-end align-items-center" style="padding-right: 15px">
+<!--
+<div class="d-flex justify-content-center align-items-center align-content-center bg-social-icons"
+style="margin-right: 7px; width: 146.3px">
+<span class="d-flex justify-content-lg-center align-items-lg-center" style="width: 133.7px">
+<i class="fas fa-music" style="padding-right: 12px"> </i>
+</span>
+</div>
+---->
+<div class="d-flex justify-content-around align-items-center bg-social-icons">
+<a href="https://twitter.com/share?text=Random forest classifier&amp;url=https://datamotto.com/posts/Dotto/D015-2021-08-11-random-forest-classifier/index.html&amp;hashtags=rstats,Python" target="_blank" class="text-reset">
+<i class="fab fa-twitter"></i></a>
+<a href="https://www.linkedin.com/sharing/share-offsite/?url=https://datamotto.com/posts/Dotto/D015-2021-08-11-random-forest-classifier/index.html" target="_blank" class="text-reset">
+<i class="fa fa-linkedin-square"></i></a>
+</div>
+<div class="text-nowrap d-flex justify-content-around align-items-center bg-social-icons bg-bugs-icons">
+<a href="https://github.com/DataMotto/DataMotto/blob/master/posts/Dotto/D015-2021-08-11-random-forest-classifier/random-forest-classifier.Rmd" target="_blank" class="text-reset">
+<i class="fab fa-github header-social-icon"></i></a>
+<a href="https://github.com/DataMotto/DataMotto/issues/new?assignees=&labels=bug&template=bug_report.md&title=" target="_blank" class="text-reset">
+<i class="fas fa-bug header-social-icon"></i></a>
+</div>
+</div>
+
+</div>
+</section>
+
+
+
+
+<section v-if="activeDotto === '1'"
+class="text-left d-flex flex-row flex-grow-1 flex-wrap" id="dotto-row-main">
+<div class="col-12 col-lg-1" id="dotto-main-dots">
+
+<button type="button" @click="activeMotto = '1'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '1', 'btn-outline-light': activeMotto !== '1'}">1</button>
+
+
+<button type="button" @click="activeMotto = '2'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '2', 'btn-outline-light': activeMotto !== '2'}">2</button>
+
+
+<button type="button" @click="activeMotto = '3'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '3', 'btn-outline-light': activeMotto !== '3'}">3</button>
+
+
+<button type="button" @click="activeMotto = '4'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '4', 'btn-outline-light': activeMotto !== '4'}">4</button>
+
+
+<button type="button" @click="activeMotto = '5'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '5', 'btn-outline-light': activeMotto !== '5'}">5</button>
+
+
+<button type="button" @click="activeMotto = '6'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '6', 'btn-outline-light': activeMotto !== '6'}">6</button>
+
+
+<button type="button" @click="activeMotto = '7'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '7', 'btn-outline-light': activeMotto !== '7'}">7</button>
+
+
+<button type="button" @click="activeMotto = '8'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '8', 'btn-outline-light': activeMotto !== '8'}">8</button>
+
+</div>
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '1'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>intro to data</strong><br />
+This famous <code>iris dataset</code> gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 150 flowers from each of 3 species of iris. The species are Iris <code>setosa</code>, <code>versicolor</code>, and <code>virginica</code>.<br />
+iris is a data frame with 150 cases (rows) and 5 variables (columns) named :<br />
+- <code>Sepal_Length</code><br />
+- <code>Sepal_Width</code><br />
+- <code>Petal_Length</code><br />
+- <code>Petal_Width</code><br />
+- <code>Species</code></p>
+<p>An important part of supervised machine learning is <code>Classification</code>:finding out that what class an observation belongs to.<code>Random forest classifier</code> is one of the most efficient algorithms in classification.(There is also the <code>Random forest regressor</code> but it is not the topic of this Dotto).</p>
+<p><strong>janitor package</strong>:<br />
+Here, we use <code>janitor</code> package ,<code>clean_names()</code> function to clean data frame names.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 1, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>intro to data</strong><br />
+This famous <code>iris dataset</code> gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 150 flowers from each of 3 species of iris. The species are Iris <code>setosa</code>, <code>versicolor</code>, and <code>virginica</code>.<br />
+iris is a data frame with 150 cases (rows) and 5 variables (columns) named : - <code>Sepal_Length</code><br />
+- <code>Sepal_Width</code><br />
+- <code>Petal_Length</code><br />
+- <code>Petal_Width</code><br />
+- <code>Species</code></p>
+<p>An important part of supervised machine learning is <code>Classification</code>:finding out that what class an observation belongs to.<code>Random forest classifier</code> is one of the most efficient algorithms in classification.(There is also the <code>Random forest regressor</code> but it is not the topic of this Dotto).</p>
+<p><strong>janitor package</strong>:<br />
+Here, we use <code>janitor</code> package ,<code>clean_names()</code> function to clean data frame names.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data_iris <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">clean_names</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_iris , <span class="dv">5</span>)</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb2"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> janitor</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>row_iris <span class="op">=</span> sns.load_dataset(<span class="st">&quot;iris&quot;</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data_iris <span class="op">=</span> row_iris.clean_names()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>data_iris.head(<span class="dv">5</span>)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+first 5 records of data_iris
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+sepal_length
+</th>
+<th style="text-align:right;">
+sepal_width
+</th>
+<th style="text-align:right;">
+petal_length
+</th>
+<th style="text-align:right;">
+petal_width
+</th>
+<th style="text-align:left;">
+species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>##    sepal_length  sepal_width  petal_length  petal_width species
+## 0           5.1          3.5           1.4          0.2  setosa
+## 1           4.9          3.0           1.4          0.2  setosa
+## 2           4.7          3.2           1.3          0.2  setosa
+## 3           4.6          3.1           1.5          0.2  setosa
+## 4           5.0          3.6           1.4          0.2  setosa</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '2'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>decision tree classifier</strong><br />
+A decision tree is the building block of a random forest model.In other words , a random forest builds many trees and predicts by using means of decision trees predictions.</p>
+<p>We can consider decision tree as a binary tree that splits dataset into different categories in case of a classification problem.<br />
+A decision tree has 2 types of nodes:<br />
+- <strong>decision nodes</strong>: contains a yes/no question to split data.<br />
+- <strong>leaf nodes</strong>: contains the predicted class of the data.<br />
+In R ,we use <code>tree()</code> function from <code>tree</code> package to implement our decision tree.<br />
+As there are so many possible splitting conditions ,now the main question is that How th choose conditions that enable our model to make predictions with highest accuracy?</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 2, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>decision tree classifier</strong><br />
+A decision tree is the building block of a random forest model.In other words , a random forest builds many trees and predicts by using means of decision trees predictions.</p>
+<p>We can consider decision tree as a binary tree that splits dataset into different categories in case of a classification problem.<br />
+A decision tree has 2 types of nodes:<br />
+- <strong>decision nodes</strong>: contains a yes/no question to split data.<br />
+- <strong>leaf nodes</strong>: contains the predicted class of the data.<br />
+We can implement decision tree (and random forest) using <code>Scikit_Learn</code> library in python.<br />
+As there are so many possible splitting conditions ,now the main question is that How th choose conditions that enable our model to make predictions with highest accuracy?</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb4"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tree)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caTools)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#splitting dataset</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">78</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">sample.split</span>(data_iris<span class="sc">$</span>species, <span class="at">SplitRatio =</span> <span class="fl">0.7</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_iris, sample <span class="sc">==</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_iris, sample <span class="sc">==</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#build model</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>decision_tree_model <span class="ot">&lt;-</span> <span class="fu">tree</span>(species<span class="sc">~</span>. , <span class="at">data =</span> train_data)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>decision_tree_test_prediction <span class="ot">&lt;-</span> <span class="fu">predict</span>(decision_tree_model, test_data, <span class="at">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(decision_tree_model)</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb5"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">78</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>iris_features <span class="op">=</span> [<span class="st">&#39;sepal_length&#39;</span>  ,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&#39;sepal_width&#39;</span>  , </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&#39;petal_length&#39;</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&#39;petal_width&#39;</span> ]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data_iris[iris_features]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data_iris.species</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>train_X, test_X, train_y, test_y <span class="op">=</span> train_test_split(X, y,test_size<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#build decision tree model</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>decision_tree_classifier_model <span class="op">=</span> DecisionTreeClassifier(max_depth <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>decision_tree_classifier_model.fit(train_X , train_y)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>decision_tree_predict <span class="op">=</span> decision_tree_classifier_model.predict(test_X)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## 
+## Classification tree:
+## tree(formula = species ~ ., data = train_data)
+## Variables actually used in tree construction:
+## [1] &quot;petal_length&quot; &quot;petal_width&quot; 
+## Number of terminal nodes:  5 
+## Residual mean deviance:  0.1173 = 11.73 / 100 
+## Misclassification error rate: 0.02857 = 3 / 105</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## DecisionTreeClassifier(max_depth=4)</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '3'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Different approaches for splitting decision tree</strong><br />
+<strong>Gini impurity</strong> :<br />
+is a measurement that shows the probability of an incorrect classification of a randomly chosen datapoint in our dataset, when it was randomly classified according to the distribution of class labels from the dataset.<br />
+We can compute gini impurity of node <code>n</code> using this formula:<br />
+<span class="math inline">\(I_{G}(n) = 1-\sum_{i=1}^{J} (p_{i})^2\)</span></p>
+<ul>
+<li>J : number of all classes(in our dataset , <code>J</code> is 3).<br />
+</li>
+<li><span class="math inline">\(p_{i}\)</span> : fraction of items labeled with class <code>i</code> in the set of datapoints in node <code>n</code>.<br />
+The lowest (and best) value for gini impurity is 0.It happens when all elements of the node belong to the same class.<br />
+random forest will choose the split that minimizes the gini impurity.</li>
+</ul>
+<p><strong>entropy</strong>:<br />
+is a measurment that shows how <em>mixed</em> the column is.<br />
+Consider a binary classification that target column can get values <code>yes</code> and <code>no</code>. if target column has equal amounts of <code>yes</code>s and <code>no</code>s , then entropy will be equal to <code>1</code>, which is the highest value for entropy.We can compute entropy using this formula:<br />
+<span class="math inline">\(-\sum_{i=1}^{c} p(x_{i}) log_{2}p(x_{i})\)</span></p>
+<ul>
+<li>c : number of classes(in our case , c is 3).<br />
+</li>
+<li><span class="math inline">\(p_{i}\)</span> : probability of class <code>i</code>.</li>
+</ul>
+<p>decision tree will choose the split that minimizes the entropy.</p>
+<p><strong>information gain</strong>:<br />
+measures <strong>reduction in entropy</strong> by splitting dataset on values of column we are testing.<br />
+In other words , the higher the information gain is , the more we have reduced entropy.<br />
+We can compute information gain using this formula:<br />
+<span class="math inline">\(IG(T,A) = Entropy(T) - \sum_{v \in A} \frac{T_{v}}{T} . Entropy(T_{v})\)</span></p>
+<p>-<code>T</code> : Target column<br />
+-<code>A</code> : the column we are testing<br />
+-<code>v</code> : each value in <code>A</code>.</p>
+<p>decision tree will choose the split that maximizes the information gain.<br />
+In this dot,we want to calculate the entropy of <code>species</code> column of our dataset, using <code>entropy()</code> function from <code>entropy</code> package.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 3, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Different approaches for splitting decision tree</strong><br />
+<strong>Gini impurity</strong> :<br />
+is a measurement that shows the probability of an incorrect classification of a randomly chosen datapoint in our dataset, when it was randomly classified according to the distribution of class labels from the dataset.<br />
+We can compute gini impurity of node <code>n</code> using this formula:<br />
+<span class="math inline">\(I_{G}(n) = 1-\sum_{i=1}^{J} (p_{i})^2\)</span></p>
+<ul>
+<li>J : number of all classes(in our dataset , <code>J</code> is 3).<br />
+</li>
+<li><span class="math inline">\(p_{i}\)</span> : probability of class <code>i</code> in node <code>n</code>.</li>
+</ul>
+<p>The lowest (and best) value for gini impurity is 0.It happens when all elements of the node belong to the same class.<br />
+decision tree will choose the split that minimizes the gini impurity.</p>
+<p><strong>entropy</strong>:<br />
+is a measurment that shows how <em>mixed</em> the column is.<br />
+Consider a binary classification that target column can get values <code>yes</code> and <code>no</code>. if target column has equal amounts of <code>yes</code>s and <code>no</code>s , then entropy will be equal to <code>1</code>, which is the highest value for entropy.We can compute entropy using this formula:<br />
+<span class="math inline">\(-\sum_{i=1}^{c} p(x_{i}) log_{2}p(x_{i})\)</span></p>
+<ul>
+<li>c : number of classes(in our case , c is 3).<br />
+</li>
+<li><span class="math inline">\(p_{i}\)</span> : probability of class <code>i</code>.</li>
+</ul>
+<p>decision tree will choose the split that minimizes the entropy.</p>
+<p><strong>information gain</strong>:<br />
+measures <strong>reduction in entropy</strong> by splitting dataset on values of column we are testing.<br />
+In other words , the higher the information gain is , the more we have reduced entropy.<br />
+We can compute information gain using this formula:<br />
+<span class="math inline">\(IG(T,A) = Entropy(T) - \sum_{v \in A} \frac{T_{v}}{T} . Entropy(T_{v})\)</span></p>
+<p>-<code>T</code> : Target column<br />
+-<code>A</code> : the column we are testing<br />
+-<code>v</code> : each value in <code>A</code>.</p>
+<p>decision tree will choose the split that maximizes the information gain.<br />
+In this dot,we want to calculate the entropy of species column of our dataset, using <code>entropy()</code> function from <code>scipy</code> package.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb8"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(entropy)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">table</span>(data_iris<span class="sc">$</span>species) <span class="sc">/</span> <span class="fu">length</span>(data_iris<span class="sc">$</span>species)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>species_entropy <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">round</span>(<span class="fu">entropy</span>(counts) , </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">2</span>) ,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">nsmall =</span> <span class="dv">2</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(species_entropy)</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb9"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> entropy</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> data_iris.species.value_counts()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>species_entropy <span class="op">=</span> entropy(counts)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;species entropy is : </span><span class="sc">{:.2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(species_entropy))</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;1.10&quot;</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## species entropy is : 1.10</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '4'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Random forest classifier</strong><br />
+Random forest is one of the most commonly used algorithms in data science.<br />
+Random forest is an <strong>ensemble model</strong>,which means more than one model is built in the process to make the prediction.<br />
+In other words , random forest is made up by many decision trees that can vary in depth.<br />
+It shows that this algorithm uses <strong>different subsets of data</strong> to built each decision tree , and <strong>different subset of features</strong> to split nodes.<br />
+This randomness improves the performance of the model output.<br />
+We use <code>randomForest</code> library to implement our random forest model.<br />
+By default, the number of decision trees in the forest is 500 and the number of features used as potential candidates for each split is 3.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 4, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Random forest classifier</strong><br />
+Random forest is one of the most commonly used algorithms in data science.<br />
+Random forest is an <strong>ensemble model</strong>,which means more than one model is built in the process to make the prediction.<br />
+In other words , random forest is made up by many decision trees that can vary in depth.<br />
+It shows that this algorithm uses <strong>different subsets of data</strong> to built each decision tree , and <strong>different subset of features</strong> to split nodes.<br />
+This randomness improves the performance of the model output.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb12"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">78</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>randomForest_model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(species <span class="sc">~</span>. ,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">data =</span> train_data)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>randomForest_predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(randomForest_model ,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">newdata =</span> test_data)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>rm_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(randomForest_model , </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">newdata =</span> test_data)</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb13"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">78</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#build random forest model</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>randomForest_model <span class="op">=</span> RandomForestClassifier(n_estimators <span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>randomForest_model.fit(train_X , train_y)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>randomForest_predict <span class="op">=</span> randomForest_model.predict(test_X)</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## RandomForestClassifier()</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '5'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Decision tree vs random forest</strong><br />
+Decision tree is easy to implement and has high performance on classification problems.It is also faster that random forest to train.However , It is prone to <strong>overfitting</strong>.<br />
+Overfitting happens when our model is very flexible and perfectly matches training dataset , but does not match well in test dataset.<br />
+decision tree can have <em>high variance</em> , which means that small change in data can result in a large change in stucture of tree , and also on model predictions.An easy way to prevent overfitting is setting a limitation for <code>max_depth</code> of the tree.<br />
+However , random forest builds many decision trees and uses the average of all predictions to classify data , so it is unlikely that random forest overfits to the data.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 5, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Decision tree vs random forest</strong><br />
+Decision tree is easy to implement and has high performance on classification problems.It is also faster that random forest to train.However , It is prone to <strong>overfitting</strong>.<br />
+Overfitting happens when our model is very flexible and perfectly matches training dataset , but does not match well in test dataset.<br />
+decision tree can have <em>high variance</em> , which means that small change in data can result in a large change in stucture of tree , and also on model predictions.An easy way to prevent overfitting is setting a limitation for <code>max_depth</code> of the tree.<br />
+However , random forest builds many decision trees and uses the average of all predictions to classify data , so it is unlikely that random forest overfits to the data.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb15"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#decision tree accuracy on test data</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>decision_tree_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(decision_tree_test_prediction <span class="sc">==</span> test_data<span class="sc">$</span>species)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#round accuracy to 2 decimal places</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>decision_tree_accuracy <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">round</span>(decision_tree_accuracy , </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="dv">2</span> ) ,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">nsmall =</span> <span class="dv">2</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(decision_tree_accuracy)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#random forest accuracy on test_data</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>randomForest_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(rm_pred <span class="sc">==</span> test_data<span class="sc">$</span>species)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#round accuracy to 2 decimal places</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>randomForest_accuracy <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">round</span>(randomForest_accuracy ,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="dv">2</span> ) ,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                                <span class="at">nsmall =</span> <span class="dv">2</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(randomForest_accuracy)</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb16"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;decision tree accuracy: </span><span class="sc">{:.2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(accuracy_score(test_y , decision_tree_predict)))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;random forest accuracy : </span><span class="sc">{:.2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(accuracy_score(test_y , randomForest_predict)))</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;0.93&quot;</code></pre>
+<pre><code>## [1] &quot;0.96&quot;</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## decision tree accuracy: 0.93</code></pre>
+<pre><code>## random forest accuracy : 0.96</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '6'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Visualizing random forest result with confusion matrix</strong><br />
+<strong>confusion matrix</strong> is used to measure the performance of a calssification algorithm. there are 4 possible output types for confusion matrix:<br />
+- <code>True Positivi(TP)</code> : Model predicts that a record belongs to a specific class , and the prediction is true.<br />
+- <code>True Negative(TN)</code> : Model predicts that a record does not belong to a specific class , and the prediction is true.<br />
+- <code>False Positive(FP)</code> : Model predicts that a record belongs to a specific class , but it actually is not.This type of error is called <strong>Type 1 error</strong>.<br />
+- <code>False Negative(FN)</code> : Model predicts that a record does not belong to a specific class, but it actually is.This type of error is called <strong>Type 2 error</strong>.</p>
+<p>In this dot , we will visualize confusion matrix of our random forest model.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 6, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Visualizing random forest result with confusion matrix</strong><br />
+<strong>confusion matrix</strong> is used to measure the performance of a calssification algorithm. there are 4 possible output types for confusion matrix:<br />
+- <code>True Positivi(TP)</code> : Model predicts that a record belongs to a specific class , and the prediction is true.<br />
+- <code>True Negative(TN)</code> : Model predicts that a record does not belong to a specific class , and the prediction is true.<br />
+- <code>False Positive(FP)</code> : Model predicts that a record belongs to a specific class , but it actually is not.This type of error is called <strong>Type 1 error</strong>.<br />
+- <code>False Negative(FN)</code> : Model predicts that a record does not belong to a specific class, but it actually is.This type of error is called <strong>Type 2 error</strong>.</p>
+<p>In this dot , we will visualize confusion matrix of our random forest model.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb21"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#confusion matrix</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cm <span class="ot">&lt;-</span> <span class="fu">as_data_frame</span>(<span class="fu">table</span>(<span class="at">predicted =</span> rm_pred , <span class="at">actual =</span> test_data<span class="sc">$</span>species))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#plot confusion matrix</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cm ,<span class="fu">aes</span>(<span class="at">x =</span> actual , <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  )) </span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb22"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>ConfusionMatrix<span class="op">=</span> confusion_matrix(test_y, randomForest_predict , labels<span class="op">=</span>np.unique(y))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#plot confusionMatrix</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(ConfusionMatrix, index<span class="op">=</span>np.unique(y), columns<span class="op">=</span>np.unique(y))</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>cm.index.name <span class="op">=</span> <span class="st">&#39;Actual&#39;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>cm.columns.name <span class="op">=</span> <span class="st">&#39;Predicted&#39;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span> , <span class="dv">10</span>))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm,annot <span class="op">=</span> <span class="va">True</span>, fmt<span class="op">=</span><span class="st">&#39;&#39;</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<p><img src="random-forest-classifier_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f3fda91d0b8&gt;</code></pre>
+<p><img src="random-forest-classifier_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" /></p>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '7'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Feature importance </strong><br />
+For calculating feature importance score of each feature,we use <code>importance()</code> function from <code>randomForest</code> package.This function calculates feature importance of each column using <code>MeanDecreaseGini</code>.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 7, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Feature importance </strong><br />
+For calculating feature importance score of each feature, we use <em>sum of the reductions in gini impurity</em> of all nodes that are split on the feature.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb24"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get a list of columns</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>Features <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data_iris)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#drop target column</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>Features <span class="ot">&lt;-</span> Features[<span class="sc">-</span><span class="fu">length</span>(Features)] </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>importance_scores <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">importance</span>(randomForest_model))</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#create feature importance data frame</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>FI <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">feature =</span> Features , <span class="at">importance_score =</span> importance_scores) <span class="sc">%&gt;%</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(importance_score))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> FI ,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(feature , <span class="sc">-</span> importance_score) ,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> importance_score)) <span class="sc">+</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Feature importance bar plot&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span> , </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">&quot;cyan&quot;</span>)</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb25"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>FI <span class="op">=</span> pd.DataFrame({<span class="st">&#39;Feature&#39;</span> : <span class="bu">list</span>(train_X.columns) , <span class="st">&#39;importance_score&#39;</span> : randomForest_model.feature_importances_}).sort_values(<span class="st">&#39;importance_score&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#create bar plot</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>plt.clf()</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>sns.barplot(data <span class="op">=</span> FI, x <span class="op">=</span> <span class="st">&#39;Feature&#39;</span> , y <span class="op">=</span> <span class="st">&#39;importance_score&#39;</span> , color <span class="op">=</span> <span class="st">&#39;cyan&#39;</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Feature importance bar plot&#39;</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<p><img src="random-forest-classifier_files/figure-html/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f3fd40147f0&gt;</code></pre>
+<pre><code>## Text(0.5, 1.0, &#39;Feature importance bar plot&#39;)</code></pre>
+<p><img src="random-forest-classifier_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto auto auto 0;" /></p>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 8, lang: r ------------------------------------------------>
+
+<div v-if="activeMotto === '8'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Generate random forest model on selected features</strong><br />
+In this dot ,we drop the least important feature(<code>sepal_width</code>) from model,to check its effect on accuracy.<br />
+We see that the accuracy is not changed,so it has no effect on accuracy and we can drop it from model.</p>
+
+</p>
+</div>
+ 
+
+<!-- Dot 8, lang: python ------------------------------------------------>
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+
+<p><strong>Generate random forest model on selected features</strong><br />
+In this dot ,we drop the least important feature(<code>sepal_width</code>) from model,to check its effect on accuracy.<br />
+We see that the accuracy is not changed,so it has no effect on accuracy and we can drop it from model.</p>
+
+</p>
+</div>
+ 
+
+
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb28"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">78</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#remove &#39;sepal_width&#39;  from our dataset</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>data_iris_2 <span class="ot">&lt;-</span> data_iris <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(petal_width ,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>         petal_length ,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>         sepal_length)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>sample_2 <span class="ot">&lt;-</span> <span class="fu">sample.split</span>(data_iris<span class="sc">$</span>species, <span class="at">SplitRatio =</span> <span class="fl">0.7</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>train_data_2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_iris, sample <span class="sc">==</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>test_data_2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(data_iris, sample <span class="sc">==</span> <span class="cn">FALSE</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>randomForest_model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(species <span class="sc">~</span>. ,</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">data =</span> train_data_2)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>randomForest_predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(randomForest_model ,</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>                                <span class="at">newdata =</span> test_data_2)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>rm_pred_2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(randomForest_model , <span class="at">newdata =</span> test_data)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co">#accuracy of new model</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>randomForest_2_accuracy <span class="ot">&lt;-</span> <span class="fu">mean</span>(rm_pred_2 <span class="sc">==</span> test_data_2<span class="sc">$</span>species)</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>randomForest_2_accuracy <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">round</span>(randomForest_2_accuracy ,</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>                                        <span class="dv">2</span>) ,</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">nsmall =</span> <span class="dv">2</span>)</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(randomForest_2_accuracy)</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb29"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">78</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#remove feature &#39;sepal_width&#39; </span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>X2 <span class="op">=</span> data_iris[[<span class="st">&#39;petal_length&#39;</span>, <span class="st">&#39;petal_width&#39;</span> ,<span class="st">&#39;sepal_length&#39;</span>]]</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> data_iris[<span class="st">&#39;species&#39;</span>]</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>train_X2 , test_X2 , train_y2 , test_y2 <span class="op">=</span> train_test_split(X2 , y2 , test_size <span class="op">=</span> <span class="fl">0.3</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#build a new random forest model with selected features</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>randomForest_model2 <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>randomForest_model2.fit(train_X2 , train_y2)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>randomForest2_predict <span class="op">=</span> randomForest_model2.predict(test_X2)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;random forest2 accuracy : </span><span class="sc">{:.2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(accuracy_score(test_y2 , randomForest2_predict)))</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>## [1] &quot;0.96&quot;</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## RandomForestClassifier()</code></pre>
+<pre><code>## random forest2 accuracy : 0.96</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+</section>
+<!-- Body Footer ----------------------------------->
+
+<section id="dotto-footer">
+<div class="col-12 col-md-9">
+<div class="d-flex" id="dotto-row-lines">
+<img src="../../../assets/img/Dotto.svg" width="35" height="35" type="button" class=" ml-5 icon d-sm-flex justify-content-sm-center dotto-lines-icons">
+</i>
+</div>
+</div>
+<div class="col-12 col-md-3 pt-2">
+<div class="alert alert-danger dotto-alert-comment text-center" role="alert">
+<span type="button" @click="commentOpen = true" class="footer-disqus-text">
+<strong><i class="fas fa-comments fa-1x" style="font-size: 21px"> </i>
+<span class="disqus-comment-count" data-disqus-url="https://datamotto.com/posts/Dotto/D015-2021-08-11-random-forest-classifier/index.html" data-disqus-identifier="c4ca940e-faa4-11eb-9676-c8b29b64e24a"></span>
+</strong>
+<span> for this Dotto.</span>
+<span> Write yours here!</span>
+</span>
+
+<script>
+var disqus_config = function () {
+  this.page.url = "https://datamotto.com/posts/Dotto/D015-2021-08-11-random-forest-classifier/index.html";
+  this.page.identifier = "c4ca940e-faa4-11eb-9676-c8b29b64e24a";
+};
+
+(function() {
+var d = document, s = d.createElement("script");
+s.src = "https://datamotto-com.disqus.com/embed.js";
+s.setAttribute("data-timestamp", +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//datamotto-com.disqus.com/count.js" async></script>
+
+</div>
+</div>
+</section>
+
+
+</div>
+<!-- Don't indent these lines or it will mess pre blocks indentation -->
+<script src="../../../assets/js/post.js"></script>
+<script src="../../../assets/js/jquery.min.js"></script>
+<script src="../../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../assets/js/bs-init.js"></script>
+<script src="../../../assets/js/carts.js"></script>
+<script src="../../../assets/js/Index_page.js"></script>
+<script src="../../../assets/js/jquery-3.5.1.min.js"></script>
+</body>
+</html>

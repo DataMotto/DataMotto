@@ -1,0 +1,47 @@
+{
+  "file_name": ["random-forest-classifier"],
+  "dir_name": ["D015-2021-08-11-random-forest-classifier"],
+  "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+  "link": ["posts/Dotto/D015-2021-08-11-random-forest-classifier/index.html"],
+  "base_url": ["https://datamotto.com"],
+  "social_networks_datamotto": {
+    "twitter": ["https://twitter.com/DataMotto"],
+    "linkedin": ["https://www.linkedin.com/company/datamotto"]
+  },
+  "dotto_number": [15],
+  "dotto_label": ["D015"],
+  "dotto_id": ["c4ca940e-faa4-11eb-9676-c8b29b64e24a"],
+  "title": ["Random forest classifier"],
+  "description": ["An introduction to one of the most efficient algorithms for classification.\n"],
+  "author": [
+    {
+      "name": ["Parnian Jahangiri Rad"],
+      "occupation": ["Data science intern"],
+      "affiliation": ["DataMotto"],
+      "url": ["https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4"],
+      "img": ["Parnian-Jahangiri-Rad.jpg"],
+      "lang": ["r , python"],
+      "profile_img_for_Dotto": ["./random-forest-classifier_files/figure-html/Parnian-Jahangiri-Rad.jpg"],
+      "profile_img": ["./posts/Dotto/D015-2021-08-11-random-forest-classifier/random-forest-classifier_files/figure-html/Parnian-Jahangiri-Rad.jpg"]
+    }
+  ],
+  "tech": [
+    {
+      "lang": ["r"],
+      "pkgs": ["randomForest"]
+    },
+    {
+      "lang": ["python"],
+      "pkgs": ["scikit-learn"]
+    }
+  ],
+  "date": {
+    "created": ["2021-08-11"],
+    "last_updated": ["2021-08-11"]
+  },
+  "categories": ["Modeling"],
+  "applications": ["General"],
+  "cover_image": {},
+  "slug": ["random-forest-classifier"],
+  "output": ["DataMotto::Dotto"]
+}
