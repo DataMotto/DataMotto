@@ -487,7 +487,7 @@ print("random forest accuracy : {:.2f}".format(accuracy_score(test_y , randomFor
 <!-- Dot 6, lang: r ------------------------------------------------>
 ```{block, Dot = 6, part = "Instruction", lang = "r"}
 **Visualizing random forest result with confusion matrix**  
-**confusion matrix** is used to measure the performance of a calssification algorithm.
+**confusion matrix** is used to measure the performance of a classification algorithm.  
 there are 4 possible output types for confusion matrix:  
 - `True Positivi(TP)` :  Model predicts that a record belongs to a specific class , and
 the prediction is true.  
@@ -504,7 +504,7 @@ In this dot , we will visualize confusion matrix of our random forest model.
 <!-- Dot 6, lang: python ------------------------------------------------>
 ```{block, Dot = 6, part = "Instruction", lang = "python"}
 **Visualizing random forest result with confusion matrix**  
-**confusion matrix** is used to measure the performance of a calssification algorithm.
+**confusion matrix** is used to measure the performance of a classification algorithm.  
 there are 4 possible output types for confusion matrix:  
 - `True Positivi(TP)` :  Model predicts that a record belongs to a specific class , and
 the prediction is true.  
@@ -544,7 +544,7 @@ sns.heatmap(cm,annot = True, fmt='', ax=ax)
 plt.show()
 ```
 
-```{r, Dot = 6, part = "Result", echo = F, eval = T}
+```{r, Dot = 6, part = "Result", echo = F, eval = T ,message=FALSE,warning=FALSE}
 #confusion matrix
 cm <- as_data_frame(table(predicted = rm_pred , actual = test_data$species))
 #plot confusion matrix
@@ -557,7 +557,7 @@ ggplot(data = cm ,aes(x = actual , y = predicted)) +
   )) 
 ```
 
-```{python, Dot = 6, part = "Result", echo = F, eval = T}
+```{python, Dot = 6, part = "Result", echo = F, eval = T, message=FALSE, warning = FALSE}
 from sklearn.metrics import confusion_matrix
 
 ConfusionMatrix= confusion_matrix(test_y, randomForest_predict , labels=np.unique(y))
@@ -604,7 +604,7 @@ ggplot(data = FI ,
            fill = "cyan")
 ```
 
-```{python, Dot = 7, part = "Code", echo = T, eval = F, }
+```{python, Dot = 7, part = "Code", echo = T, eval = F }
 FI = pd.DataFrame({'Feature' : list(train_X.columns) , 'importance_score' : randomForest_model.feature_importances_}).sort_values('importance_score', ascending=False)
 
 #create bar plot
@@ -614,7 +614,7 @@ plt.title('Feature importance bar plot')
 plt.show()
 ```
 
-```{r, Dot = 7, part = "Result", echo = F, eval = T}
+```{r, Dot = 7, part = "Result", echo = F, eval = T,message=FALSE,warning=FALSE}
 #get a list of columns
 Features <- colnames(data_iris)
 #drop target column
@@ -633,7 +633,7 @@ ggplot(data = FI ,
            fill = "cyan")
 ```
 
-```{python, Dot = 7, part = "Result", echo = F, eval = T}
+```{python, Dot = 7, part = "Result", echo = F, eval = T,message=FALSE,warning=FALSE}
 FI = pd.DataFrame({'Feature' : list(train_X.columns) , 'importance_score' : randomForest_model.feature_importances_}).sort_values('importance_score', ascending=False)
 
 #create bar plot
