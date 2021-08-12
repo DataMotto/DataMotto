@@ -104,7 +104,7 @@ library(dplyr)
 library(ggplot2)
 
 #Load Dataset
-data = read.csv('E:/loan_data_set.csv',na.strings=c(""))
+data = read.csv('loan_data_set.csv',na.strings=c(""))
 
 #Drop NA values
 data = na.omit(data)
@@ -142,7 +142,7 @@ library(dplyr)
 library(ggplot2)
 
 #Load Dataset
-data = read.csv('E:/loan_data_set.csv',na.strings=c(""))
+data = read.csv('loan_data_set.csv',na.strings=c(""))
 
 #Drop NA values
 data = na.omit(data)
@@ -162,7 +162,7 @@ import seaborn as sns
 import numpy as np
 
 #Load dataset
-data = pd.read_csv('E:/loan_data_set.csv')
+data = pd.read_csv('loan_data_set.csv')
 
 #Show dataset information
 data.info()
