@@ -278,7 +278,10 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>DESC</p>
+<p>The <a href="https://www.kaggle.com/burak3ergun/loan-data-set">Loan dataset</a> is home loans information for Dream Housing Finance company. It contains 13 different features about their applicants. These features and their types are listed below: - <strong>Loan ID</strong> : Applicants ID - <strong>Gender</strong> : Categorical (<em>Female or Male</em>) - <strong>Married</strong> : Categorical (<em>Yes or No</em>) - <strong>Dependents</strong> : Categorical (<em>0, 1, 2, or 3+</em>) - <strong>Education</strong> : Categorical (<em>Graduated or Not Graduated</em>) - <strong>Self-Employed</strong> : Categorical (<em>Yes or No</em>) - <strong>Applicant Income</strong> : Numerical - <strong>Co-applicant Income</strong> : Numerical - <strong>Loan Amount</strong> : Numerical - <strong>Loan-Amount-Term</strong> : Categorical (<em>10 categories</em>) - <strong>Credit History</strong> : Binary (<em>1 or 0</em>) - <strong>Property Area</strong> : Categorical(<em>Semiurban, Urban or Rural</em>) - <strong>Loan Status</strong> : Categorical (<em>Y or N</em>)</p>
+<p>In this Dotto, we want to count different categories in each categorical data, use suitable plots for visualization, encode and create dummy features.</p>
+<p>Categorical data divides into two main classes: - <strong>Nominal</strong> categorical data: In this type of data, we do not have any ordinal priority—for instance, weather conditions, medical conditions, and hair colors. - <strong>Ordinal</strong> categorical data: In against an ordinal type, has ordinal priority among categories.</p>
+<p>In the Loan dataset, Property Area and Education features are the examples of the nominal type, and Dependents is the example of the ordinal type.</p>
 
 </p>
 </div>
@@ -337,7 +340,10 @@ class="btn dotto-main-dot-shape"
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&#39;E:/loan_data_set.csv&#39;</span>,<span class="at">na.strings=</span><span class="fu">c</span>(<span class="st">&quot;&quot;</span>))</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Drop NA values</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">na.omit</span>(data)</span></code></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">na.omit</span>(data)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Show five sample of dataset</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(data, <span class="dv">5</span>)</span></code></pre></div>
 
 </div>
  
@@ -377,6 +383,24 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
+<pre><code>##    Loan_ID Gender Married Dependents Education Self_Employed
+## 1 LP001608   Male     Yes          2  Graduate            No
+## 2 LP002842   Male     Yes          1  Graduate            No
+## 3 LP002097   Male      No          1  Graduate            No
+## 4 LP002035   Male     Yes          2  Graduate            No
+## 5 LP001222 Female      No          0  Graduate            No
+##   ApplicantIncome CoapplicantIncome LoanAmount Loan_Amount_Term
+## 1            2045              1619        101              360
+## 2            3417              1750        186              360
+## 3            4384              1793        117              360
+## 4            3717                 0        120              360
+## 5            4166                 0        116              360
+##   Credit_History Property_Area Loan_Status
+## 1              1         Rural           Y
+## 2              1         Urban           Y
+## 3              1         Urban           Y
+## 4              1     Semiurban           Y
+## 5              0     Semiurban           N</code></pre>
 
 </div>
  
@@ -406,11 +430,11 @@ class="btn dotto-main-dot-shape"
 ## dtypes: float64(4), int64(1), object(8)
 ## memory usage: 62.5+ KB</code></pre>
 <pre><code>##       Loan_ID  Gender Married  ... Credit_History Property_Area Loan_Status
-## 71   LP001245    Male     Yes  ...            1.0     Semiurban           Y
-## 92   LP001319    Male     Yes  ...            1.0         Urban           Y
-## 180  LP001633    Male     Yes  ...            0.0         Urban           N
-## 160  LP001560    Male     Yes  ...            1.0     Semiurban           Y
-## 500  LP002603  Female      No  ...            1.0         Rural           Y
+## 288  LP001931  Female      No  ...            1.0     Semiurban           Y
+## 499  LP002602    Male      No  ...            0.0         Rural           N
+## 89   LP001310    Male     Yes  ...            1.0     Semiurban           Y
+## 459  LP002473    Male     Yes  ...            1.0     Semiurban           N
+## 13   LP001029    Male      No  ...            1.0         Rural           N
 ## 
 ## [5 rows x 13 columns]</code></pre>
 
@@ -432,7 +456,7 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>DESC</p>
+<p>It is essential to know the frequency of each category in categorical features. For this purpose, we can use table to create a table or use <code>ggplot</code> to plot a barplot. For example, in the Loan dataset, we have some categorical features like Property Area. This feature has three categories, and we want to know the most frequent category. We can use both table and plot to identify it. In this dot, first we use <code>fct_reorder</code> in <code>forcats</code> package to sort categories by their frequency then use <code>ggplot</code> to plot a barplot.</p>
 
 </p>
 </div>
@@ -461,15 +485,22 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb5"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(data<span class="sc">$</span>Property_Area))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(Property_Area) <span class="sc">%&gt;%</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Property_Area =</span> <span class="fu">fct_reorder</span>(Property_Area, n, <span class="at">.desc =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Property_Area, <span class="at">y =</span> n, <span class="at">fill=</span>Property_Area)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&#39;identity&#39;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Count frequency of &#39;Property_Area&#39; categories</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>Property_Area)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Import packages</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot bar plot for &#39;Property_Area&#39;  feature</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(Property_Area) <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Property_Area =</span> </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">fct_reorder</span>(Property_Area, n, <span class="at">.desc =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Property_Area,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> n,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill=</span>Property_Area))<span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&#39;identity&#39;</span>)   </span></code></pre></div>
 
 </div>
  
@@ -478,13 +509,13 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb6"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Count frequency of &#39;Property_Area&#39; categories</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;Property_Area&#39;</span>].value_counts())</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot bar plot for &#39;Property_Area&#39;  feature</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>sns.catplot(data <span class="op">=</span> data,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="st">&#39;Property_Area&#39;</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            kind <span class="op">=</span> <span class="st">&#39;count&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Count frequency of &#39;Property_Area&#39; categories</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;Property_Area&#39;</span>].value_counts())</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot bar plot for &#39;Property_Area&#39;  feature</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>sns.catplot(data <span class="op">=</span> data,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="st">&#39;Property_Area&#39;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            kind <span class="op">=</span> <span class="st">&#39;count&#39;</span>)</span></code></pre></div>
 
 </div>
  
@@ -536,7 +567,7 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>DESC</p>
+<p>Sometimes it is good to know the variation in numerical features in each category in a categorical feature. For this purpose, we can plot a <code>stripplot</code>. For example, we want to show the Loan Amount variation in each Dependents category in the Loan dataset. We can plot a strip plot by <code>ggplot</code> and <code>geom_jitter</code> in the <code>ggplot2</code> package.</p>
 
 </p>
 </div>
@@ -565,9 +596,10 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb9"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> Dependents, <span class="at">y =</span> LoanAmount, <span class="at">color =</span> Dependents))<span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_jitter</span>()<span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PLot a stripplot for each &#39;Dependets&#39; categories for &#39;LoanAmount&#39;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> Dependents, <span class="at">y =</span> LoanAmount, <span class="at">color =</span> Dependents))<span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_jitter</span>()<span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -576,8 +608,10 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb10"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PLot a stripplot for each &#39;Dependets&#39; category for &#39;LoanAmount&#39;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sns.catplot(data <span class="op">=</span> data, x <span class="op">=</span> <span class="st">&#39;Dependents&#39;</span>, y <span class="op">=</span> <span class="st">&#39;LoanAmount&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PLot a stripplot for each &#39;Dependets&#39; category for &#39;LoanAmount&#39;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sns.catplot(data <span class="op">=</span> data,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="st">&#39;Dependents&#39;</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> <span class="st">&#39;LoanAmount&#39;</span>)</span></code></pre></div>
 
 </div>
  
@@ -622,7 +656,7 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>DESC</p>
+<p>In the last dot, we may see some outliers in some categories. One of the good ways to identify outliers is to plot the box plot. For this purpose, we can use <code>geom_boxplot</code> to create a boxplot for each category. As we can see in the box plot, the zero dependents category has many outliers.</p>
 
 </p>
 </div>
@@ -651,8 +685,12 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb11"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x=</span>Dependents, <span class="at">y=</span>LoanAmount, <span class="at">color =</span> Dependents)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PLot a boxplot for each &#39;Dependets&#39; categories for &#39;LoanAmount&#39;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x=</span>Dependents,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y=</span>LoanAmount,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> Dependents)) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 
 </div>
  
@@ -661,11 +699,11 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb12"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PLot a boxplot for each &#39;Dependets&#39; categories for &#39;LoanAmount&#39;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sns.catplot(data <span class="op">=</span> data,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="st">&#39;Dependents&#39;</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> <span class="st">&#39;LoanAmount&#39;</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>            kind <span class="op">=</span> <span class="st">&#39;box&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PLot a boxplot for each &#39;Dependets&#39; categories for &#39;LoanAmount&#39;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sns.catplot(data <span class="op">=</span> data,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>            x <span class="op">=</span> <span class="st">&#39;Dependents&#39;</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> <span class="st">&#39;LoanAmount&#39;</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>            kind <span class="op">=</span> <span class="st">&#39;box&#39;</span>)</span></code></pre></div>
 
 </div>
  
@@ -710,7 +748,7 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>DESC</p>
+<p>Feature engineering is one of the most crucial processes to prepare categorical data for machine learning projects. In feature engineering, we use some transformation techniques to transform categorical data into some numerical features. For this purpose, we can use the <code>LabelEncoder</code> in <code>superml</code> package to encode features. In this dot, we use <code>LabelEncoder</code> to transform Property Area categories into numeric values.</p>
 
 </p>
 </div>
@@ -739,14 +777,20 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb13"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(superml)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df_Property_Area <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Property_Area)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>Property_Area_encoded <span class="ot">&lt;-</span> LabelEncoder<span class="sc">$</span><span class="fu">new</span>()</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Property_Area_encoded<span class="sc">$</span><span class="fu">fit</span>(df_Property_Area<span class="sc">$</span>Property_Area))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>df_Property_Area<span class="sc">$</span>Property_Area_encoded <span class="ot">&lt;-</span> Property_Area_encoded<span class="sc">$</span><span class="fu">fit_transform</span>(df_Property_Area<span class="sc">$</span>Property_Area)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(df_Property_Area,<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import superml package</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(superml)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Select &#39;property_Area&#39;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>df_Property_Area <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Property_Area)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Fit and Transform LabelEncoder </span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>Property_Area_encoded <span class="ot">&lt;-</span> LabelEncoder<span class="sc">$</span><span class="fu">new</span>()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Property_Area_encoded<span class="sc">$</span><span class="fu">fit</span>(df_Property_Area<span class="sc">$</span>Property_Area))</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>df_Property_Area<span class="sc">$</span>Property_Area_encoded <span class="ot">&lt;-</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  Property_Area_encoded<span class="sc">$</span><span class="fu">fit_transform</span>(</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    df_Property_Area<span class="sc">$</span>Property_Area)</span></code></pre></div>
 
 </div>
  
@@ -755,16 +799,18 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb14"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import LabelEncoder from sklearn</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Fit and Transform LabelEncoder </span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>le <span class="op">=</span> LabelEncoder()</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>Property_labels <span class="op">=</span> le.fit_transform(data[[<span class="st">&#39;Property_Area&#39;</span>]])</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Show encoded categories</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>genre_mappings <span class="op">=</span> {index: label <span class="cf">for</span> index, label <span class="kw">in</span> <span class="bu">enumerate</span>(le.classes_)}</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>genre_mappings</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import LabelEncoder from sklearn</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Fit and Transform LabelEncoder </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>le <span class="op">=</span> LabelEncoder()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>Property_labels <span class="op">=</span> le.fit_transform(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                        data[[<span class="st">&#39;Property_Area&#39;</span>]])</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Show encoded categories</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>genre_mappings <span class="op">=</span> {index: label <span class="cf">for</span> index,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                  label <span class="kw">in</span> <span class="bu">enumerate</span>(le.classes_)}</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(genre_mappings)</span></code></pre></div>
 
 </div>
  
@@ -781,12 +827,6 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
 <pre><code>## [1] TRUE</code></pre>
-<pre><code>##   Property_Area Property_Area_encoded
-## 1     Semiurban                     2
-## 2         Urban                     1
-## 3     Semiurban                     2
-## 4         Urban                     1
-## 5     Semiurban                     2</code></pre>
 
 </div>
  
@@ -817,7 +857,7 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>DESC</p>
+<p>Use the One-Hot (or dummy) encoding scheme is another way for feature engineering for categorical data. In this scheme, each category transforms into one binary feature. For example, if a categorical feature has <em>m</em> categories, then after One-Hot transformation, we have <em>m</em> binary feature, and every instance has only one of the values as 1. In python, we can use the <code>dummy_cols</code> in<code>fastDummies</code> to use One-Hot transformation. In this dot, we transform <strong>Property Area</strong> categories into three binary features.</p>
 
 </p>
 </div>
@@ -846,8 +886,12 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb19"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fastDummies)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(<span class="fu">dummy_cols</span>(df_Property_Area, <span class="at">select_columns =</span> <span class="fu">c</span>(<span class="st">&quot;Property_Area&quot;</span>)),<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import fastDummies package</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fastDummies)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Dummy &#39;Propert_Area&#39; categories</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(<span class="fu">dummy_cols</span>(df_Property_Area,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">select_columns =</span> <span class="fu">c</span>(<span class="st">&quot;Property_Area&quot;</span>)),<span class="dv">5</span>)</span></code></pre></div>
 
 </div>
  
@@ -861,12 +905,14 @@ class="btn dotto-main-dot-shape"
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Fit and Transform OneHotEncoder </span></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>ohe <span class="op">=</span> OneHotEncoder()</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>Property_one_hot <span class="op">=</span> ohe.fit_transform(data[[<span class="st">&#39;Property_Area&#39;</span>]])</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Show encoded categories as pandas dataframe</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>ohe_features <span class="op">=</span> pd.DataFrame(Property_one_hot.toarray(), </span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>                            columns<span class="op">=</span>[<span class="st">&#39;Rural&#39;</span>, <span class="st">&#39;Semiurban&#39;</span>, <span class="st">&#39;Urban&#39;</span>])</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>ohe_features.head(<span class="dv">5</span>)</span></code></pre></div>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>Property_one_hot <span class="op">=</span> ohe.fit_transform(</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                            data[[<span class="st">&#39;Property_Area&#39;</span>]])</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Show encoded categories as pandas dataframe</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>ohe_features <span class="op">=</span> pd.DataFrame(Property_one_hot.toarray(), </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>                            columns<span class="op">=</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>                            [<span class="st">&#39;Rural&#39;</span>, <span class="st">&#39;Semiurban&#39;</span>, <span class="st">&#39;Urban&#39;</span>])</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>ohe_features.head(<span class="dv">5</span>)</span></code></pre></div>
 
 </div>
  
@@ -883,17 +929,17 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
 <pre><code>##   Property_Area Property_Area_encoded Property_Area_Rural
-## 1         Rural                     0                   1
-## 2     Semiurban                     2                   0
+## 1     Semiurban                     2                   0
+## 2         Rural                     0                   1
 ## 3     Semiurban                     2                   0
-## 4     Semiurban                     2                   0
-## 5         Urban                     1                   0
+## 4         Urban                     1                   0
+## 5     Semiurban                     2                   0
 ##   Property_Area_Semiurban Property_Area_Urban
-## 1                       0                   0
-## 2                       1                   0
+## 1                       1                   0
+## 2                       0                   0
 ## 3                       1                   0
-## 4                       1                   0
-## 5                       0                   1</code></pre>
+## 4                       0                   1
+## 5                       1                   0</code></pre>
 
 </div>
  
@@ -927,7 +973,7 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>DESC</p>
+<p>Sometimes we want to change the category name in order manually. For example, the Dependents feature is an ordinal category in the Loan dataset, and we want to change just ‘3+’ into ‘3’. In this situation, with the <code>recode_factor</code> function, we can define any name for categories.</p>
 
 </p>
 </div>
@@ -956,8 +1002,13 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb23"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_dependents <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Dependents)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df_dependents<span class="sc">$</span>Dependents <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(df_dependents<span class="sc">$</span>Dependents, <span class="st">&quot;3+&quot;</span> <span class="ot">=</span> <span class="st">&quot;3&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select &#39;Dependents&#39; feature</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df_dependents <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">select</span>(Dependents)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Recode the levels</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>df_dependents<span class="sc">$</span>Dependents <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(df_dependents<span class="sc">$</span>Dependents,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&quot;3+&quot;</span> <span class="ot">=</span> <span class="st">&quot;3&quot;</span> )</span></code></pre></div>
 
 </div>
  
@@ -968,10 +1019,11 @@ class="btn dotto-main-dot-shape"
 
 <div class="sourceCode" id="cb24"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create mapping dictionary for &#39;Dependents&#39; categories</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>dependents_map <span class="op">=</span> { <span class="st">&#39;0&#39;</span> : <span class="dv">0</span>, <span class="st">&#39;1&#39;</span> : <span class="dv">1</span>, <span class="st">&#39;2&#39;</span> : <span class="dv">2</span>, <span class="st">&#39;3+&#39;</span> : <span class="dv">3</span>}</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Dependents&#39;</span>] <span class="op">=</span> data[<span class="st">&#39;Dependents&#39;</span>].<span class="bu">map</span>(dependents_map)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Print new categories</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;Dependents&#39;</span>].unique())</span></code></pre></div>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Dependents&#39;</span>] <span class="op">=</span> data[<span class="st">&#39;Dependents&#39;</span>].</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                      <span class="bu">map</span>(dependents_map)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Print new categories</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&#39;Dependents&#39;</span>].unique())</span></code></pre></div>
 
 </div>
  
@@ -1015,7 +1067,7 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>DESC</p>
+<p>We have features like <strong>Gender</strong>, <strong>Married</strong>, <strong>Education</strong>, <strong>Self-Employed</strong>, and <strong>Loan-Status</strong> in the Loan dataset with only two categories. In this situation, it is better to transform these features into binary features. For this purpose, we can use <code>dummy_cols</code> in fastdummies package then remove first column or encode manually with the recode_factor function.</p>
 
 </p>
 </div>
@@ -1044,10 +1096,15 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb26"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_bin <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Gender, Married, Self_Employed, Loan_Status)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_bin<span class="sc">$</span>Loan_Status)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(<span class="fu">dummy_cols</span>(df_bin, <span class="at">select_columns =</span> <span class="fu">c</span>(<span class="st">&quot;Gender&quot;</span> ),<span class="at">remove_first_dummy =</span> <span class="cn">TRUE</span>),<span class="dv">5</span>)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>df_bin<span class="sc">$</span>Married <span class="ot">&lt;-</span> <span class="fu">recode_factor</span>(df_bin<span class="sc">$</span>Married, <span class="st">&quot;Yes&quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;No&quot;</span> <span class="ot">=</span> <span class="dv">0</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Select features</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df_bin <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">select</span>(Gender,Married,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                 Self_Employed, Loan_Status)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Dummy features and drop first column</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dummy_cols</span>(df_bin,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">select_columns =</span> <span class="fu">c</span>(<span class="st">&quot;Gender&quot;</span> ),</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">remove_first_dummy =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 
 </div>
  
@@ -1088,13 +1145,208 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
-<pre><code>## [1] &quot;N&quot; &quot;Y&quot;</code></pre>
-<pre><code>##   Gender Married Self_Employed Loan_Status Gender_Male
-## 1   Male      No            No           Y           1
-## 2   Male     Yes            No           Y           1
-## 3   Male      No            No           N           1
-## 4   Male     Yes            No           Y           1
-## 5   Male      No            No           Y           1</code></pre>
+<pre><code>##     Gender Married Self_Employed Loan_Status Gender_Male
+## 1     Male     Yes            No           N           1
+## 2     Male     Yes           Yes           Y           1
+## 3     Male     Yes            No           Y           1
+## 4     Male      No            No           Y           1
+## 5     Male     Yes           Yes           Y           1
+## 6     Male     Yes            No           Y           1
+## 7     Male     Yes            No           N           1
+## 8     Male     Yes            No           Y           1
+## 9     Male     Yes            No           N           1
+## 10    Male     Yes            No           Y           1
+## 11    Male     Yes            No           Y           1
+## 12    Male      No            No           N           1
+## 13    Male     Yes            No           Y           1
+## 14    Male      No            No           Y           1
+## 15  Female      No            No           N           0
+## 16    Male     Yes            No           N           1
+## 17    Male     Yes            No           N           1
+## 18    Male     Yes            No           Y           1
+## 19    Male     Yes            No           N           1
+## 20    Male     Yes           Yes           Y           1
+## 21    Male     Yes            No           Y           1
+## 22    Male     Yes            No           Y           1
+## 23    Male      No            No           N           1
+## 24    Male      No            No           N           1
+## 25    Male      No           Yes           N           1
+## 26    Male     Yes            No           Y           1
+## 27    Male      No            No           N           1
+## 28  Female     Yes            No           Y           0
+## 29    Male      No            No           Y           1
+## 30    Male      No            No           Y           1
+## 31    Male      No            No           N           1
+## 32    Male      No            No           Y           1
+## 33    Male     Yes            No           Y           1
+## 34    Male     Yes            No           Y           1
+## 35    Male     Yes            No           Y           1
+## 36  Female     Yes            No           N           0
+## 37  Female      No            No           Y           0
+## 38  Female     Yes            No           Y           0
+## 39  Female      No            No           Y           0
+## 40  Female      No            No           N           0
+## 41    Male     Yes            No           N           1
+## 42  Female     Yes           Yes           N           0
+## 43    Male     Yes            No           Y           1
+## 44    Male     Yes            No           Y           1
+## 45    Male     Yes            No           N           1
+## 46    Male     Yes            No           Y           1
+## 47    Male     Yes            No           Y           1
+## 48    Male     Yes            No           Y           1
+## 49    Male     Yes            No           Y           1
+## 50    Male     Yes           Yes           N           1
+## 51  Female      No            No           N           0
+## 52    Male     Yes            No           N           1
+## 53    Male      No            No           N           1
+## 54    Male     Yes            No           Y           1
+## 55    Male     Yes           Yes           Y           1
+## 56  Female      No            No           N           0
+## 57    Male     Yes            No           Y           1
+## 58    Male     Yes           Yes           Y           1
+## 59    Male      No            No           Y           1
+## 60    Male     Yes           Yes           Y           1
+## 61    Male      No            No           N           1
+## 62    Male      No            No           N           1
+## 63    Male     Yes           Yes           N           1
+## 64    Male     Yes            No           N           1
+## 65  Female      No            No           Y           0
+## 66  Female     Yes            No           N           0
+## 67    Male     Yes            No           Y           1
+## 68    Male      No            No           Y           1
+## 69    Male     Yes            No           Y           1
+## 70    Male      No            No           Y           1
+## 71    Male     Yes            No           Y           1
+## 72    Male     Yes            No           Y           1
+## 73    Male     Yes            No           Y           1
+## 74    Male     Yes            No           Y           1
+## 75    Male      No            No           Y           1
+## 76    Male      No            No           Y           1
+## 77  Female     Yes            No           Y           0
+## 78    Male     Yes            No           Y           1
+## 79    Male     Yes            No           Y           1
+## 80    Male     Yes            No           Y           1
+## 81    Male     Yes            No           Y           1
+## 82    Male      No            No           Y           1
+## 83    Male     Yes            No           Y           1
+## 84    Male     Yes            No           Y           1
+## 85    Male     Yes            No           N           1
+## 86    Male     Yes            No           Y           1
+## 87    Male      No            No           Y           1
+## 88    Male     Yes            No           Y           1
+## 89  Female     Yes            No           Y           0
+## 90    Male     Yes            No           N           1
+## 91  Female      No            No           Y           0
+## 92  Female      No            No           Y           0
+## 93  Female      No            No           Y           0
+## 94    Male     Yes            No           Y           1
+## 95    Male     Yes            No           Y           1
+## 96    Male     Yes           Yes           N           1
+## 97    Male      No            No           Y           1
+## 98    Male      No            No           Y           1
+## 99    Male     Yes           Yes           Y           1
+## 100   Male      No            No           Y           1
+## 101   Male     Yes            No           N           1
+## 102 Female     Yes            No           N           0
+## 103   Male     Yes           Yes           Y           1
+## 104   Male      No            No           N           1
+## 105   Male     Yes            No           N           1
+## 106   Male     Yes            No           N           1
+## 107   Male      No            No           Y           1
+## 108   Male      No           Yes           Y           1
+## 109   Male     Yes            No           Y           1
+## 110   Male     Yes            No           Y           1
+## 111 Female     Yes            No           Y           0
+## 112 Female     Yes            No           Y           0
+## 113   Male     Yes            No           Y           1
+## 114 Female      No            No           N           0
+## 115   Male     Yes            No           Y           1
+## 116   Male      No            No           N           1
+## 117   Male     Yes           Yes           Y           1
+## 118   Male      No            No           N           1
+## 119   Male     Yes            No           N           1
+## 120   Male      No            No           Y           1
+## 121   Male     Yes            No           Y           1
+## 122   Male     Yes            No           Y           1
+## 123   Male     Yes            No           Y           1
+## 124   Male     Yes            No           Y           1
+## 125   Male     Yes            No           N           1
+## 126   Male     Yes            No           N           1
+## 127   Male     Yes            No           Y           1
+## 128   Male     Yes            No           Y           1
+## 129 Female     Yes            No           N           0
+## 130   Male     Yes            No           Y           1
+## 131   Male      No            No           N           1
+## 132   Male     Yes            No           Y           1
+## 133   Male     Yes            No           N           1
+## 134   Male     Yes            No           Y           1
+## 135   Male     Yes           Yes           N           1
+## 136   Male     Yes            No           Y           1
+## 137   Male     Yes            No           Y           1
+## 138   Male     Yes            No           N           1
+## 139   Male     Yes            No           Y           1
+## 140   Male      No            No           N           1
+## 141   Male     Yes            No           N           1
+## 142   Male     Yes            No           Y           1
+## 143   Male     Yes            No           N           1
+## 144 Female     Yes            No           Y           0
+## 145   Male     Yes           Yes           Y           1
+## 146   Male     Yes           Yes           N           1
+## 147   Male     Yes            No           Y           1
+## 148   Male      No            No           Y           1
+## 149   Male      No            No           N           1
+## 150   Male     Yes            No           N           1
+## 151   Male      No            No           Y           1
+## 152   Male      No            No           Y           1
+## 153   Male     Yes            No           N           1
+## 154   Male      No            No           Y           1
+## 155   Male      No           Yes           N           1
+## 156   Male     Yes            No           Y           1
+## 157   Male      No            No           Y           1
+## 158   Male     Yes            No           Y           1
+## 159   Male     Yes            No           Y           1
+## 160 Female      No            No           Y           0
+## 161 Female      No            No           Y           0
+## 162   Male      No            No           Y           1
+## 163   Male      No            No           Y           1
+## 164   Male      No            No           N           1
+## 165 Female      No            No           N           0
+## 166   Male     Yes            No           N           1
+## 167   Male     Yes           Yes           Y           1
+## 168   Male     Yes           Yes           Y           1
+## 169   Male     Yes            No           Y           1
+## 170   Male     Yes            No           Y           1
+## 171   Male     Yes            No           N           1
+## 172   Male     Yes            No           Y           1
+## 173   Male     Yes            No           N           1
+## 174   Male     Yes            No           Y           1
+## 175   Male      No            No           Y           1
+## 176   Male     Yes            No           Y           1
+## 177   Male     Yes            No           N           1
+## 178   Male     Yes            No           Y           1
+## 179   Male      No           Yes           Y           1
+## 180   Male     Yes            No           Y           1
+## 181 Female      No            No           Y           0
+## 182   Male     Yes            No           Y           1
+## 183   Male     Yes            No           Y           1
+## 184 Female      No            No           Y           0
+## 185   Male     Yes            No           Y           1
+## 186   Male     Yes            No           Y           1
+## 187   Male     Yes            No           N           1
+## 188   Male      No            No           Y           1
+## 189   Male     Yes           Yes           Y           1
+## 190   Male     Yes            No           Y           1
+## 191   Male      No           Yes           N           1
+## 192   Male     Yes            No           Y           1
+## 193   Male     Yes            No           Y           1
+## 194   Male     Yes            No           Y           1
+## 195   Male     Yes            No           Y           1
+## 196   Male     Yes            No           N           1
+## 197 Female      No            No           N           0
+## 198   Male      No           Yes           Y           1
+## 199   Male     Yes            No           Y           1
+## 200   Male      No           Yes           N           1
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 280 rows ]</code></pre>
 
 </div>
  

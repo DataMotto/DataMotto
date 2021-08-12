@@ -32,7 +32,28 @@ DataMotto::use_Dotto()
 <!-- Dot 1, lang: r,python ------------------------------------------------>
 
 ```{block, Dot = 1, part = "Instruction", lang = "r"}
-DESC
+The [Loan dataset](https://www.kaggle.com/burak3ergun/loan-data-set) is home loans information for Dream Housing Finance company. It contains 13 different features about their applicants. These features and their types are listed below:
+- **Loan ID** : Applicants ID
+- **Gender** : Categorical (*Female or Male*)
+- **Married** : Categorical (*Yes or No*)
+- **Dependents** : Categorical (*0, 1, 2, or 3+*)
+- **Education** : Categorical (*Graduated or Not Graduated*)
+- **Self-Employed** : Categorical (*Yes or No*)
+- **Applicant Income** : Numerical 
+- **Co-applicant Income** :  Numerical
+- **Loan Amount** : Numerical
+- **Loan-Amount-Term** : Categorical (*10 categories*)
+- **Credit History** : Binary (*1 or 0*) 
+- **Property Area** : Categorical(*Semiurban, Urban or Rural*)
+- **Loan Status** : Categorical (*Y or N*)
+
+In this Dotto, we want to count different categories in each categorical data, use suitable plots for visualization, encode and create dummy features.
+
+Categorical data divides into two main classes:
+- **Nominal** categorical data: In this type of data, we do not have any ordinal priority—for instance, weather conditions, medical conditions, and hair colors.
+- **Ordinal** categorical data: In against an ordinal type, has ordinal priority among categories.
+
+In the Loan dataset, Property Area and Education features are the examples of the nominal type, and Dependents is the example of the ordinal type.
 
 ```
 
@@ -88,6 +109,9 @@ data = read.csv('E:/loan_data_set.csv',na.strings=c(""))
 #Drop NA values
 data = na.omit(data)
 
+#Show five sample of dataset
+sample_n(data, 5)
+
 ```
 
 ```{python, Dot = 1, part = "Code", echo = T, eval = F}
@@ -123,6 +147,9 @@ data = read.csv('E:/loan_data_set.csv',na.strings=c(""))
 #Drop NA values
 data = na.omit(data)
 
+#Show five sample of dataset
+sample_n(data, 5)
+
 ```
 
 ```{python, Dot = 1, part = "Result", echo = F, eval = T}
@@ -151,7 +178,8 @@ data.sample(5)
 <!-- Dot 2, lang: r,python ------------------------------------------------>
 
 ```{block, Dot = 2, part = "Instruction", lang = "r"}
-DESC
+It is essential to know the frequency of each category in categorical features. For this purpose, we can use table to create a table or use `ggplot` to plot a barplot. For example, in the Loan dataset, we have some categorical features like Property Area. This feature has three categories, and we want to know the most frequent category. We can use both table and plot to identify it. 
+In this dot, first we use `fct_reorder` in `forcats` package to sort categories by their frequency then use `ggplot` to plot a barplot.
 
 ```
 
@@ -161,15 +189,22 @@ It is essential to know the frequency of each category in categorical features. 
 ```
 
 ```{r, Dot = 2, part = "Code", echo = T, eval = F}
-print(table(data$Property_Area))
+#Count frequency of 'Property_Area' categories
+table(data$Property_Area)
 
+#Import packages
 library(ggplot2)
 library(forcats)
 
+#Plot bar plot for 'Property_Area'  feature
 data %>%
     count(Property_Area) %>%
-    mutate(Property_Area = fct_reorder(Property_Area, n, .desc = TRUE)) %>%
-    ggplot(aes(x = Property_Area, y = n, fill=Property_Area)) + geom_bar(stat = 'identity') 
+    mutate(Property_Area = 
+             fct_reorder(Property_Area, n, .desc = TRUE)) %>%
+    ggplot(aes(x = Property_Area,
+               y = n,
+               fill=Property_Area))+
+    geom_bar(stat = 'identity')   
 
 ```
 
@@ -185,15 +220,22 @@ sns.catplot(data = data,
 ```
 
 ```{r, Dot = 2, part = "Result", echo = F, eval = T}
-print(table(data$Property_Area))
+#Count frequency of 'Property_Area' categories
+table(data$Property_Area)
 
+#Import packages
 library(ggplot2)
 library(forcats)
 
+#Plot bar plot for 'Property_Area'  feature
 data %>%
     count(Property_Area) %>%
-    mutate(Property_Area = fct_reorder(Property_Area, n, .desc = TRUE)) %>%
-    ggplot(aes(x = Property_Area, y = n, fill=Property_Area)) + geom_bar(stat = 'identity') 
+    mutate(Property_Area = 
+             fct_reorder(Property_Area, n, .desc = TRUE)) %>%
+    ggplot(aes(x = Property_Area,
+               y = n,
+               fill=Property_Area))+
+    geom_bar(stat = 'identity')  
 
 ```
 
@@ -209,7 +251,7 @@ sns.catplot(data = data, x = 'Property_Area', kind = 'count')
 <!-- Dot 3, lang: r,python ------------------------------------------------>
 
 ```{block, Dot = 3, part = "Instruction", lang = "r"}
-DESC
+Sometimes it is good to know the variation in numerical features in each category in a categorical feature. For this purpose, we can plot a `stripplot`. For example, we want to show the Loan Amount variation in each Dependents category in the Loan dataset. We can plot a strip plot by `ggplot` and `geom_jitter` in the `ggplot2` package.
 
 ```
 
@@ -219,6 +261,7 @@ Sometimes it is good to know the variation in numerical features in each categor
 ```
 
 ```{r, Dot = 3, part = "Code", echo = T, eval = F}
+#PLot a stripplot for each 'Dependets' categories for 'LoanAmount'
 ggplot(data, aes(x = Dependents, y = LoanAmount, color = Dependents))+
 geom_jitter()+
 theme(legend.position = "none")
@@ -234,6 +277,7 @@ sns.catplot(data = data,
 ```
 
 ```{r, Dot = 3, part = "Result", echo = F, eval = T}
+#PLot a stripplot for each 'Dependets' categories for 'LoanAmount'
 ggplot(data, aes(x = Dependents, y = LoanAmount, color = Dependents))+
 geom_jitter()+
 theme(legend.position = "none")
@@ -249,7 +293,8 @@ sns.catplot(data = data, x = 'Dependents', y = 'LoanAmount')
 <!-- Dot 4, lang: r,python ------------------------------------------------>
 
 ```{block, Dot = 4, part = "Instruction", lang = "r"}
-DESC
+In the last dot, we may see some outliers in some categories. One of the good ways to identify outliers is to plot the box plot. For this purpose, we can use `geom_boxplot` to create a boxplot for each category. 
+As we can see in the box plot, the zero dependents category has many outliers. 
 
 ```
 
@@ -260,8 +305,12 @@ As we can see in the box plot, the zero dependents category has many outliers.
 ```
 
 ```{r, Dot = 4, part = "Code", echo = T, eval = F}
-ggplot(data, aes(x=Dependents, y=LoanAmount, color = Dependents)) +
-  geom_boxplot() + theme(legend.position = "none")
+#PLot a boxplot for each 'Dependets' categories for 'LoanAmount'
+ggplot(data, aes(x=Dependents,
+                 y=LoanAmount,
+                 color = Dependents)) +
+  geom_boxplot() +
+  theme(legend.position = "none")
 
 ```
 
@@ -275,8 +324,12 @@ sns.catplot(data = data,
 ```
 
 ```{r, Dot = 4, part = "Result", echo = F, eval = T}
-ggplot(data, aes(x=Dependents, y=LoanAmount, color = Dependents)) +
-  geom_boxplot() + theme(legend.position = "none")
+#PLot a boxplot for each 'Dependets' categories for 'LoanAmount'
+ggplot(data, aes(x=Dependents,
+                 y=LoanAmount,
+                 color = Dependents)) +
+  geom_boxplot() +
+  theme(legend.position = "none")
 
 ```
 
@@ -289,7 +342,7 @@ sns.catplot(data = data, x = 'Dependents', y = 'LoanAmount', kind = 'box')
 <!-- Dot 5, lang: r,python ------------------------------------------------>
 
 ```{block, Dot = 5, part = "Instruction", lang = "r"}
-DESC
+Feature engineering is one of the most crucial processes to prepare categorical data for machine learning projects. In feature engineering, we use some transformation techniques to transform categorical data into some numerical features. For this purpose, we can use the `LabelEncoder` in `superml` package to encode features. In this dot, we use `LabelEncoder` to transform Property Area categories into numeric values.
 
 ```
 
@@ -299,14 +352,20 @@ Feature engineering is one of the most crucial processes to prepare categorical 
 ```
 
 ```{r, Dot = 5, part = "Code", echo = T, eval = F}
+#Import superml package
 library(superml)
 
+#Select 'property_Area'
 df_Property_Area <- data %>% select(Property_Area)
-Property_Area_encoded <- LabelEncoder$new()
-print(Property_Area_encoded$fit(df_Property_Area$Property_Area))
-df_Property_Area$Property_Area_encoded <- Property_Area_encoded$fit_transform(df_Property_Area$Property_Area)
 
-sample_n(df_Property_Area,5)
+#Fit and Transform LabelEncoder 
+Property_Area_encoded <- LabelEncoder$new()
+
+print(Property_Area_encoded$fit(df_Property_Area$Property_Area))
+
+df_Property_Area$Property_Area_encoded <-
+  Property_Area_encoded$fit_transform(
+    df_Property_Area$Property_Area)
 
 ```
 
@@ -327,14 +386,20 @@ print(genre_mappings)
 ```
 
 ```{r, Dot = 5, part = "Result", echo = F, eval = T}
+#Import superml package
 library(superml)
 
+#Select 'property_Area'
 df_Property_Area <- data %>% select(Property_Area)
-Property_Area_encoded <- LabelEncoder$new()
-print(Property_Area_encoded$fit(df_Property_Area$Property_Area))
-df_Property_Area$Property_Area_encoded <- Property_Area_encoded$fit_transform(df_Property_Area$Property_Area)
 
-sample_n(df_Property_Area,5)
+#Fit and Transform LabelEncoder 
+Property_Area_encoded <- LabelEncoder$new()
+
+print(Property_Area_encoded$fit(df_Property_Area$Property_Area))
+
+df_Property_Area$Property_Area_encoded <-
+  Property_Area_encoded$fit_transform(
+    df_Property_Area$Property_Area)
 
 ```
 
@@ -356,7 +421,7 @@ genre_mappings
 <!-- Dot 6, lang: r,python ------------------------------------------------>
 
 ```{block, Dot = 6, part = "Instruction", lang = "r"}
-DESC
+Use the One-Hot (or dummy) encoding scheme is another way for feature engineering for categorical data. In this scheme, each category transforms into one binary feature. For example, if a categorical feature has *m* categories, then after One-Hot transformation, we have *m* binary feature, and every instance has only one of the values as 1. In python, we can use the `dummy_cols` in`fastDummies` to use One-Hot transformation. In this dot, we transform **Property Area** categories into three binary features.
 
 ```
 
@@ -366,8 +431,12 @@ Use the One-Hot encoding scheme is another way for feature engineering for categ
 ```
 
 ```{r, Dot = 6, part = "Code", echo = T, eval = F}
+#Import fastDummies package
 library(fastDummies)
-sample_n(dummy_cols(df_Property_Area, select_columns = c("Property_Area")),5)
+
+#Dummy 'Propert_Area' categories
+sample_n(dummy_cols(df_Property_Area,
+                    select_columns = c("Property_Area")),5)
 
 ```
 
@@ -389,8 +458,12 @@ ohe_features.head(5)
 ```
 
 ```{r, Dot = 6, part = "Result", echo = F, eval = T}
+#Import fastDummies package
 library(fastDummies)
-sample_n(dummy_cols(df_Property_Area, select_columns = c("Property_Area")),5)
+
+#Dummy 'Propert_Area' categories
+sample_n(dummy_cols(df_Property_Area,
+                    select_columns = c("Property_Area")),5)
 
 ```
 
@@ -412,7 +485,7 @@ ohe_features.head(5)
 <!-- Dot 7, lang: r,python ------------------------------------------------>
 
 ```{block, Dot = 7, part = "Instruction", lang = "r"}
-DESC
+Sometimes we want to change the category name in order manually. For example, the Dependents feature is an ordinal category in the Loan dataset, and we want to change just '3+' into '3'. In this situation, with the `recode_factor` function, we can define any name for categories.
 
 ```
 
@@ -422,8 +495,13 @@ Sometimes we want to change the category name in order manually. For example, th
 ```
 
 ```{r, Dot = 7, part = "Code", echo = T, eval = F}
-df_dependents <- data %>% select(Dependents)
-df_dependents$Dependents <- recode_factor(df_dependents$Dependents, "3+" = "3" )
+#Select 'Dependents' feature
+df_dependents <- data %>% 
+          select(Dependents)
+
+#Recode the levels
+df_dependents$Dependents <- recode_factor(df_dependents$Dependents,
+                                          "3+" = "3" )
 
 ```
 
@@ -439,8 +517,13 @@ print(data['Dependents'].unique())
 ```
 
 ```{r, Dot = 7, part = "Result", echo = F, eval = T}
-df_dependents <- data %>% select(Dependents)
-df_dependents$Dependents <- recode_factor(df_dependents$Dependents, "3+" = "3" )
+#Select 'Dependents' feature
+df_dependents <- data %>% 
+          select(Dependents)
+
+#Recode the levels
+df_dependents$Dependents <- recode_factor(df_dependents$Dependents,
+                                          "3+" = "3" )
 
 ```
 
@@ -457,7 +540,7 @@ print(data['Dependents'].unique())
 <!-- Dot 8, lang: r,python ------------------------------------------------>
 
 ```{block, Dot = 8, part = "Instruction", lang = "r"}
-DESC
+We have features like **Gender**, **Married**, **Education**, **Self-Employed**, and **Loan-Status** in the Loan dataset with only two categories. In this situation, it is better to transform these features into binary features. For this purpose, we can use `dummy_cols` in fastdummies package then remove first column or encode manually with the recode_factor function.
 
 ```
 
@@ -467,10 +550,15 @@ We have features like **Gender**, **Married**, **Education**, **Self-Employed**,
 ```
 
 ```{r, Dot = 8, part = "Code", echo = T, eval = F}
-df_bin <- data %>% select(Gender, Married, Self_Employed, Loan_Status)
-unique(df_bin$Loan_Status)
-sample_n(dummy_cols(df_bin, select_columns = c("Gender" ),remove_first_dummy = TRUE),5)
-df_bin$Married <- recode_factor(df_bin$Married, "Yes" = 1, "No" = 0 )
+#Select features
+df_bin <- data %>% 
+          select(Gender,Married,
+                 Self_Employed, Loan_Status)
+
+#Dummy features and drop first column
+dummy_cols(df_bin,
+                select_columns = c("Gender" ),
+                remove_first_dummy = TRUE)
 
 ```
 
@@ -496,10 +584,15 @@ data['Loan_Status'] = data['Loan_Status'].map(Loan_status)
 ```
 
 ```{r, Dot = 8, part = "Result", echo = F, eval = T}
-df_bin <- data %>% select(Gender, Married, Self_Employed, Loan_Status)
-unique(df_bin$Loan_Status)
-sample_n(dummy_cols(df_bin, select_columns = c("Gender" ),remove_first_dummy = TRUE),5)
-df_bin$Married <- recode_factor(df_bin$Married, "Yes" = 1, "No" = 0 )
+#Select features
+df_bin <- data %>% 
+          select(Gender,Married,
+                 Self_Employed, Loan_Status)
+
+#Dummy features and drop first column
+dummy_cols(df_bin,
+                select_columns = c("Gender" ),
+                remove_first_dummy = TRUE)
 
 ```
 
