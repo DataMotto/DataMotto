@@ -33,24 +33,40 @@ DataMotto::use_Dotto()
 
 ```{block, Dot = 1, part = "Instruction", lang = "r"}
 The [Loan dataset](https://www.kaggle.com/burak3ergun/loan-data-set) is home loans information for Dream Housing Finance company. It contains 13 different features about their applicants. These features and their types are listed below:
+
 - **Loan ID** : Applicants ID
+
 - **Gender** : Categorical (*Female or Male*)
+
 - **Married** : Categorical (*Yes or No*)
+
 - **Dependents** : Categorical (*0, 1, 2, or 3+*)
+
 - **Education** : Categorical (*Graduated or Not Graduated*)
+
 - **Self-Employed** : Categorical (*Yes or No*)
+
 - **Applicant Income** : Numerical 
+
 - **Co-applicant Income** :  Numerical
+
 - **Loan Amount** : Numerical
+
 - **Loan-Amount-Term** : Categorical (*10 categories*)
+
+
 - **Credit History** : Binary (*1 or 0*) 
+
 - **Property Area** : Categorical(*Semiurban, Urban or Rural*)
+
 - **Loan Status** : Categorical (*Y or N*)
 
 In this Dotto, we want to count different categories in each categorical data, use suitable plots for visualization, encode and create dummy features.
 
 Categorical data divides into two main classes:
+
 - **Nominal** categorical data: In this type of data, we do not have any ordinal priority—for instance, weather conditions, medical conditions, and hair colors.
+
 - **Ordinal** categorical data: In against an ordinal type, has ordinal priority among categories.
 
 In the Loan dataset, Property Area and Education features are the examples of the nominal type, and Dependents is the example of the ordinal type.

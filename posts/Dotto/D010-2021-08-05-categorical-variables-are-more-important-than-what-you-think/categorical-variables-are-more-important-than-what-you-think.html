@@ -278,9 +278,28 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>The <a href="https://www.kaggle.com/burak3ergun/loan-data-set">Loan dataset</a> is home loans information for Dream Housing Finance company. It contains 13 different features about their applicants. These features and their types are listed below: - <strong>Loan ID</strong> : Applicants ID - <strong>Gender</strong> : Categorical (<em>Female or Male</em>) - <strong>Married</strong> : Categorical (<em>Yes or No</em>) - <strong>Dependents</strong> : Categorical (<em>0, 1, 2, or 3+</em>) - <strong>Education</strong> : Categorical (<em>Graduated or Not Graduated</em>) - <strong>Self-Employed</strong> : Categorical (<em>Yes or No</em>) - <strong>Applicant Income</strong> : Numerical - <strong>Co-applicant Income</strong> : Numerical - <strong>Loan Amount</strong> : Numerical - <strong>Loan-Amount-Term</strong> : Categorical (<em>10 categories</em>) - <strong>Credit History</strong> : Binary (<em>1 or 0</em>) - <strong>Property Area</strong> : Categorical(<em>Semiurban, Urban or Rural</em>) - <strong>Loan Status</strong> : Categorical (<em>Y or N</em>)</p>
+<p>The <a href="https://www.kaggle.com/burak3ergun/loan-data-set">Loan dataset</a> is home loans information for Dream Housing Finance company. It contains 13 different features about their applicants. These features and their types are listed below:</p>
+<ul>
+<li><p><strong>Loan ID</strong> : Applicants ID</p></li>
+<li><p><strong>Gender</strong> : Categorical (<em>Female or Male</em>)</p></li>
+<li><p><strong>Married</strong> : Categorical (<em>Yes or No</em>)</p></li>
+<li><p><strong>Dependents</strong> : Categorical (<em>0, 1, 2, or 3+</em>)</p></li>
+<li><p><strong>Education</strong> : Categorical (<em>Graduated or Not Graduated</em>)</p></li>
+<li><p><strong>Self-Employed</strong> : Categorical (<em>Yes or No</em>)</p></li>
+<li><p><strong>Applicant Income</strong> : Numerical</p></li>
+<li><p><strong>Co-applicant Income</strong> : Numerical</p></li>
+<li><p><strong>Loan Amount</strong> : Numerical</p></li>
+<li><p><strong>Loan-Amount-Term</strong> : Categorical (<em>10 categories</em>)</p></li>
+<li><p><strong>Credit History</strong> : Binary (<em>1 or 0</em>)</p></li>
+<li><p><strong>Property Area</strong> : Categorical(<em>Semiurban, Urban or Rural</em>)</p></li>
+<li><p><strong>Loan Status</strong> : Categorical (<em>Y or N</em>)</p></li>
+</ul>
 <p>In this Dotto, we want to count different categories in each categorical data, use suitable plots for visualization, encode and create dummy features.</p>
-<p>Categorical data divides into two main classes: - <strong>Nominal</strong> categorical data: In this type of data, we do not have any ordinal priority—for instance, weather conditions, medical conditions, and hair colors. - <strong>Ordinal</strong> categorical data: In against an ordinal type, has ordinal priority among categories.</p>
+<p>Categorical data divides into two main classes:</p>
+<ul>
+<li><p><strong>Nominal</strong> categorical data: In this type of data, we do not have any ordinal priority—for instance, weather conditions, medical conditions, and hair colors.</p></li>
+<li><p><strong>Ordinal</strong> categorical data: In against an ordinal type, has ordinal priority among categories.</p></li>
+</ul>
 <p>In the Loan dataset, Property Area and Education features are the examples of the nominal type, and Dependents is the example of the ordinal type.</p>
 
 </p>
@@ -337,7 +356,7 @@ class="btn dotto-main-dot-shape"
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Load Dataset</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&#39;E:/loan_data_set.csv&#39;</span>,<span class="at">na.strings=</span><span class="fu">c</span>(<span class="st">&quot;&quot;</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&#39;loan_data_set.csv&#39;</span>,<span class="at">na.strings=</span><span class="fu">c</span>(<span class="st">&quot;&quot;</span>))</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Drop NA values</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">na.omit</span>(data)</span>
@@ -383,24 +402,24 @@ class="btn dotto-main-dot-shape"
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
-<pre><code>##    Loan_ID Gender Married Dependents Education Self_Employed
-## 1 LP001608   Male     Yes          2  Graduate            No
-## 2 LP002842   Male     Yes          1  Graduate            No
-## 3 LP002097   Male      No          1  Graduate            No
-## 4 LP002035   Male     Yes          2  Graduate            No
-## 5 LP001222 Female      No          0  Graduate            No
+<pre><code>##    Loan_ID Gender Married Dependents    Education Self_Employed
+## 1 LP001702   Male      No          0     Graduate            No
+## 2 LP002187   Male      No          0     Graduate            No
+## 3 LP002841   Male     Yes          0     Graduate            No
+## 4 LP001800   Male     Yes          1 Not Graduate            No
+## 5 LP002505   Male     Yes          0     Graduate            No
 ##   ApplicantIncome CoapplicantIncome LoanAmount Loan_Amount_Term
-## 1            2045              1619        101              360
-## 2            3417              1750        186              360
-## 3            4384              1793        117              360
-## 4            3717                 0        120              360
-## 5            4166                 0        116              360
+## 1            3418                 0        127              360
+## 2            2500                 0         96              480
+## 3            3166              2064        104              360
+## 4            2510              1983        140              180
+## 5            4333              2451        110              360
 ##   Credit_History Property_Area Loan_Status
-## 1              1         Rural           Y
-## 2              1         Urban           Y
-## 3              1         Urban           Y
-## 4              1     Semiurban           Y
-## 5              0     Semiurban           N</code></pre>
+## 1              1     Semiurban           N
+## 2              1     Semiurban           N
+## 3              0         Urban           N
+## 4              1         Urban           N
+## 5              1         Urban           N</code></pre>
 
 </div>
  
@@ -429,12 +448,12 @@ class="btn dotto-main-dot-shape"
 ##  12  Loan_Status        614 non-null    object 
 ## dtypes: float64(4), int64(1), object(8)
 ## memory usage: 62.5+ KB</code></pre>
-<pre><code>##       Loan_ID  Gender Married  ... Credit_History Property_Area Loan_Status
-## 288  LP001931  Female      No  ...            1.0     Semiurban           Y
-## 499  LP002602    Male      No  ...            0.0         Rural           N
-## 89   LP001310    Male     Yes  ...            1.0     Semiurban           Y
-## 459  LP002473    Male     Yes  ...            1.0     Semiurban           N
-## 13   LP001029    Male      No  ...            1.0         Rural           N
+<pre><code>##       Loan_ID Gender Married  ... Credit_History Property_Area Loan_Status
+## 428  LP002369   Male     Yes  ...            1.0         Rural           Y
+## 471  LP002517   Male     Yes  ...            0.0         Rural           N
+## 10   LP001024   Male     Yes  ...            1.0         Urban           Y
+## 227  LP001758   Male     Yes  ...            1.0     Semiurban           Y
+## 287  LP001926   Male     Yes  ...            1.0         Rural           Y
 ## 
 ## [5 rows x 13 columns]</code></pre>
 
@@ -930,16 +949,16 @@ class="btn dotto-main-dot-shape"
 
 <pre><code>##   Property_Area Property_Area_encoded Property_Area_Rural
 ## 1     Semiurban                     2                   0
-## 2         Rural                     0                   1
-## 3     Semiurban                     2                   0
-## 4         Urban                     1                   0
-## 5     Semiurban                     2                   0
+## 2         Urban                     1                   0
+## 3         Rural                     0                   1
+## 4     Semiurban                     2                   0
+## 5         Rural                     0                   1
 ##   Property_Area_Semiurban Property_Area_Urban
 ## 1                       1                   0
-## 2                       0                   0
-## 3                       1                   0
-## 4                       0                   1
-## 5                       1                   0</code></pre>
+## 2                       0                   1
+## 3                       0                   0
+## 4                       1                   0
+## 5                       0                   0</code></pre>
 
 </div>
  
