@@ -12,7 +12,7 @@
   "dotto_label": ["D010"],
   "dotto_id": ["f96870b6-f55c-11eb-a8cf-7f12180e7498"],
   "title": ["Categorical variables are more important than what you think"],
-  "description": ["A short description of the Dotto.\n"],
+  "description": ["In many projects and datasets, we may face categorical features, among other feature types. This type of data shows qualitative information in datasets and has some finite categories. In this Dotto, we want to work with some different kinds of categorical features.\n"],
   "author": [
     {
       "name": ["Mahyar Sharifi"],

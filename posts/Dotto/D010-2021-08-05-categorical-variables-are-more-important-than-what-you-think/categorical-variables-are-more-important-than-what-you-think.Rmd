@@ -1,7 +1,8 @@
 ---
 title: "Categorical variables are more important than what you think"
 description: |
-  A short description of the Dotto.
+  In many projects and datasets, we may face categorical features, among other feature types. This type of data shows qualitative information in datasets and has some finite categories. In this Dotto, we want to work with some different kinds of categorical features.
+  
 author:
   - name: "Mahyar Sharifi"
     occupation: "Internship"
@@ -36,21 +37,56 @@ DESC
 ```
 
 ```{block, Dot = 1, part = "Instruction", lang = "python"}
-DESC
+The [Loan dataset](https://www.kaggle.com/burak3ergun/loan-data-set) is home loans information for Dream Housing Finance company. It contains 13 different features about their applicants. These features and their types are listed below:
+
+- **Loan ID** : Applicants ID
+
+- **Gender** : Categorical (*Female or Male*)
+
+- **Married** : Categorical (*Yes or No*)
+
+- **Dependents** : Categorical (*0, 1, 2, or 3+*)
+
+- **Education** : Categorical (*Graduated or Not Graduated*)
+
+- **Self-Employed** : Categorical (*Yes or No*)
+
+- **Applicant Income** : Numerical 
+
+- **Co-applicant Income** :  Numerical
+
+- **Loan Amount** : Numerical
+
+- **Loan-Amount-Term** : Categorical (*10 categories*)
+
+- **Credit History** : Binary (*1 or 0*) 
+
+- **Property Area** : Categorical(*Semiurban, Urban or Rural*)
+
+- **Loan Status** : Categorical (*Y or N*)
+
+In this Dotto, we want to count different categories in each categorical data, use suitable plots for visualization, encode and create dummy features.
+
+Categorical data divides into two main classes:
+
+- **Nominal** categorical data: In this type of data, we do not have any ordinal priority—for instance, weather conditions, medical conditions, and hair colors.
+
+- **Ordinal** categorical data: In against an ordinal type, has ordinal priority among categories.
+
+In the Loan dataset, Property Area and Education features are the examples of the nominal type, and Dependents is the example of the ordinal type.
 
 ```
 
 ```{r, Dot = 1, part = "Code", echo = T, eval = F}
+#Import Packages
 library(dplyr)
 library(ggplot2)
 
-data1 = read.csv('loan_data_set.csv',na.strings=c(""))
-print(dim(data1))
+#Load Dataset
+data = read.csv('E:/loan_data_set.csv',na.strings=c(""))
 
-colSums(is.na(data1))
-
-data = na.omit(data1)
-print(dim(data))
+#Drop NA values
+data = na.omit(data)
 
 ```
 
@@ -61,7 +97,7 @@ import seaborn as sns
 import numpy as np
 
 #Load dataset
-data = pd.read_csv('E:/loan_data_set.csv')
+data = pd.read_csv('loan_data_set.csv')
 
 #Show dataset information
 data.info()
@@ -75,20 +111,24 @@ data.sample(5)
 ```
 
 ```{r, Dot = 1, part = "Result", echo = F, eval = T}
+options(warn=-1)
+
+#Import Packages
 library(dplyr)
 library(ggplot2)
 
-data1 = read.csv('loan_data_set.csv',na.strings=c(""))
-print(dim(data1))
+#Load Dataset
+data = read.csv('E:/loan_data_set.csv',na.strings=c(""))
 
-colSums(is.na(data1))
-
-data = na.omit(data1)
-print(dim(data))
+#Drop NA values
+data = na.omit(data)
 
 ```
 
 ```{python, Dot = 1, part = "Result", echo = F, eval = T}
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
+
 #Import packages
 import pandas as pd
 import seaborn as sns
@@ -116,7 +156,7 @@ DESC
 ```
 
 ```{block, Dot = 2, part = "Instruction", lang = "python"}
-DESC
+It is essential to know the frequency of each category in categorical features. For this purpose, we can use `value_counts` to create a table or use `catplot` to plot a barplot. For example, in the Loan dataset, we have some categorical features like Property Area. This feature has three categories, and we want to know the most frequent category. We can use both table and plot to identify it. 
 
 ```
 
@@ -134,9 +174,13 @@ data %>%
 ```
 
 ```{python, Dot = 2, part = "Code", echo = T, eval = F}
+#Count frequency of 'Property_Area' categories
 print(data['Property_Area'].value_counts())
 
-sns.catplot(data = data, x = 'Property_Area', kind = 'count')
+#Plot bar plot for 'Property_Area'  feature
+sns.catplot(data = data,
+            x = 'Property_Area',
+            kind = 'count')
 
 ```
 
@@ -154,8 +198,10 @@ data %>%
 ```
 
 ```{python, Dot = 2, part = "Result", echo = F, eval = T}
+#Count frequency of 'Property_Area' categories
 print(data['Property_Area'].value_counts())
 
+#Plot bar plot for 'Property_Area'  feature
 sns.catplot(data = data, x = 'Property_Area', kind = 'count')
 
 ```
@@ -168,7 +214,7 @@ DESC
 ```
 
 ```{block, Dot = 3, part = "Instruction", lang = "python"}
-DESC
+Sometimes it is good to know the variation in numerical features in each category in a categorical feature. For this purpose, we can plot a `stripplot`. For example, we want to show the Loan Amount variation in each Dependents category in the Loan dataset. We can plot a strip plot by `catplot` in the `seaborn` package and set the kind with the `strip`.
 
 ```
 
@@ -180,7 +226,10 @@ theme(legend.position = "none")
 ```
 
 ```{python, Dot = 3, part = "Code", echo = T, eval = F}
-sns.catplot(data = data, x = 'Dependents', y = 'LoanAmount')
+#PLot a stripplot for each 'Dependets' category for 'LoanAmount'
+sns.catplot(data = data,
+            x = 'Dependents',
+            y = 'LoanAmount')
 
 ```
 
@@ -192,6 +241,7 @@ theme(legend.position = "none")
 ```
 
 ```{python, Dot = 3, part = "Result", echo = F, eval = T}
+#PLot a stripplot for each 'Dependets' category for 'LoanAmount'
 sns.catplot(data = data, x = 'Dependents', y = 'LoanAmount')
 
 ```
@@ -204,7 +254,8 @@ DESC
 ```
 
 ```{block, Dot = 4, part = "Instruction", lang = "python"}
-DESC
+In the last dot, we may see some outliers in some categories. One of the good ways to identify outliers is to plot the box plot. For this purpose, we can use `catplot` and set the kind with the `box` to create a boxplot for each category. 
+As we can see in the box plot, the zero dependents category has many outliers. 
 
 ```
 
@@ -215,7 +266,11 @@ ggplot(data, aes(x=Dependents, y=LoanAmount, color = Dependents)) +
 ```
 
 ```{python, Dot = 4, part = "Code", echo = T, eval = F}
-sns.catplot(data = data, x = 'Dependents', y = 'LoanAmount', kind = 'box')
+#PLot a boxplot for each 'Dependets' categories for 'LoanAmount'
+sns.catplot(data = data,
+            x = 'Dependents',
+            y = 'LoanAmount',
+            kind = 'box')
 
 ```
 
@@ -226,6 +281,7 @@ ggplot(data, aes(x=Dependents, y=LoanAmount, color = Dependents)) +
 ```
 
 ```{python, Dot = 4, part = "Result", echo = F, eval = T}
+#PLot a boxplot for each 'Dependets' categories for 'LoanAmount'
 sns.catplot(data = data, x = 'Dependents', y = 'LoanAmount', kind = 'box')
 
 ```
@@ -238,7 +294,7 @@ DESC
 ```
 
 ```{block, Dot = 5, part = "Instruction", lang = "python"}
-DESC
+Feature engineering is one of the most crucial processes to prepare categorical data for machine learning projects. In feature engineering, we use some transformation techniques to transform categorical data into some numerical features. For this purpose, we can use the `LabelEncoder()` in `sklearn` package to encode features. In this dot, we use `LabelEncoder` to transform Property Area categories into numeric values.
 
 ```
 
@@ -255,10 +311,18 @@ sample_n(df_Property_Area,5)
 ```
 
 ```{python, Dot = 5, part = "Code", echo = T, eval = F}
+#Import LabelEncoder from sklearn
 from sklearn.preprocessing import LabelEncoder
+
+#Fit and Transform LabelEncoder 
 le = LabelEncoder()
-Property_labels = le.fit_transform(data[['Property_Area']])
-le.classes_
+Property_labels = le.fit_transform(
+                        data[['Property_Area']])
+
+#Show encoded categories
+genre_mappings = {index: label for index,
+                  label in enumerate(le.classes_)}
+print(genre_mappings)
 
 ```
 
@@ -275,10 +339,17 @@ sample_n(df_Property_Area,5)
 ```
 
 ```{python, Dot = 5, part = "Result", echo = F, eval = T}
+#Import LabelEncoder from sklearn
 from sklearn.preprocessing import LabelEncoder
+
+#Fit and Transform LabelEncoder 
 le = LabelEncoder()
-Property_labels = le.fit_transform(data[['Property_Area']])
-le.classes_
+Property_labels = le.fit_transform(
+                        data[['Property_Area']])
+
+#Show encoded categories
+genre_mappings = {index: label for index, label in enumerate(le.classes_)}
+genre_mappings
 
 ```
 
@@ -290,7 +361,7 @@ DESC
 ```
 
 ```{block, Dot = 6, part = "Instruction", lang = "python"}
-DESC
+Use the One-Hot encoding scheme is another way for feature engineering for categorical data. In this scheme, each category transforms into one binary feature. For example, if a categorical feature has *m* categories, then after One-Hot transformation, we have *m* binary feature, and every instance has only one of the values as 1. In python, we can use the `OneHotEncoder()` in`sklearn` to use One-Hot transformation. In this dot, we transform **Property Area** categories into three binary features.
 
 ```
 
@@ -301,11 +372,18 @@ sample_n(dummy_cols(df_Property_Area, select_columns = c("Property_Area")),5)
 ```
 
 ```{python, Dot = 6, part = "Code", echo = T, eval = F}
+#Import LabelEncoder from sklearn
 from sklearn.preprocessing import OneHotEncoder
+
+#Fit and Transform OneHotEncoder 
 ohe = OneHotEncoder()
-Property_one_hot = ohe.fit_transform(data[['Property_Area']])
+Property_one_hot = ohe.fit_transform(
+                            data[['Property_Area']])
+
+#Show encoded categories as pandas dataframe
 ohe_features = pd.DataFrame(Property_one_hot.toarray(), 
-                            columns=le.classes_)
+                            columns=
+                            ['Rural', 'Semiurban', 'Urban'])
 ohe_features.head(5)
 
 ```
@@ -317,11 +395,16 @@ sample_n(dummy_cols(df_Property_Area, select_columns = c("Property_Area")),5)
 ```
 
 ```{python, Dot = 6, part = "Result", echo = F, eval = T}
+#Import LabelEncoder from sklearn
 from sklearn.preprocessing import OneHotEncoder
+
+#Fit and Transform OneHotEncoder 
 ohe = OneHotEncoder()
 Property_one_hot = ohe.fit_transform(data[['Property_Area']])
+
+#Show encoded categories as pandas dataframe
 ohe_features = pd.DataFrame(Property_one_hot.toarray(), 
-                            columns=le.classes_)
+                            columns=['Rural', 'Semiurban', 'Urban'])
 ohe_features.head(5)
 
 ```
@@ -334,7 +417,7 @@ DESC
 ```
 
 ```{block, Dot = 7, part = "Instruction", lang = "python"}
-DESC
+Sometimes we want to change the category name in order manually. For example, the Dependents feature is an ordinal category in the Loan dataset, and we want to change just '3+' into '3'. In this situation, with the `map` function, we can define any name for categories.
 
 ```
 
@@ -345,9 +428,13 @@ df_dependents$Dependents <- recode_factor(df_dependents$Dependents, "3+" = "3" )
 ```
 
 ```{python, Dot = 7, part = "Code", echo = T, eval = F}
-print(data['Dependents'].value_counts())
+#Create mapping dictionary for 'Dependents' categories
 dependents_map = { '0' : 0, '1' : 1, '2' : 2, '3+' : 3}
-data['Dependents'] = data['Dependents'].map(dependents_map)
+data['Dependents'] = data['Dependents'].
+                      map(dependents_map)
+
+#Print new categories
+print(data['Dependents'].unique())
 
 ```
 
@@ -358,9 +445,12 @@ df_dependents$Dependents <- recode_factor(df_dependents$Dependents, "3+" = "3" )
 ```
 
 ```{python, Dot = 7, part = "Result", echo = F, eval = T}
-print(data['Dependents'].value_counts())
+#Create mapping dictionary for 'Dependents' categories
 dependents_map = { '0' : 0, '1' : 1, '2' : 2, '3+' : 3}
 data['Dependents'] = data['Dependents'].map(dependents_map)
+
+#Print new categories
+print(data['Dependents'].unique())
 
 ```
 
@@ -372,7 +462,7 @@ DESC
 ```
 
 ```{block, Dot = 8, part = "Instruction", lang = "python"}
-DESC
+We have features like **Gender**, **Married**, **Education**, **Self-Employed**, and **Loan-Status** in the Loan dataset with only two categories. In this situation, it is better to transform these features into binary features. For this purpose, we can use `LabelEncoder` in sklearn package or encode manually with the map function.
 
 ```
 
@@ -385,17 +475,19 @@ df_bin$Married <- recode_factor(df_bin$Married, "Yes" = 1, "No" = 0 )
 ```
 
 ```{python, Dot = 8, part = "Code", echo = T, eval = F}
+#Print Unique values
 print(pd.unique(data['Gender']))
 print(pd.unique(data['Married']))
 print(pd.unique(data['Self_Employed']))
 print(pd.unique(data['Loan_Status']))
 
-
+#Create mapping categories
 gender_level = {'Male':1, 'Female':0}
 married_level = {'Yes':1, 'No':0}
 self_employed_level = {'Yes':1, 'No':0}
 Loan_status = {'Y':1, 'N':0}
 
+#Mapping with new categories
 data['Gender'] = data['Gender'].map(gender_level)
 data['Married'] = data['Married'].map(married_level)
 data['Self_Employed'] = data['Self_Employed'].map(self_employed_level)
@@ -412,17 +504,19 @@ df_bin$Married <- recode_factor(df_bin$Married, "Yes" = 1, "No" = 0 )
 ```
 
 ```{python, Dot = 8, part = "Result", echo = F, eval = T}
+#Print Unique values
 print(pd.unique(data['Gender']))
 print(pd.unique(data['Married']))
 print(pd.unique(data['Self_Employed']))
 print(pd.unique(data['Loan_Status']))
 
-
+#Create mapping categories
 gender_level = {'Male':1, 'Female':0}
 married_level = {'Yes':1, 'No':0}
 self_employed_level = {'Yes':1, 'No':0}
 Loan_status = {'Y':1, 'N':0}
 
+#Mapping with new categories
 data['Gender'] = data['Gender'].map(gender_level)
 data['Married'] = data['Married'].map(married_level)
 data['Self_Employed'] = data['Self_Employed'].map(self_employed_level)
@@ -430,47 +524,6 @@ data['Loan_Status'] = data['Loan_Status'].map(Loan_status)
 
 ```
 
-<!-- Dot 9, lang: r,python ------------------------------------------------>
-
-```{block, Dot = 9, part = "Instruction", lang = "r"}
-DESC
-
-```
-
-```{block, Dot = 9, part = "Instruction", lang = "python"}
-DESC
-
-```
-
-```{r, Dot = 9, part = "Code", echo = T, eval = F}
-print('NOT Completed')
-
-```
-
-```{python, Dot = 9, part = "Code", echo = T, eval = F}
-from sklearn.feature_extraction import FeatureHasher
-data['Loan_Amount_Term'] = data['Loan_Amount_Term'].astype('str')
-fh = FeatureHasher(n_features=4, input_type='string')
-hashed_features = fh.fit_transform(data['Loan_Amount_Term'])
-hashed_features = hashed_features.toarray()
-pd.DataFrame(hashed_features)
-
-```
-
-```{r, Dot = 9, part = "Result", echo = F, eval = T}
-print('NOT Completed')
-
-```
-
-```{python, Dot = 9, part = "Result", echo = F, eval = T}
-from sklearn.feature_extraction import FeatureHasher
-data['Loan_Amount_Term'] = data['Loan_Amount_Term'].astype('str')
-fh = FeatureHasher(n_features=4, input_type='string')
-hashed_features = fh.fit_transform(data['Loan_Amount_Term'])
-hashed_features = hashed_features.toarray()
-pd.DataFrame(hashed_features)
-
-```
 
 
 
