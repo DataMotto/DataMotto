@@ -489,27 +489,113 @@ print(date)
 <!-- Dot 6, lang: r ------------------------------------------------>
 
 ```{block, Dot = 6, part = "Instruction", lang = "r"}
+**Assemble a datetime from multiple columns**
+
+Right now, we having 3 separate columns as year, month, and day in a data file in R. we want merge these three columns into just one column and make R understand that it is date. ince your year, month and day types are numerical the best function to use is the make_date function from the [lubridate](https://lubridate.tidyverse.org/index.html) package. The [tidyverse](https://www.tidyverse.org/) style solution is therefore.
+
+There is also a simpler solution using `lubridate` and `magrittr`. This worked even we have days and months written in single (i.e. 1) and double (i.e. 01) digits. Parsing was correct as well.
 
 ```
 
 ```{block, Dot = 6, part = "Instruction", lang = "python"}
+**Assemble a datetime from multiple columns**
 
+`to_datetime()` can be used to assemble a datetime from multiple columns as well. First rename all columns, filter by values of dict. The keys (columns label) can be common abbreviations like **[‘year’, ‘month’, ‘day’, ‘minute’, ‘second’, ‘ms’, ‘us’, ‘ns’])** or plurals of the same.
 
 ```
 
 ```{r, Dot = 6, part = "Code", echo = T, eval = F, }
+library(tidyverse)
+library(lubridate)
+
+# Create fake data
+year = c(2015, 2016)
+month = c(2, 3)
+day = c(4, 5)
+data = data.frame(year, month, day)
+
+# Solution 1
+data = data %>% mutate(date1 = make_date(year, month, day))
+
+# Solution 2
+data$date2 <- paste(data$year, data$mon, data$day, sep="-") %>% ymd() %>% as.Date()
+
+data
 
 ```
 
 ```{python, Dot = 6, part = "Code", echo = T, eval = F, }
+import pandas as pd
 
+df = pd.DataFrame({'year': [2015, 2016],
+                   'month': [2, 3],
+                   'day': [4, 5]})
+                   
+df['date'] = pd.to_datetime(df)
+df
 
 ```
 
 ```{r, Dot = 6, part = "Result", echo = F, eval = T}
+library(tidyverse)
+library(lubridate)
+
+# Create fake data
+year = c(2015, 2016)
+month = c(2, 3)
+day = c(4, 5)
+data = data.frame(year, month, day)
+
+# Solution 1
+data = data %>% mutate(date1 = make_date(year, month, day))
+
+# Solution 2
+data$date2 <- paste(data$year, data$mon, data$day, sep="-") %>% ymd() %>% as.Date()
+
+data
 
 ```
 
 ```{python, Dot = 6, part = "Result", echo = F, eval = T}
+import pandas as pd
+
+df = pd.DataFrame({'year': [2015, 2016],
+                   'month': [2, 3],
+                   'day': [4, 5]})
+                   
+df['date'] = pd.to_datetime(df)
+df
+
+```
+
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+
+
+```
+
+```{block, Dot = 7, part = "Instruction", lang = "python"}
+
+
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F, }
+
+
+```
+
+```{python, Dot = 7, part = "Code", echo = T, eval = F, }
+
+
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+
+
+```
+
+```{python, Dot = 7, part = "Result", echo = F, eval = T}
 
 ```

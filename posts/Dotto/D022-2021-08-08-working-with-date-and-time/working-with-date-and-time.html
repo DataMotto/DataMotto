@@ -247,6 +247,11 @@ class="btn dotto-main-dot-shape"
 class="btn dotto-main-dot-shape"
 :class="{'btn-light': activeMotto === '6', 'btn-outline-light': activeMotto !== '6'}">6</button>
 
+
+<button type="button" @click="activeMotto = '7'"
+class="btn dotto-main-dot-shape"
+:class="{'btn-light': activeMotto === '7', 'btn-outline-light': activeMotto !== '7'}">7</button>
+
 </div>
 
 <!-- Dot 1, lang: r ------------------------------------------------>
@@ -443,7 +448,7 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
 <pre><code>## [1] &quot;2020-01-31 20:11:59 UTC&quot;</code></pre>
-<pre><code>## [1] &quot;2021-08-08 15:22:30 +0430&quot;</code></pre>
+<pre><code>## [1] &quot;2021-08-12 11:16:16 +0430&quot;</code></pre>
 
 </div>
  
@@ -453,7 +458,7 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 <pre><code>## 2021-06-01 15:23:25</code></pre>
-<pre><code>## 2021-08-08 15:22:30.497670</code></pre>
+<pre><code>## 2021-08-12 11:16:16.658699</code></pre>
 
 </div>
  
@@ -585,9 +590,9 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## 2021-08-08 15:22:30.763672</code></pre>
-<pre><code>## 2021 8 15</code></pre>
-<pre><code>## 6</code></pre>
+<pre><code>## 2021-08-12 11:16:16.918735</code></pre>
+<pre><code>## 2021 12 11</code></pre>
+<pre><code>## 3</code></pre>
 
 </div>
  
@@ -698,8 +703,8 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
  
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
-<pre><code>## Time difference of 15274 days</code></pre>
-<pre><code>## [1] &quot;1319673600s (~41.82 years)&quot;</code></pre>
+<pre><code>## Time difference of 15278 days</code></pre>
+<pre><code>## [1] &quot;1320019200s (~41.83 years)&quot;</code></pre>
 <pre><code>## [1] &quot;2016-07-09 12:34:56 UTC&quot;</code></pre>
 <pre><code>## [1] 365</code></pre>
 
@@ -710,8 +715,8 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## 2021-08-08 15:22:31.074675</code></pre>
-<pre><code>## 2021-09-04 15:22:31.074675</code></pre>
+<pre><code>## 2021-08-12 11:16:17.260713</code></pre>
+<pre><code>## 2021-09-08 11:16:17.260713</code></pre>
 
 </div>
  
@@ -844,7 +849,117 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
  
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
+<strong>Assemble a datetime from multiple columns</strong></p>
+<p>Right now, we having 3 separate columns as year, month, and day in a data file in R. we want merge these three columns into just one column and make R understand that it is date. ince your year, month and day types are numerical the best function to use is the make_date function from the <a href="https://lubridate.tidyverse.org/index.html">lubridate</a> package. The <a href="https://www.tidyverse.org/">tidyverse</a> style solution is therefore.</p>
+<p>There is also a simpler solution using <code>lubridate</code> and <code>magrittr</code>. This worked even we have days and months written in single (i.e. 1) and double (i.e. 01) digits. Parsing was correct as well. 
+</p>
+</div>
+ 
+</p>
+<p>
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+<p class="mx-2">
+<strong>Assemble a datetime from multiple columns</strong></p>
+<p><code>to_datetime()</code> can be used to assemble a datetime from multiple columns as well. First rename all columns, filter by values of dict. The keys (columns label) can be common abbreviations like <strong>[‘year’, ‘month’, ‘day’, ‘minute’, ‘second’, ‘ms’, ‘us’, ‘ns’])</strong> or plurals of the same. 
+</p>
+</div>
+ 
+</p>
 
+</div>
+<div class="handler dotto-main-intro"></div>
+<div id="resizable">
+<div class="box2 dotto-main overflow-auto dotto-main-codes">
+<div class="card-header dot-codes">
+<h1>&nbsp;Codes:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+
+<div class="sourceCode" id="cb37"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create fake data</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>year <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2015</span>, <span class="dv">2016</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>month <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>day <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">data.frame</span>(year, month, day)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Solution 1</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">date1 =</span> <span class="fu">make_date</span>(year, month, day))</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Solution 2</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>date2 <span class="ot">&lt;-</span> <span class="fu">paste</span>(data<span class="sc">$</span>year, data<span class="sc">$</span>mon, data<span class="sc">$</span>day, <span class="at">sep=</span><span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">ymd</span>() <span class="sc">%&gt;%</span> <span class="fu">as.Date</span>()</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2">
+
+<div class="sourceCode" id="cb38"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;year&#39;</span>: [<span class="dv">2015</span>, <span class="dv">2016</span>],</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&#39;month&#39;</span>: [<span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&#39;day&#39;</span>: [<span class="dv">4</span>, <span class="dv">5</span>]})</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>                   </span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;date&#39;</span>] <span class="op">=</span> pd.to_datetime(df)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+
+</div>
+ 
+
+
+</div>
+<div class="handler2 dotto-main-output"></div>
+<div class="box2 dotto-main overflow-auto dotto-main-output">
+<div class="card-header">
+<h1>&nbsp;Results:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
+
+<pre><code>##   year month day      date1      date2
+## 1 2015     2   4 2015-02-04 2015-02-04
+## 2 2016     3   5 2016-03-05 2016-03-05</code></pre>
+
+</div>
+ 
+
+
+ 
+<div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
+
+<pre><code>## C:\Users\ASUS\Documents\R\win-library\4.0\reticulate\python\rpytools\call.py:13: MatplotlibDeprecationWarning: The &#39;warn&#39; parameter of use() is deprecated since Matplotlib 3.1 and will be removed in 3.3.  If any parameter follows &#39;warn&#39;, they should be pass as keyword, not positionally.
+##   res = rpycall.call_r_function(f, *args, **kwargs)</code></pre>
+<pre><code>##    year  month  day       date
+## 0  2015      2    4 2015-02-04
+## 1  2016      3    5 2016-03-05</code></pre>
+
+</div>
+ 
+</div>
+</div>
+</div>
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+<p>
+<div v-if="activeMotto === '7'" class="col-12 col-lg-11 d-flex p-0 wrapper">
+<div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
+<div class="card-header">
+<h1>&nbsp;Instructions:</h1>
+</div>
+<br>
+ 
+<div v-if="activeLang === 'r'" class="mx-2">
+<p class="mx-2">
+ 
 </p>
 </div>
  
