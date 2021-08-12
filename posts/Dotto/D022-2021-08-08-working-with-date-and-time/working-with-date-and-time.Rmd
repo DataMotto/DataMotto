@@ -515,10 +515,13 @@ day = c(4, 5)
 data = data.frame(year, month, day)
 
 # Solution 1
-data = data %>% mutate(date1 = make_date(year, month, day))
+data = data %>% 
+  mutate(date1 = make_date(year, month, day))
 
 # Solution 2
-data$date2 <- paste(data$year, data$mon, data$day, sep="-") %>% ymd() %>% as.Date()
+data$date2 <- paste(data$year, data$mon, data$day, sep="-") %>% 
+  ymd() %>% 
+  as.Date()
 
 data
 
@@ -547,10 +550,13 @@ day = c(4, 5)
 data = data.frame(year, month, day)
 
 # Solution 1
-data = data %>% mutate(date1 = make_date(year, month, day))
+data = data %>%
+  mutate(date1 = make_date(year, month, day))
 
 # Solution 2
-data$date2 <- paste(data$year, data$mon, data$day, sep="-") %>% ymd() %>% as.Date()
+data$date2 <- paste(data$year, data$mon, data$day, sep="-") %>% 
+  ymd() %>% 
+  as.Date()
 
 data
 
@@ -572,30 +578,78 @@ df
 <!-- Dot 7, lang: r ------------------------------------------------>
 
 ```{block, Dot = 7, part = "Instruction", lang = "r"}
+ **Create separate columns for year, month, and day**
 
+`tidyr` and `dplyr` don't have date manipulation functions. `lubridate` is the `tidyverse` package for date functions (although it's not one of the "core" `tidyverse` packages loaded by the `tidyverse` library).
+
+The example below is converts the `date` column to Date format and then uses `mutate_at` to create separate columns for year, month, and day.  `mutate_at` allows all three functions to be applied to the `date` column with a single line of code.
 
 ```
 
 ```{block, Dot = 7, part = "Instruction", lang = "python"}
+ **Create separate columns for year, month, and day**
 
+`dt.year`, `dt.month` and `dt.day` are the inbuilt attributes to get year, month , and day from Pandas datetime object.
+
+First, let’s create a dummy DateFrame and parse **DoB** to datetime. Then get year, month, and day.
 
 ```
 
 ```{r, Dot = 7, part = "Code", echo = T, eval = F, }
+library(tidyverse)
+library(lubridate)
 
+# Fake data
+x = data.frame(date=c('08-05-1997', '04-28-1996', '12-16-1995'))
+
+x = x %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate_at(vars(date), funs(year, month, day))
+
+x
 
 ```
 
 ```{python, Dot = 7, part = "Code", echo = T, eval = F, }
+import pandas as pd
 
+df = pd.DataFrame('DoB': ['08-05-1997', '04-28-1996', '12-16-1995']})
+                 
+df['DoB'] = pd.to_datetime(df['DoB'])
+
+df['year']= df['DoB'].dt.year
+df['month']= df['DoB'].dt.month
+df['day']= df['DoB'].dt.day
+df
 
 ```
 
 ```{r, Dot = 7, part = "Result", echo = F, eval = T}
+library(tidyverse)
+library(lubridate)
 
+# Fake data
+x = data.frame(date=c('08-05-1997', '04-28-1996', '12-16-1995'))
+
+x = x %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate_at(vars(date), funs(year, month, day))
+
+x
 
 ```
 
 ```{python, Dot = 7, part = "Result", echo = F, eval = T}
+import pandas as pd
+
+df = pd.DataFrame({'name': ['Tom', 'Andy', 'Lucas'],
+                 'DoB': ['08-05-1997', '04-28-1996', '12-16-1995']})
+                 
+df['DoB'] = pd.to_datetime(df['DoB'])
+
+df['year']= df['DoB'].dt.year
+df['month']= df['DoB'].dt.month
+df['day']= df['DoB'].dt.day
+df
 
 ```
