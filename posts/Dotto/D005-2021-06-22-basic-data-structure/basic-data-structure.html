@@ -276,7 +276,8 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>This Dot illustrates how to define a variable , change variable type and chaning assignment in R.</p>
+<p><strong>Variable</strong><br />
+This Dot illustrates how to define a variable , change variable type and chaining assignment in R.</p>
 
 </p>
 </div>
@@ -288,7 +289,8 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>This Dot illustrates how to define a variable , change variable type and chaning assignment in Python.</p>
+<p><strong>Variable</strong><br />
+This Dot illustrates how to define a variable , change variable type and chaining assignment in Python.</p>
 
 </p>
 </div>
@@ -314,11 +316,11 @@ class="btn dotto-main-dot-shape"
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span> </span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#new type of object x :</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#chaning assignment in R :</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#chaining assignment in R :</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> z <span class="ot">&lt;-</span> x</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Assignment using equal operator</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">&quot;orange&quot;</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a)</span></code></pre></div>
 
 </div>
  
@@ -334,7 +336,7 @@ class="btn dotto-main-dot-shape"
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#change variable type from str to int :</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="bu">int</span>(x)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;new x class type:&quot;</span>,<span class="bu">type</span>(x))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#chained assignmen:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#chained assignment:</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> m <span class="op">=</span> x</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;n = &quot;</span>,n</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    ,<span class="st">&quot; m = &quot;</span>, m</span>
@@ -389,8 +391,9 @@ class="btn dotto-main-dot-shape"
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>Vector is a basic data structure in R which contains element of the same type.<br />
-The data types can be logical, integer, double, character, complex or raw.<br />
+<p><strong>Vector</strong><br />
+Vector is a basic data structure in R that contains elements of the <strong>same type</strong>.<br />
+These elements can be integer , character , complex and etc.<br />
 for more information,visit <a href="https://www.datamentor.io/r-programming/vector/">here</a></p>
 
 </p>
@@ -403,8 +406,14 @@ for more information,visit <a href="https://www.datamentor.io/r-programming/vect
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>List is a mutable built_in data structure in python that allows us to store sets of information in one place.<br />
-Lists are one of Python’s most powerful features readily accessible to new programmers, and they tie together many important concepts in programming.</p>
+<p><strong>List</strong><br />
+List is one of the most common built-in data structures in python.<br />
+it is a mutable built_in data structure in python which is used to store multiple elements. These elements can vary in type.<br />
+<strong>some list methods</strong><br />
+- <code>insert(index , element)</code>: puts element in place of given index.<br />
+- <code>append(element)</code> : adds element to the end of list.<br />
+- <code>pop(index)</code> : deletes element in given index.(and there is no given index,it will delete last element of list).<br />
+- <code>reverse()</code>: reverses the order of elements in the list.</p>
 
 </p>
 </div>
@@ -422,15 +431,22 @@ Lists are one of Python’s most powerful features readily accessible to new pro
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb11"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">0</span>) <span class="co">#create vector using c()</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">&quot;logical&quot;</span>,<span class="at">length =</span> <span class="dv">5</span>)<span class="co">#create vector using vector()</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>y</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)] <span class="co">#access first and second element of vector</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>x [x <span class="sc">&gt;</span> <span class="dv">4</span>] <span class="co">#filtering elements of x based on condition</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co">#modify 2nd element of x from 5 to 10</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>x [x <span class="sc">&lt;</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co">#modify elements less than 3 to 3</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co">#delete vector</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> <span class="co">#create vector using c()</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">0</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#create vector using vector()</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">&quot;logical&quot;</span>,<span class="at">length =</span> <span class="dv">5</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>y</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#access first and second element of vector</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)] </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#filtering elements of x based on condition</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>x [x <span class="sc">&gt;</span> <span class="dv">4</span>] </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#modify 2nd element of x from 5 to 10</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">10</span> </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#modify elements less than 3 to 3</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>x [x <span class="sc">&lt;</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">3</span> </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#delete vector</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="cn">NULL</span> </span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
 
 </div>
  
@@ -440,7 +456,7 @@ Lists are one of Python’s most powerful features readily accessible to new pro
 <div v-if="activeLang === 'python'" class="mx-2">
 
 <div class="sourceCode" id="cb12"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>A<span class="op">=</span>[<span class="dv">1</span>,<span class="dv">2</span>,<span class="st">&quot;Hi&quot;</span>]</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;last element od list A:&quot;</span>,A[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;last element of list A:&quot;</span>,A[<span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> [i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">5</span>)]</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;new list A is:&#39;</span> , A)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># add 12 at position 2 in list :</span></span>
@@ -511,10 +527,11 @@ Lists are one of Python’s most powerful features readily accessible to new pro
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>Factor is a data structure used to represent categorical data.<br />
-For example, a data field like gender will contain only values of male,female or other. Factors in R are stored as a vector of integer that each integer has a label.<br />
-One of the most important uses of factors is in statistical modeling; since categorical variables enter into statistical models differently than continuous variables, storing data as factors insures that the modeling functions will treat such data correctly.<br />
-for more information,visit <a href="https://www.datamentor.io/r-programming/factor/">here</a>.</p>
+<p><strong>Factor</strong><br />
+Factor is a data structure which is used to represent categorical data.<br />
+For example, a data field like gender will contain only values of male,female or other. Each distinct value is a level. We can consider factor as a vector of integers , that each integer has a level.<br />
+<code>as.factor()</code> function can convert a categorical vector to a factor.<br />
+Factors can be used in statistical modeling. for more information,visit <a href="https://www.datamentor.io/r-programming/factor/">here</a>.</p>
 
 </p>
 </div>
@@ -526,8 +543,9 @@ for more information,visit <a href="https://www.datamentor.io/r-programming/fact
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>Tuple is an ordered collection of objects in Python.<br />
-You can’t change tuple atfer defining it(unlike list).</p>
+<p><strong>Tuple</strong><br />
+Tuple is an ordered collection of objects in Python.<br />
+You can not change tuple after defining it(unlike list).</p>
 
 </p>
 </div>
@@ -646,11 +664,11 @@ You can’t change tuple atfer defining it(unlike list).</p>
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>Matrix is a two dimensional data structure in R programming.<br />
-Matrix is similar to vector but additionally contains the dimension attribute.<br />
-All attributes of an object can be checked with the attributes() function (dimension can be checked directly with the <code>dim()</code> function ).<br />
-<code>as.matrix()</code> is used to convert an object into a matrix.<br />
-for more information ,see <a href="https://www.datamentor.io/r-programming/matrix/">this</a>.</p>
+<p><strong>Matrix</strong><br />
+A matrix can be considered as a vector in 2 dimensions.<br />
+Like vector , matrix can also have only one data type.<br />
+<code>as.matrix()</code> is used to convert a <code>data.table</code> object into a matrix.<br />
+For more information,please visit <a href="https://www.datamentor.io/r-programming/matrix/">here</a>.</p>
 
 </p>
 </div>
@@ -662,7 +680,8 @@ for more information ,see <a href="https://www.datamentor.io/r-programming/matri
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>Set is a built_in data structure in Python which is unordered , and has no duplicate values.</p>
+<p><strong>Set</strong><br />
+Set is a built_in data structure in python which is unordered, and has no duplicate values.</p>
 
 </p>
 </div>
@@ -686,7 +705,7 @@ for more information ,see <a href="https://www.datamentor.io/r-programming/matri
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dimnames=</span><span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;X&quot;</span>,<span class="st">&quot;Y&quot;</span>,<span class="st">&quot;Z&quot;</span>),</span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                                            <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>)))</span>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>matrix1</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#create matrix using cbind() ( and rbind() ):</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#create matrix using cbind():</span></span>
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>matrix2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>( <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>) , <span class="fu">c</span>( <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>))</span>
 <span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>matrix2</span>
 <span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co">#select an element :</span></span>
@@ -777,7 +796,7 @@ for more information ,see <a href="https://www.datamentor.io/r-programming/matri
 </div>
 </div>
 
-<!-- Dot 5, lang: python ------------------------------------------------>
+<!-- Dot 5, lang: r ------------------------------------------------>
 
 <div v-if="activeMotto === '5'" class="col-12 col-lg-11 d-flex p-0 wrapper">
 <div class="box overflow-auto dotto-main-intro dotto-dot-instruction">
@@ -789,10 +808,11 @@ for more information ,see <a href="https://www.datamentor.io/r-programming/matri
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>A list is a collection of elements which can be of different types.<br />
-A vector having all elements of the same type is called atomic vector(vector) but a vector having elements of diffrent types is called list.<br />
-We can also set tags(a,b,c are tags here) for list elements.Doing this, our list will be like <code>dictionary</code> in Python.<br />
-<code>as.list()</code> is used to convert an object to list. These objects can be Vectors, Matrices, Factors, and data frames.<br />
+<p><strong>List</strong><br />
+A list is a collection of elements that can be of different types.<br />
+A vector having all elements of the same type is called an atomic vector(vector) but a vector having elements of different types is called a <code>list</code>.<br />
+We can also set tags(a,b,c are tags here) for list elements.Doing this, our list will be like a <code>dictionary</code> in python.<br />
+<code>as.list()</code> is used to convert an object to a list. These objects can be Vectors, Matrices, Factors, and data frames.<br />
 You can also see <a href="https://www.datamentor.io/r-programming/list/">this</a> and <a href="https://www.geeksforgeeks.org/convert-an-object-to-list-in-r-programming-as-list-function/">this</a> for more information.</p>
 
 </p>
@@ -805,9 +825,9 @@ You can also see <a href="https://www.datamentor.io/r-programming/list/">this</a
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>Python’s dictionaries allow you to connect pieces of related information.Each piece of information in a dictionary is stored as a key-value pair.<br />
-When you provide a key, Python returns the value associated with that key.<br />
-You can convert <code>list</code> to <code>dict</code> using list <code>index</code> as the <code>keys</code>.<br />
+<p><strong>Dictionary</strong><br />
+Dictionary is a data structure that is used to store a collection of <code>key:value</code>s in python. We can access <code>value</code> in dictionary by <code>dict[key]</code>.<br />
+In a dictionary,<code>value</code>s cab be duplicated and be of any data type.However,<code>key</code>s must be <code>unique</code> and <code>immutable</code>.<br />
 Please check <a href="https://medium.com/swlh/data-structure-conversion-f99d3ff9eaf5">here</a> for details.</p>
 
 </p>
@@ -983,9 +1003,10 @@ Please check <a href="https://medium.com/swlh/data-structure-conversion-f99d3ff9
 <div v-if="activeLang === 'r'" class="mx-2">
 <p class="mx-2">
 
-<p>Data Frame is a special case of a list where all elements are the same length.The main usage of data frame is storing tabular data.<br />
-Data Frames can be created using data.frame().<br />
-<code>as.data.frame()</code> function in R Language is used to convert an object to data frame. These objects can be Vectors, Lists, Matrices, and Factors.<br />
+<p><strong>Data Frame</strong><br />
+Data Frame is a 2 dimensional data structure that is used to store tabular data.<br />
+Data Frames can be created using <code>data.frame()</code>.<br />
+<code>as.data.frame()</code> is used to convert an object to a data frame. These objects can be Vectors, Lists, Matrices, and Factors.<br />
 you can also see <a href="https://www.datamentor.io/r-programming/data-frame/">here</a></p>
 
 </p>
@@ -998,12 +1019,14 @@ you can also see <a href="https://www.datamentor.io/r-programming/data-frame/">h
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>A DataFrame is a table. It contains an array of individual entries, each of which has a certain value. Each entry corresponds to a row (or record) and a column. Data frame is one of the most commonly used pandas objects.<br />
-<code>df.head(n)</code> returns first n rows of data frame.<br />
-<code>df.tail(n)</code> returns last n rows from data frame.<br />
-<code>pandas.DataFrame(list)</code> converts the list to data frame.<br />
-<code>as.matrix(df)</code> converts dataframe to a numeric matrix.<br />
-you can also convert dictionary to dataframe using <code>pandas.DataFrame.from_dict(data, orient = { 'columns','index'} , dtype=None, columns=None)</code>.<br />
+<p><strong>Data Frame</strong><br />
+Data Frame is a 2 dimensional data structure that is used to store tabular data,and it is one of the most commonly used objects in <code>pandas</code> library.<br />
+<strong>methods</strong><br />
+<code>df.head(n)</code> returns first n rows of the data frame.<br />
+<code>df.tail(n)</code> returns last n rows from our data frame.<br />
+<code>pandas.DataFrame(list)</code> converts the list to a data frame.<br />
+<code>as.matrix(df)</code> converts a data frame to a numeric matrix.<br />
+We can also convert dictionary to a data frame using <code>pandas.DataFrame.from_dict(data, orient = { 'columns','index'} , dtype=None, columns=None)</code>.<br />
 Please visit <a href="https://medium.com/swlh/data-structure-conversion-f99d3ff9eaf5">here</a> for details.</p>
 
 </p>

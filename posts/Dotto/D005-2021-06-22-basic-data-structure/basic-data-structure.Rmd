@@ -31,13 +31,15 @@ DataMotto::use_Dotto()
 ```
 <!-- Dot 1, lang: r ------------------------------------------------>
 ```{block, Dot = 1, part = "Instruction", lang = "r"}
+**Variable**  
 This Dot illustrates how to define a variable , change variable type and
-chaning assignment in R.
+chaining assignment in R.
 ```
 <!-- Dot 1, lang: python ------------------------------------------------>
 ```{block, Dot = 1, part = "Instruction", lang = "python"}
+**Variable**  
 This Dot illustrates how to define a variable , change variable type and 
-chaning assignment in Python.
+chaining assignment in Python.
 ```
 
 ```{r, Dot = 1, part = "Code", echo = T, eval = F, }
@@ -49,11 +51,11 @@ class(x)
 x <- 10 
 #new type of object x :
 class(x)
-#chaning assignment in R :
+#chaining assignment in R :
 y <- z <- x
 # Assignment using equal operator
 a = "orange"
-a
+print(a)
 ```
 
 ```{python, Dot = 1, part = "Code", echo = T, eval = F, }
@@ -64,7 +66,7 @@ print("x class type:",type(x))
 #change variable type from str to int :
 x = int(x)
 print("new x class type:",type(x))
-#chained assignmen:
+#chained assignment:
 n = m = x
 print("n = ",n
     ," m = ", m
@@ -80,11 +82,11 @@ class(x)
 x <- 10 
 #new type of object x :
 class(x)
-#chaning assignment in R :
+#chaining assignment in R :
 y <- z <- x
 # Assignment using equal operator
 a = "orange"
-a
+print(a)
 ```
 
 ```{python, Dot = 1, part = "Result", echo = F, eval = T}
@@ -95,7 +97,7 @@ print("x class type:",type(x))
 #change variable type from str to int :
 x = int(x)
 print("new x class type:",type(x))
-#chained assignmen:
+#chained assignment:
 n = m = x
 print("n = ",n
     ," m = ", m
@@ -104,35 +106,49 @@ print("n = ",n
 
 <!-- Dot 2, lang: r ------------------------------------------------>
 ```{block, Dot = 2, part = "Instruction", lang = "r"}
-Vector is a basic data structure in R which contains element of the same type.  
-The data types can be logical, integer, double, character, complex or raw.  
+**Vector**  
+Vector is a basic data structure in R that contains elements of the **same type**.  
+These elements can be integer , character , complex and etc.  
 for more information,visit [here](https://www.datamentor.io/r-programming/vector/)
 ```
 
 <!-- Dot 2, lang: python ------------------------------------------------>
 
 ```{block, Dot = 2, part = "Instruction", lang = "python"}
-List is a mutable built_in data structure in python that allows us to store 
-sets of information in one place.  
-Lists are one of Python's most powerful features readily accessible to new programmers,
-and they tie together many important concepts in programming.
+**List**  
+List is one of the most common built-in data structures in python.  
+it is a mutable built_in data structure in python which is used to store multiple elements.
+These elements can vary in type.  
+**some list methods**  
+- `insert(index , element)`: puts element in place of given index.  
+- `append(element)` : adds element to the end of list.  
+- `pop(index)` : deletes element in given index.(and there is no given index,it will delete
+last element of list).  
+- `reverse()`: reverses the order of elements in the list.  
 ```
 
 ```{r, Dot = 2, part = "Code", echo = T, eval = F, }
-x <- c(1, 5, 4, 9, 0) #create vector using c()
-y <- vector(mode = "logical",length = 5)#create vector using vector()
+ #create vector using c()
+x <- c(1, 5, 4, 9, 0)
+#create vector using vector()
+y <- vector(mode = "logical",length = 5)
 y
-x[c(1,2)] #access first and second element of vector
-x [x > 4] #filtering elements of x based on condition
-x[2] <- 10 #modify 2nd element of x from 5 to 10
-x [x < 3] <- 3 #modify elements less than 3 to 3
-y <- NULL #delete vector
+#access first and second element of vector
+x[c(1,2)] 
+#filtering elements of x based on condition
+x [x > 4] 
+#modify 2nd element of x from 5 to 10
+x[2] <- 10 
+#modify elements less than 3 to 3
+x [x < 3] <- 3 
+#delete vector
+y <- NULL 
 y
 ```
 
 ```{python, Dot = 2, part = "Code", echo = T, eval = F, }
 A=[1,2,"Hi"]
-print("last element od list A:",A[-1])
+print("last element of list A:",A[-1])
 A = [i**2 for i in range(1,5)]
 print('new list A is:' , A)
 # add 12 at position 2 in list :
@@ -183,19 +199,20 @@ print("list A after removing it's first element:", A)
 ```
 <!-- Dot 3, lang: r ------------------------------------------------>
 ```{block, Dot = 3, part = "Instruction", lang = "r"}
-Factor is a data structure used to represent categorical data.  
+**Factor**  
+Factor is a data structure which is  used to represent categorical data.  
 For example, a data field like gender will contain only values of male,female or other.
-Factors in R are stored as a vector of integer that each integer has a label.  
-One of the most important uses of factors is in statistical modeling; since 
-categorical variables enter into statistical models differently than continuous 
-variables, storing data as factors insures that the modeling functions will 
-treat such data correctly.  
+Each distinct value is a level.
+We can consider factor as a vector of integers , that each integer has a level.  
+`as.factor()` function can convert a categorical vector to a factor.  
+Factors can be used in statistical modeling.
 for more information,visit [here](https://www.datamentor.io/r-programming/factor/).
 ```
 <!-- Dot 3, lang: python ------------------------------------------------>
 ```{block, Dot = 3, part = "Instruction", lang = "python"}
+**Tuple**  
 Tuple is an ordered collection of objects in Python.  
-You can't change tuple atfer defining it(unlike list).
+You can not change tuple after defining it(unlike list).
 ```
 
 ```{r, Dot = 3, part = "Code", echo = T, eval = F, }
@@ -278,18 +295,18 @@ print("new a :",a," ,new c :",c)
 ```
 <!-- Dot 4, lang: r ------------------------------------------------>
 ```{block, Dot = 4, part = "Instruction", lang = "r"}
-Matrix is a two dimensional data structure in R programming.  
-Matrix is similar to vector but additionally contains the dimension attribute.  
-All attributes of an object can be checked with the attributes() function
-(dimension can be checked directly with the `dim()` function ).  
-`as.matrix()` is used to convert an object into a matrix.  
-for more information ,see [this](https://www.datamentor.io/r-programming/matrix/).
+**Matrix**  
+A matrix can be considered as a vector in 2 dimensions.  
+Like vector , matrix can also have only one data type.  
+`as.matrix()` is used to convert a `data.table` object into a matrix.  
+For more information,please visit [here](https://www.datamentor.io/r-programming/matrix/).
 ```
 
 <!-- Dot 4, lang: python ------------------------------------------------>
 
 ```{block, Dot = 4, part = "Instruction", lang = "python"}
-Set is a built_in data structure in Python which is unordered ,
+**Set**  
+Set is a built_in data structure in python which is unordered,
 and has no duplicate values.
 ```
 
@@ -300,7 +317,7 @@ matrix1 <- matrix(1:9,
                   dimnames=list(c("X","Y","Z"),
                                             c("A","B","C")))
 matrix1
-#create matrix using cbind() ( and rbind() ):
+#create matrix using cbind():
 matrix2 <- cbind(c( 4, 5, 6) , c( 7, 8, 9))
 matrix2
 #select an element :
@@ -375,14 +392,15 @@ else :
   
 ```
 
-<!-- Dot 5, lang: python ------------------------------------------------>
+<!-- Dot 5, lang: r ------------------------------------------------>
 ```{block, Dot = 5, part = "Instruction", lang = "r"}
-A list is a collection of elements which can be of different types.  
-A vector  having all elements of the same type is called atomic vector(vector)
-but a vector having elements of diffrent types is called list.  
+**List**  
+A list is a collection of elements that can be of different types.  
+A vector  having all elements of the same type is called an atomic vector(vector)
+but a vector having elements of different types is called a `list`.  
 We can also set tags(a,b,c are tags here) for list elements.Doing this,
-our list will be like `dictionary` in Python.  
-`as.list()` is used to convert an object to list. These objects can be
+our list will be like a `dictionary` in python.  
+`as.list()` is used to convert an object to a list. These objects can be
 Vectors, Matrices, Factors, and data frames.  
 You can also see [this](https://www.datamentor.io/r-programming/list/) and
 [this](https://www.geeksforgeeks.org/convert-an-object-to-list-in-r-programming-as-list-function/) for more information.
@@ -390,10 +408,11 @@ You can also see [this](https://www.datamentor.io/r-programming/list/) and
 <!-- Dot 5, lang: python ------------------------------------------------>
 
 ```{block, Dot = 5, part = "Instruction", lang = "python"}
-Python's dictionaries allow you to connect pieces of related
-information.Each piece of information in a dictionary is stored as a key-value pair.  
-When you provide a key, Python returns the value associated with that key.  
-You can convert `list` to `dict` using list `index` as the `keys`.  
+**Dictionary**  
+Dictionary is a data structure that is used to store a collection of `key:value`s in python.
+We can access `value` in dictionary by `dict[key]`.  
+In a dictionary,`value`s cab be duplicated and be of any data type.However,`key`s must be 
+`unique` and `immutable`.  
 Please check [here](https://medium.com/swlh/data-structure-conversion-f99d3ff9eaf5) 
 for details.
 ```
@@ -504,23 +523,25 @@ dict_from_list1
 
 <!-- Dot 6, lang: r ------------------------------------------------>
 ```{block, Dot = 6, part = "Instruction", lang = "r"}
-Data Frame is a special case of a list where all elements are the same 
-length.The main usage of data frame is storing tabular data.  
-Data Frames can be created using data.frame().  
-`as.data.frame()` function in R Language is used to convert an object to data frame.
+**Data Frame**  
+Data Frame is a 2 dimensional data structure that is used to store tabular data.  
+Data Frames can be created using `data.frame()`.  
+`as.data.frame()`  is used to convert an object to a data frame.
 These objects can be Vectors, Lists, Matrices, and Factors.  
 you can also see [here](https://www.datamentor.io/r-programming/data-frame/)
 ```
 
 <!-- Dot 6, lang: python ------------------------------------------------>
 ```{block, Dot = 6, part = "Instruction", lang = "python"}
-A DataFrame is a table. It contains an array of individual entries, each of which has a certain value. Each entry corresponds to a row (or record) and a column.
-Data frame is one of the most commonly used pandas objects.  
-`df.head(n)` returns first n rows of data frame.  
-`df.tail(n)` returns last n rows from data frame.  
-`pandas.DataFrame(list)` converts the list to data frame.  
-`as.matrix(df)` converts dataframe to a numeric matrix.  
-you can also convert dictionary to dataframe using 
+**Data Frame**  
+Data Frame is a 2 dimensional data structure that is used to store tabular data,and it 
+is one of the most commonly used objects in `pandas` library.  
+**methods**  
+`df.head(n)` returns first n rows of the data frame.  
+`df.tail(n)` returns last n rows from our data frame.  
+`pandas.DataFrame(list)` converts the list to a data frame.  
+`as.matrix(df)` converts a data frame to a numeric matrix.  
+We can also convert dictionary to a data frame using 
 `pandas.DataFrame.from_dict(data, orient = { 'columns','index'} , dtype=None, columns=None)`.  
 Please visit [here](https://medium.com/swlh/data-structure-conversion-f99d3ff9eaf5)
 for details.
