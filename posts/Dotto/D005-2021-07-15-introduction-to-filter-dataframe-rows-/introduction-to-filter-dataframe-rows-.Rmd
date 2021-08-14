@@ -52,7 +52,7 @@ Here, we use `janitor` package ,`clean_names()` function to clean data frame nam
 
 <!-- Dot 1, lang: Python ------------------------------------------------>
 ```{block, Dot = 1, part = "Instruction", lang = "python"}
-In this dot,we are using dataset `penguins_raw` ,that can be downloded from
+In this dot,we are using dataset `penguins_raw` ,that can be downloaded from
 [here](site address).
 This dataset includes nesting observations, penguin size data, and isotope measurements from blood samples for adult Adélie, Chinstrap, and Gentoo penguins.It has 344 rows and 17 columns.  
 However , we only need columns:  
@@ -77,7 +77,7 @@ penguins_data <- penguins_raw %>%
 import pandas as pd
 import janitor
 
-penguins_raw = pd.read_csv("/home/parnian/Documents/sprint3/penguins_raw.csv")
+penguins_raw = pd.read_csv("Data/penguins_raw.csv")
 penguine_data = penguins_raw.clean_names()
 penguins_data = penguine_data[["individual_id" , "date_egg" ,"body_mass_g_" , "sex" ]]
 ```
@@ -102,7 +102,7 @@ penguins_data %>%
 import pandas as pd
 import janitor
 
-penguins_raw = pd.read_csv("/home/parnian/Documents/sprint3/penguins_raw.csv")
+penguins_raw = pd.read_csv("Data/penguins_raw.csv")
 penguine_data = penguins_raw.clean_names()
 penguins_data = penguine_data[["individual_id" , "date_egg" ,"body_mass_g_" , "sex" ]]
 penguins_data
@@ -118,7 +118,7 @@ based on conditions.
    `is.na()`  
    `between()` , `near()`  
 
-`filter()` (and other `dplyr` functions) work with pipes `%>%` and expect tidy data.   
+`filter()` (and other `dplyr` functions) work with pipes `%>%` and  tidy data.   
 In tidy data:  
 * Each variable is in its own column.  
 * Each observation, or case, is in its own row.  
@@ -128,8 +128,8 @@ for example , `x %>% f(y)` is equivalent to `f(x, y)`.
 <!-- Dot 2, lang: python ------------------------------------------------>
 ```{block, Dot = 2, part = "Instruction", lang = "python"}
 We can use logical operators like `==` , `<` and `>` on columns to filter
-dataframe rows.  
-For examle , `df[df.col1 == 3800]` will select rows with `col1` = 3800.  
+data frame rows.  
+For example , `df[df.col1 == 3800]` will select rows with `col1` = 3800.  
 ```
 
 ```{r, Dot = 2, part = "Code", echo = T, eval = F, }
@@ -174,7 +174,7 @@ penguins_data [ penguins_data.body_mass_g_ ==  max(penguins_data.body_mass_g_)]
 ```{block, Dot = 3, part = "Instruction", lang = "r"}
 We can use `==` , `<` and  `>` operators with strings as well.  
 For example , `A == "ABC"` checks whether string A is equal to `"ABC"`,
-or `A < "ABC"` checks if string A comes before "ABC" (in alphabetical order).  
+or `A < "ABC"` checks if string "A" comes before "ABC" (in alphabetical order).  
   
 We can also filter data frame rows using Dates.  
 For example , `penguins_data %>% filter(Date_Egg < "2007-11-10")` filters

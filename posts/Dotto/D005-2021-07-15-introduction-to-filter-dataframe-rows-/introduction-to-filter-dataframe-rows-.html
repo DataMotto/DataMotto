@@ -303,7 +303,7 @@ data_penguin &lt;- penguins_raw</p>
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>In this dot,we are using dataset <code>penguins_raw</code> ,that can be downloded from <a href="site%20address">here</a>. This dataset includes nesting observations, penguin size data, and isotope measurements from blood samples for adult Adélie, Chinstrap, and Gentoo penguins.It has 344 rows and 17 columns.<br />
+<p>In this dot,we are using dataset <code>penguins_raw</code> ,that can be downloaded from <a href="site%20address">here</a>. This dataset includes nesting observations, penguin size data, and isotope measurements from blood samples for adult Adélie, Chinstrap, and Gentoo penguins.It has 344 rows and 17 columns.<br />
 However , we only need columns:<br />
 <code>individual_id</code><br />
 <code>date_egg</code><br />
@@ -344,7 +344,7 @@ However , we only need columns:<br />
 <div class="sourceCode" id="cb2"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> janitor</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>penguins_raw <span class="op">=</span> pd.read_csv(<span class="st">&quot;/home/parnian/Documents/sprint3/penguins_raw.csv&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>penguins_raw <span class="op">=</span> pd.read_csv(<span class="st">&quot;Data/penguins_raw.csv&quot;</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>penguine_data <span class="op">=</span> penguins_raw.clean_names()</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>penguins_data <span class="op">=</span> penguine_data[[<span class="st">&quot;individual_id&quot;</span> , <span class="st">&quot;date_egg&quot;</span> ,<span class="st">&quot;body_mass_g_&quot;</span> , <span class="st">&quot;sex&quot;</span> ]]</span></code></pre></div>
 
@@ -501,7 +501,7 @@ Useful filter functions: <code>==</code> , <code>&lt;</code> , <code>&gt;</code>
 <code>&amp;</code> , <code>|</code> , <code>!</code> , <code>xor()</code><br />
 <code>is.na()</code><br />
 <code>between()</code> , <code>near()</code></p>
-<p><code>filter()</code> (and other <code>dplyr</code> functions) work with pipes <code>%&gt;%</code> and expect tidy data.<br />
+<p><code>filter()</code> (and other <code>dplyr</code> functions) work with pipes <code>%&gt;%</code> and tidy data.<br />
 In tidy data:<br />
 * Each variable is in its own column.<br />
 * Each observation, or case, is in its own row.<br />
@@ -517,8 +517,8 @@ In tidy data:<br />
 <div v-if="activeLang === 'python'" class="mx-2">
 <p class="mx-2">
 
-<p>We can use logical operators like <code>==</code> , <code>&lt;</code> and <code>&gt;</code> on columns to filter dataframe rows.<br />
-For examle , <code>df[df.col1 == 3800]</code> will select rows with <code>col1</code> = 3800.</p>
+<p>We can use logical operators like <code>==</code> , <code>&lt;</code> and <code>&gt;</code> on columns to filter data frame rows.<br />
+For example , <code>df[df.col1 == 3800]</code> will select rows with <code>col1</code> = 3800.</p>
 
 </p>
 </div>
@@ -839,7 +839,7 @@ MALE
 <p class="mx-2">
 
 <p>We can use <code>==</code> , <code>&lt;</code> and <code>&gt;</code> operators with strings as well.<br />
-For example , <code>A == "ABC"</code> checks whether string A is equal to <code>"ABC"</code>, or <code>A &lt; "ABC"</code> checks if string A comes before “ABC” (in alphabetical order).</p>
+For example , <code>A == "ABC"</code> checks whether string A is equal to <code>"ABC"</code>, or <code>A &lt; "ABC"</code> checks if string “A” comes before “ABC” (in alphabetical order).</p>
 <p>We can also filter data frame rows using Dates.<br />
 For example , <code>penguins_data %&gt;% filter(Date_Egg &lt; "2007-11-10")</code> filters rows with Date_Egg before 2007-11-10.</p>
 
