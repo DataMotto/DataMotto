@@ -1,0 +1,101 @@
+---
+title: "How to Create Plots with Beautiful Animation in R"
+description: |
+  gganimate extends the grammar of graphics as implemented by ggplot2 to include the description of animation.
+author:
+  - name: "Mohammad Hossein Malekpour"
+    occupation: "Data Scientist"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/mohammadhossein-malekpour/"
+    img: "MalekpourAvatar.jpg"
+    lang: ["python", "R"]
+tech:
+  - lang: r
+    pkgs: ["gganimate", "ggplot2", "gapminder"]
+date:
+  created: "2021-08-26"
+  last_updated: "2021-08-26"
+categories: "Visualizer"
+applications: "Other"
+cover_image: NULL
+slug: "how-to-create-plots-with-beautiful-animation-in-r"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+This Dotto describes how to create animation in R using the **gganimate** R package.
+
+gganimate is an extension of the ggplot2 package for creating animated ggplots. It provides a range of new functionality that can be added to the plot object in order to customize how it should change with time.
+
+Key features of gganimate:
+
+- **transitions**: you want your data to change
+- **views**: you want your viewpoint to change
+- **shadows**: you want the animation to have memory
+
+gganimate stable version is available on CRAN and can be installed with `install.packages('gganimate')`. The latest development version can be installed as follow: `devtools::install_github('thomasp85/gganimate')`.
+
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+# Load required packages and set theme:
+library(ggplot2)
+library(gganimate)
+theme_set(theme_bw())
+
+# demo dataset
+library(gapminder)
+head(gapminder)
+
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+# Load required packages and set theme:
+library(ggplot2)
+library(gganimate)
+theme_set(theme_bw())
+
+# demo dataset
+library(gapminder)
+head(gapminder)
+
+```
+
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+
+```
+
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+
+```
+
+
+

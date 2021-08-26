@@ -448,7 +448,7 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
 <div v-if="activeLang === 'r'" class="mx-2 dotto-dot-output">
 
 <pre><code>## [1] &quot;2020-01-31 20:11:59 UTC&quot;</code></pre>
-<pre><code>## [1] &quot;2021-08-12 11:37:10 +0430&quot;</code></pre>
+<pre><code>## [1] &quot;2021-08-12 16:40:37 +0430&quot;</code></pre>
 
 </div>
  
@@ -458,7 +458,7 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
 <pre><code>## 2021-06-01 15:23:25</code></pre>
-<pre><code>## 2021-08-12 11:37:10.796331</code></pre>
+<pre><code>## 2021-08-12 16:40:38.843631</code></pre>
 
 </div>
  
@@ -590,8 +590,8 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## 2021-08-12 11:37:11.224331</code></pre>
-<pre><code>## 2021 12 11</code></pre>
+<pre><code>## 2021-08-12 16:40:39.775329</code></pre>
+<pre><code>## 2021 12 16</code></pre>
 <pre><code>## 3</code></pre>
 
 </div>
@@ -715,8 +715,8 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
-<pre><code>## 2021-08-12 11:37:11.712328</code></pre>
-<pre><code>## 2021-09-08 11:37:11.712328</code></pre>
+<pre><code>## 2021-08-12 16:40:41.089482</code></pre>
+<pre><code>## 2021-09-08 16:40:41.089482</code></pre>
 
 </div>
  
@@ -939,6 +939,8 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
  
 <div v-if="activeLang === 'python'" class="mx-2 dotto-dot-output">
 
+<pre><code>## C:\Users\ASUS\Documents\R\win-library\4.0\reticulate\python\rpytools\call.py:13: MatplotlibDeprecationWarning: The &#39;warn&#39; parameter of use() is deprecated since Matplotlib 3.1 and will be removed in 3.3.  If any parameter follows &#39;warn&#39;, they should be pass as keyword, not positionally.
+##   res = rpycall.call_r_function(f, *args, **kwargs)</code></pre>
 <pre><code>##    year  month  day       date
 ## 0  2015      2    4 2015-02-04
 ## 1  2016      3    5 2016-03-05</code></pre>
@@ -990,17 +992,17 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
  
 <div v-if="activeLang === 'r'" class="mx-2">
 
-<div class="sourceCode" id="cb41"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fake data</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">date=</span><span class="fu">c</span>(<span class="st">&#39;08-05-1997&#39;</span>, <span class="st">&#39;04-28-1996&#39;</span>, <span class="st">&#39;12-16-1995&#39;</span>))</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> x <span class="sc">%&gt;%</span> </span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">mdy</span>(date)) <span class="sc">%&gt;%</span> </span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(date), <span class="fu">funs</span>(year, month, day))</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r dotto-dot-code"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fake data</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">date=</span><span class="fu">c</span>(<span class="st">&#39;08-05-1997&#39;</span>, <span class="st">&#39;04-28-1996&#39;</span>, <span class="st">&#39;12-16-1995&#39;</span>))</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> x <span class="sc">%&gt;%</span> </span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">mdy</span>(date)) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">vars</span>(date), <span class="fu">funs</span>(year, month, day))</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 
 </div>
  
@@ -1009,16 +1011,16 @@ Throughout your career as a data scientist, it’s inevitable that you’ll come
  
 <div v-if="activeLang === 'python'" class="mx-2">
 
-<div class="sourceCode" id="cb42"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(<span class="st">&#39;DoB&#39;</span>: [<span class="st">&#39;08-05-1997&#39;</span>, <span class="st">&#39;04-28-1996&#39;</span>, <span class="st">&#39;12-16-1995&#39;</span>]})</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                 </span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;DoB&#39;</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">&#39;DoB&#39;</span>])</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;year&#39;</span>]<span class="op">=</span> df[<span class="st">&#39;DoB&#39;</span>].dt.year</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;month&#39;</span>]<span class="op">=</span> df[<span class="st">&#39;DoB&#39;</span>].dt.month</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;day&#39;</span>]<span class="op">=</span> df[<span class="st">&#39;DoB&#39;</span>].dt.day</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python dotto-dot-code"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(<span class="st">&#39;DoB&#39;</span>: [<span class="st">&#39;08-05-1997&#39;</span>, <span class="st">&#39;04-28-1996&#39;</span>, <span class="st">&#39;12-16-1995&#39;</span>]})</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                 </span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;DoB&#39;</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">&#39;DoB&#39;</span>])</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;year&#39;</span>]<span class="op">=</span> df[<span class="st">&#39;DoB&#39;</span>].dt.year</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;month&#39;</span>]<span class="op">=</span> df[<span class="st">&#39;DoB&#39;</span>].dt.month</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;day&#39;</span>]<span class="op">=</span> df[<span class="st">&#39;DoB&#39;</span>].dt.day</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
 
 </div>
  
