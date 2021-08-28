@@ -1,0 +1,43 @@
+{
+  "file_name": ["how-to-create-plots-with-beautiful-animation-in-r"],
+  "dir_name": ["D026-2021-08-26-how-to-create-plots-with-beautiful-animation-in-r"],
+  "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+  "link": ["posts/Dotto/D026-2021-08-26-how-to-create-plots-with-beautiful-animation-in-r/index.html"],
+  "base_url": ["https://datamotto.com"],
+  "social_networks_datamotto": {
+    "twitter": ["https://twitter.com/DataMotto"],
+    "linkedin": ["https://www.linkedin.com/company/datamotto"]
+  },
+  "dotto_number": [10],
+  "dotto_label": ["D010"],
+  "dotto_id": ["104b7d10-0632-11ec-ace8-affd6f9e16f1"],
+  "title": ["How to Create Plots with Beautiful Animation in R"],
+  "description": ["gganimate extends the grammar of graphics as implemented by ggplot2 to include the description of animation.\n"],
+  "author": [
+    {
+      "name": ["Mohammad Hossein Malekpour"],
+      "occupation": ["Data Scientist"],
+      "affiliation": ["DataMotto"],
+      "url": ["https://www.linkedin.com/in/mohammadhossein-malekpour/"],
+      "img": ["MalekpourAvatar.jpg"],
+      "lang": ["python", "R"],
+      "profile_img_for_Dotto": ["./how-to-create-plots-with-beautiful-animation-in-r_files/figure-html/MalekpourAvatar.jpg"],
+      "profile_img": ["./posts/Dotto/D026-2021-08-26-how-to-create-plots-with-beautiful-animation-in-r/how-to-create-plots-with-beautiful-animation-in-r_files/figure-html/MalekpourAvatar.jpg"]
+    }
+  ],
+  "tech": [
+    {
+      "lang": ["r"],
+      "pkgs": ["gganimate", "ggplot2", "gapminder", "Rcpp"]
+    }
+  ],
+  "date": {
+    "created": ["2021-08-26"],
+    "last_updated": ["2021-08-26"]
+  },
+  "categories": ["Visualizer"],
+  "applications": ["Other"],
+  "cover_image": {},
+  "slug": ["how-to-create-plots-with-beautiful-animation-in-r"],
+  "output": ["DataMotto::Dotto"]
+}
