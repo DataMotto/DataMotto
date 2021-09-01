@@ -1,0 +1,346 @@
+---
+title: "How to make better spaghetti plots"
+description: |
+  How to explore longitudinal data effectively  
+author:
+  - name: "Parnian Jahangiri Rad"
+    occupation: "Data science intern"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/parnian-jahangiri-rad-4603611b4"
+    img: "Parnian-Jahangiri-Rad.jpg"
+    lang: r
+tech:
+  - lang: r
+    pkgs: ["brolgar"]
+date:
+  created: "2021-09-01"
+  last_updated: "2021-09-01"
+categories: ["Visualization"]
+applications: ["General"]
+cover_image: NULL
+slug: "how-to-make-better-spaghetti-plots"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+**`longitudinal data` and `brolgar` package**    
+**Dataset** : `heights` from [brolgar](https://github.com/njtierney/brolgar) package  
+**What is longitudinal data?**  
+individuals repeatedly measured through time.  
+**Why `brolgar`?**    
+Problems of our spaghetti plot:  
+- Overplotting  
+- Can not see individuals
+`brolgar` package helps us to solve following problems:  
+- How to look at **some** of the data?  
+- How to find **interesting observations**?  
+- How to understand a model?  
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+library(brolgar)
+library(tsibble)
+library(feasts)
+library(tidyverse)
+library(gghighlight)
+library(kableExtra)
+# remove column 'continent' from dataset(because it is not needed)
+heights_data <- heights[,-2]
+#an example of longitudinal data
+heights_data %>%
+  filter(country == "Australia") %>%
+  kbl(caption = "An example of longitudinal data") %>%
+  kable_material(c("striped", "hover"))
+#plot longitudinal data of 144 contries(why brolgar)
+ggplot(data = heights_data ,
+       aes(x = year ,
+           y = height_cm)) +
+  geom_line(aes(group = country))
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+library(brolgar)
+library(tsibble)
+library(feasts)
+library(tidyverse)
+library(gghighlight)
+library(kableExtra)
+# remove column 'continent' from dataset(because it is not needed)
+heights_data <- heights[,-2]
+#an example of longitudinal data
+heights_data %>%
+  filter(country == "Australia") %>%
+  kbl(caption = "An example of longitudinal data") %>%
+  kable_material(c("striped", "hover"))
+#plot longitudinal data of 144 contries(why brolgar)
+ggplot(data = heights_data ,
+       aes(x = year ,
+           y = height_cm)) +
+  geom_line(aes(group = country))
+```
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+**Longitudinal data as a time series**   
+**time series:**  
+Anything that is observed sequentially over time is a time series.  
+  
+With this approach,we can use `tsibble` package to have 
+special time series that are compatible with `brolgar` package tools.  
+`as_tsibble`: coerce a data frame to tsibble.  
+**parameters**:  
+- `index`: Your time variable  
+- `key` : Variable(s) defining individual groups (or series)  
+For more information,please visit [here](https://tsibble.tidyverts.org/).
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+heights_data <- as_tsibble(heights_data,
+                      index = year,
+                      key = country,
+                      regular = FALSE)
+heights_data
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+heights_data <- as_tsibble(heights_data,
+                      index = year,
+                      key = country,
+                      regular = FALSE)
+heights_data
+```
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+**look at many subsamples using `facet_sample`**    
+ `facet_sample` helps us to specify:  
+ - numbers of keys per facet by `n_per_facet`  
+ - number of facets(plots) by `n_facets`  
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F, }
+gg_heights <- ggplot(heights_data, aes(x = year,
+                    y = height_cm,
+                    group = country)) +
+  geom_line()
+#see more individuals
+gg_heights +
+  facet_sample(
+    n_per_facet = 3,
+    n_facets = 9
+  ) +
+  ggtitle("see more individulas")
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+gg_heights <- ggplot(heights_data, aes(x = year,
+                    y = height_cm,
+                    group = country)) +
+  geom_line()
+#see more individuals
+gg_heights +
+  facet_sample(
+    n_per_facet = 3,
+    n_facets = 9
+  ) +
+  ggtitle("see more individulas")
+```
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+**See all individuals along some variable by `facet_strata`**    
+`facet_strata` helps us to plot **all** individuals,
+and we can arrange them in length by `along` parameter
+(`along = -year` will arrange spaghetti plots from tallest to shortest)
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F, }
+gg_heights + 
+  facet_strata(
+    along = -year
+  ) +
+  ggtitle("see all individuals")
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+gg_heights + 
+  facet_strata(
+    along = -year
+  ) +
+  ggtitle("see all individuals")
+```
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+**How to find interesting observations**    
+We would like to find countries with minimum and maximum of `max hight`.  
+`fit_ranges` in `features` gives us range of data.  
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F, }
+max_heights <- heights %>%
+  features(height_cm, feat_ranges) %>%
+  select(country,max)
+
+interesting_data <- max_heights %>%
+  filter(max == max(max) | max == min(max))
+
+heights_data %>%
+  left_join(interesting_data ,by = "country") %>%
+  as_tibble() %>%
+  ggplot(aes(x = year,
+             y = height_cm,
+             group = country,
+             colour = "red")) + 
+  geom_line() +
+   gghighlight(!is.na(max)) +
+   ggtitle("Countries with smallest and largest max height")
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+max_heights <- heights %>%
+  features(height_cm, feat_ranges) %>%
+  select(country,max)
+
+interesting_data <- max_heights %>%
+  filter(max == max(max) | max == min(max))
+
+heights_data %>%
+  left_join(interesting_data ,by = "country") %>%
+  as_tibble() %>%
+  ggplot(aes(x = year,
+             y = height_cm,
+             group = country,
+             colour = "red")) + 
+  geom_line() +
+   gghighlight(!is.na(max)) +
+   ggtitle("Countries with smallest and largest max height")
+```
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+**how to understand a model?**    
+We will fit a mixed effects model on our data.  
+-[lmer](https://www.rdocumentation.org/packages/lme4/versions/1.1-27.1/topics/lmer) 
+from `lme4` package : fits linear mixed effects model to data.  
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F, }
+library(lme4)
+library(modelr)
+# fit a mixed effects model
+heights_fit <- lmer(height_cm ~ year + (1|country), heights_data)
+heights_aug <- heights_data %>%
+  add_predictions(heights_fit, var = "pred") %>%
+  add_residuals(heights_fit, var = "res")
+
+heights_aug
+# plot model
+gg_heights_fit <- ggplot(heights_aug,
+       aes(x = year ,
+           y = pred ,
+           group = country)) +
+  geom_line()
+
+gg_heights_fit +
+  ggtitle("model prediction plot")
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+library(lme4)
+library(modelr)
+# fit a mixed effects model
+heights_fit <- lmer(height_cm ~ year + (1|country), heights_data)
+heights_aug <- heights_data %>%
+  add_predictions(heights_fit, var = "pred") %>%
+  add_residuals(heights_fit, var = "res")
+
+heights_aug
+# plot model
+gg_heights_fit <- ggplot(heights_aug,
+       aes(x = year ,
+           y = pred ,
+           group = country)) +
+  geom_line()
+
+gg_heights_fit +
+  ggtitle("model prediction plot")
+```
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+**Look at `many` and `all` subsamples**    
+We will look at **many** and **all** subsamples by `facet_sample` and `facet_strata` .  
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F, }
+# look at 'many' subsamples
+gg_heights_fit +
+  facet_sample() +
+  ggtitle("look at many subsamples")
+# look at 'all' subsamples
+gg_heights_fit +
+  facet_strata(along = -res) +
+  ggtitle("look at all subsamples")
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+# look at 'many' subsamples
+gg_heights_fit +
+  facet_sample() +
+  ggtitle("look at many subsamples")
+# look at 'all' subsamples
+gg_heights_fit +
+  facet_strata(along = -res) +
+  ggtitle("look at all subsamples")
+```
+
+<!-- Dot 8, lang: r ------------------------------------------------>
+
+```{block, Dot = 8, part = "Instruction", lang = "r"}
+**Look at the predictions with the data**    
+`sample_n_keys` from `brolgar` package: helps us to take a **random sample** of `n` keys.  
+Let's plot predictions of 9 randomly selected countries using `sample_n_keys`.  
+```
+
+```{r, Dot = 8, part = "Code", echo = T, eval = F, }
+set.seed(2020-01-21)
+heights_sample <- 
+heights_aug %>%
+  sample_n_keys(size = 9) %>%
+  ggplot(aes(x = year,
+             y = pred,
+             group = country)) + 
+  geom_line() +
+  facet_wrap(~country)
+heights_sample +
+  geom_point(aes(y = height_cm)) +
+  ggtitle("Look at 9 predictions with the data ")
+```
+
+```{r, Dot = 8, part = "Result", echo = F, eval = T}
+set.seed(2020-01-21)
+heights_sample <- 
+heights_aug %>%
+  sample_n_keys(size = 9) %>%
+  ggplot(aes(x = year,
+             y = pred,
+             group = country)) + 
+  geom_line() +
+  facet_wrap(~country)
+heights_sample +
+  geom_point(aes(y = height_cm)) +
+  ggtitle("Look at 9 predictions with the data ")
+```
