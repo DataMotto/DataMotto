@@ -1,0 +1,655 @@
+---
+title: "Working with Date and Time"
+description: |
+  Become a master of dates and times in no time.
+author:
+  - name: "Mohammad Hossein Malekpour"
+    occupation: "Data Scientist"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/mohammadhossein-malekpour/"
+    img: "MalekpourAvatar.jpg"
+    lang: ["python", "R"]
+tech:
+  - lang: r
+    pkgs: ["lubridate", "dplyr"]
+  - lang: python
+    pkgs: ["datetime", "pandas"]
+date:
+  created: "2021-08-08"
+  last_updated: "2021-08-08"
+categories: "Wrangler"
+applications: "General"
+cover_image: NULL
+slug: "working-with-date-and-time"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+Throughout your career as a data scientist, it’s inevitable that you’ll come across data containing date and time. For this reason, this extensive guide is here to help make manipulating date and time data using R’s `lubridate` package. We’ll cover a range of topics such as handling date and time strings and measuring time span.
+
+**DateTime Classes**
+
+This chapter will focus on the **lubridate** package, which makes it easier to work with dates and times in R. lubridate is not part of core tidyverse because you only need it when you’re working with dates/times. There are three types of date/time data that refer to an instant in time:
+
+- A **date**. Tibbles print this as `<date>`.
+- A **time** within a day. Tibbles print this as `<time>`.
+- A **date-time** is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as `<dttm>`. Elsewhere in R these are called POSIXct, but I don’t think that’s a very useful name.
+
+In this chapter we are only going to focus on dates and date-times as R doesn’t have a native class for storing times. If you need one, you can use the **hms** package.
+
+```
+
+
+```{block, Dot = 1, part = "Instruction", lang = "python"}
+Throughout your career as a data scientist, it’s inevitable that you’ll come across data containing date and time. For this reason, this extensive guide is here to help make manipulating date and time data using Python’s `datetime` module. We’ll cover a range of topics such as handling date and time strings, measuring time span, and working with datetime objects in `pandas`.
+
+**Python’s DateTime Classes**
+
+To introduce you to the `datetime` module, there are five main object classes that come in handy for different purposes. They are as follows:
+
+- `datetime` — allows us to manipulate dates and times together (month, day, year, hour, second, microsecond).
+- `date`— allows us to manipulate dates only (month, day, year).
+- `time` — you probably guessed it; this class allows us to manipulate time only (hour, minute, second, microsecond).
+- `timedelta` — used for measuring duration, the difference between two dates or times.
+- `tzinfo` — used for dealing with time zones. We won’t be covering this one in this Dotto.
+
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+# To install package from CRAN:
+install.packages("lubridate")
+
+# To install development version from Github:
+library(devtools)
+# dev mode allows testing of development packages in a sandbox, without interfering
+# with the other packages you have installed.
+dev_mode(on=T)
+install_github("hadley/lubridate")
+dev_mode(on=F)
+```
+
+```{python, Dot = 1, part = "Code", echo = T, eval = F, }
+# import datetime
+from datetime import datetime
+
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+
+```
+
+```{python, Dot = 1, part = "Result", echo = F, eval = T}
+
+```
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+**Working With Datetime**
+
+You should always use the simplest possible data type that works for your needs. That means if you can use a date instead of a date-time, you should. Date-times are substantially more complicated because of the need to handle time zones.
+
+To get the current date or date-time you can use `today()` or `now()`.
+
+Otherwise, there are three ways you’re likely to create a date/time:
+
+- From a string.
+- From individual date-time components.
+- From an existing date/time object.
+
+```
+
+```{block, Dot = 2, part = "Instruction", lang = "python"}
+**Working With Datetime**
+
+First things first, it’s important to note that `datetime` is both a module and a class within that module for when you’re writing your imports. We’ll demonstrate two ways in which you can work with a`datetime` object.
+
+First, you can pass the arguments to `datetime` starting with the largest time unit and ending with the smallest (year, month, day, hours, minutes, second). It’s worth mentioning that you won’t often come across this method in real life as you’ll most probably find yourself using readily available data, but it’s still good to know nonetheless.
+
+Second, if you want to get the current `datetime` you can easily do so using the `.now()` function.
+
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+# import lubridate
+library(lubridate)
+
+# create date-time
+datetime_object1 <- ymd_hms("2020-01-31 20:11:59")
+print(datetime_object1)
+
+# get current date
+datetime_object2 <- now()
+print(datetime_object2)
+
+```
+
+```{python, Dot = 2, part = "Code", echo = T, eval = F, }
+# import datetime
+from datetime import datetime
+
+# create datetime object 
+datetime_object1 = datetime(2021, 6, 1, 15, 23, 25)
+print(datetime_object1)
+
+# get current date
+datetime_object2 = datetime.now()
+print(datetime_object2)
+
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+# import lubridate
+library(lubridate)
+
+# create date-time
+datetime_object1 <- ymd_hms("2020-01-31 20:11:59")
+print(datetime_object1)
+
+# get current date
+datetime_object2 <- now()
+print(datetime_object2)
+
+```
+
+```{python, Dot = 2, part = "Result", echo = F, eval = T}
+# import datetime
+from datetime import datetime
+
+# create datetime object 
+datetime_object1 = datetime(2021, 6, 1, 15, 23, 25)
+print(datetime_object1)
+
+# get current date
+datetime_object2 = datetime.now()
+print(datetime_object2)
+
+```
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+**Date-time components**
+
+Now that you know how to get date-time data into R’s date-time data structures, let’s explore what you can do with them. This Dot will focus on the accessor functions that let you get and set individual components. 
+
+You can pull out individual parts of the date with the accessor functions `year()`, `month()`, `mday()` (day of the month), `yday()` (day of the year), `wday()` (day of the week), `hour()`, `minute()`, and `second()`.
+
+For `month()` and `wday()` you can set `label = TRUE` to return the abbreviated name of the month or day of the week. Set `abbr = FALSE` to return the full name.
+
+```
+
+```{block, Dot = 3, part = "Instruction", lang = "python"}
+**Accessing Individual Components**
+
+You can access individual components of a`datetime` object using the datetime’s attributes; such as year, day, and hour attributes for instance.
+
+Further, you can also find the day of the week using the `.weekday()` function.
+
+Note that Python counts weekdays from 0, starting on Monday. Meaning that:
+
+- 0 = Monday
+- 1 = Tuesday
+- 2 = Wednesday
+- …
+- 6 = Sunday
+
+Now that we’ve covered the ins and outs of the`datetime` object, you can also easily work with `date` and `time` objects as they use the same methods.
+
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F, }
+# import lubridate
+library(lubridate)
+
+datetime_object <- ymd_hms("2016-07-08 12:34:56")
+
+year(datetime_object)
+#> [1] 2016
+month(datetime_object)
+#> [1] 7
+mday(datetime_object)
+#> [1] 8
+
+yday(datetime_object)
+#> [1] 190
+wday(datetime_object)
+#> [1] 6
+
+month(datetime_object, label = TRUE)
+#> [1] Jul
+
+```
+
+```{python, Dot = 3, part = "Code", echo = T, eval = F, }
+# import datetime
+from datetime import datetime
+
+# get current date
+datetime_object = datetime.now()
+print(datetime_object)
+
+# extract data
+y = datetime_object.year
+d = datetime_object.day 
+h = datetime_object.hour
+print(y, d, h)
+
+# find the day of the week
+w = datetime_object2.weekday()
+print(w)
+
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+# import lubridate
+library(lubridate)
+
+datetime_object <- ymd_hms("2016-07-08 12:34:56")
+
+year(datetime_object)
+#> [1] 2016
+month(datetime_object)
+#> [1] 7
+mday(datetime_object)
+#> [1] 8
+
+yday(datetime_object)
+#> [1] 190
+wday(datetime_object)
+#> [1] 6
+
+month(datetime_object, label = TRUE)
+#> [1] Jul
+
+```
+
+
+```{python, Dot = 3, part = "Result", echo = F, eval = T}
+# import datetime
+from datetime import datetime
+
+# get current date
+datetime_object = datetime.now()
+print(datetime_object)
+
+# extract data
+y = datetime_object.year
+d = datetime_object.day 
+h = datetime_object.hour
+print(y, d, h)
+
+# find the day of the week
+w = datetime_object2.weekday()
+print(w)
+
+```
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+**Time spans**
+
+Next you’ll learn about how arithmetic with dates works, including subtraction, addition, and division. Along the way, you’ll learn about three important classes that represent time spans:
+
+- **durations**, which represent an exact number of seconds.
+- **periods**, which represent human units like weeks and months.
+- **intervals**, which represent a starting and ending point.
+
+In R, when you subtract two dates, you get a difftime object. A difftime class object records a time span of seconds, minutes, hours, days, or weeks. This ambiguity can make difftimes a little painful to work with, so lubridate provides an alternative which always uses seconds: the **duration**.
+
+**Periods** are time spans but don’t have a fixed length in seconds, instead they work with “human” times, like days and months. That allows them to work in a more intuitive way.
+
+If you want a more accurate measurement, you’ll have to use an **interval**. An interval is a duration with a starting point: that makes it precise so you can determine exactly how long it is.
+
+```
+
+```{block, Dot = 4, part = "Instruction", lang = "python"}
+**Working With Timedelta**
+
+The`timedelta` class comes in handy in situations where we want to measure duration as it represents the amount of time between two dates or times. This is particularly useful when we want to add or subtract from dates or times.
+
+We’ll go ahead and demonstrate how `timedelta` objects and `datetime`objects can be used together to do mathematical operations. For instance, we’ll add 27 days to the current time.
+
+Similar to what we did in code, we can also use `timedelta` to subtract from the current date or any other date.
+
+Note that `timedelta` can be used with any number of weeks, days, hours, minutes, etc. It can be used with time units as small as a microsecond or as large as *2.7 million years*! That’s impressive.
+
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F, }
+# Durations:
+h_age <- today() - ymd(19791014)
+h_age
+#> Time difference of 14971 days
+as.duration(h_age)
+#> [1] "1293494400s (~40.99 years)"
+
+# Periods:
+datetime_object <- ymd_hms("2016-07-08 12:34:56")
+datetime_object + days(1)
+#> [1] "2016-07-09 12:34:56 UTC"
+
+# Interval:
+next_year <- today() + years(1)
+(today() %--% next_year) / ddays(1)
+#> [1] 365
+
+```
+
+```{python, Dot = 4, part = "Code", echo = T, eval = F, }
+# import timedelta
+from datetime import timedelta
+from datetime import datetime
+
+# create a 27 day timedelta
+td = timedelta(days=27)
+
+# get current date
+datetime_object = datetime.now()
+print(datetime_object)
+
+#add 27 days to current date
+_27_days_later = datetime_object + td
+print(_27_days_later)
+
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+# Durations:
+h_age <- today() - ymd(19791014)
+h_age
+#> Time difference of 14971 days
+as.duration(h_age)
+#> [1] "1293494400s (~40.99 years)"
+
+# Periods:
+datetime_object <- ymd_hms("2016-07-08 12:34:56")
+datetime_object + days(1)
+#> [1] "2016-07-09 12:34:56 UTC"
+
+# Interval:
+next_year <- today() + years(1)
+(today() %--% next_year) / ddays(1)
+#> [1] 365
+
+```
+
+```{python, Dot = 4, part = "Result", echo = F, eval = T}
+# import timedelta
+from datetime import timedelta
+from datetime import datetime
+
+# create a 27 day timedelta
+td = timedelta(days=27)
+
+# get current date
+datetime_object = datetime.now()
+print(datetime_object)
+
+#add 27 days to current date
+_27_days_later = datetime_object + td
+print(_27_days_later)
+
+```
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+**Working with Date and Time Strings**
+
+Date/time data often comes as strings. You’ve seen one approach to parsing strings into date-times in [date-times](https://r4ds.had.co.nz/data-import.html#readr-datetimes). Another approach is to use the helpers provided by lubridate. They automatically work out the format once you specify the order of the component. To use them, identify the order in which year, month, and day appear in your dates, then arrange “y”, “m”, and “d” in the same order. That gives you the name of the lubridate function that will parse your date. 
+
+These functions also take unquoted numbers. This is the most concise way to create a single date/time object, as you might need when filtering date/time data. `ymd()` is short and unambiguous. `ymd()` and friends create dates. To create a date-time, add an underscore and one or more of “h”, “m”, and “s” to the name of the parsing function
+
+```
+
+```{block, Dot = 5, part = "Instruction", lang = "python"}
+**Working with Date and Time Strings**
+
+Oftentimes, we’ll find that we want to convert objects from strings to `datetime` objects and vice versa. `datetime` includes two useful methods that can help us achieve this; namely, `strptime()` and `strftime().` We can use `strptime()` to read strings containing date and time information and convert them to `datetime` objects, and `strftime()` to convert `datetime` objects back into strings.
+
+When working with`strptime()` we have to take into consideration that it can’t turn any string into a date and time, and therefore we’ll have to indicate the time format ourselves. 
+
+Note that `strptime()` takes two arguments:
+
+- string — time in string format
+- format — specific formatting of the time in the string
+
+If you’re unfamiliar with the formatting codes required to help `strptime()` interpret our string input you can find a [useful reference here](https://strftime.org/).
+
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F, }
+ymd("2017-01-31")
+#> [1] "2017-01-31"
+mdy("January 31st, 2017")
+#> [1] "2017-01-31"
+dmy("31-Jan-2017")
+#> [1] "2017-01-31"
+
+
+ymd(20170131)
+#> [1] "2017-01-31"
+
+ymd_hms("2017-01-31 20:11:59")
+#> [1] "2017-01-31 20:11:59 UTC"
+mdy_hm("01/31/2017 08:01")
+#> [1] "2017-01-31 08:01:00 UTC"
+
+```
+
+```{python, Dot = 5, part = "Code", echo = T, eval = F, }
+from datetime import datetime
+
+date_string = '2020-11-27'
+
+# Create date object with time format yyyy-mm-dd
+date = datetime.strptime(date_string, "%Y-%m-%d")
+print(date)
+
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+ymd("2017-01-31")
+#> [1] "2017-01-31"
+mdy("January 31st, 2017")
+#> [1] "2017-01-31"
+dmy("31-Jan-2017")
+#> [1] "2017-01-31"
+
+
+ymd(20170131)
+#> [1] "2017-01-31"
+
+ymd_hms("2017-01-31 20:11:59")
+#> [1] "2017-01-31 20:11:59 UTC"
+mdy_hm("01/31/2017 08:01")
+#> [1] "2017-01-31 08:01:00 UTC"
+
+```
+
+```{python, Dot = 5, part = "Result", echo = F, eval = T}
+from datetime import datetime
+
+date_string = '2020-11-27'
+
+# Create date object with time format yyyy-mm-dd
+date = datetime.strptime(date_string, "%Y-%m-%d")
+print(date)
+
+```
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+**Assemble a datetime from multiple columns**
+
+Right now, we having 3 separate columns as year, month, and day in a data file in R. we want merge these three columns into just one column and make R understand that it is date. ince your year, month and day types are numerical the best function to use is the make_date function from the [lubridate](https://lubridate.tidyverse.org/index.html) package. The [tidyverse](https://www.tidyverse.org/) style solution is therefore.
+
+There is also a simpler solution using `lubridate` and `magrittr`. This worked even we have days and months written in single (i.e. 1) and double (i.e. 01) digits. Parsing was correct as well.
+
+```
+
+```{block, Dot = 6, part = "Instruction", lang = "python"}
+**Assemble a datetime from multiple columns**
+
+`to_datetime()` can be used to assemble a datetime from multiple columns as well. First rename all columns, filter by values of dict. The keys (columns label) can be common abbreviations like **[‘year’, ‘month’, ‘day’, ‘minute’, ‘second’, ‘ms’, ‘us’, ‘ns’])** or plurals of the same.
+
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F, }
+library(tidyverse)
+library(lubridate)
+
+# Create fake data
+year = c(2015, 2016)
+month = c(2, 3)
+day = c(4, 5)
+data = data.frame(year, month, day)
+
+# Solution 1
+data = data %>% 
+  mutate(date1 = make_date(year, month, day))
+
+# Solution 2
+data$date2 <- paste(data$year, data$mon, data$day, sep="-") %>% 
+  ymd() %>% 
+  as.Date()
+
+data
+
+```
+
+```{python, Dot = 6, part = "Code", echo = T, eval = F, }
+import pandas as pd
+
+df = pd.DataFrame({'year': [2015, 2016],
+                   'month': [2, 3],
+                   'day': [4, 5]})
+                   
+df['date'] = pd.to_datetime(df)
+df
+
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+library(tidyverse)
+library(lubridate)
+
+# Create fake data
+year = c(2015, 2016)
+month = c(2, 3)
+day = c(4, 5)
+data = data.frame(year, month, day)
+
+# Solution 1
+data = data %>%
+  mutate(date1 = make_date(year, month, day))
+
+# Solution 2
+data$date2 <- paste(data$year, data$mon, data$day, sep="-") %>% 
+  ymd() %>% 
+  as.Date()
+
+data
+
+```
+
+```{python, Dot = 6, part = "Result", echo = F, eval = T}
+import pandas as pd
+
+df = pd.DataFrame({'year': [2015, 2016],
+                   'month': [2, 3],
+                   'day': [4, 5]})
+                   
+df['date'] = pd.to_datetime(df)
+df
+
+```
+
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+ **Create separate columns for year, month, and day**
+
+`tidyr` and `dplyr` don't have date manipulation functions. `lubridate` is the `tidyverse` package for date functions (although it's not one of the "core" `tidyverse` packages loaded by the `tidyverse` library).
+
+The example below is converts the `date` column to Date format and then uses `mutate_at` to create separate columns for year, month, and day.  `mutate_at` allows all three functions to be applied to the `date` column with a single line of code.
+
+```
+
+```{block, Dot = 7, part = "Instruction", lang = "python"}
+ **Create separate columns for year, month, and day**
+
+`dt.year`, `dt.month` and `dt.day` are the inbuilt attributes to get year, month , and day from Pandas datetime object.
+
+First, let’s create a dummy DateFrame and parse **DoB** to datetime. Then get year, month, and day.
+
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F, }
+library(tidyverse)
+library(lubridate)
+
+# Fake data
+x = data.frame(date=c('08-05-1997', '04-28-1996', '12-16-1995'))
+
+x = x %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate_at(vars(date), funs(year, month, day))
+
+x
+
+```
+
+```{python, Dot = 7, part = "Code", echo = T, eval = F, }
+import pandas as pd
+
+df = pd.DataFrame('DoB': ['08-05-1997', '04-28-1996', '12-16-1995']})
+                 
+df['DoB'] = pd.to_datetime(df['DoB'])
+
+df['year']= df['DoB'].dt.year
+df['month']= df['DoB'].dt.month
+df['day']= df['DoB'].dt.day
+df
+
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+library(tidyverse)
+library(lubridate)
+
+# Fake data
+x = data.frame(date=c('08-05-1997', '04-28-1996', '12-16-1995'))
+
+x = x %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate_at(vars(date), funs(year, month, day))
+
+x
+
+```
+
+```{python, Dot = 7, part = "Result", echo = F, eval = T}
+import pandas as pd
+
+df = pd.DataFrame({'name': ['Tom', 'Andy', 'Lucas'],
+                 'DoB': ['08-05-1997', '04-28-1996', '12-16-1995']})
+                 
+df['DoB'] = pd.to_datetime(df['DoB'])
+
+df['year']= df['DoB'].dt.year
+df['month']= df['DoB'].dt.month
+df['day']= df['DoB'].dt.day
+df
+
+```

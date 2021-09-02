@@ -1,0 +1,43 @@
+{
+  "file_name": ["an-introduction-to-the-hmisc-package"],
+  "dir_name": ["D029-2021-09-02-an-introduction-to-the-hmisc-package"],
+  "cover_image_url": ["https://datamotto.com/assets/img/logo.svg"],
+  "link": ["posts/Dotto/D029-2021-09-02-an-introduction-to-the-hmisc-package/index.html"],
+  "base_url": ["https://datamotto.com"],
+  "social_networks_datamotto": {
+    "twitter": ["https://twitter.com/DataMotto"],
+    "linkedin": ["https://www.linkedin.com/company/datamotto"]
+  },
+  "dotto_number": [11],
+  "dotto_label": ["D011"],
+  "dotto_id": ["26ebcd62-0bb0-11ec-b2d9-3ff91f6d18cc"],
+  "title": ["An Introduction to the Hmisc package"],
+  "description": ["Understand your data well.\n"],
+  "author": [
+    {
+      "name": ["Mohammad Hossein Malekpour"],
+      "occupation": ["Data Scientist"],
+      "affiliation": ["DataMotto"],
+      "url": ["https://www.linkedin.com/in/mohammadhossein-malekpour/"],
+      "img": ["MalekpourAvatar.jpg"],
+      "lang": ["R"],
+      "profile_img_for_Dotto": ["./an-introduction-to-the-hmisc-package_files/figure-html/MalekpourAvatar.jpg"],
+      "profile_img": ["./posts/Dotto/D029-2021-09-02-an-introduction-to-the-hmisc-package/an-introduction-to-the-hmisc-package_files/figure-html/MalekpourAvatar.jpg"]
+    }
+  ],
+  "tech": [
+    {
+      "lang": ["r"],
+      "pkgs": ["hmisc"]
+    }
+  ],
+  "date": {
+    "created": ["2021-09-02"],
+    "last_updated": ["2021-09-02"]
+  },
+  "categories": ["Wrangler"],
+  "applications": ["General"],
+  "cover_image": {},
+  "slug": ["an-introduction-to-the-hmisc-package"],
+  "output": ["DataMotto::Dotto"]
+}

@@ -1,0 +1,225 @@
+---
+title: "An Introduction to the Hmisc package"
+description: |
+  Understand your data well.
+author:
+  - name: "Mohammad Hossein Malekpour"
+    occupation: "Data Scientist"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/mohammadhossein-malekpour/"
+    img: "MalekpourAvatar.jpg"
+    lang: ["R"]
+tech:
+  - lang: r
+    pkgs: ["hmisc"]
+date:
+  created: "2021-09-02"
+  last_updated: "2021-09-02"
+categories: "Wrangler"
+applications: "General"
+cover_image: NULL
+slug: "an-introduction-to-the-hmisc-package"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+**Hmisc** package Contains many functions useful for data analysis, high-level graphics, utility operations, functions for computing sample size and power, simulation, importing and annotating datasets, imputing missing values, advanced table making, variable clustering, character string manipulation, conversion of R objects to LaTeX and html code, and recoding variables.
+
+**Setup Environment**
+
+Install Hmisc package:  `install.packages("Hmisc")`
+
+The following (`r mu$styles()`) defines HTML styles and javascript functions, such as `ffig, smg` and the function for expanding and collapsing text as done by the `expcoll` function.
+
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+# load Hmisc packgae
+library(Hmisc)
+
+# Setup Environment
+knitrSet(lang='markdown', h=4.5, fig.path='png/', fig.align='left',
+         capfile='captions.md')  # + sometimes ,cache=TRUE
+# knitrSet redirects all messages to messages.txt
+options(grType='plotly') # for certain graphics functions
+mu <- markupSpecs$html   # markupSpecs is in Hmisc
+cap  <- mu$cap           # function to output html caption
+lcap <- mu$lcap          # for continuation for long caption
+# These last 2 functions are used by the putHfig function in Hmisc
+cat('', file='captions.md')   # initialize table of short captions
+
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+# load Hmisc packgae
+library(Hmisc)
+
+# Setup Environment
+knitrSet(lang='markdown', h=4.5, fig.path='png/', fig.align='left',
+         capfile='captions.md')  # + sometimes ,cache=TRUE
+# knitrSet redirects all messages to messages.txt
+options(grType='plotly') # for certain graphics functions
+mu <- markupSpecs$html   # markupSpecs is in Hmisc
+cap  <- mu$cap           # function to output html caption
+lcap <- mu$lcap          # for continuation for long caption
+# These last 2 functions are used by the putHfig function in Hmisc
+cat('', file='captions.md')   # initialize table of short captions
+
+```
+
+<!-- Dot 2, lang: r ------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+**Fetching Data, Modifying Variables, and Printing Data Dictionary**
+
+The `getHdata` function is used to fetch a dataset from the Vanderbilt `DataSets` web site `hbiostat.org/data`. The `upData` function is used to
+
+- create a new variable from an old one
+- add labels to 2 variables
+- add units to the new variable
+- remove the old variable
+- automatically move units of measurements from parenthetical expressions in labels to separate `units` attributed used by `Hmisc` and `rms` functions for table making and graphics
+
+`contents` is used to print a data dictionary, run through an `html` method for nicer output. Information about the data source may be found [here](https://hbiostat.org/data/repo/pbc.html). Click on the number of levels in the `contents` table to jump to the value labels for the variable.
+
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+getHdata(pbc)
+
+# Have upData move units from labels to separate attribute
+pbc <- upData(pbc,
+              fu.yrs = fu.days / 365.25,
+              labels = c(fu.yrs = 'Follow-up Time',
+                         status = 'Death or Liver Transplantation'),
+              units = c(fu.yrs = 'year'),
+              drop  = 'fu.days',
+              moveUnits=TRUE, html=TRUE)
+
+# The following can also be done by running this command
+# to put the results in a new browser tab:
+# getHdata(pbc, 'contents')
+html(contents(pbc), maxlevels=10, levelType='table')
+
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+getHdata(pbc)
+
+# Have upData move units from labels to separate attribute
+pbc <- upData(pbc,
+              fu.yrs = fu.days / 365.25,
+              labels = c(fu.yrs = 'Follow-up Time',
+                         status = 'Death or Liver Transplantation'),
+              units = c(fu.yrs = 'year'),
+              drop  = 'fu.days',
+              moveUnits=TRUE, html=TRUE)
+
+# The following can also be done by running this command
+# to put the results in a new browser tab:
+# getHdata(pbc, 'contents')
+html(contents(pbc), maxlevels=10, levelType='table')
+
+```
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+**Descriptive Statistics Without Stratification**
+
+The html method is used for the `describe` function, and the output is put in a scrollable box. Other than for the overall title and variable names and labels, the output size used here is 80 (0.8 × the usual font size[1](https://hbiostat.org/R/Hmisc/examples.html#fn1)). But the graphical display of the descriptives statistics that follows this is probably better.
+
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F, }
+# did have results='asis' above
+d <- describe(pbc)
+html(d, size=80, scroll=TRUE)
+
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+# did have results='asis' above
+d <- describe(pbc)
+html(d, size=80, scroll=TRUE)
+
+```
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+**Stratified Descriptive Statistics**
+
+Produce stratified quantiles, means/SD, and proportions by treatment group. Plot the results before rendering as an advanced html table:
+
+- categorical variables: a single dot chart
+- continuous variables: a series of extended box plots
+
+To construct the caption outside of the code chunk use e.g. ### r cap(‘Proportions and’, mu$chisq(), ‘tests for categorical variables’) where a backtick is placed before r and after the last ).
+
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F, }
+s <- summaryM(bili + albumin + stage + protime + sex + age + spiders + alk.phos + sgot + chol ~ drug, data=pbc, overall=FALSE, test=TRUE)
+
+plot(s, which='categorical')
+
+plot(s, which='continuous', vars=1 : 4)
+
+
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+s <- summaryM(bili + albumin + stage + protime + sex + age + spiders + alk.phos + sgot + chol ~ drug, data=pbc, overall=FALSE, test=TRUE)
+
+plot(s, which='categorical')
+
+plot(s, which='continuous', vars=1 : 4)
+
+```
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+**Better Demonstration of Boxplot Replacement**
+
+Uses plotly to draw horizontal spike histograms stratified by group, plus the mean (solid dot) and vertical bars for these quantiles: 0.05 (red, short), 0.25 (blue, medium), 0.50 (black, long), 0.75 (blue, medium), and 0.95 (red, short). The robust dispersion measure Gini’s mean difference and the SD may optionally be added. These are shown as horizontal lines starting at the minimum value of x having a length equal to the mean difference or SD. Even when Gini’s and SD are computed, they are not drawn unless the user clicks on their legend entry. Spike histograms have the advantage of effectively showing the raw data for both small and huge datasets, and unlike box plots allow multi-modality to be easily seen.
+
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F, }
+getHdata(support2)
+with(support2, histboxp(x=meanbp, group=dzgroup, sd=TRUE, bins=200))
+
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+getHdata(support2)
+with(support2, histboxp(x=meanbp, group=dzgroup, sd=TRUE, bins=200))
+
+```
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+
+```
+
+
+
+
+
