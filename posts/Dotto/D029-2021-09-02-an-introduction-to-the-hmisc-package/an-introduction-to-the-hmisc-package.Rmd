@@ -1,0 +1,46 @@
+---
+title: "An Introduction to the Hmisc package"
+description: |
+  Understand your data well.
+author:
+  - name: "Mohammad Hossein Malekpour"
+    occupation: "Data Scientist"
+    affiliation: "DataMotto"
+    url: "https://www.linkedin.com/in/mohammadhossein-malekpour/"
+    img: "MalekpourAvatar.jpg"
+    lang: ["R"]
+tech:
+  - lang: r
+    pkgs: ["hmisc"]
+date:
+  created: "2021-09-02"
+  last_updated: "2021-09-02"
+categories: "Wrangler"
+applications: "General"
+cover_image: NULL
+slug: "an-introduction-to-the-hmisc-package"
+output: DataMotto::Dotto
+---
+
+```{r DataMotto, echo=FALSE}
+DataMotto::use_Dotto()
+```
+
+<!-- Dot 1, lang: r ------------------------------------------------>
+
+```{block, Dot = 1, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 1, part = "Result", echo = F, eval = T}
+
+```
+
+
+
+
+
