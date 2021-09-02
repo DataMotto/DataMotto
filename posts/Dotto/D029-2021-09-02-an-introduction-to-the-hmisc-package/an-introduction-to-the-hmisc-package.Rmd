@@ -29,17 +29,147 @@ DataMotto::use_Dotto()
 <!-- Dot 1, lang: r ------------------------------------------------>
 
 ```{block, Dot = 1, part = "Instruction", lang = "r"}
+**Hmisc** package Contains many functions useful for data analysis, high-level graphics, utility operations, functions for computing sample size and power, simulation, importing and annotating datasets, imputing missing values, advanced table making, variable clustering, character string manipulation, conversion of R objects to LaTeX and html code, and recoding variables.
+
+**Setup Environment**
+
+Install Hmisc package:  `install.packages("Hmisc")`
+
+The following (`r mu$styles()`) defines HTML styles and javascript functions, such as `ffig, smg` and the function for expanding and collapsing text as done by the `expcoll` function.
 
 ```
 
 ```{r, Dot = 1, part = "Code", echo = T, eval = F, }
+# load Hmisc packgae
+library(Hmisc)
+
+# Setup Environment
+knitrSet(lang='markdown', h=4.5, fig.path='png/', fig.align='left',
+         capfile='captions.md')  # + sometimes ,cache=TRUE
+# knitrSet redirects all messages to messages.txt
+options(grType='plotly') # for certain graphics functions
+mu <- markupSpecs$html   # markupSpecs is in Hmisc
+cap  <- mu$cap           # function to output html caption
+lcap <- mu$lcap          # for continuation for long caption
+# These last 2 functions are used by the putHfig function in Hmisc
+cat('', file='captions.md')   # initialize table of short captions
 
 ```
 
 ```{r, Dot = 1, part = "Result", echo = F, eval = T}
+# load Hmisc packgae
+library(Hmisc)
+
+# Setup Environment
+knitrSet(lang='markdown', h=4.5, fig.path='png/', fig.align='left',
+         capfile='captions.md')  # + sometimes ,cache=TRUE
+# knitrSet redirects all messages to messages.txt
+options(grType='plotly') # for certain graphics functions
+mu <- markupSpecs$html   # markupSpecs is in Hmisc
+cap  <- mu$cap           # function to output html caption
+lcap <- mu$lcap          # for continuation for long caption
+# These last 2 functions are used by the putHfig function in Hmisc
+cat('', file='captions.md')   # initialize table of short captions
 
 ```
 
+<!-- Dot 2, lang: r ------------------------------------------------>
+
+```{block, Dot = 2, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 2, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 2, part = "Result", echo = F, eval = T}
+
+```
+
+<!-- Dot 3, lang: r ------------------------------------------------>
+
+```{block, Dot = 3, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 3, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 3, part = "Result", echo = F, eval = T}
+
+```
+
+<!-- Dot 4, lang: r ------------------------------------------------>
+
+```{block, Dot = 4, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 4, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 4, part = "Result", echo = F, eval = T}
+
+```
+
+<!-- Dot 5, lang: r ------------------------------------------------>
+
+```{block, Dot = 5, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 5, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 5, part = "Result", echo = F, eval = T}
+
+```
+
+<!-- Dot 6, lang: r ------------------------------------------------>
+
+```{block, Dot = 6, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 6, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 6, part = "Result", echo = F, eval = T}
+
+```
+
+<!-- Dot 7, lang: r ------------------------------------------------>
+
+```{block, Dot = 7, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 7, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 7, part = "Result", echo = F, eval = T}
+
+```
+
+<!-- Dot 8, lang: r ------------------------------------------------>
+
+```{block, Dot = 8, part = "Instruction", lang = "r"}
+
+```
+
+```{r, Dot = 8, part = "Code", echo = T, eval = F, }
+
+```
+
+```{r, Dot = 8, part = "Result", echo = F, eval = T}
+
+```
 
 
 
